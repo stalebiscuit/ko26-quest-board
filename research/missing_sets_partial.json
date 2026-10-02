@@ -1,0 +1,738 @@
+{
+ "D-Block & S-te-Fan": {
+  "note": "Five 2026 sets found on 1001Tracklists (Defqon.1 Gathering, Intents mainstage + Journey, REBiRTH Evolution w/ Phuture Noize, APEX Mannheim); only partial tracklists recoverable from search snippets (pages blocked), order of the Defqon list is as the snippet listed it, not verified; no Spotify ids seen for set tracks, but four 2025-26 collabs carry ids/YT from other acts' research.",
+  "sets": [
+   {
+    "event": "The Gathering, Blue Stage, Defqon.1, Netherlands",
+    "date": "2026-06-25",
+    "url": "https://www.1001tracklists.com/tracklist/wknljut/d-block-s-te-fan-the-gathering-blue-stage-defqon.1-netherlands-2026-06-25.html",
+    "video": null,
+    "partial": true,
+    "track_count": 24,
+    "tracks": [
+     [
+      "?",
+      "D-Block & S-te-Fan ft. DJ Isaac - Berlin"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan - Bla Bla"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan - Twilight Zone"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan & Phuture Noize - Arcadia"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan & D-Sturb - Feel It!"
+     ],
+     [
+      "?",
+      "Ghost Stories - Ready Or Not"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan - Harder State Of Mind"
+     ],
+     [
+      "?",
+      "4444 OF A KIND - Waiting 4"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan - Don't Stop The Music"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan - Fire"
+     ],
+     [
+      "?",
+      "Headhunterz & Malukah - Reignite (D-Block & S-te-Fan Remix)"
+     ],
+     [
+      "?",
+      "D-Block & S-te-Fan - Music Made Addict (2025 Edit)"
+     ],
+     [
+      "?",
+      "Ran-D & D-Block & S-te-Fan - Behind Enemy Lines"
+     ]
+    ]
+   },
+   {
+    "event": "Journey, Mainstage, Intents Festival, Netherlands",
+    "date": "2026-06-06",
+    "url": "https://www.1001tracklists.com/tracklist/2d1gx1l9/d-block-s-te-fan-journey-mainstage-intents-festival-netherlands-2026-06-06.html",
+    "video": null,
+    "partial": true,
+    "track_count": 36,
+    "duration_approx": "57:00",
+    "tracks": [
+     [
+      "01",
+      "D-Block & S-te-Fan vs. High Voltage - Kingdom Shiverz (D-Block & S-te-Fan Mashup)"
+     ],
+     [
+      "02",
+      "D-Block & S-te-Fan - Music Made Addict (2025 Edit)"
+     ],
+     [
+      "03",
+      "D-Block & S-te-Fan ft. MC Villain - Part Of The Hard"
+     ],
+     [
+      "04",
+      "D-Block & S-te-Fan - Promised Land (We Will Rock You Edit)"
+     ],
+     [
+      "05",
+      "D-Block & S-te-Fan vs. F8trix - Higher vs. Beat As One (D-Block & S-te-Fan Qlimax Edit)"
+     ]
+    ]
+   },
+   {
+    "event": "REBiRTH Evolution Special (w/ Phuture Noize), Mainstage, REBiRTH Festival, Netherlands",
+    "date": "2026-04-12",
+    "url": "https://www.1001tracklists.com/tracklist/2dyxwyh9/d-block-s-te-fan-phuture-noize-rebirth-evolution-special-mainstage-rebirth-festival-netherlands-2026-04-12.html",
+    "video": null,
+    "partial": true,
+    "track_count": 35,
+    "tracks": []
+   }
+  ],
+  "released": [
+   {
+    "artist": "D-Block & S-te-Fan ft. DJ Isaac",
+    "title": "Berlin",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Bla Bla",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": "https://www.1001tracklists.com/track/1wz4nrxx/d-block-s-te-fan-bla-bla/index.html",
+    "note": "self-released"
+   },
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Twilight Zone",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan & Phuture Noize",
+    "title": "Arcadia",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan & D-Sturb",
+    "title": "Feel It!",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Harder State Of Mind",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Don't Stop The Music",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Fire",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "Headhunterz & Malukah",
+    "title": "Reignite (D-Block & S-te-Fan Remix)",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   },
+   {
+    "artist": "Ran-D & D-Block & S-te-Fan",
+    "title": "Behind Enemy Lines",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null,
+    "note": "release status not verified"
+   },
+   {
+    "artist": "D-Block & S-te-Fan ft. MC Villain",
+    "title": "Part Of The Hard",
+    "sets": [
+     1
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Music Made Addict (2025 Edit)",
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "clip": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan vs. High Voltage",
+    "title": "Kingdom Shiverz (D-Block & S-te-Fan Mashup)",
+    "sets": [
+     1
+    ],
+    "kind": "mashup",
+    "clip": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan",
+    "title": "Promised Land (We Will Rock You Edit)",
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "clip": null
+   },
+   {
+    "artist": "D-Block & S-te-Fan vs. F8trix",
+    "title": "Higher vs. Beat As One (D-Block & S-te-Fan Qlimax Edit)",
+    "sets": [
+     1
+    ],
+    "kind": "mashup",
+    "clip": null
+   }
+  ],
+  "new_releases": [
+   {
+    "artist": "Dual Damage & D-Block & S-te-Fan",
+    "title": "Tomorrow Can Wait",
+    "sets": [],
+    "spotify_track": "7indayEbupLkf7uvacFBEC",
+    "album": null,
+    "yt": {
+     "id": "vPBqW8M-9T0",
+     "channel": "Dual Damage"
+    },
+    "evidence": "https://open.spotify.com/track/7indayEbupLkf7uvacFBEC",
+    "note": "newest of the four (Deezer id 4079901101)"
+   },
+   {
+    "artist": "Da Tweekaz & D-Block & S-te-Fan",
+    "title": "In My Mind",
+    "sets": [],
+    "spotify_track": "34AodtfpGFMvlxpKFrNxvY",
+    "album": {
+     "id": "1vrQiLeLfUNq4IshXfqg9R",
+     "name": "In My Mind",
+     "type": "single"
+    },
+    "yt": {
+     "id": "qm98h7lTAzY",
+     "channel": "Dirty Workz"
+    },
+    "evidence": "https://open.spotify.com/track/34AodtfpGFMvlxpKFrNxvY"
+   },
+   {
+    "artist": "Ran-D & D-Block & S-te-Fan",
+    "title": "Shivers",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "kT4OhVnLE0I",
+     "channel": "Q-dance Music"
+    },
+    "evidence": "https://www.deezer.com/track/3584939721"
+   },
+   {
+    "artist": "D-Block & S-te-Fan & Rebelion",
+    "title": "Save The Day",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "y-tpOydx6SI",
+     "channel": "Dirty Workz"
+    },
+    "evidence": "https://www.deezer.com/track/3837041331"
+   }
+  ]
+ },
+ "Noisemakers": {
+  "note": "Noisemakers is the Sickmode & Krowdexx joint live show; its one tracklisted 2026 set is Reverze (12 tracks, only 3 titles recoverable). The Sickmode & Krowdexx songs they play (YEAH, SAVE ME, WHAT THA HELLY, LEAN BACK) come from Sickmode's July 2026 Dropzone sets, with Spotify ids found earlier.",
+  "sets": [
+   {
+    "event": "NOISEMAKERS (Sickmode & Krowdexx), Reverze, Lotto Arena Antwerp, Belgium",
+    "date": "2026-02-27",
+    "url": "https://www.1001tracklists.com/tracklist/xgrxtx9/sickmode-krowdexx-noisemakers-reverze-lotto-arena-antwerp-belgium-2026-02-27.html",
+    "video": null,
+    "partial": true,
+    "track_count": 12,
+    "tracks": [
+     [
+      "01",
+      "Sickmode & Krowdexx - NOISEMAKERS INTRO"
+     ],
+     [
+      "?",
+      "Sickmode & Krowdexx - HARDSTYLE IS BACK"
+     ],
+     [
+      "?",
+      "Rooler & Sickmode & Krowdexx - SAVE ME"
+     ]
+    ]
+   },
+   {
+    "event": "Sickmode @ Dropzone Festival, Club Papaya Zrce, Croatia (Noisemakers intro + S&K tracks)",
+    "date": "2026-07-09",
+    "url": "https://1001.tl/wksmxgt",
+    "video": null,
+    "partial": true,
+    "tracks": [
+     [
+      "01",
+      "Sickmode - HEY X (2026 Edit)"
+     ],
+     [
+      "02",
+      "Sickmode & Krowdexx - NOISEMAKERS INTRO"
+     ],
+     [
+      "03",
+      "Netherworld - Atlantis (The Saints Edit)"
+     ],
+     [
+      "04",
+      "Endymion & D-Fence - PSSY MTHRFCKRZ (Chaos Project & Sakyra Remix)"
+     ],
+     [
+      "05",
+      "Sickmode & Krowdexx - YEAH"
+     ],
+     [
+      "06",
+      "Sickmode & Krowdexx - LEAN BACK"
+     ]
+    ]
+   }
+  ],
+  "released": [
+   {
+    "artist": "Sickmode & Krowdexx",
+    "title": "YEAH",
+    "sets": [
+     1
+    ],
+    "spotify_track": "03QzNTMRkmuVifyapS8eKX",
+    "album": {
+     "id": "1QEbCQjE1boSO1yqw0rX4J",
+     "name": "YEAH",
+     "type": "single"
+    },
+    "yt": {
+     "id": "ZBUkkOJuEc8",
+     "channel": "Aggressive Records"
+    },
+    "evidence": "https://open.spotify.com/track/03QzNTMRkmuVifyapS8eKX",
+    "release_date": "2026-02-26"
+   },
+   {
+    "artist": "Rooler & Sickmode & Krowdexx",
+    "title": "SAVE ME",
+    "sets": [
+     0
+    ],
+    "spotify_track": "15YYQC2n1LJblmAoN8F5ke",
+    "album": null,
+    "yt": {
+     "id": "lOVtSvWyQmc",
+     "channel": "Aggressive Records"
+    },
+    "evidence": "https://open.spotify.com/intl-it/track/15YYQC2n1LJblmAoN8F5ke"
+   },
+   {
+    "artist": "Sickmode & Krowdexx & Levenkhan",
+    "title": "WHAT THA HELLY (SOMEONE CALL THE AMBULANCE)",
+    "sets": [],
+    "spotify_track": "1QIBLPZqpqETKtuMLpHAN4",
+    "album": null,
+    "yt": {
+     "id": "qguq_kDUzxU",
+     "channel": "Aggressive Records"
+    },
+    "evidence": "https://open.spotify.com/track/1QIBLPZqpqETKtuMLpHAN4",
+    "release_date": "2025-10-16",
+    "note": "played in Sickmode's 2026 Dropzone sets"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Sickmode & Krowdexx",
+    "title": "NOISEMAKERS INTRO",
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "tool",
+    "clip": null
+   },
+   {
+    "artist": "Sickmode & Krowdexx",
+    "title": "HARDSTYLE IS BACK",
+    "sets": [
+     0
+    ],
+    "kind": "unreleased",
+    "clip": null
+   },
+   {
+    "artist": "Sickmode & Krowdexx",
+    "title": "LEAN BACK",
+    "sets": [
+     1
+    ],
+    "kind": "ID",
+    "clip": {
+     "type": "soundcloud",
+     "url": "https://soundcloud.com/jann-me0103/sickmode-krowdexx-id-lean-back",
+     "yt_id": null
+    }
+   }
+  ],
+  "new_releases": []
+ },
+ "Major Conspiracy": {
+  "note": "Most recent material is the Decibel Outdoor 2026 warm-up mix (20 Aug 2026, 35 tracks, 30 IDed); about 10 titles were recoverable from search snippets, in snippet order rather than verified order; no Spotify ids seen. Kamikaze (w/ The Dope Doctor & EZG) has an official YouTube upload.",
+  "sets": [
+   {
+    "event": "Decibel Outdoor Festival Warm-Up Mix",
+    "date": "2026-08-20",
+    "url": "https://www.1001tracklists.com/tracklist/1fbdzs9k/major-conspiracy-decibel-outdoor-festival-warm-up-mix-2026-08-20.html",
+    "video": null,
+    "partial": true,
+    "track_count": 35,
+    "tracks": [
+     [
+      "?",
+      "Major Conspiracy & Pinotello - Major Pinotello (2026 Edit)"
+     ],
+     [
+      "?",
+      "Be Stranger & Jigenweis - Put The Bass"
+     ],
+     [
+      "?",
+      "Akimbo & T.M.O. - Bingo!"
+     ],
+     [
+      "?",
+      "Unresolved - Bad Blood (MT Edit)"
+     ],
+     [
+      "?",
+      "Vengaboys - We Like To Party! (Da Tweekaz Remix)"
+     ],
+     [
+      "?",
+      "KENAI - DON'T GO"
+     ],
+     [
+      "?",
+      "Sickmode & Lekkerfaces - SORRY MAMA"
+     ],
+     [
+      "?",
+      "Major Conspiracy & The Dark Horror - WAZAAAA"
+     ],
+     [
+      "?",
+      "Akimbo & Missy - L.P.A (Losse Polsjes Anthem)"
+     ],
+     [
+      "?",
+      "Major Conspiracy - Down Under"
+     ],
+     [
+      "?",
+      "Major Conspiracy - Trapped In The Temple"
+     ],
+     [
+      "?",
+      "Major Conspiracy - Rock The Party"
+     ],
+     [
+      "?",
+      "Major Conspiracy - Kurwa Raketa (2026 Live Edit)"
+     ]
+    ]
+   }
+  ],
+  "released": [
+   {
+    "artist": "Major Conspiracy & The Dark Horror",
+    "title": "WAZAAAA",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null,
+    "note": "release status not verified"
+   },
+   {
+    "artist": "Major Conspiracy",
+    "title": "Down Under",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null,
+    "note": "release status not verified"
+   },
+   {
+    "artist": "Major Conspiracy",
+    "title": "Trapped In The Temple",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null,
+    "note": "release status not verified"
+   },
+   {
+    "artist": "Major Conspiracy",
+    "title": "Rock The Party",
+    "sets": [
+     0
+    ],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null,
+    "note": "release status not verified"
+   },
+   {
+    "artist": "Sickmode & Lekkerfaces",
+    "title": "SORRY MAMA",
+    "sets": [
+     0
+    ],
+    "spotify_track": "0SHR6X8IJXaxsRYaUt7nhg",
+    "album": {
+     "id": "3xog9gL4XqVuAEOwLY043O",
+     "name": "SORRY MAMA",
+     "type": "single"
+    },
+    "yt": {
+     "id": "wCiX6MU55HE",
+     "channel": null
+    },
+    "evidence": "https://open.spotify.com/track/0SHR6X8IJXaxsRYaUt7nhg",
+    "release_date": "2026-06-04"
+   },
+   {
+    "artist": "Major Conspiracy & The Dope Doctor & EZG",
+    "title": "Kamikaze",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "K9kbjN9Z_lw",
+     "channel": "Major Conspiracy"
+    },
+    "evidence": "https://www.deezer.com/track/3054417631",
+    "note": "recent release, not confirmed in this mix"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Major Conspiracy & Pinotello",
+    "title": "Major Pinotello (2026 Edit)",
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "clip": null
+   },
+   {
+    "artist": "Major Conspiracy",
+    "title": "Kurwa Raketa (2026 Live Edit)",
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "clip": null
+   },
+   {
+    "artist": "Unresolved",
+    "title": "Bad Blood (MT Edit)",
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "clip": null
+   }
+  ],
+  "new_releases": []
+ },
+ "Da Mouth of Madness": {
+  "note": "Da Mouth of Madness is Dr. Peacock's long-time MC, not a DJ, so no tracklists of his own exist; the closest reference is the 'Tripping with Dr. Peacock' live show at Harmony of Hardcore 2026 (DMOM on the mic, YouTube XSy2XiE-VV4, no tracklist found). The tribute set will likely draw on Peacock/DMOM collabs; only YouTube ids were seen, no Spotify ids.",
+  "sets": [
+   {
+    "event": "Tripping with Dr. Peacock Live, Harmony of Hardcore 2026 (DMOM on mic)",
+    "date": null,
+    "url": "https://www.youtube.com/watch?v=XSy2XiE-VV4",
+    "video": {
+     "id": "XSy2XiE-VV4",
+     "dur": null
+    },
+    "partial": true,
+    "tracks": []
+   }
+  ],
+  "released": [
+   {
+    "artist": "Dr. Peacock & Da Mouth Of Madness",
+    "title": "The Future",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "xXizQLnIaK8",
+     "channel": null
+    },
+    "evidence": "https://www.youtube.com/watch?v=xXizQLnIaK8"
+   },
+   {
+    "artist": "Dr. Peacock & Da Mouth of Madness feat. HRTMN.",
+    "title": "Peacock in Babylon",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "UNzQI2PRQrg",
+     "channel": null
+    },
+    "evidence": "https://www.youtube.com/watch?v=UNzQI2PRQrg"
+   },
+   {
+    "artist": "Dr. Peacock & Da Mouth of Madness ft. Ally The Piper",
+    "title": "Trip To ... (full title cut off in search result)",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "oIYDEfEDmfw",
+     "channel": null
+    },
+    "evidence": "https://m.youtube.com/watch?v=oIYDEfEDmfw",
+    "note": "title cut off in search snippet; confirm before use"
+   },
+   {
+    "artist": "Dr. Peacock & Dimitri K",
+    "title": "Trip To Greece",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": {
+     "id": "dH2yu2o_IhY",
+     "channel": "Dr. Peacock"
+    },
+    "evidence": "https://www.deezer.com/track/3842773011"
+   },
+   {
+    "artist": "Dr. Peacock",
+    "title": "Trip To Valhalla",
+    "sets": [],
+    "spotify_track": null,
+    "album": null,
+    "yt": null,
+    "evidence": null,
+    "note": "Noxiouz & Satirized played an unreleased remix at Defqon.1 2026"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Dr. Peacock",
+    "title": "Trip To Valhalla (Noxiouz & Satirized Remix)",
+    "sets": [],
+    "kind": "unreleased",
+    "clip": null
+   }
+  ],
+  "new_releases": []
+ }
+}
