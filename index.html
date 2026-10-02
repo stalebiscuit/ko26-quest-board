@@ -1542,7 +1542,7 @@ function setsHtml(artist, a){
     const vid = st.video ? `<span class="vid">${IC.vid}video${st.video.dur ? " " + esc(st.video.dur) : ""}</span>` : `<span>no video</span>`;
     h += `<li class="set${open ? " open" : ""}" id="set-${si}">
       <button class="set-h" data-set="${si}" aria-expanded="${open}" aria-controls="setb-${si}">
-        <span class="set-dt">${esc(fmtDay(st.date))}</span><span class="set-ev">${esc(st.event)}</span>
+        <span class="set-dt"${st.date_guess ? ` title="upload date, approximate"` : ""}>${esc(st.date_guess ? "~" + fmtRel(st.date.slice(0, 7)) : fmtDay(st.date))}</span><span class="set-ev">${esc(st.event)}</span>
         <span class="set-meta"><span>${n ? plural(n, "track") : "no tracklist"}</span>${vid}</span><span class="chev" aria-hidden="true"></span></button>
       ${st.url ? `<div class="set-f"><a href="${esc(st.url)}" target="_blank" rel="noopener">${/1001/.test(st.url) ? "tracklist on 1001Tracklists" : /youtu/.test(st.url) ? "on YouTube" : "source"} ↗</a></div>` : ""}`;
     if(open){
