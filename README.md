@@ -11,3 +11,7 @@ Data lives in the script block with id ko-data near the end of index.html, as JS
 ## Credits
 
 Set times from HSU Events' official KO26 timetable. Tracklists from 1001Tracklists. 30-second previews from the Deezer public API; full tracks link to Spotify. Emblems are original artwork, not official artist logos.
+
+## v3 notes
+
+The poster header comes from one EVENT config object in the main script, so the board can be re-skinned for another rave. Released vs unreleased was checked against Deezer, plus SoundCloud and YouTube spot checks; each released track links to its proof. The Sets tab lists every song from each source set with cue times, and sets with a video posted on 1001Tracklists embed it so you can jump to any song.
