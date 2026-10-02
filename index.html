@@ -489,6 +489,29 @@ body.playing .wrap{padding-bottom:calc(var(--np-h,64px) + 80px)}
 .mini.playing{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}
 .mini:disabled{opacity:.4;cursor:default}
 .card-tools{display:flex;flex-wrap:wrap;gap:8px}
+.card-tools.subtle .btn{font-size:12.5px;color:var(--muted)}
+.namebox{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.namebox input,.pasterow input{flex:1;min-width:0;min-height:var(--tap);background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:8px 12px;font:16px var(--body);letter-spacing:0}
+.namebox input{max-width:280px}
+.viewing{border:1px solid var(--gold);background:color-mix(in srgb,var(--gold) 8%,var(--panel));padding:14px 16px;display:grid;gap:10px}
+.viewing p{margin:0;line-height:1.5}
+.viewing b{color:var(--gold-hi)}
+.loadbox{border:1px dashed var(--line);padding:14px 16px;display:grid;gap:10px;margin:0}
+.loadbox p{margin:0;color:var(--muted);font-size:14px}
+.loadbox .file{position:relative;display:inline-flex;align-items:center;justify-self:start}
+.loadbox .file input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.loadbox .file:focus-within{outline:2px solid var(--gold-hi);outline-offset:2px}
+.pasterow{display:flex;gap:8px}
+.crew ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.crew li{display:flex;border:1px solid var(--line);background:var(--panel)}
+.crew-open{border:0;background:none;padding:8px 12px;min-height:var(--tap);display:grid;text-align:left;line-height:1.25}
+.crew-open b{font-family:var(--display);font-size:17px;text-transform:uppercase}
+.crew-open span{font-size:12px;color:var(--muted)}
+.crew-x{border:0;border-left:1px solid var(--line);background:none;width:var(--tap);display:grid;place-items:center;color:var(--muted)}
+.crew-x svg{width:12px;height:12px}
+.with{font-family:var(--mono);font-size:11.5px;color:var(--gold-hi);border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);padding:0 6px}
+.krlist li.both::before{background:var(--rel)}
+.krlist li em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--rel);margin-left:4px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--panel-2);color:var(--gold-hi);border:1px solid var(--gold);padding:10px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.06em;z-index:40;max-width:calc(100% - 32px);text-align:center;box-shadow:0 6px 24px var(--scrim)}
 body.playing .toast{bottom:calc(var(--np-h,64px) + 28px + env(safe-area-inset-bottom,0px))}
 .copybox{width:100%;min-height:200px;background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:10px;font-family:ui-monospace,Menlo,monospace;font-size:12px}
@@ -589,7 +612,7 @@ body.playing .toast{bottom:calc(var(--np-h,64px) + 28px + env(safe-area-inset-bo
     <div class="card-wrap" id="cardWrap"></div>
   </section>
 
-  <p class="foot">set times from HSU Events' official KO26 timetable. tracklists from 1001Tracklists: each act's sets from the last 12 months, as IDed by the community, so a KO set may differ. full tracks play from the official YouTube uploads, with 30s Deezer previews where there isn't one. set videos are the recordings linked on 1001Tracklists, and cue times are community-added, so they can be a few seconds off. emblems are original artwork, not official artist logos. picks are saved in this browser only, so hit <b>Copy card</b> to keep a backup.</p>
+  <p class="foot">set times from HSU Events' official KO26 timetable. tracklists from 1001Tracklists: each act's sets from the last 12 months, as IDed by the community, so a KO set may differ. full tracks play from the official YouTube uploads, with 30s Deezer previews where there isn't one. set videos are the recordings linked on 1001Tracklists, and cue times are community-added, so they can be a few seconds off. emblems are original artwork, not official artist logos. picks are saved in this browser only. <b>Share card</b> makes an image (with a QR code) and a link your crew can open to see your run next to theirs; <b>Load a card</b> opens one they sent you.</p>
 </div>
 
 <div class="scrim" id="scrim" hidden></div>
@@ -676,6 +699,9 @@ let kr = store.get("ko26.kr", {});          // { artist: [trackText,...] }
 let custom = store.get("ko26.custom", {});  // { artist: [trackText,...] } songs added by hand
 let view = store.get("ko26.view", "arena"); // phone lane: arena | pit | oasis | all
 if(!["arena","pit","oasis","all"].includes(view)) view = "arena";
+let myName = String(store.get("ko26.name", "") || "").slice(0, 24); // name on the player card
+let crew = (store.get("ko26.crew", []) || []).filter(f => f && f.n && Array.isArray(f.p) && f.k); // friends' cards you saved
+let viewing = null; // a friend's card being looked at
 const save = () => { store.set("ko26.picks",[...picks]); store.set("ko26.kr",kr); store.set("ko26.custom",custom); };
 
 const toMin = t => { const [h,m] = t.split(":").map(Number); return (h < 12 ? h+12 : h)*60 + m; };
@@ -698,8 +724,7 @@ function toggleKr(a,t){
   save(); renderHud();
 }
 const chosenSlots = () => acts.filter(s => picks.has(slotId(s))).sort((a,b)=>a.s-b.s || a.stage.localeCompare(b.stage));
-function clashes(){
-  const chosen = chosenSlots();
+function clashes(chosen = chosenSlots()){
   const bad = new Map();
   for(const a of chosen) for(const b of chosen){
     if(a===b) continue;
@@ -1528,47 +1553,301 @@ function syncKr(){
 }
 
 // ---------- player card ----------
-function cardText(){
-  const chosen = chosenSlots(); const bad = clashes();
-  let out = `CHEF'S ${EVENT.tag} PLAYER CARD · ${EVENT.edition} · ${EVENT.date}\n`;
-  out += `${chosen.length} sets · ${totalKr()} kick rolls\n`;
+// a card is {n: name, p: [slotIds], k: {artist: [KR songs]}}. mine comes from picks/kr; a friend's comes from a share link or image.
+const mineCard = () => ({ n: myName, p: chosenSlots().map(slotId), k: Object.fromEntries(chosenSlots().filter(s => krFor(s.artist).length).map(s => [s.artist, krFor(s.artist)])) });
+const cardName = c => (c && c.n ? String(c.n).trim() : "") || "chef";
+const possessive = n => /s$/i.test(n) ? `${n}'` : `${n}'s`;
+const runOf = c => acts.filter(s => c.p.includes(slotId(s))).sort((a,b)=>a.s-b.s || a.stage.localeCompare(b.stage));
+function cardText(c){
+  c = c || mineCard();
+  const chosen = runOf(c); const bad = clashes(chosen); const kf = a => c.k[a] || [];
+  let out = `${possessive(cardName(c)).toUpperCase()} ${EVENT.tag} PLAYER CARD · ${EVENT.edition} · ${EVENT.date}\n`;
+  out += `${chosen.length} sets · ${chosen.reduce((n,s)=>n+kf(s.artist).length,0)} kick rolls\n`;
   for(const s of chosen){
     out += `\n${s.start}-${s.end}  ${s.artist} (${STAGES[s.stage].name})\n`;
-    const c = bad.get(slotId(s)); if(c) out += `   ! clashes with ${c.map(x=>x.artist).join(", ")}\n`;
-    for(const t of krFor(s.artist)) out += `   KR  ${t}\n`;
+    const cl = bad.get(slotId(s)); if(cl) out += `   ! clashes with ${cl.map(x=>x.artist).join(", ")}\n`;
+    for(const t of kf(s.artist)) out += `   KR  ${t}\n`;
   }
   return out;
 }
-function renderCard(){
-  const chosen = chosenSlots();
-  const bad = clashes();
-  const now = nowMin();
-  const nextIdx = now===null ? -1 : chosen.findIndex(s => s.s > now);
-  let h = `<div class="pcard gframe"><div class="sheen" aria-hidden="true"></div><div class="pcard-head"><div><div class="eyebrow"><span class="star">★ P1</span> Player card <span class="sep">·</span> ${esc(EVENT.edition)}</div><h2>chef's run</h2><div class="sub">${esc([EVENT.tag, EVENT.date, String(EVENT.venue).split(/\s*·\s*/)[0]].filter(Boolean).join(" · "))}</div></div>
-    <div class="stats"><div class="stat"><b>${chosen.length}</b><span>sets</span></div><div class="stat kr"><b>${totalKr()}</b><span>kick rolls</span></div><div class="stat ${bad.size?"bad":""}"><b>${bad.size}</b><span>clashes</span></div></div></div><div class="thorn" aria-hidden="true"></div>`;
-  if(!chosen.length){
-    h += `<p class="empty" style="padding:20px 22px">nothing cooking yet. on the <b>quest board</b>, hit <b>+</b> on the sets you want, then tap each artist and KR the songs you'll kick roll to.</p>`;
-  } else {
-    h += `<ol class="run">`;
-    chosen.forEach((s, i) => {
-      const prev = chosen[i-1];
-      if(prev && !bad.has(slotId(s))){
-        const gap = s.s - prev.e;
-        if(gap >= 15) h += `<li class="gap" aria-hidden="true"><b>${gap} min</b> free · ${fmt(prev.e)}–${s.start}</li>`;
-        else if(prev.stage !== s.stage && gap >= 0) h += `<li class="gap" aria-hidden="true">Move to <b>${STAGES[s.stage].name}</b>${gap?` · ${gap} min`:" · no gap"}</li>`;
-      }
-      const ks = krFor(s.artist);
-      const c = bad.get(slotId(s));
-      const live = now!==null && s.s <= now && now < s.e ? `<span class="live">on now</span>` : (i===nextIdx ? `<span class="live">up next</span>` : "");
-      h += `<li class="${s.stage}"><div class="time">${s.start}–${s.end}<small>${s.e-s.s} min</small></div><div>
-        <div class="who"><button data-open="${esc(slotId(s))}">${esc(s.artist)}</button><span class="st">${STAGES[s.stage].name}</span>${live}</div>
-        ${c?`<div class="clashnote">Clashes with ${c.map(x=>esc(x.artist)).join(", ")}</div>`:""}
-        <ul class="krlist">${ks.length ? ks.map(t=>{ const it = RELEASED.get(t); return `<li><span>${esc(t)}</span>${it?`<span class="ics"><button class="mini pv" data-play="${esc(t)}" aria-label="${esc(playLabel(t, playState(t)))}">${playInner(t, true)}</button>${it.spotify?`<a class="mini" href="${esc(it.spotify)}" target="_blank" rel="noopener" aria-label="Open ${esc(t)} on Spotify">${IC.sp}</a>`:""}</span>`:""}</li>`; }).join("") : `<li class="none">no KR songs yet. tap the name to pick some.</li>`}</ul>
-      </div></li>`;
-    });
-    h += `</ol>`;
+
+// ---- share codes: JSON -> deflate (when the browser can) -> base64url. "z" = deflated, "j" = plain ----
+const b64u = {
+  enc(bytes){ let b = ""; for(let i = 0; i < bytes.length; i += 0x8000) b += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000)); return btoa(b).replace(/\+/g,"-").replace(/\//g,"_").replace(/=+$/,""); },
+  dec(str){ const b = atob(str.replace(/-/g,"+").replace(/_/g,"/") + "===".slice((str.length + 3) % 4)); const u = new Uint8Array(b.length); for(let i = 0; i < b.length; i++) u[i] = b.charCodeAt(i); return u; }
+};
+async function pipeBytes(bytes, stream){ return new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(stream)).arrayBuffer()); }
+async function encodeCard(c){
+  const body = new TextEncoder().encode(JSON.stringify({v:1, n:c.n || "", p:c.p, k:c.k}));
+  try{ if(window.CompressionStream) return "z" + b64u.enc(await pipeBytes(body, new CompressionStream("deflate-raw"))); }catch(e){}
+  return "j" + b64u.enc(body);
+}
+async function decodeCard(code){
+  code = String(code || "").trim();
+  const m = /[#&?]c=([A-Za-z0-9_-]+)/.exec(code); if(m) code = m[1];
+  if(!/^[zj][A-Za-z0-9_-]+$/.test(code)) throw new Error("not a card code");
+  let bytes = b64u.dec(code.slice(1));
+  if(code[0] === "z"){
+    if(!window.DecompressionStream) throw new Error("this browser can't open compressed cards");
+    bytes = await pipeBytes(bytes, new DecompressionStream("deflate-raw"));
   }
-  h += `</div><div class="card-tools"><button class="btn primary" id="copyCard">Copy card</button><button class="btn" id="clearAll">reset everything</button></div><div id="copyFallback"></div>`;
+  return cleanCard(JSON.parse(new TextDecoder().decode(bytes)));
+}
+// keep only slots that exist on this board and plain-string KR songs
+function cleanCard(o){
+  if(!o || typeof o !== "object" || !Array.isArray(o.p)) throw new Error("not a card");
+  const ids = new Set(acts.map(slotId));
+  const p = [...new Set(o.p.filter(x => typeof x === "string" && ids.has(x)))];
+  const k = {};
+  for(const [a, list] of Object.entries(o.k || {})) if(Array.isArray(list)){ const l = list.filter(t => typeof t === "string" && t.length < 300).slice(0, 60); if(l.length) k[a] = l; }
+  return { n: String(o.n || "").slice(0, 24), p, k };
+}
+const shareUrl = code => location.href.split("#")[0] + "#c=" + code;
+
+// ---- the card as a PNG: drawn on a canvas, with the share code tucked in a tEXt chunk and a QR to scan ----
+const CRC_T = (() => { const t = new Uint32Array(256); for(let n = 0; n < 256; n++){ let c = n; for(let k = 0; k < 8; k++) c = c & 1 ? 0xedb88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+const crc32 = u => { let c = 0xffffffff; for(let i = 0; i < u.length; i++) c = CRC_T[(c ^ u[i]) & 255] ^ (c >>> 8); return (c ^ 0xffffffff) >>> 0; };
+const PNG_KEY = "ko26card";
+function pngWithText(buf, text){
+  const src = new Uint8Array(buf), data = new TextEncoder().encode(PNG_KEY + "\0" + text);
+  const chunk = new Uint8Array(12 + data.length), dv = new DataView(chunk.buffer);
+  dv.setUint32(0, data.length); chunk.set([116,69,88,116], 4); chunk.set(data, 8);
+  dv.setUint32(8 + data.length, crc32(chunk.subarray(4, 8 + data.length)));
+  const iend = src.length - 12; // IEND is always the last 12 bytes
+  const out = new Uint8Array(src.length + chunk.length);
+  out.set(src.subarray(0, iend)); out.set(chunk, iend); out.set(src.subarray(iend), iend + chunk.length);
+  return out;
+}
+function pngText(buf){
+  const u = new Uint8Array(buf), dv = new DataView(u.buffer, u.byteOffset);
+  if(u.length < 8 || u[1] !== 80 || u[2] !== 78 || u[3] !== 71) return null;
+  for(let i = 8; i + 8 <= u.length;){
+    const len = dv.getUint32(i), type = String.fromCharCode(u[i+4], u[i+5], u[i+6], u[i+7]);
+    if(type === "tEXt"){ const t = new TextDecoder("latin1").decode(u.subarray(i + 8, i + 8 + len)); if(t.startsWith(PNG_KEY + "\0")) return t.slice(PNG_KEY.length + 1); }
+    if(type === "IEND") break;
+    i += 12 + len;
+  }
+  return null;
+}
+// QR lib loads lazily from cdnjs; the card still renders without it
+let qrLib = null;
+function loadQr(){
+  if(window.qrcode) return Promise.resolve(window.qrcode);
+  if(qrLib) return qrLib;
+  qrLib = new Promise(res => {
+    const sc = document.createElement("script");
+    sc.src = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
+    sc.onload = () => res(window.qrcode || null); sc.onerror = () => { qrLib = null; res(null); };
+    document.head.appendChild(sc); setTimeout(() => res(window.qrcode || null), 6000);
+  });
+  return qrLib;
+}
+function wrapLines(ctx, text, max){
+  const words = String(text).split(/\s+/); const lines = []; let cur = "";
+  for(const w of words){ const t = cur ? cur + " " + w : w; if(ctx.measureText(t).width > max && cur){ lines.push(cur); cur = w; } else cur = t; }
+  if(cur) lines.push(cur); return lines;
+}
+async function cardPng(c, url){
+  const css = getComputedStyle(document.documentElement), v = n => css.getPropertyValue(n).trim();
+  const C = { bg:v("--bg"), panel:v("--panel"), p2:v("--panel-2"), line:v("--line"), fg:v("--fg"), muted:v("--muted"), dim:v("--dim"), gold:v("--gold"), hi:v("--gold-hi"), ink:v("--kick-ink"), warn:v("--warn"), violet:v("--violet"), blood:v("--blood"), arena:v("--arena"), pit:v("--pit"), oasis:v("--oasis") };
+  try{ await Promise.all(['96px "Pirata One"','700 40px Oswald','700 20px Cinzel','26px "IBM Plex Sans"','20px Silkscreen'].map(f => document.fonts.load(f))); }catch(e){}
+  const qrF = url.length <= 1600 ? await loadQr() : null;
+  let qr = null; if(qrF){ try{ qr = qrF(0, "L"); qr.addData(url); qr.make(); }catch(e){ qr = null; } }
+  const W = 1080, P = 56, chosen = runOf(c), bad = clashes(chosen), kf = a => c.k[a] || [];
+  const cv = document.createElement("canvas"), ctx = cv.getContext("2d");
+  // pass 1 measures, pass 2 draws
+  const layout = draw => {
+    let y = 0;
+    const hdr = 300;
+    if(draw){
+      ctx.fillStyle = C.panel; ctx.fillRect(0, 0, W, cv.height);
+      const g1 = ctx.createRadialGradient(0, 0, 0, 0, 0, 640); g1.addColorStop(0, C.violet + "55"); g1.addColorStop(1, "transparent");
+      const g2 = ctx.createRadialGradient(W, hdr, 0, W, hdr, 560); g2.addColorStop(0, C.blood + "55"); g2.addColorStop(1, "transparent");
+      ctx.fillStyle = C.p2; ctx.fillRect(0, 0, W, hdr); ctx.fillStyle = g1; ctx.fillRect(0, 0, W, hdr); ctx.fillStyle = g2; ctx.fillRect(0, 0, W, hdr);
+      ctx.fillStyle = C.gold; ctx.fillRect(P, 62, 92, 32); ctx.fillStyle = C.ink; ctx.font = '20px Silkscreen'; ctx.textBaseline = "middle"; ctx.fillText("★ P1", P + 12, 79);
+      ctx.fillStyle = C.gold; ctx.font = '700 22px Cinzel'; ctx.fillText(`PLAYER CARD · ${EVENT.edition.toUpperCase()}`, P + 110, 79);
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = C.fg; ctx.font = '96px "Pirata One"';
+      let nm = `${possessive(cardName(c))} run`; while(ctx.measureText(nm).width > W - 2*P - 330 && nm.length > 6) nm = nm.slice(0, -5) + "…run";
+      ctx.fillText(nm, P, 192);
+      ctx.fillStyle = C.muted; ctx.font = '26px "IBM Plex Sans"'; ctx.fillText([EVENT.tag, EVENT.date, String(EVENT.venue).split(/\s*·\s*/)[0]].join(" · "), P, 240);
+      const st = [[chosen.length, "SETS", C.fg], [chosen.reduce((n,s)=>n+kf(s.artist).length,0), "KICK ROLLS", C.hi], [bad.size, "CLASHES", bad.size ? C.warn : C.fg]];
+      let x = W - P; ctx.textAlign = "right";
+      for(let i = st.length - 1; i >= 0; i--){ ctx.font = '700 56px Oswald'; ctx.fillStyle = st[i][2]; ctx.fillText(String(st[i][0]), x, 190); ctx.font = '700 17px Cinzel'; ctx.fillStyle = C.muted; ctx.fillText(st[i][1], x, 222); x -= 150; }
+      ctx.textAlign = "left";
+      ctx.fillStyle = C.gold; ctx.fillRect(P, hdr - 2, W - 2*P, 2);
+    }
+    y = hdr + 12;
+    if(!chosen.length){ if(draw){ ctx.fillStyle = C.muted; ctx.font = '28px "IBM Plex Sans"'; ctx.fillText("no sets locked in yet.", P, y + 60); } y += 110; }
+    for(const s of chosen){
+      const top = y, col = C[s.stage] || C.gold, tx = P + 170, tw = W - tx - P;
+      y += 30;
+      if(draw){ ctx.fillStyle = C.fg; let fs = 32; do { ctx.font = `600 ${fs}px Oswald`; } while(ctx.measureText(`${s.start}–${s.end}`).width > tx - P - 36 && --fs > 18); ctx.fillText(`${s.start}–${s.end}`, P + 18, y + 26); ctx.fillStyle = C.muted; ctx.font = '22px Oswald'; ctx.fillText(`${s.e - s.s} min`, P + 18, y + 58); }
+      ctx.font = '700 44px Oswald';
+      const nameLines = wrapLines(ctx, s.artist.toUpperCase(), tw);
+      for(const ln of nameLines){ if(draw){ ctx.fillStyle = C.fg; ctx.fillText(ln, tx, y + 36); } y += 50; }
+      if(draw){ ctx.fillStyle = col; ctx.font = '700 20px Cinzel'; ctx.fillText(STAGES[s.stage].name.toUpperCase() + (s.tag ? `  ·  ${s.tag}` : ""), tx, y + 18); }
+      y += 34;
+      const cl = bad.get(slotId(s));
+      if(cl){ if(draw){ ctx.fillStyle = C.warn; ctx.font = '22px Oswald'; ctx.fillText(`clashes with ${cl.map(x=>x.artist).join(", ")}`, tx, y + 18); } y += 32; }
+      ctx.font = '25px "IBM Plex Sans"';
+      for(const t of kf(s.artist)){
+        const lines = wrapLines(ctx, t, tw - 64);
+        lines.forEach((ln, i) => {
+          if(draw){
+            if(!i){ ctx.fillStyle = C.hi; ctx.fillRect(tx, y + 6, 46, 26); ctx.fillStyle = C.ink; ctx.font = '15px Silkscreen'; ctx.fillText("KR", tx + 9, y + 25); ctx.font = '25px "IBM Plex Sans"'; }
+            ctx.fillStyle = C.fg; ctx.fillText(ln, tx + 62, y + 28);
+          }
+          y += 34;
+        });
+        y += 4;
+      }
+      y = Math.max(y, top + 130) + 18;
+      if(draw){ ctx.fillStyle = col; ctx.fillRect(P, top + 18, 6, y - top - 36); ctx.fillStyle = C.line; ctx.fillRect(P, y, W - 2*P, 1); }
+    }
+    // footer: QR + how to load it
+    const qs = qr ? 300 : 0, fh = Math.max(qs, 120) + 70;
+    if(draw){
+      const fy = y + 30;
+      if(qr){
+        const n = qr.getModuleCount(), q = 4, cell = qs / (n + 2*q);
+        ctx.fillStyle = "#fff"; ctx.fillRect(W - P - qs, fy, qs, qs); ctx.fillStyle = "#000";
+        for(let r = 0; r < n; r++) for(let cc = 0; cc < n; cc++) if(qr.isDark(r, cc)) ctx.fillRect(W - P - qs + (cc + q) * cell, fy + (r + q) * cell, Math.ceil(cell), Math.ceil(cell));
+      }
+      ctx.fillStyle = C.gold; ctx.font = '700 24px Cinzel'; ctx.fillText(`CHEF'S ${EVENT.tag} QUEST BOARD`, P, fy + 36);
+      ctx.fillStyle = C.muted; ctx.font = '24px "IBM Plex Sans"';
+      const how = qr ? ["scan the code, or open the board and", "tap Load a card with this image,", "to see this run next to yours."] : ["open the board and tap Load a card", "with this image to see this run", "next to yours."];
+      how.forEach((ln, i) => ctx.fillText(ln, P, fy + 80 + i * 34));
+      ctx.fillStyle = C.dim; ctx.font = '20px "IBM Plex Sans"'; ctx.fillText(location.host + location.pathname.replace(/index\.html$/, ""), P, fy + 80 + how.length * 34 + 16);
+    }
+    return y + 30 + fh;
+  };
+  cv.width = W; cv.height = 2000; const H = layout(false);
+  cv.height = Math.ceil(H); layout(true);
+  return cv;
+}
+async function cardFile(c){
+  const code = await encodeCard(c), url = shareUrl(code);
+  const cv = await cardPng(c, url);
+  const blob = await new Promise(r => cv.toBlob(r, "image/png"));
+  const bytes = pngWithText(await blob.arrayBuffer(), code);
+  const fname = `${cardName(c).replace(/[^\w-]+/g, "-").toLowerCase()}-${EVENT.tag.toLowerCase()}-card.png`;
+  return { code, url, file: new File([bytes], fname, {type:"image/png"}) };
+}
+function download(file){
+  const a = document.createElement("a"); a.href = URL.createObjectURL(file); a.download = file.name;
+  document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+}
+function copyText(txt, okMsg){
+  const fb = () => { document.getElementById("copyFallback").innerHTML = `<textarea class="copybox" id="copyBox" readonly aria-label="Copy this"></textarea>`; const b = document.getElementById("copyBox"); b.value = txt; b.focus(); b.select(); toast("copy blocked here. it's selected, copy it manually"); };
+  try{ navigator.clipboard.writeText(txt).then(() => toast(okMsg), fb); }catch(err){ fb(); }
+}
+let busy = false;
+async function shareCard(how){
+  if(busy) return; busy = true;
+  try{
+    const c = mineCard();
+    if(how === "link"){ copyText(shareUrl(await encodeCard(c)), "link copied. send it to your crew"); return; }
+    const { url, file } = await cardFile(c);
+    if(how === "share" && navigator.canShare && navigator.canShare({files:[file]})){
+      try{ await navigator.share({ files:[file], title:`${possessive(cardName(c))} ${EVENT.tag} run`, text:`my ${EVENT.tag} run. open it on the quest board: ${url}` }); }
+      catch(e){ if(e && e.name !== "AbortError") { download(file); toast("saved the image"); } }
+      return;
+    }
+    download(file);
+    toast(how === "share" ? "image saved. share it, or copy the link" : "image saved");
+  }catch(e){ toast("couldn't make the card here"); }
+  finally{ busy = false; }
+}
+
+// ---- loading someone else's card ----
+async function readCardFile(file){
+  if(!file) throw new Error("no file");
+  if(/json/.test(file.type) || /\.json$/i.test(file.name)) return cleanCard(JSON.parse(await file.text()));
+  const buf = await file.arrayBuffer(), code = pngText(buf);
+  if(code) return decodeCard(code);
+  // images forwarded through chat apps lose the hidden code, so fall back to the QR
+  if("BarcodeDetector" in window){
+    try{
+      const det = new window.BarcodeDetector({formats:["qr_code"]});
+      const hits = await det.detect(await createImageBitmap(file));
+      for(const h of hits){ try{ return await decodeCard(h.rawValue); }catch(e){} }
+    }catch(e){}
+  }
+  throw new Error("no card in that image. ask them for the link, or scan the QR with your camera");
+}
+function crewIndex(c){ return crew.findIndex(x => x.n.toLowerCase() === cardName(c).toLowerCase()); }
+function showFriend(c){
+  viewing = c; cardOpen = false;
+  if(document.getElementById("view-card").hidden) setTab(true); else { renderCard(); window.scrollTo(0, 0); }
+}
+function saveFriend(c){
+  const i = crewIndex(c), entry = { n: cardName(c), p: c.p, k: c.k, at: Date.now() };
+  if(i >= 0) crew[i] = entry; else crew.push(entry);
+  store.set("ko26.crew", crew);
+}
+async function loadFromHash(){
+  if(!/^#c=/.test(location.hash)) return;
+  try{ showFriend(await decodeCard(location.hash)); }
+  catch(e){ toast("that card link is broken"); }
+}
+
+// crew members who picked this slot
+const crewAt = id => crew.filter(f => f.p.includes(id)).map(f => f.n);
+
+function runHtml(c, other){
+  const chosen = runOf(c), bad = clashes(chosen), kf = a => c.k[a] || [];
+  const now = other ? null : nowMin();
+  const nextIdx = now===null ? -1 : chosen.findIndex(s => s.s > now);
+  if(!chosen.length) return other
+    ? `<p class="empty" style="padding:20px 22px">${esc(cardName(c))} hasn't locked in any sets yet.</p>`
+    : `<p class="empty" style="padding:20px 22px">nothing cooking yet. on the <b>quest board</b>, hit <b>+</b> on the sets you want, then tap each artist and KR the songs you'll kick roll to.</p>`;
+  let h = `<ol class="run">`;
+  chosen.forEach((s, i) => {
+    const prev = chosen[i-1];
+    if(prev && !bad.has(slotId(s))){
+      const gap = s.s - prev.e;
+      if(gap >= 15) h += `<li class="gap" aria-hidden="true"><b>${gap} min</b> free · ${fmt(prev.e)}–${s.start}</li>`;
+      else if(prev.stage !== s.stage && gap >= 0) h += `<li class="gap" aria-hidden="true">Move to <b>${STAGES[s.stage].name}</b>${gap?` · ${gap} min`:" · no gap"}</li>`;
+    }
+    const ks = kf(s.artist), cl = bad.get(slotId(s));
+    const live = now!==null && s.s <= now && now < s.e ? `<span class="live">on now</span>` : (i===nextIdx ? `<span class="live">up next</span>` : "");
+    const mates = other ? (picks.has(slotId(s)) ? [`you`] : []) : crewAt(slotId(s));
+    const with_ = mates.length ? `<span class="with">with ${esc(mates.join(", "))}</span>` : "";
+    h += `<li class="${s.stage}"><div class="time">${s.start}–${s.end}<small>${s.e-s.s} min</small></div><div>
+      <div class="who"><button data-open="${esc(slotId(s))}">${esc(s.artist)}</button><span class="st">${STAGES[s.stage].name}</span>${live}${with_}</div>
+      ${cl?`<div class="clashnote">Clashes with ${cl.map(x=>esc(x.artist)).join(", ")}</div>`:""}
+      <ul class="krlist">${ks.length ? ks.map(t=>{ const it = RELEASED.get(t); const both = other && isKr(s.artist, t); return `<li${both ? ` class="both"` : ""}><span>${esc(t)}${both ? ` <em>you too</em>` : ""}</span>${it?`<span class="ics"><button class="mini pv" data-play="${esc(t)}" aria-label="${esc(playLabel(t, playState(t)))}">${playInner(t, true)}</button>${it.spotify?`<a class="mini" href="${esc(it.spotify)}" target="_blank" rel="noopener" aria-label="Open ${esc(t)} on Spotify">${IC.sp}</a>`:""}</span>`:""}</li>`; }).join("") : `<li class="none">${other ? "no KR songs picked." : "no KR songs yet. tap the name to pick some."}</li>`}</ul>
+    </div></li>`;
+  });
+  return h + `</ol>`;
+}
+function cardHtml(c, other){
+  const chosen = runOf(c), bad = clashes(chosen), krN = chosen.reduce((n,s)=>n+(c.k[s.artist]||[]).length,0);
+  return `<div class="pcard gframe"><div class="sheen" aria-hidden="true"></div><div class="pcard-head"><div><div class="eyebrow"><span class="star">★ ${other ? "P2" : "P1"}</span> Player card <span class="sep">·</span> ${esc(EVENT.edition)}</div><h2>${esc(possessive(cardName(c)))} run</h2><div class="sub">${esc([EVENT.tag, EVENT.date, String(EVENT.venue).split(/\s*·\s*/)[0]].filter(Boolean).join(" · "))}</div></div>
+    <div class="stats"><div class="stat"><b>${chosen.length}</b><span>sets</span></div><div class="stat kr"><b>${krN}</b><span>kick rolls</span></div><div class="stat ${bad.size?"bad":""}"><b>${bad.size}</b><span>clashes</span></div></div></div><div class="thorn" aria-hidden="true"></div>${runHtml(c, other)}</div>`;
+}
+let cardOpen = false; // "load a card" panel
+function renderCard(){
+  let h = "";
+  if(viewing){
+    const c = viewing, shared = runOf(c).filter(s => picks.has(slotId(s))).length, saved = crewIndex(c) >= 0;
+    h += `<div class="viewing"><p>You're looking at <b>${esc(possessive(cardName(c)))}</b> card${shared ? ` · <b>${shared}</b> ${shared === 1 ? "set" : "sets"} in common with yours` : ""}.</p>
+      <div class="card-tools"><button class="btn primary" id="saveFriend">${saved ? "Update in my crew" : "Save to my crew"}</button><button class="btn" id="backMine">Back to my card</button></div></div>`;
+    h += cardHtml(c, true);
+  } else {
+    h += `<label class="namebox">Name on your card <input id="myName" maxlength="24" autocomplete="nickname" placeholder="chef" value="${esc(myName)}"></label>`;
+    h += cardHtml(mineCard(), false);
+    h += `<div class="card-tools"><button class="btn primary" id="shareCard">Share card</button><button class="btn" id="copyLink">Copy link</button><button class="btn" id="saveImg">Save image</button><button class="btn" id="loadCard" aria-expanded="${cardOpen}">Load a card</button></div>`;
+    if(cardOpen) h += `<form class="loadbox" id="loadForm"><p>Got a friend's card? Pick the image they sent you, or paste their link.</p>
+      <label class="btn file">Choose image<input type="file" id="cardFileIn" accept="image/png,image/*,.json,application/json"></label>
+      <div class="pasterow"><input id="cardPaste" placeholder="paste a card link" aria-label="Card link" autocomplete="off"><button class="btn" type="submit">Open</button></div></form>`;
+    if(crew.length){
+      h += `<div class="crew"><div class="eyebrow">Your crew</div><ul>${crew.map((f, i) => { const n = runOf(f).filter(s => picks.has(slotId(s))).length; return `<li><button class="crew-open" data-crew="${i}"><b>${esc(f.n)}</b><span>${plural(f.p.length, "set")}${n ? ` · ${n} with you` : ""}</span></button><button class="crew-x" data-crew-x="${i}" aria-label="Remove ${esc(f.n)} from your crew">${IC.x}</button></li>`; }).join("")}</ul></div>`;
+    }
+    h += `<div class="card-tools subtle"><button class="btn" id="copyCard">Copy as text</button><button class="btn" id="clearAll">reset everything</button></div>`;
+  }
+  h += `<div id="copyFallback"></div>`;
   document.getElementById("cardWrap").innerHTML = h;
   syncPlay();
 }
@@ -1626,18 +1905,44 @@ document.addEventListener("click", e => {
   if(sw){ view = sw.dataset.view; store.set("ko26.view", view); renderSwitch(); renderTT(); return; }
   if(e.target.closest("#closeSheet") || e.target.id==="scrim"){ closeSheet(); return; }
   const tab = e.target.closest(".tab");
-  if(tab){ setTab(tab.id==="tab-card"); return; }
-  if(e.target.id==="copyCard"){
-    const txt = cardText();
-    const fb = () => { document.getElementById("copyFallback").innerHTML = `<textarea class="copybox" id="copyBox" readonly aria-label="Card text"></textarea>`; const b=document.getElementById("copyBox"); b.value = txt; b.focus(); b.select(); toast("copy blocked here. text is selected, copy it manually"); };
-    try{ navigator.clipboard.writeText(txt).then(()=>toast("card copied"), fb); }catch(err){ fb(); }
-    return; }
+  if(tab){ if(viewing) leaveFriend(true); setTab(tab.id==="tab-card"); return; }
+  if(e.target.id==="copyCard"){ copyText(cardText(), "card copied"); return; }
+  if(e.target.id==="shareCard"){ shareCard("share"); return; }
+  if(e.target.id==="saveImg"){ shareCard("image"); return; }
+  if(e.target.id==="copyLink"){ shareCard("link"); return; }
+  if(e.target.id==="loadCard"){ cardOpen = !cardOpen; renderCard(); const p = document.getElementById(cardOpen ? "cardPaste" : "loadCard"); if(p) p.focus({preventScroll:true}); return; }
+  if(e.target.id==="saveFriend"){ saveFriend(viewing); toast(`${cardName(viewing)} is in your crew`); leaveFriend(); return; }
+  if(e.target.id==="backMine"){ leaveFriend(); return; }
+  const cr = e.target.closest("[data-crew]");
+  if(cr){ const f = crew[Number(cr.dataset.crew)]; if(f) showFriend(cleanCard(f)); return; }
+  const cx = e.target.closest("[data-crew-x]");
+  if(cx){ const f = crew.splice(Number(cx.dataset.crewX), 1)[0]; store.set("ko26.crew", crew); renderCard(); if(f) toast(`${f.n} removed`); return; }
   if(e.target.id==="clearAll"){
     if(!confirmReset){ confirmReset = true; e.target.textContent = "tap again to wipe it"; setTimeout(()=>{confirmReset=false; const b=document.getElementById("clearAll"); if(b) b.textContent="reset everything";}, 3000); return; }
     picks = new Set(); kr = {}; custom = {}; save(); confirmReset=false; renderAll(); toast("wiped clean"); return; }
 });
-document.addEventListener("input", e => { if(e.target.id==="trackSearch"){ sheetState.q = e.target.value; renderSheetList(); } });
-document.addEventListener("submit", e => {
+document.addEventListener("input", e => {
+  if(e.target.id==="trackSearch"){ sheetState.q = e.target.value; renderSheetList(); return; }
+  if(e.target.id==="myName"){ myName = e.target.value.slice(0, 24); store.set("ko26.name", myName); const h = document.querySelector("#cardWrap .pcard-head h2"); if(h) h.textContent = possessive(cardName({n:myName})) + " run"; }
+});
+document.addEventListener("change", async e => {
+  if(e.target.id!=="cardFileIn") return;
+  const f = e.target.files && e.target.files[0]; e.target.value = "";
+  try{ const c = await readCardFile(f); toast(`opened ${possessive(cardName(c))} card`); showFriend(c); }
+  catch(err){ toast(err.message || "couldn't read that file"); }
+});
+function leaveFriend(quiet){
+  viewing = null;
+  if(/^#c=/.test(location.hash)) try{ history.replaceState(null, "", location.pathname + location.search); }catch(e){}
+  if(!quiet){ renderCard(); window.scrollTo(0, 0); }
+}
+window.addEventListener("hashchange", loadFromHash);
+document.addEventListener("submit", async e => {
+  if(e.target.id==="loadForm"){
+    e.preventDefault();
+    const v = document.getElementById("cardPaste").value;
+    try{ const c = await decodeCard(v); showFriend(c); }catch(err){ toast("that doesn't look like a card link"); }
+    return; }
   if(e.target.id!=="addOwn") return; e.preventDefault();
   const v = document.getElementById("ownTrack").value.trim(); if(!v) return;
   const s = curSlot();
@@ -1663,6 +1968,7 @@ function renderMain(){
 }
 function renderAll(){ renderSwitch(); renderTT(); renderCard(); renderHud(); }
 renderAll();
+loadFromHash();
 </script>
 </body>
 </html>
