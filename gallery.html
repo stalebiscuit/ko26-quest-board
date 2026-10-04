@@ -1078,11 +1078,11 @@ function renderAcct(){
 async function onAuthChange(){
   renderAcct();
   if(!S.ready) return;
-  const openId = S.lb >= 0 ? (S.seq[S.lb] || {}).id : null;
+  const curId = S.lb >= 0 ? (S.seq[S.lb] || {}).id : null;
   try{ await load(); }catch(e){ fail(e); }
   render.keepScroll = true; render();
-  if(openId){
-    const i = S.seq.findIndex(k => k.id === openId);
+  if(curId){
+    const i = S.seq.findIndex(k => k.id === curId);
     if(i >= 0){ S.lb = i; fill(); } else closeLb();
   }
 }

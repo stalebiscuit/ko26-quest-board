@@ -122,6 +122,14 @@ a{color:inherit}
 .sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
 .sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
 @media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
+.acct{margin-left:auto;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}
+.acct:empty{display:none}
+.acct .me{display:inline-flex;align-items:center;gap:7px;min-height:36px;min-width:0;padding:0 10px;border:1px solid color-mix(in srgb,var(--rel) 45%,var(--line));background:var(--panel);font-size:13px;color:var(--fg-2)}
+.acct .me::before{content:"";width:7px;height:7px;flex:none;background:var(--rel)}
+.acct .me span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:18ch}
+.acct button{min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;white-space:nowrap}
+.acct button.in{border-color:var(--gold);color:var(--gold-hi)}
+@media (hover:hover){.acct button:hover{border-color:var(--gold);color:var(--gold-hi)}}
 
 .demo{margin:0 0 12px;padding:7px 12px;font-size:12.5px;line-height:1.4;color:var(--fg-2);border:1px solid color-mix(in srgb,var(--p-violet) 45%,var(--line));background:color-mix(in srgb,var(--violet) 12%,var(--panel));display:flex;gap:8px;align-items:baseline}
 .demo b{font-family:var(--pixel);font-weight:400;font-size:9.5px;background:var(--p-violet);color:var(--p-bg);padding:0 5px;flex:none}
@@ -317,6 +325,15 @@ a{color:inherit}
 .kc .when{font-size:12px;color:var(--dim)}
 .kc .rate{grid-column:1/-1;border-top:1px solid var(--line);padding-top:6px}
 .kc .tools{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.stat{display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0 8px;font-family:var(--display);font-weight:600;font-size:11.5px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.stat.pending{color:var(--kick-ink);background:var(--p-soft)}
+.stat.rejected{color:var(--kick-ink);background:var(--warn)}
+.kc.own{border-style:dashed;border-color:color-mix(in srgb,var(--p-violet) 70%,var(--line));background:color-mix(in srgb,var(--violet) 7%,var(--panel))}
+.kc.own.rejected{border-color:color-mix(in srgb,var(--warn) 60%,var(--line));background:color-mix(in srgb,var(--warn) 5%,var(--panel))}
+.kc .why{margin:0;font-size:13px;line-height:1.45;color:var(--fg-2)}
+.kc .why b{color:var(--warn);font-weight:600}
+.own-h{margin:0 0 8px;font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--p-soft)}
+.krs.mine{margin-bottom:18px}
 .kc.flash{border-color:var(--rel);box-shadow:0 0 0 1px var(--rel),0 0 18px color-mix(in srgb,var(--rel) 35%,transparent)}
 .kc.first{grid-template-columns:minmax(0,1fr);border-color:var(--gold);background:radial-gradient(ellipse 80% 50% at 50% 0,color-mix(in srgb,var(--p-violet) 22%,transparent),transparent 70%),var(--panel-2);padding:16px}
 .kc.first .vbox{width:auto;height:min(58vh,500px);max-width:100%;justify-self:center;box-shadow:0 0 0 1px var(--gold),0 0 26px color-mix(in srgb,var(--p-violet) 45%,transparent)}
@@ -457,7 +474,7 @@ a{color:inherit}
       <div class="cell"><b id="hudS">0</b><span>songs</span></div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
-    <nav class="sitenav" aria-label="Pages"><a href="index.html">Quest board</a><a href="leaderboard.html" aria-current="page">Kickroll leaderboard</a><a href="gallery.html">Gallery</a></nav>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html">Quest board</a><a href="leaderboard.html" aria-current="page">Leaderboard</a><a href="gallery.html">Gallery</a><span class="acct" id="acct" aria-live="polite"></span></nav>
   </header>
 
   <p class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></p>
@@ -549,23 +566,23 @@ const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
 const ICON = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
 
 // ---------- state ----------
-let ALL = [], W = {byStage:{}, byAct:{}, bySong:{}}, loadedAt = 0;
-// demo mode can't tell whose video is whose, so remember what this device uploaded
-const myIds = new Set(store.get("ko26.myKickrolls", []));
+let ALL = [], PUB = [], W = {byStage:{}, byAct:{}, bySong:{}}, loadedAt = 0;
 const reported = new Set(store.get("ko26.reported", []));
-const isMine = k => !!(k && (k.mine || myIds.has(k.id)));
+const isMine = k => !!(k && k.mine);
+const isPub = k => !k.status || k.status === "approved";
 const byId = id => ALL.find(k => k.id === id);
 const leadWord = () => KO.closed() ? "winner" : "leader";
 
 async function refresh(){
   ALL = await KO.list();
-  W = KO.winners(ALL);
+  PUB = ALL.filter(isPub);
+  W = KO.winners(PUB);
   loadedAt = Date.now();
   hud();
 }
 function patch(fresh){
   for(const f of fresh){ const i = ALL.findIndex(k => k.id === f.id); if(i >= 0) ALL[i] = f; else ALL.push(f); }
-  W = KO.winners(ALL); hud();
+  PUB = ALL.filter(isPub); W = KO.winners(PUB); hud();
 }
 
 // ---------- toast ----------
@@ -574,13 +591,14 @@ function toast(msg, err){
   const t = $("#toast"); t.textContent = msg; t.classList.toggle("err", !!err); t.hidden = false;
   clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, err ? 4200 : 2600);
 }
-const fail = e => toast((e && e.message) || String(e), true);
+const QUIET = /^(sign in to do that|cancelled)$/i;
+const fail = e => { const m = (e && e.message) || String(e); if(!QUIET.test(m)) toast(m, true); };
 
 // ---------- HUD + countdown ----------
 function hud(){
-  $("#hudK").textContent = ALL.length;
-  $("#hudV").textContent = ALL.reduce((s, k) => s + (k.votes || 0), 0);
-  $("#hudS").textContent = new Set(ALL.map(k => k.songKey)).size;
+  $("#hudK").textContent = PUB.length;
+  $("#hudV").textContent = PUB.reduce((s, k) => s + (k.votes || 0), 0);
+  $("#hudS").textContent = new Set(PUB.map(k => k.songKey)).size;
 }
 function left(ms){
   const m = Math.floor(ms / 60000), d = Math.floor(m / 1440), h = Math.floor((m % 1440) / 60), mm = m % 60;
@@ -690,7 +708,10 @@ function thumbBtn(k, extra){
 function rateHTML(k){
   const closed = KO.closed();
   let h = `<div class="rate" data-k="${esc(k.id)}">`;
-  if(isMine(k)){
+  if(!isPub(k)){
+    h += k.status === "rejected" ? `<span class="stat rejected">not approved</span>` : `<span class="stat pending">awaiting review</span><span class="yr">Only you can see this until it's approved. Usually within an hour.</span>`;
+    if(k.status === "rejected" && k.reviewNote) h += `<span class="yr">${esc(k.reviewNote)}</span>`;
+  }else if(isMine(k)){
     h += scoreTxt(k) + `<span class="pill mine">your video</span>`;
   }else{
     h += `<div class="stars${closed ? " off" : ""}" role="radiogroup" aria-label="Rate ${esc(k.name)}'s kickroll">`;
@@ -718,7 +739,7 @@ const actsByStage = () => {
 
 // ---------- 1. artists ----------
 function artistsView(){
-  const byAct = groupBy(ALL, k => k.act), groups = actsByStage();
+  const byAct = groupBy(PUB, k => k.act), groups = actsByStage();
   const stages = STAGE_ORDER.filter(st => groups[st] && groups[st].length).concat(Object.keys(groups).filter(st => !STAGE_ORDER.includes(st) && groups[st].length));
   let h = `<div class="jump" role="group" aria-label="Jump to stage">${stages.map(st => `<button type="button" data-jump="${esc(st)}">${esc(STAGE_WORD[st] || st)}</button>`).join("")}</div><div class="stages">`;
   for(const st of stages){
@@ -739,9 +760,11 @@ function artistsView(){
 
 // ---------- 2. act ----------
 function actView(act){
-  const s = KO.sets[act], ks = ALL.filter(k => k.act === act), bySong = groupBy(ks, k => k.songKey);
+  const s = KO.sets[act], ks = PUB.filter(k => k.act === act), bySong = groupBy(ks, k => k.songKey);
   const seen = new Set(), tracks = s.tracks.filter(t => !seen.has(t.key) && seen.add(t.key));
-  const fans = [...bySong.keys()].filter(key => !seen.has(key));
+  // fan-added songs: public uploads, plus the viewer's own ones still in review (so they can find them again)
+  const ownSongs = groupBy(ALL.filter(k => k.act === act && !isPub(k) && isMine(k)), k => k.songKey);
+  const fans = [...new Set([...bySong.keys(), ...ownSongs.keys()])].filter(key => !seen.has(key));
   const lead = W.byAct[act];
   let h = `<header class="head gframe" data-stage="${esc(s.stage)}"><div class="h-top">${emblem(act, "h-em")}<div class="h-id"><div class="stage">${esc(KO.STAGES[s.stage] || s.stage)}</div><h2>${esc(act)}</h2><div class="when">${esc(when(s))} <span>· ${toMin(s.end) - toMin(s.start)} min${s.tag ? " · " + esc(s.tag) : ""}</span></div></div></div>`;
   h += `<div class="h-stats"><span class="pill">${plural(ks.length, "kickroll")}</span><span class="pill">${plural(bySong.size, "song")} rolled</span>`;
@@ -765,7 +788,7 @@ function actView(act){
   };
   for(const t of tracks) h += row(String(t.n), t.key, t.text, t.artist, t.id ? "ID (unknown)" : t.title, t.id || /^ID(\s|$)/i.test(t.title), false);
   for(const key of fans){
-    const k = bySong.get(key)[0], text = k.song || key.split("/").pop().replace(/-/g, " "), j = text.indexOf(" - ");
+    const k = (bySong.get(key) || ownSongs.get(key))[0], text = k.song || key.split("/").pop().replace(/-/g, " "), j = text.indexOf(" - ");
     h += row("+", key, text, j > 0 ? text.slice(0, j) : "", j > 0 ? text.slice(j + 3) : text, false, true);
   }
   h += `</ol><form class="addsong" id="addSong" autocomplete="off"><b>Song not listed? Add it</b><p>Type it as Artist - Title, then post your kickroll to it.</p><div class="inrow"><label class="sr" for="addTxt">Song (Artist - Title)</label><input class="inp" id="addTxt" maxlength="120" placeholder="Artist - Title" enterkeyhint="go"><button class="btn" type="submit">Add</button></div></form></section></div>`;
@@ -775,10 +798,11 @@ function actView(act){
 // ---------- 3. song ----------
 function songInfo(act, key, t){
   const s = KO.sets[act], tr = s.tracks.find(x => x.key === key);
-  const ks = ALL.filter(k => k.songKey === key);
+  const ks = PUB.filter(k => k.songKey === key);
+  const own = ALL.filter(k => k.songKey === key && !isPub(k) && isMine(k));
   const text = tr ? tr.text : (ks[0] && ks[0].song) || String(t || "").trim().slice(0, 120) || key.split("/").pop().replace(/-/g, " ");
   const j = text.indexOf(" - ");
-  return {tr, text, artist: j > 0 ? text.slice(0, j) : "", title: tr ? (tr.id ? "ID (unknown)" : tr.title) : (j > 0 ? text.slice(j + 3) : text), ks};
+  return {tr, text, own, artist: j > 0 ? text.slice(0, j) : "", title: tr ? (tr.id ? "ID (unknown)" : tr.title) : (j > 0 ? text.slice(j + 3) : text), ks};
 }
 function songView(act, key, t){
   const s = KO.sets[act], info = songInfo(act, key, t), ranked = KO.rank(info.ks), closed = KO.closed();
@@ -799,6 +823,14 @@ function songView(act, key, t){
   </fieldset></form>`;
   // ranked
   h += `<section class="ranked" aria-label="Kickrolls for this song"><div class="list-h"><h3>Kickrolls</h3><span>${ranked.length ? (closed ? "final ranking" : "ranked by rating, live") : ""}</span></div>`;
+  if(info.own.length){
+    h += `<h4 class="own-h">Your ${info.own.length === 1 ? "upload" : "uploads"} in review</h4><ol class="krs mine">`;
+    for(const k of info.own){
+      const rej = k.status === "rejected";
+      h += `<li class="kc own${rej ? " rejected" : ""}" data-k="${esc(k.id)}">${thumbBtn(k)}<div class="info"><div class="rk">${rej ? `<span class="stat rejected">not approved</span>` : `<span class="stat pending">awaiting review</span>`}</div><p class="nm">${esc(k.name)}</p>${k.caption ? `<p class="cap">${esc(k.caption)}</p>` : ""}${rej ? (k.reviewNote ? `<p class="why"><b>Reviewer:</b> ${esc(k.reviewNote)}</p>` : `<p class="why">It didn't pass review, so it isn't shown to anyone else.</p>`) : `<p class="why">Only you can see this until it's approved. Usually within an hour.</p>`}<span class="when">${esc(ago(k.createdAt))}</span></div><div class="tools">${toolsHTML(k)}</div></li>`;
+    }
+    h += `</ol>`;
+  }
   if(!ranked.length){
     h += `<p class="empty">${closed ? "Nobody posted a kickroll to this song." : `<b>No kickrolls yet.</b> Post the first one and you're the ${leadWord()} by default.`}</p>`;
   }else{
@@ -859,10 +891,10 @@ function wireUpload(act, key, t){
     go.disabled = true; go.textContent = "Uploading…"; prog.hidden = false; prog.firstElementChild.style.width = "0%";
     try{
       const k = await KO.upload({file: f, act, songKey: key, song: info.text, name, caption: cap.value}, p => prog.firstElementChild.style.width = Math.round(p * 100) + "%");
-      if(k && k.id){ myIds.add(k.id); store.set("ko26.myKickrolls", [...myIds]); flashId = k.id; }
+      if(k && k.id) flashId = k.id;
       if(url){ URL.revokeObjectURL(url); url = ""; }
       await refresh();
-      toast("Kickroll posted. now get your mates to rate it");
+      toast(k && k.status === "pending" ? "Uploaded! It goes live once it's reviewed" : "Kickroll posted. now get your mates to rate it");
       renderedBase = null; await route();
     }catch(err){
       fail(err);
@@ -873,7 +905,7 @@ function wireUpload(act, key, t){
 
 // ---------- 4. top 20 ----------
 function topView(){
-  const top = KO.rank(ALL).slice(0, 20), closed = KO.closed();
+  const top = KO.rank(PUB).slice(0, 20), closed = KO.closed();
   const cards = [["Overall", W.overall, "", "all"]].concat(STAGE_ORDER.map(st => [KO.STAGES[st] || st, W.byStage[st], st, ""]));
   let h = `<div class="sec-h"><h2>${closed ? "Winners" : "Current leaders"}</h2><span>${closed ? "final" : "can still change until voting closes"}</span></div><div class="leaders">`;
   for(const [label, k, st, cls] of cards){
@@ -977,7 +1009,7 @@ function redrawRate(id){
   for(const el of $$(`.rate[data-k="${CSS.escape(id)}"]`)) el.outerHTML = rateHTML(k);
 }
 async function rate(id, n){
-  const k = byId(id); if(!k || isMine(k)) return;
+  const k = byId(id); if(!k || isMine(k) || !isPub(k)) return;
   const prev = k.myStars;
   k.myStars = n; redrawRate(id);
   const again = $(`.rate[data-k="${CSS.escape(id)}"] .st[data-rate="${n}"]`, lbOpen ? $("#lb") : document);
@@ -1011,7 +1043,6 @@ async function del(btn, id){
   clearTimeout(armed.get(btn)); btn.disabled = true; btn.textContent = "Deleting…";
   try{
     await KO.remove(id);
-    myIds.delete(id); store.set("ko26.myKickrolls", [...myIds]);
     await refresh();
     toast("kickroll deleted");
     if(lbOpen){ lbOpen = false; $("#lb").hidden = true; $("#lbVid").pause(); document.body.classList.remove("lb-open"); lbPushed = false; history.replaceState(null, "", baseOf(parseHash())); }
