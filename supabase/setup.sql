@@ -1,4 +1,5 @@
--- KO26 Kickroll Leaderboard: run this once in Supabase → SQL Editor → New query → Run.
+-- KO26 Kickroll Leaderboard: run this once in Supabase → SQL Editor → New query → paste ALL of it → Run
+-- (with nothing highlighted: if any text is selected, Supabase runs only the selection).
 -- Also turn on Authentication → Sign In / Providers → "Allow anonymous sign-ins"
 -- (every visitor gets a silent anonymous account, so one rating per person per video holds).
 --
@@ -6,7 +7,7 @@
 -- To change it, edit ko26_deadline() below and KO_CONFIG.deadline in ko-config.js.
 
 create or replace function public.ko26_deadline() returns timestamptz
-language sql immutable as $$ select timestamptz '2026-10-10 23:59:59+11' $$;
+language sql immutable as $fn$ select timestamptz '2026-10-10 23:59:59+11' $fn$;
 
 -- ---------- kickroll videos ----------
 create table if not exists public.kickrolls (
@@ -85,13 +86,13 @@ drop policy if exists "report once" on public.reports;
 create policy "report once" on public.reports for insert to authenticated with check (reporter = auth.uid());
 
 -- at most 15 uploads per person per day
-create or replace function public.ko26_upload_limit() returns trigger language plpgsql security definer set search_path = public as $$
+create or replace function public.ko26_upload_limit() returns trigger language plpgsql security definer set search_path = public as $fn$
 begin
   if (select count(*) from public.kickrolls where owner = new.owner and created_at > now() - interval '1 day') >= 15 then
     raise exception 'upload limit reached, try again tomorrow';
   end if;
   return new;
-end $$;
+end $fn$;
 drop trigger if exists ko26_upload_limit on public.kickrolls;
 create trigger ko26_upload_limit before insert on public.kickrolls for each row execute function public.ko26_upload_limit();
 
@@ -135,9 +136,9 @@ drop policy if exists "admins see themselves" on public.admins;
 create policy "admins see themselves" on public.admins for select to authenticated using (user_id = auth.uid());
 
 create or replace function public.ko26_is_admin() returns boolean
-language sql stable security definer set search_path = public as $$
+language sql stable security definer set search_path = public as $fn$
   select exists (select 1 from public.admins where user_id = auth.uid())
-$$;
+$fn$;
 
 alter table public.visits enable row level security;
 drop policy if exists "anyone logs a visit" on public.visits;
@@ -183,7 +184,7 @@ begin
         'videos', (select count(*) from kickrolls), 'ratings', (select count(*) from ratings),
         'uploaders', (select count(distinct owner) from kickrolls), 'reported', (select count(distinct kickroll_id) from reports)))
   );
-end $$;
+end $fn$;
 revoke all on function public.ko26_stats(integer) from public, anon;
 grant execute on function public.ko26_stats(integer) to authenticated;
 
