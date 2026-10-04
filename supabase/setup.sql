@@ -215,6 +215,128 @@ drop policy if exists "kickrolls delete own" on storage.objects;
 create policy "kickrolls delete own" on storage.objects for delete to authenticated
   using (bucket_id = 'kickrolls' and (storage.foldername(name))[1] = auth.uid()::text);
 
+-- ---------- groups: invite friends, compare kickrolls on a group leaderboard ----------
+create table if not exists public.ko_groups (
+  id          uuid primary key default gen_random_uuid(),
+  name        text not null check (char_length(name) between 1 and 40 and name !~* '(https?://|www\.)'),
+  owner       uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  invite_code text not null unique default upper(substr(md5(gen_random_uuid()::text), 1, 8)),
+  created_at  timestamptz not null default now()
+);
+create table if not exists public.ko_group_members (
+  group_id  uuid not null references public.ko_groups(id) on delete cascade,
+  user_id   uuid not null references auth.users(id) on delete cascade,
+  joined_at timestamptz not null default now(),
+  primary key (group_id, user_id)
+);
+create index if not exists ko_group_members_user_idx on public.ko_group_members (user_id);
+alter table public.ko_groups enable row level security;
+alter table public.ko_group_members enable row level security;
+-- direct reads only of your own groups / co-members; every change goes through the functions below
+create or replace function public.ko26_in_group(g uuid) returns boolean
+language sql stable security definer set search_path = public as $fn$
+  select exists (select 1 from public.ko_group_members where group_id = g and user_id = auth.uid())
+$fn$;
+drop policy if exists "members read their groups" on public.ko_groups;
+create policy "members read their groups" on public.ko_groups for select to authenticated using (public.ko26_in_group(id));
+drop policy if exists "members read co-members" on public.ko_group_members;
+create policy "members read co-members" on public.ko_group_members for select to authenticated using (public.ko26_in_group(group_id));
+
+create or replace function public.ko26_group_create(gname text) returns json
+language plpgsql security definer set search_path = public as $fn$
+declare g public.ko_groups;
+begin
+  if not public.ko26_is_member() then raise exception 'sign in to make a group'; end if;
+  if (select count(*) from public.ko_groups where owner = auth.uid()) >= 5 then raise exception 'you can own up to 5 groups'; end if;
+  if (select count(*) from public.ko_group_members where user_id = auth.uid()) >= 15 then raise exception 'you can be in up to 15 groups'; end if;
+  insert into public.ko_groups (name, owner) values (trim(gname), auth.uid()) returning * into g;
+  insert into public.ko_group_members (group_id, user_id) values (g.id, auth.uid());
+  return json_build_object('id', g.id, 'name', g.name, 'code', g.invite_code);
+end $fn$;
+
+create or replace function public.ko26_group_join(code text) returns json
+language plpgsql security definer set search_path = public as $fn$
+declare g public.ko_groups;
+begin
+  if not public.ko26_is_member() then raise exception 'sign in to join a group'; end if;
+  select * into g from public.ko_groups where invite_code = upper(trim(code));
+  if g.id is null then raise exception 'that invite code is not valid (it may have been changed)'; end if;
+  if (select count(*) from public.ko_group_members where user_id = auth.uid()) >= 15 then raise exception 'you can be in up to 15 groups'; end if;
+  if (select count(*) from public.ko_group_members where group_id = g.id) >= 100 then raise exception 'that group is full (100 members)'; end if;
+  insert into public.ko_group_members (group_id, user_id) values (g.id, auth.uid()) on conflict do nothing;
+  return json_build_object('id', g.id, 'name', g.name);
+end $fn$;
+
+create or replace function public.ko26_my_groups() returns json
+language sql stable security definer set search_path = public as $fn$
+  select coalesce(json_agg(x order by x.joined_at desc), '[]') from (
+    select g.id, g.name, case when g.owner = auth.uid() then g.invite_code end as code, g.invite_code as invite,
+           (g.owner = auth.uid()) as is_owner, m.joined_at,
+           (select count(*) from public.ko_group_members m2 where m2.group_id = g.id) as members
+    from public.ko_group_members m join public.ko_groups g on g.id = m.group_id
+    where m.user_id = auth.uid()) x
+$fn$;
+
+-- the group leaderboard: per member, approved kickrolls, stars received, votes, best kickroll (Bayesian, same as the site)
+create or replace function public.ko26_group_board(g uuid) returns json
+language plpgsql stable security definer set search_path = public as $fn$
+begin
+  if not public.ko26_in_group(g) then raise exception 'you are not in that group'; end if;
+  return (select json_build_object(
+    'group', (select json_build_object('id', id, 'name', name, 'invite', invite_code, 'is_owner', owner = auth.uid(), 'owner', owner) from public.ko_groups where id = g),
+    'members', (select coalesce(json_agg(r order by r.best_score desc nulls last, r.avg_stars desc, r.posts desc, r.joined_at), '[]') from (
+      select m.user_id, m.joined_at, (m.user_id = auth.uid()) as is_me,
+             coalesce(nullif(u.raw_user_meta_data ->> 'name', ''), (select k.name from public.kickrolls k where k.owner = m.user_id order by k.created_at desc limit 1), 'Raver') as name,
+             pr.tiktok, pr.instagram,
+             (select count(*) from public.kickroll_scores s where s.owner = m.user_id) as posts,
+             (select round(avg(r.stars)::numeric, 2) from public.ratings r join public.kickroll_scores s on s.id = r.kickroll_id where s.owner = m.user_id) as avg_stars,
+             (select coalesce(sum(s.votes), 0) from public.kickroll_scores s where s.owner = m.user_id) as votes,
+             (select max((3.5 * 3 + s.avg_stars * s.votes) / (3 + s.votes)) from public.kickroll_scores s where s.owner = m.user_id and s.votes > 0) as best_score,
+             (select json_build_object('id', s.id, 'song', s.song, 'act', s.act, 'avg', s.avg_stars, 'votes', s.votes)
+                from public.kickroll_scores s where s.owner = m.user_id and s.votes > 0
+               order by (3.5 * 3 + s.avg_stars * s.votes) / (3 + s.votes) desc limit 1) as best,
+             (select count(*) from public.ratings r where r.rater = m.user_id) as ratings_given
+      from public.ko_group_members m
+      join auth.users u on u.id = m.user_id
+      left join public.profiles pr on pr.user_id = m.user_id
+      where m.group_id = g) r)
+  ));
+end $fn$;
+
+create or replace function public.ko26_group_leave(g uuid) returns void
+language plpgsql security definer set search_path = public as $fn$
+begin
+  if exists (select 1 from public.ko_groups where id = g and owner = auth.uid()) then
+    raise exception 'you own this group: delete it instead, or it stays yours';
+  end if;
+  delete from public.ko_group_members where group_id = g and user_id = auth.uid();
+end $fn$;
+
+create or replace function public.ko26_group_admin(g uuid, action text, target uuid default null, new_name text default null) returns json
+language plpgsql security definer set search_path = public as $fn$
+declare c text;
+begin
+  if not exists (select 1 from public.ko_groups where id = g and owner = auth.uid()) then raise exception 'only the group owner can do that'; end if;
+  if action = 'remove' then
+    if target = auth.uid() then raise exception 'you can''t remove yourself'; end if;
+    delete from public.ko_group_members where group_id = g and user_id = target;
+  elsif action = 'new_code' then
+    update public.ko_groups set invite_code = upper(substr(md5(gen_random_uuid()::text), 1, 8)) where id = g returning invite_code into c;
+    return json_build_object('code', c);
+  elsif action = 'rename' then
+    update public.ko_groups set name = trim(new_name) where id = g;
+  elsif action = 'delete' then
+    delete from public.ko_groups where id = g;
+  else raise exception 'unknown action';
+  end if;
+  return '{}'::json;
+end $fn$;
+
+revoke all on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid),
+  public.ko26_group_leave(uuid), public.ko26_group_admin(uuid, text, uuid, text) from public, anon;
+grant execute on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid),
+  public.ko26_group_leave(uuid), public.ko26_group_admin(uuid, text, uuid, text) to authenticated;
+
 -- ---------- moderation by hand ----------
 -- hide a video:     update public.kickrolls set hidden = true where id = '...';
 -- see reported:     select k.*, count(*) from public.reports p join public.kickrolls k on k.id = p.kickroll_id group by k.id order by 2 desc;
