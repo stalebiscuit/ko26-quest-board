@@ -225,6 +225,26 @@ table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:
 .mlist.one .item video,.mlist.one .item .vph{height:100%;min-height:220px;max-height:360px;border-bottom:0;border-right:1px solid var(--line)}
 .vph{display:flex!important;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-family:var(--pixel);font-size:11px;text-align:center;padding:12px;
   background:repeating-linear-gradient(135deg,#0d0a05 0 10px,#130f08 10px 20px)!important}
+.lnk{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;width:100%;height:min(360px,56vh);background:#000;border-bottom:1px solid var(--line);overflow:hidden;padding:12px;text-align:center}
+.lnk img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.55}
+.lnk > :not(img){position:relative}
+.lnk .pl{font-family:var(--pixel);font-size:11px;color:var(--fg-2)}
+.lnk .short{font-size:12.5px;color:var(--fg-2);max-width:240px}
+.lnk .btn{min-height:40px;font-size:12.5px;background:rgba(10,8,4,.85)}
+.lnk.embed{padding:0;height:auto;min-height:min(360px,56vh)}
+.lnk iframe{display:block;border:0;background:#000}
+.lnk iframe.tt{height:min(560px,75vh);aspect-ratio:9/16;max-width:100%}
+.lnk iframe.ig{width:100%;height:min(600px,78vh)}
+.mlist.one .item .lnk{height:100%;min-height:220px;max-height:none;border-bottom:0;border-right:1px solid var(--line)}
+.plat{font-family:var(--pixel);font-size:9.5px;padding:1px 5px;line-height:1.6;border:1px solid currentColor;color:var(--fg-2);white-space:nowrap}
+.plat.tiktok{color:#7fe7f2}
+.plat.instagram{color:#f5a3d0}
+.hdl{color:var(--fg-2);font-size:13px;font-weight:500;overflow-wrap:anywhere}
+.ext{font-size:12.5px;color:var(--gold);overflow-wrap:anywhere}
+.socials{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.socials a{color:var(--gold);white-space:nowrap}
+.mism{font-size:12.5px;color:#ffb39b;border-left:2px solid var(--warn);padding:2px 0 2px 8px;margin:2px 0}
+.mism::before{content:"! ";font-weight:700;color:var(--warn)}
 .item .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
 .item .nm{font-weight:600;font-size:15.5px;color:var(--fg);overflow-wrap:anywhere;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
 .item .song{color:var(--fg-2);font-size:13.5px;overflow-wrap:anywhere}
@@ -265,7 +285,8 @@ table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:
   .kr{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mgrid{grid-template-columns:minmax(0,1fr)}
   .mlist.one .item{display:flex}
-  .mlist.one .item video,.mlist.one .item .vph{height:min(360px,56vh);min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+  .mlist.one .item video,.mlist.one .item .vph,.mlist.one .item .lnk{height:min(360px,56vh);min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+  .mlist.one .item .lnk.embed{height:auto}
   .card{padding:16px 14px 14px}
   .who{text-align:left}
   .range button{min-width:0;flex:1}
@@ -651,7 +672,8 @@ document.addEventListener("visibilitychange", () => {
 
 
 /* ---------- moderation: review queue, reported, recently reviewed ---------- */
-const COLS = "id,created_at,act,song,name,caption,path,mime,size_bytes,status,hidden,reviewed_at,review_note";
+const COLS = "id,created_at,owner,act,song,name,caption,path,mime,size_bytes,status,hidden,reviewed_at,review_note,source,external_url,external_id,handle,thumb_url";
+let PROFILES = new Map();
 const videoUrl = path => `${CFG.supabaseUrl}/storage/v1/object/public/${CFG.bucket || "kickrolls"}/${String(path || "").split("/").map(encodeURIComponent).join("/")}`;
 const LIVE_MOD = {
   async lists(){
@@ -671,6 +693,11 @@ const LIVE_MOD = {
         .filter(x => !x.reviewed_at || Date.parse(x.last_report) > Date.parse(x.reviewed_at))
         .sort((a, b) => b.reports - a.reports || Date.parse(b.last_report) - Date.parse(a.last_report));
     }
+    const owners = [...new Set([...out.queue, ...out.reported, ...out.recent].map(x => x.owner).filter(Boolean))];
+    if(owners.length){
+      const pr = await sb.from("profiles").select("user_id,tiktok,instagram").in("user_id", owners.slice(0, 300));
+      if(!pr.error) out.profiles = pr.data || [];
+    }
     return out;
   },
   async moderate(id, approve, note){
@@ -686,11 +713,17 @@ const LIVE_MOD = {
 /* sample moderation backend: fake rows, changes stay in this tab */
 const SAMPLE_MOD = (() => {
   const ago = m => new Date(Date.now() - m * 60000).toISOString();
-  const mk = (i, o) => Object.assign({id: "sample-" + i, path: "", mime: "video/mp4", hidden: false, status: "pending", reviewed_at: null, review_note: null}, o);
+  const mk = (i, o) => Object.assign({id: "sample-" + i, owner: "sample-u" + i, source: "upload", path: "", mime: "video/mp4", hidden: false, status: "pending", reviewed_at: null, review_note: null}, o);
+  const link = (src, id, handle, o) => Object.assign({source: src, path: null, mime: null, size_bytes: null, external_id: id, handle,
+    external_url: src === "tiktok" ? (id ? `https://www.tiktok.com/@${handle || "sample.user"}/video/${id}` : "https://vt.tiktok.com/ZSsample/") : `https://www.instagram.com/reel/${id}/`, thumb_url: null}, o);
+  const profiles = [{user_id: "sample-u6", tiktok: "sample.dancer", instagram: null}, {user_id: "sample-u7", tiktok: null, instagram: "sample_raver"}, {user_id: "sample-u8", tiktok: "sample.someone", instagram: "sample.someone"}];
   let rows;
   const init = () => { rows = [
     mk(1, {name: "Sample Sam", act: "Sample Act One", song: "Placeholder Track (Sample Edit)", caption: "sample caption: front left, first drop", created_at: ago(190), size_bytes: 18.4e6}),
     mk(2, {name: "Test Tess", act: "Sample Act Two", song: "Example Song", caption: "", created_at: ago(75), size_bytes: 7.2e6}),
+    mk(6, link("tiktok", "7000000000000000001", "sample.dancer", {name: "Link Lou", act: "Sample Act One", song: "Sample Song (TikTok link)", caption: "sample: TikTok link post", created_at: ago(150)})),
+    mk(7, link("instagram", "SAMPLEreel01", "not_the_uploader", {name: "Insta Ivy", act: "Sample Act Three", song: "Sample Song (Instagram link)", caption: "sample: handle doesn't match", created_at: ago(95)})),
+    mk(8, link("tiktok", null, null, {name: "Short Sid", act: "Sample Act Two", song: "Sample Song (short link)", caption: "", created_at: ago(30)})),
     mk(3, {name: "Demo Dee", act: "Sample Act Three", song: "Fake Tune <b>not real</b>", caption: "a deliberately long sample caption to check wrapping on a phone screen, nothing here is real", created_at: ago(12), size_bytes: 41.9e6}),
     mk(4, {name: "Report Rae", act: "Sample Act Two", song: "Reported Sample Song", caption: "sample: reported video", created_at: ago(2900), size_bytes: 12e6, status: "approved", reviewed_at: ago(2800), review_note: "sample: auto-approved", reports: 2, last_report: ago(40)}),
     mk(5, {name: "Flag Finn", act: "Sample Act One", song: "Another Sample Song", caption: "", created_at: ago(4000), size_bytes: 9e6, status: "approved", reviewed_at: ago(3900), review_note: null, reports: 1, last_report: ago(300)}),
@@ -704,7 +737,7 @@ const SAMPLE_MOD = (() => {
     reset: init,
     queue: () => rows.filter(r => r.status === "pending").sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at)),
     reported: () => rows.filter(r => r.reports && r.status !== "rejected" && Date.parse(r.last_report) > Date.parse(r.reviewed_at || 0)),
-    async lists(){ return {queue: api.queue(), reported: api.reported(), recent: recentOf()}; },
+    async lists(){ return {queue: api.queue(), reported: api.reported(), recent: recentOf(), profiles}; },
     async moderate(id, approve, note){ const r = rows.find(x => x.id === id); if(r){ r.status = approve ? "approved" : "rejected"; r.reviewed_at = new Date().toISOString(); r.review_note = note || null; if(approve) r.hidden = false; } },
     async remove(id){ rows = rows.filter(x => x.id !== id); }
   };
@@ -721,8 +754,64 @@ function ago(iso){
 const mb = b => (num(b) / 1048576).toFixed(num(b) < 10485760 ? 1 : 0) + " MB";
 const stChip = st => h("span", {class: "st " + st}, (st === "approved" ? "✓ " : st === "rejected" ? "✕ " : "• ") + String(st).toUpperCase());
 
+const PLAT = {tiktok: "TikTok", instagram: "Instagram"};
+const isLink = k => k.source === "tiktok" || k.source === "instagram";
+function https(u){ try{ const x = new URL(String(u || "")); return x.protocol === "https:" ? x.href : null; }catch(_){ return null; } }
+const cleanId = id => String(id || "").replace(/[^A-Za-z0-9_-]/g, "");
+const cleanHandle = s => String(s || "").replace(/^@/, "").replace(/[^A-Za-z0-9._]/g, "");
+const socialUrl = (plat, hd) => plat === "tiktok" ? `https://www.tiktok.com/@${encodeURIComponent(hd)}` : `https://www.instagram.com/${encodeURIComponent(hd)}/`;
+function embedUrl(k){
+  const id = cleanId(k.external_id); if(!id) return null;
+  if(k.source === "tiktok") return `https://www.tiktok.com/player/v1/${id}?loop=1&rel=0`;
+  return `https://www.instagram.com/${String(k.external_url || "").includes("/p/") ? "p" : "reel"}/${id}/embed/`;
+}
+function mediaBox(k){
+  if(!isLink(k)) return videoBox(k);
+  const box = h("div", {class: "lnk"});
+  const thumb = https(k.thumb_url);
+  if(thumb && !sample){ const img = h("img", {alt: "", loading: "lazy", referrerpolicy: "no-referrer"}); img.src = thumb; img.addEventListener("error", () => img.remove()); box.append(img); }
+  box.append(h("span", {class: "pl"}, (sample ? "SAMPLE " : "") + PLAT[k.source].toUpperCase() + " POST"));
+  const src = embedUrl(k);
+  if(!src){ box.append(h("span", {class: "short"}, "short link: the auto reviewer expands it hourly")); return box; }
+  const btn = h("button", {class: "btn", type: "button"}, "Load post");
+  btn.addEventListener("click", () => {
+    box.classList.add("embed");
+    if(sample){ box.replaceChildren(h("div", {class: "vph", style: "height:min(360px,56vh)"}, "SAMPLE", h("span", {}, "the official embed loads here"))); return; }
+    const f = h("iframe", {class: k.source === "tiktok" ? "tt" : "ig", title: PLAT[k.source] + " post", allow: "encrypted-media; fullscreen; picture-in-picture",
+      allowfullscreen: true, loading: "lazy", referrerpolicy: "strict-origin-when-cross-origin", sandbox: "allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox allow-presentation"});
+    f.src = src;
+    box.replaceChildren(f);
+  });
+  box.append(btn);
+  return box;
+}
+function platBits(k){
+  if(!isLink(k)) return [];
+  const hd = cleanHandle(k.handle);
+  return [h("span", {class: "plat " + k.source}, PLAT[k.source].toUpperCase()), hd ? h("span", {class: "hdl"}, "@" + hd) : null];
+}
+function extLink(k){
+  const u = isLink(k) && https(k.external_url);
+  return u ? h("a", {class: "ext", href: u, target: "_blank", rel: "noopener noreferrer"}, `Open on ${PLAT[k.source]} ↗`) : null;
+}
+function socialsOf(k){
+  const p = PROFILES.get(k.owner) || {};
+  const bits = [];
+  for(const plat of ["tiktok", "instagram"]){
+    const hd = cleanHandle(p[plat]);
+    if(hd) bits.push(bits.length ? " · " : "", h("a", {href: socialUrl(plat, hd), target: "_blank", rel: "noopener noreferrer"}, `${PLAT[plat]} @${hd}`));
+  }
+  const line = h("div", {class: "socials"}, "Uploader's socials: ", ...(bits.length ? bits : ["none linked"]));
+  let warn = null;
+  if(isLink(k)){
+    const posted = cleanHandle(k.handle).toLowerCase(), mine = cleanHandle(p[k.source]).toLowerCase();
+    if(posted && mine && posted !== mine) warn = h("div", {class: "mism"}, `handle doesn't match their linked account (@${cleanHandle(p[k.source])} on ${PLAT[k.source]})`);
+    else if(posted && !mine) warn = h("div", {class: "socials"}, `They haven't linked a ${PLAT[k.source]} account to compare.`);
+  }
+  return [line, warn];
+}
 function videoBox(k){
-  if(sample || !k.path) return h("div", {class: "vph", role: "img", "aria-label": "Sample, no video"}, "SAMPLE", h("span", {}, "no video in preview"));
+  if(sample || !k.path || !https(CFG.supabaseUrl)) return h("div", {class: "vph", role: "img", "aria-label": "Sample, no video"}, "SAMPLE", h("span", {}, "no video in preview"));
   const v = h("video", {controls: true, preload: "metadata", playsinline: true});
   v.autoplay = false; v.muted = false;
   v.src = videoUrl(k.path);
@@ -730,10 +819,12 @@ function videoBox(k){
 }
 function itemHead(k, extra){
   return [
-    h("div", {class: "nm"}, String(k.name || "unnamed"), sample ? h("span", {class: "tag"}, "SAMPLE") : null, extra || null),
+    h("div", {class: "nm"}, String(k.name || "unnamed"), ...platBits(k), sample ? h("span", {class: "tag"}, "SAMPLE") : null, extra || null),
     h("div", {class: "song"}, h("b", {}, String(k.act || "")), " — ", String(k.song || "")),
     k.caption ? h("div", {class: "capt"}, "“" + String(k.caption) + "”") : null,
-    h("div", {class: "meta"}, `${sydFmt.format(new Date(k.created_at))} · ${ago(k.created_at)} · ${mb(k.size_bytes)}`)
+    h("div", {class: "meta"}, `${sydFmt.format(new Date(k.created_at))} · ${ago(k.created_at)} · ${isLink(k) ? "linked post" : mb(k.size_bytes)}`),
+    extLink(k),
+    ...socialsOf(k)
   ];
 }
 function act(btns, item, fn, okText){
@@ -766,7 +857,7 @@ function queueItem(k){
   const doRej = act(all, item, () => API().moderate(k.id, false, reason.value.trim().slice(0, 200)));
   go.addEventListener("click", doRej);
   reason.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); doRej(); } else if(e.key === "Escape") cancel.click(); });
-  item.append(videoBox(k), h("div", {class: "body"}, ...itemHead(k), h("div", {class: "acts"}, ok, no), rej));
+  item.append(mediaBox(k), h("div", {class: "body"}, ...itemHead(k), h("div", {class: "acts"}, ok, no), rej));
   return item;
 }
 function reportedItem(k){
@@ -785,7 +876,7 @@ function reportedItem(k){
     armed = setTimeout(() => { armed = null; del.classList.remove("arm"); del.textContent = "Delete"; }, 4000);
   });
   const reps = h("span", {class: "st reports"}, `! ${k.reports} REPORT${k.reports === 1 ? "" : "S"}`);
-  item.append(videoBox(k), h("div", {class: "body"}, ...itemHead(k, reps),
+  item.append(mediaBox(k), h("div", {class: "body"}, ...itemHead(k, reps),
     h("div", {class: "meta"}, "last report ", ago(k.last_report), " · now ", stChip(k.status)),
     h("div", {class: "acts"}, keep, hide, del)));
   return item;
@@ -812,6 +903,7 @@ function syncBadges(){
 function renderMod(m){
   const fail = (box, e) => $(box).replaceChildren(e ? msg("Couldn't load: " + String(e.message || e), true) : "");
   if(m.error){ fail("q-err", m.error); return; }
+  if(m.profiles) PROFILES = new Map(m.profiles.map(p => [p.user_id, p]));
   fail("q-err", m.qErr); fail("rep-err", m.rErr);
   if(!m.qErr) reconcile($("queue"), m.queue || [], queueItem, "Nothing waiting. New uploads will show up here.");
   if(!m.rErr) reconcile($("reported"), m.reported || [], reportedItem, "No open reports.");
@@ -823,8 +915,8 @@ function renderMod(m){
   ul.replaceChildren(...rec.map(k => h("li", {},
     h("div", {class: "a"}, String(k.name || "unnamed"), h("span", {}, " · ", String(k.act || ""), " — ", String(k.song || ""))),
     h("div", {class: "when", title: sydFmt.format(new Date(k.reviewed_at))}, ago(k.reviewed_at)),
-    h("div", {class: "row2"}, stChip(k.status), k.hidden ? h("span", {}, "hidden") : null,
-      !sample && k.path ? h("a", {href: videoUrl(k.path), target: "_blank", rel: "noopener noreferrer"}, "watch") : null),
+    h("div", {class: "row2"}, stChip(k.status), ...platBits(k), k.hidden ? h("span", {}, "hidden") : null,
+      !sample && !isLink(k) && k.path ? h("a", {href: videoUrl(k.path), target: "_blank", rel: "noopener noreferrer"}, "watch") : null, extLink(k)),
     k.review_note ? h("div", {class: "note"}, String(k.review_note)) : null)));
 }
 
