@@ -122,24 +122,33 @@ a{color:inherit}
 .sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
 .sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
 @media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
-.acct{position:relative;margin-left:auto;display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}
-.acct:empty{display:none}
-.acct .me{cursor:pointer;font:inherit;font-size:13px;display:inline-flex;align-items:center;gap:7px;min-height:36px;min-width:0;padding:0 10px;border:1px solid color-mix(in srgb,var(--rel) 45%,var(--line));background:var(--panel);font-size:13px;color:var(--fg-2)}
-.acct .me::before{content:"";width:7px;height:7px;flex:none;background:var(--rel)}
-.acct .me span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:18ch}
-.acct button{min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;white-space:nowrap}
-.acct button.in{border-color:var(--gold);color:var(--gold-hi)}
+.acct{position:relative;display:flex;align-items:center;gap:6px;min-width:0;margin-left:auto}
+.acct .who{display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:22ch;font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.acct .who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct .who i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.acct .btn{min-height:40px;padding:6px 14px;font-size:12.5px}
+.acct .me{display:inline-flex;align-items:center;gap:7px;min-height:40px;min-width:0;max-width:24ch;padding:0 10px 0 12px;border:1px solid color-mix(in srgb,var(--rel) 45%,var(--line));background:var(--panel);font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.acct .me i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.acct .me span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct .me::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-2px) rotate(45deg);margin-left:2px}
 .acct .me[aria-expanded="true"]{border-color:var(--gold)}
-.acct .chev{width:6px;height:6px;border-right:1.5px solid var(--gold);border-bottom:1.5px solid var(--gold);transform:rotate(45deg) translateY(-2px);flex:none}
-.amenu{position:absolute;right:0;top:calc(100% + 6px);z-index:35;width:min(300px,calc(100vw - 32px));background:var(--panel-2);border:1px solid var(--gold);box-shadow:0 10px 30px var(--scrim);padding:14px;display:grid;gap:10px}
-.amenu b{font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--fg-2)}
-.amenu .em{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere;margin-top:-6px}
-.amenu .fld > span{align-items:center;justify-content:flex-start;gap:6px}
-.amenu .fld .ic{width:13px;height:13px}
-.amenu .row{display:flex;gap:8px;justify-content:space-between}
-.amenu .msg{margin:0;font-size:13px;color:color-mix(in srgb,var(--warn) 80%,var(--muted));min-height:0}
-.amenu .msg:empty{display:none}
-@media (hover:hover){.acct button:hover{border-color:var(--gold);color:var(--gold-hi)}}
+.acct .me[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+.amenu{position:absolute;right:0;top:calc(100% + 6px);z-index:25;width:min(320px,calc(100vw - 32px));background:var(--panel-2);border:1px solid var(--gold);box-shadow:0 10px 32px var(--scrim);padding:16px;display:grid;gap:10px}
+.amenu h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi)}
+.amenu p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.amenu label{display:grid;gap:4px;font-family:var(--rpg);font-weight:700;font-size:11.5px;letter-spacing:.08em;color:var(--muted)}
+.amenu .inp{display:flex;align-items:center;border:1px solid var(--line);background:var(--bg)}
+.amenu .inp:focus-within{outline:2px solid var(--gold-hi);outline-offset:1px}
+.amenu .inp b{padding:0 2px 0 10px;color:var(--dim);font-family:var(--body);font-weight:500;font-size:16px}
+.amenu .inp .ico{width:15px;height:15px;margin-left:10px;color:var(--fg-2)}
+.amenu input{flex:1;min-width:0;min-height:var(--tap);border:0;background:transparent;color:var(--fg);padding:8px 10px 8px 2px;font:16px var(--body);outline:none}
+.amenu .msg{min-height:18px;font-size:13px;color:var(--warn)}
+.amenu .msg.ok{color:var(--rel)}
+.amenu .row{display:flex;gap:8px}
+.amenu .row .btn{flex:1}
+.amenu hr{border:0;border-top:1px solid var(--line);margin:2px 0}
+.acct .amenu .inp{padding:0;min-height:0;width:auto;border:1px solid var(--line);background:var(--bg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
 .demo{margin:0 0 12px;padding:7px 12px;font-size:12.5px;line-height:1.4;color:var(--fg-2);border:1px solid color-mix(in srgb,var(--p-violet) 45%,var(--line));background:color-mix(in srgb,var(--violet) 12%,var(--panel));display:flex;gap:8px;align-items:baseline}
 .demo b{font-family:var(--pixel);font-weight:400;font-size:9.5px;background:var(--p-violet);color:var(--p-bg);padding:0 5px;flex:none}
@@ -1147,47 +1156,48 @@ async function authRerender(){
   try{ await refresh(); }catch(e){ fail(e); }
   renderedBase = null; await onHash();
 }
+// same chip + menu markup as gallery.html
 function renderAcct(){
   const u = KO.user(), el = $("#acct");
-  if(u){
-    const pr = KO.profile ? KO.profile() : {};
-    el.innerHTML = `<button type="button" class="me" data-acct="menu" aria-expanded="false" aria-controls="amenu"><span></span><i class="chev" aria-hidden="true"></i></button>
-<form class="amenu" id="amenu" hidden autocomplete="off"><b>Your socials</b><div class="em"></div>
-<label class="fld"><span>${ICON("tt")}TikTok @</span><input class="inp" name="tiktok" maxlength="80" placeholder="yourhandle or profile link" autocapitalize="off" spellcheck="false"></label>
-<label class="fld"><span>${ICON("ig")}Instagram @</span><input class="inp" name="instagram" maxlength="80" placeholder="yourhandle or profile link" autocapitalize="off" spellcheck="false"></label>
-<p class="msg" role="status"></p>
-<div class="row"><button type="submit" class="btn primary">Save</button><button type="button" class="btn" data-acct="out">Sign out</button></div></form>`;
-    el.querySelector(".me span").textContent = u.name || u.email || "signed in";
-    el.querySelector(".me").title = u.email || "";
-    el.querySelector(".em").textContent = u.email || "";
-    el.querySelector("[name=tiktok]").value = pr.tiktok || "";
-    el.querySelector("[name=instagram]").value = pr.instagram || "";
-  }else el.innerHTML = `<button type="button" class="in" data-acct="in">Sign in</button>`;
+  menuClose();
+  if(!u){ el.innerHTML = `<button type="button" class="btn" data-acct="in">Sign in</button>`; return; }
+  const label = u.name || u.email || "signed in";
+  el.innerHTML = `<button type="button" class="me" data-acct="menu" aria-expanded="false" aria-controls="amenu"><i aria-hidden="true"></i><span></span><span class="sr"> · account menu</span></button>`;
+  const me = el.querySelector(".me"); me.querySelector("span").textContent = label; me.title = u.email || label;
 }
-function acctMenu(open){
-  const m = $("#amenu"), b = $('#acct [data-acct="menu"]'); if(!m || !b) return;
-  m.hidden = !open; b.setAttribute("aria-expanded", String(open));
-  if(open){ const pr = KO.profile(); m.tiktok.value = pr.tiktok || ""; m.instagram.value = pr.instagram || ""; m.querySelector(".msg").textContent = ""; m.tiktok.focus(); }
+const icoSvg = net => `<svg class="ico" aria-hidden="true"><use href="#i-${net === "tiktok" ? "tt" : "ig"}"/></svg>`;
+function menuClose(){ const m = $("#amenu"); if(m) m.remove(); const me = $("#acct .me"); if(me) me.setAttribute("aria-expanded", "false"); }
+function menuOpen(){
+  menuClose();
+  const me = $("#acct .me"); if(!me) return;
+  const p = KO.profile ? KO.profile() : {tiktok: "", instagram: ""};
+  const field = net => `<label>${NET[net]}<span class="inp">${icoSvg(net)}<b aria-hidden="true">@</b><input name="${net}" maxlength="${net === "tiktok" ? 40 : 50}" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="yourhandle" inputmode="text"></span></label>`;
+  $("#acct").insertAdjacentHTML("beforeend", `<form class="amenu" id="amenu" aria-label="Account"><h3>Your socials</h3><p>Shown as small links next to your name on your kickrolls.</p>${field("tiktok")}${field("instagram")}<div class="msg" role="status"></div><div class="row"><button class="btn primary" type="submit">Save</button></div><hr><div class="row"><button class="btn" type="button" data-acct="out">Sign out</button></div></form>`);
+  const f = $("#amenu"); f.tiktok.value = p.tiktok || ""; f.instagram.value = p.instagram || "";
+  me.setAttribute("aria-expanded", "true");
+  f.tiktok.focus();
 }
 $("#acct").addEventListener("click", e => {
+  e.stopPropagation();
   const b = e.target.closest("[data-acct]"); if(!b) return;
-  if(b.dataset.acct === "in") KO.openAccount("Sign in or make a free account to post kickrolls and rate other people's.").catch(fail);
-  else if(b.dataset.acct === "menu") acctMenu($("#amenu").hidden);
-  else { b.disabled = true; KO.signOut().then(() => toast("signed out")).catch(e => { b.disabled = false; fail(e); }); }
+  if(b.dataset.acct === "in") KO.openAccount("Sign in or make a free account to post kickrolls and rate other people's.").then(() => toast("signed in"), fail);
+  else if(b.dataset.acct === "menu") (b.getAttribute("aria-expanded") === "true" ? menuClose : menuOpen)();
+  else { menuClose(); KO.signOut().then(() => toast("signed out")).catch(fail); }
 });
 $("#acct").addEventListener("submit", async e => {
   e.preventDefault();
-  const m = e.target, msg = m.querySelector(".msg"), go = m.querySelector("[type=submit]");
-  msg.textContent = ""; go.disabled = true;
+  const f = e.target, msg = f.querySelector(".msg"), go = f.querySelector("[type=submit]");
+  msg.className = "msg"; msg.textContent = ""; go.disabled = true;
   try{
-    await KO.saveProfile({tiktok: m.tiktok.value, instagram: m.instagram.value});
-    acctMenu(false); toast("socials saved");
-    authRerender();
-  }catch(err){ const t = (err && err.message) || String(err); if(!QUIET.test(t)) msg.textContent = t; }
+    const r = await KO.saveProfile({tiktok: f.tiktok.value, instagram: f.instagram.value});
+    f.tiktok.value = r.tiktok || ""; f.instagram.value = r.instagram || "";
+    msg.className = "msg ok"; msg.textContent = "Saved.";
+    busy++; try{ await refresh(); renderedBase = null; await onHash(); } finally { busy--; }
+  }catch(err){ const t = (err && err.message) || "couldn't save that"; if(!QUIET.test(t)) msg.textContent = t; }
   finally{ go.disabled = false; }
 });
-document.addEventListener("click", e => { const m = $("#amenu"); if(m && !m.hidden && !e.target.closest("#acct")) acctMenu(false); });
-document.addEventListener("keydown", e => { const m = $("#amenu"); if(e.key === "Escape" && m && !m.hidden){ acctMenu(false); $('#acct [data-acct="menu"]').focus(); } });
+document.addEventListener("click", () => { if($("#amenu")) menuClose(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape" && $("#amenu")){ menuClose(); const me = $("#acct .me"); if(me) me.focus(); } });
 
 // ---------- actions ----------
 function redrawRate(id){
