@@ -337,6 +337,57 @@ revoke all on function public.ko26_group_create(text), public.ko26_group_join(te
 grant execute on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid),
   public.ko26_group_leave(uuid), public.ko26_group_admin(uuid, text, uuid, text) to authenticated;
 
+-- ---------- song ratings: rate the tracks themselves; your groups see each other's ----------
+create table if not exists public.song_ratings (
+  song_key   text not null check (char_length(song_key) between 1 and 300),
+  user_id    uuid not null default auth.uid() references auth.users(id) on delete cascade,
+  act        text not null check (char_length(act) between 1 and 80),
+  song       text not null check (char_length(song) between 1 and 300),
+  stars      smallint not null check (stars between 1 and 5),
+  updated_at timestamptz not null default now(),
+  primary key (song_key, user_id)
+);
+create index if not exists song_ratings_user_idx on public.song_ratings (user_id);
+alter table public.song_ratings enable row level security;
+create or replace function public.ko26_shares_group(other uuid) returns boolean
+language sql stable security definer set search_path = public as $fn$
+  select other = auth.uid() or exists (select 1 from public.ko_group_members a join public.ko_group_members b on a.group_id = b.group_id
+                                        where a.user_id = auth.uid() and b.user_id = other)
+$fn$;
+drop policy if exists "see own and group mates' song ratings" on public.song_ratings;
+create policy "see own and group mates' song ratings" on public.song_ratings for select to authenticated using (public.ko26_shares_group(user_id));
+drop policy if exists "rate songs" on public.song_ratings;
+create policy "rate songs" on public.song_ratings for insert to authenticated with check (public.ko26_is_member() and user_id = auth.uid());
+drop policy if exists "change own song ratings" on public.song_ratings;
+create policy "change own song ratings" on public.song_ratings for update to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
+drop policy if exists "remove own song ratings" on public.song_ratings;
+create policy "remove own song ratings" on public.song_ratings for delete to authenticated using (user_id = auth.uid());
+
+-- every song a group's members rated: group average + each member's stars
+create or replace function public.ko26_group_songs(g uuid) returns json
+language plpgsql stable security definer set search_path = public as $fn$
+begin
+  if not public.ko26_in_group(g) then raise exception 'you are not in that group'; end if;
+  return (select coalesce(json_agg(x order by x.avg desc, x.n desc, x.song), '[]') from (
+    select sr.song_key, max(sr.act) as act, max(sr.song) as song, round(avg(sr.stars)::numeric, 2) as avg, count(*) as n,
+           json_agg(json_build_object('user_id', sr.user_id, 'stars', sr.stars,
+             'name', coalesce(nullif(u.raw_user_meta_data ->> 'name', ''), 'Raver'), 'is_me', sr.user_id = auth.uid()) order by sr.stars desc) as ratings
+    from public.song_ratings sr
+    join public.ko_group_members m on m.user_id = sr.user_id and m.group_id = g
+    join auth.users u on u.id = sr.user_id
+    group by sr.song_key) x);
+end $fn$;
+-- one song: your rating and your group mates' (with names), for the leaderboard's song view
+create or replace function public.ko26_song_mates(key text) returns json
+language sql stable security definer set search_path = public as $fn$
+  select coalesce(json_agg(json_build_object('user_id', sr.user_id, 'stars', sr.stars, 'is_me', sr.user_id = auth.uid(),
+           'name', coalesce(nullif(u.raw_user_meta_data ->> 'name', ''), 'Raver')) order by (sr.user_id = auth.uid()) desc, sr.stars desc), '[]')
+  from public.song_ratings sr join auth.users u on u.id = sr.user_id
+  where sr.song_key = key and public.ko26_shares_group(sr.user_id)
+$fn$;
+revoke all on function public.ko26_group_songs(uuid), public.ko26_song_mates(text) from public, anon;
+grant execute on function public.ko26_group_songs(uuid), public.ko26_song_mates(text) to authenticated;
+
 -- ---------- moderation by hand ----------
 -- hide a video:     update public.kickrolls set hidden = true where id = '...';
 -- see reported:     select k.*, count(*) from public.reports p join public.kickrolls k on k.id = p.kickroll_id group by k.id order by 2 desc;
