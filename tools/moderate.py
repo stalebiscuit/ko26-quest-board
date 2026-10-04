@@ -8,7 +8,7 @@
 Needs environment variables KO26_MOD_EMAIL and KO26_MOD_PASSWORD (an account listed in public.admins), set in the
 cloud environment's settings. Supabase URL and anon key come from ko-config.js. Needs ffmpeg + ffprobe.
 """
-import json, os, re, subprocess, sys, tempfile, urllib.request, urllib.parse
+import json, os, re, subprocess, sys, tempfile, urllib.request, urllib.parse, http.client
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(tempfile.gettempdir(), "ko26-review")
@@ -51,6 +51,60 @@ def sheet(video, out_jpg):
     return (out_jpg if r.returncode == 0 and os.path.exists(out_jpg) else None), dur
 
 
+TT = re.compile(r"^https://(?:www\.|m\.)?tiktok\.com/@([A-Za-z0-9._]{2,24})/video/(\d{8,25})")
+
+
+def expand(url):
+    """Follow a TikTok short link's redirects (vm.tiktok.com/…, tiktok.com/t/…) to the full video URL."""
+    try:
+        req = urllib.request.Request(url, method="GET", headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=30) as r:
+            return r.geturl()
+    except urllib.error.HTTPError as e:
+        return e.geturl() or url
+    except Exception:
+        return url
+
+
+def tiktok_oembed(url):
+    try:
+        with urllib.request.urlopen("https://www.tiktok.com/oembed?url=" + urllib.parse.quote(url, safe=""), timeout=30) as r:
+            j = json.loads(r.read())
+        m = re.search(r'cite="([^"]+)"', j.get("html", ""))
+        p = TT.match(m.group(1)) if m else None
+        return {"url": m.group(1).split("?")[0] if p else None, "id": p.group(2) if p else None,
+                "handle": j.get("author_unique_id") or (p.group(1) if p else None), "thumb": j.get("thumbnail_url"), "title": j.get("title", "")}
+    except Exception:
+        return None
+
+
+def link_item(k, tok):
+    """Linked TikTok / Instagram post: expand short links, fetch the cover image to look at."""
+    info, img, note = None, None, ""
+    if k["source"] == "tiktok":
+        url = k["external_url"]
+        if not k.get("external_id"):
+            full = expand(url)
+            p = TT.match(full)
+            url = f"https://www.tiktok.com/@{p.group(1)}/video/{p.group(2)}" if p else url
+        info = tiktok_oembed(url)
+        if info and info["id"] and not k.get("external_id"):
+            call("POST", "/rest/v1/rpc/ko26_set_link", {"kickroll": k["id"], "ext_id": info["id"], "ext_url": info["url"],
+                 "ext_handle": info["handle"], "thumb": info["thumb"] if (info["thumb"] or "").startswith("https://") else None}, token=tok)
+            note = "short link expanded"
+        if info and info.get("thumb"):
+            img = os.path.join(OUT, k["id"] + "-cover.jpg")
+            try:
+                urllib.request.urlretrieve(info["thumb"], img)
+            except Exception:
+                img = None
+        if not info:
+            note = "TikTok couldn't find it (deleted or private?)"
+    else:
+        note = "Instagram post: no cover image available to check, so the owner reviews it in the dashboard"
+    return img, info, note
+
+
 def fetch():
     tok = login()
     os.makedirs(OUT, exist_ok=True)
@@ -65,6 +119,13 @@ def fetch():
         flagged = call("GET", f"/rest/v1/kickrolls?id=in.({ids})&status=eq.approved&reviewed_at=is.null&select=*", token=tok) or []
     items = []
     for k, why in [(k, "pending") for k in pending] + [(k, f"reported x{counts[k['id']]}") for k in flagged]:
+        if (k.get("source") or "upload") != "upload":
+            img, info, note = link_item(k, tok)
+            items.append({"id": k["id"], "why": why, "source": k["source"], "name": k["name"], "caption": k.get("caption"), "act": k["act"],
+                          "song": k["song"], "created_at": k["created_at"], "post": (info or {}).get("url") or k["external_url"],
+                          "post_handle": (info or {}).get("handle") or k.get("handle"), "post_title": (info or {}).get("title", ""),
+                          "cover_image": img, "note": note})
+            continue
         url = f"{URL}/storage/v1/object/public/{BUCKET}/" + "/".join(urllib.parse.quote(p) for p in k["path"].split("/"))
         vid = os.path.join(OUT, k["id"] + os.path.splitext(k["path"])[1])
         try:
