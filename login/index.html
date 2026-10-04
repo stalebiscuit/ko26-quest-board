@@ -142,14 +142,22 @@ input.in:focus{border-color:var(--gold)}
 .sample b{font-family:var(--pixel);font-weight:400;font-size:12px;background:var(--gold-hi);color:var(--kick-ink);padding:2px 7px;letter-spacing:.04em}
 .tag{font-family:var(--pixel);font-size:9.5px;background:var(--gold-hi);color:var(--kick-ink);padding:1px 5px;line-height:1.6}
 .dash{transition:opacity .2s}
-.dash.busy{opacity:.55}
+.dash.busy .stats-area{opacity:.55}
+.stats-area{transition:opacity .2s}
 .err-line{margin:0 0 12px}
 
 /* KPI tiles */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:12px}
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.kpis .kpi.live{grid-column:1/-1}
+@media (min-width:900px){
+  .kpis{grid-template-columns:minmax(0,1.25fr) repeat(4,minmax(0,1fr))}
+  .kpis .kpi.live{grid-column:auto;grid-row:span 2;display:flex;flex-direction:column}
+  .kpis .kpi.live .v{font-size:64px;margin-top:auto}
+}
+.kpi.due .v{color:var(--gold-hi)}
 .kpi{background:var(--panel);border:1px solid var(--line);padding:12px 14px 12px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 8%,transparent);min-width:0}
 .kpi .l{font-family:var(--rpg);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:6px}
-.kpi .v{font-family:var(--display);font-weight:600;font-size:34px;line-height:1.05;margin-top:6px;color:var(--fg);overflow-wrap:anywhere}
+.kpi .v{font-family:var(--display);font-weight:600;font-size:34px;line-height:1.05;margin-top:6px;color:var(--fg);white-space:nowrap}
 .kpi .v small{font-size:17px;font-weight:500;color:var(--fg-2);margin-left:6px;white-space:nowrap}
 .kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
 .kpi.live .v{color:var(--gold-hi)}
@@ -204,14 +212,60 @@ table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:
 .kr .l{font-family:var(--rpg);font-weight:700;font-size:10.5px;letter-spacing:.1em;color:var(--muted)}
 .kr .v{font-family:var(--display);font-weight:600;font-size:28px;line-height:1.1;margin-top:4px}
 .kr .w{font-size:12px;color:var(--warn);margin-top:2px}
+/* moderation */
+.mod{margin-bottom:12px}
+.badge{display:inline-block;vertical-align:2px;margin-left:8px;font-family:var(--pixel);font-weight:400;font-size:10.5px;letter-spacing:0;text-transform:none;padding:2px 7px;background:var(--line);color:var(--muted)}
+.badge.on{background:var(--gold-hi);color:var(--kick-ink)}
+.mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:10px}
+.mlist.one{grid-template-columns:minmax(0,1fr)}
+.item{border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;min-width:0;transition:opacity .25s}
+.item.gone{opacity:0}
+.item video,.item .vph{display:block;width:100%;height:min(360px,56vh);background:#000;object-fit:contain;border-bottom:1px solid var(--line)}
+.mlist.one .item{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr)}
+.mlist.one .item video,.mlist.one .item .vph{height:100%;min-height:220px;max-height:360px;border-bottom:0;border-right:1px solid var(--line)}
+.vph{display:flex!important;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-family:var(--pixel);font-size:11px;text-align:center;padding:12px;
+  background:repeating-linear-gradient(135deg,#0d0a05 0 10px,#130f08 10px 20px)!important}
+.item .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.item .nm{font-weight:600;font-size:15.5px;color:var(--fg);overflow-wrap:anywhere;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.item .song{color:var(--fg-2);font-size:13.5px;overflow-wrap:anywhere}
+.item .song b{font-weight:600;color:var(--fg)}
+.item .capt{color:var(--fg-2);font-size:13.5px;font-style:italic;overflow-wrap:anywhere}
+.item .meta{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.item .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.item .acts .btn{flex:1 1 auto;min-height:40px;font-size:12.5px;padding:6px 10px}
+.btn.bad{border-color:color-mix(in srgb,var(--warn) 60%,var(--line));color:#ffb39b}
+.btn.bad.arm{background:var(--warn);border-color:var(--warn);color:var(--kick-ink)}
+@media (hover:hover){.btn.bad:not(:disabled):not(.arm):hover{border-color:var(--warn);color:var(--warn)}}
+.rej{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.rej input{flex:1 1 100%;min-height:40px;background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:6px 10px;font:15px var(--body)}
+.rej input:focus{border-color:var(--warn)}
+.rej .btn{flex:1;min-height:40px;font-size:12.5px;padding:6px 10px}
+.item .msg{margin-top:8px;font-size:13px}
+.st{display:inline-flex;align-items:center;gap:4px;font-family:var(--rpg);font-weight:700;font-size:10px;letter-spacing:.08em;padding:1px 6px;border:1px solid currentColor;line-height:1.5;white-space:nowrap}
+.st.approved{color:var(--rel)}
+.st.rejected{color:var(--warn)}
+.st.pending{color:var(--gold-hi)}
+.st.reports{color:var(--warn)}
+.rlist{list-style:none;margin:0;padding:0}
+.rlist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:9px 0;border-top:1px solid var(--c-grid);font-size:13.5px}
+.rlist li:first-child{border-top:0;padding-top:0}
+.rlist .a{overflow-wrap:anywhere;color:var(--fg)}
+.rlist .a span{color:var(--muted)}
+.rlist .when{color:var(--muted);font-size:12px;white-space:nowrap;text-align:right}
+.rlist .note{grid-column:1/-1;color:var(--fg-2);font-size:12.5px;overflow-wrap:anywhere}
+.rlist .note::before{content:"“"}.rlist .note::after{content:"”"}
+.rlist .row2{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:12px;color:var(--muted)}
+.rlist a{color:var(--gold);font-size:12px}
+.mgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px;margin-bottom:12px;align-items:start}
 .foot{margin-top:18px;font-size:12.5px;color:var(--dim);line-height:1.55}
 
 @media (max-width:760px){
   .grid{grid-template-columns:minmax(0,1fr)}
-  .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
   .kpi .v{font-size:30px}
-  .kpi:last-child:nth-child(odd){grid-column:1/-1}
   .kr{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mgrid{grid-template-columns:minmax(0,1fr)}
+  .mlist.one .item{display:flex}
+  .mlist.one .item video,.mlist.one .item .vph{height:min(360px,56vh);min-height:0;border-right:0;border-bottom:1px solid var(--line)}
   .card{padding:16px 14px 14px}
   .who{text-align:left}
   .range button{min-width:0;flex:1}
@@ -293,6 +347,34 @@ table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:
     </div>
     <div id="dash-err"></div>
 
+    <section class="card gframe mod" id="queue-card" aria-labelledby="q-h">
+      <div class="card-h"><div>
+        <h2 id="q-h">Review queue<span class="badge" id="q-badge"></span></h2>
+        <p class="sub">New uploads wait here until you approve them. Oldest first.</p>
+      </div></div>
+      <div id="q-err"></div>
+      <div class="mlist" id="queue"></div>
+    </section>
+    <div class="mgrid">
+      <section class="card gframe" id="rep-card" aria-labelledby="rep-h">
+        <div class="card-h"><div>
+          <h2 id="rep-h">Reported<span class="badge" id="rep-badge"></span></h2>
+          <p class="sub">Videos with reports since they were last reviewed. 3 reports hide a video automatically.</p>
+        </div></div>
+        <div id="rep-err"></div>
+        <div class="mlist one" id="reported"></div>
+      </section>
+      <section class="card gframe" id="rev-card" aria-labelledby="rev-h">
+        <div class="card-h"><div>
+          <h2 id="rev-h">Recently reviewed</h2>
+          <p class="sub">Last 20 decisions, by you or the automatic reviewer</p>
+        </div></div>
+        <ul class="rlist" id="reviewed"></ul>
+      </section>
+    </div>
+
+    <div class="stats-area">
+
     <section class="kpis" id="kpis" aria-label="Headline numbers"></section>
 
     <section class="card gframe" aria-labelledby="daily-h">
@@ -332,6 +414,7 @@ table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:
         <div class="card-h"><div><h2 id="kr-h">Kickrolls</h2><p class="sub">All time</p></div></div>
         <div class="kr" id="kr"></div>
       </section>
+    </div>
     </div>
     <p class="foot">A visitor is one browser (a random id, no names or IPs). Returning means seen on more than one Sydney day. Browsers with Do Not Track on aren't counted. Your own visits to this page aren't counted.</p>
   </main>
@@ -478,9 +561,9 @@ $("si-form").addEventListener("submit", async ev => {
 });
 document.querySelectorAll("[data-signout]").forEach(b => b.addEventListener("click", async () => {
   stopAuto();
-  if(sample){ sample = false; last = null; lastAt = 0; $("who").hidden = true; show(HAS_KEYS ? (sb ? "v-signin" : "v-libfail") : "v-connect"); return; }
+  if(sample){ sample = false; last = null; lastAt = 0; resetMod(); $("who").hidden = true; show(HAS_KEYS ? (sb ? "v-signin" : "v-libfail") : "v-connect"); return; }
   if(sb) await sb.auth.signOut();
-  session = null; showSignin();
+  session = null; last = null; lastAt = 0; resetMod(); showSignin();
 }));
 $("na-again").addEventListener("click", () => enterDash());
 
@@ -508,18 +591,21 @@ async function fetchStats(n){
   return typeof data === "string" ? JSON.parse(data) : data;
 }
 
+let again = false;
 async function load(first){
-  if(busy) return; busy = true;
+  if(!sample && !session) return;
+  if(busy){ again = true; return; } busy = true;
   const dash = $("v-dash");
   if(first && !last){ $("loading-msg").textContent = "Reading the numbers…"; show("v-loading"); }
   else dash.classList.add("busy");
   $("stamp").replaceChildren(h("span", {class: "spin", "aria-hidden": "true"}), "updating…");
   try{
-    const data = await fetchStats(days);
+    const [data, mod] = await Promise.all([fetchStats(days), API().lists().catch(e => ({error: e}))]);
     last = data; lastAt = Date.now();
     $("dash-err").replaceChildren();
     show("v-dash");
     render(data);
+    renderMod(mod);
     startAuto();
   }catch(e){
     const m = String(e && (e.message || e.details) || e);
@@ -538,6 +624,7 @@ async function load(first){
   }finally{
     busy = false; dash.classList.remove("busy");
     setStamp();
+    if(again){ again = false; load(); }
   }
 }
 function setStamp(){
@@ -562,6 +649,185 @@ document.addEventListener("visibilitychange", () => {
   if(document.visibilityState === "visible" && timer && !$("v-dash").hidden && Date.now() - lastAt > 60000) load();
 });
 
+
+/* ---------- moderation: review queue, reported, recently reviewed ---------- */
+const COLS = "id,created_at,act,song,name,caption,path,mime,size_bytes,status,hidden,reviewed_at,review_note";
+const videoUrl = path => `${CFG.supabaseUrl}/storage/v1/object/public/${CFG.bucket || "kickrolls"}/${String(path || "").split("/").map(encodeURIComponent).join("/")}`;
+const LIVE_MOD = {
+  async lists(){
+    const [q, r, v] = await Promise.all([
+      sb.from("kickrolls").select(COLS).eq("status", "pending").order("created_at", {ascending: true}).limit(100),
+      sb.from("reports").select("kickroll_id,created_at").order("created_at", {ascending: false}).limit(5000),
+      sb.from("kickrolls").select(COLS).not("reviewed_at", "is", null).order("reviewed_at", {ascending: false}).limit(20)
+    ]);
+    const out = {queue: q.data || [], recent: v.data || [], reported: [], qErr: q.error, vErr: v.error, rErr: r.error};
+    if(!r.error && r.data && r.data.length){
+      const agg = new Map();
+      for(const x of r.data){ const a = agg.get(x.kickroll_id) || {n: 0, last: x.created_at}; a.n++; if(x.created_at > a.last) a.last = x.created_at; agg.set(x.kickroll_id, a); }
+      const ids = [...agg.keys()].slice(0, 300);
+      const k = await sb.from("kickrolls").select(COLS).in("id", ids);
+      if(k.error) out.rErr = k.error;
+      else out.reported = (k.data || []).map(x => ({...x, reports: agg.get(x.id).n, last_report: agg.get(x.id).last}))
+        .filter(x => !x.reviewed_at || Date.parse(x.last_report) > Date.parse(x.reviewed_at))
+        .sort((a, b) => b.reports - a.reports || Date.parse(b.last_report) - Date.parse(a.last_report));
+    }
+    return out;
+  },
+  async moderate(id, approve, note){
+    const {error} = await sb.rpc("ko26_moderate", {kickroll: id, approve, note: note || null});
+    if(error) throw error;
+  },
+  async remove(id){
+    const {data, error} = await sb.from("kickrolls").delete().eq("id", id).select("id");
+    if(error) throw error;
+    if(!data || !data.length) throw new Error("Nothing was deleted (no permission, or it's already gone).");
+  }
+};
+/* sample moderation backend: fake rows, changes stay in this tab */
+const SAMPLE_MOD = (() => {
+  const ago = m => new Date(Date.now() - m * 60000).toISOString();
+  const mk = (i, o) => Object.assign({id: "sample-" + i, path: "", mime: "video/mp4", hidden: false, status: "pending", reviewed_at: null, review_note: null}, o);
+  let rows;
+  const init = () => { rows = [
+    mk(1, {name: "Sample Sam", act: "Sample Act One", song: "Placeholder Track (Sample Edit)", caption: "sample caption: front left, first drop", created_at: ago(190), size_bytes: 18.4e6}),
+    mk(2, {name: "Test Tess", act: "Sample Act Two", song: "Example Song", caption: "", created_at: ago(75), size_bytes: 7.2e6}),
+    mk(3, {name: "Demo Dee", act: "Sample Act Three", song: "Fake Tune <b>not real</b>", caption: "a deliberately long sample caption to check wrapping on a phone screen, nothing here is real", created_at: ago(12), size_bytes: 41.9e6}),
+    mk(4, {name: "Report Rae", act: "Sample Act Two", song: "Reported Sample Song", caption: "sample: reported video", created_at: ago(2900), size_bytes: 12e6, status: "approved", reviewed_at: ago(2800), review_note: "sample: auto-approved", reports: 2, last_report: ago(40)}),
+    mk(5, {name: "Flag Finn", act: "Sample Act One", song: "Another Sample Song", caption: "", created_at: ago(4000), size_bytes: 9e6, status: "approved", reviewed_at: ago(3900), review_note: null, reports: 1, last_report: ago(300)}),
+    ...["approved", "rejected", "approved", "approved", "rejected"].map((st, i) => mk(10 + i, {name: "Sample " + (i + 1), act: "Sample Act " + (i % 3 + 1), song: "Sample Song " + (i + 1), caption: "", created_at: ago(600 + i * 300), size_bytes: 5e6,
+      status: st, reviewed_at: ago(500 + i * 280), review_note: st === "rejected" ? (i === 1 ? "sample note: not a kick roll" : "sample note: link spam in caption") : (i === 0 ? "sample note: auto-approved" : null)}))
+  ]; };
+  init();
+  const recentOf = () => rows.filter(r => r.reviewed_at && !r.reports).concat(rows.filter(r => r.reports && r.reviewed_at && Date.parse(r.reviewed_at) > Date.parse(r.last_report)))
+    .sort((a, b) => Date.parse(b.reviewed_at) - Date.parse(a.reviewed_at)).slice(0, 20);
+  const api = {
+    reset: init,
+    queue: () => rows.filter(r => r.status === "pending").sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at)),
+    reported: () => rows.filter(r => r.reports && r.status !== "rejected" && Date.parse(r.last_report) > Date.parse(r.reviewed_at || 0)),
+    async lists(){ return {queue: api.queue(), reported: api.reported(), recent: recentOf()}; },
+    async moderate(id, approve, note){ const r = rows.find(x => x.id === id); if(r){ r.status = approve ? "approved" : "rejected"; r.reviewed_at = new Date().toISOString(); r.review_note = note || null; if(approve) r.hidden = false; } },
+    async remove(id){ rows = rows.filter(x => x.id !== id); }
+  };
+  return api;
+})();
+const API = () => sample ? SAMPLE_MOD : LIVE_MOD;
+function resetMod(){ SAMPLE_MOD.reset(); for(const id of ["queue", "reported", "reviewed", "q-err", "rep-err"]) $(id).replaceChildren(); }
+
+const sydFmt = new Intl.DateTimeFormat("en-AU", {timeZone: TZ, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false});
+function ago(iso){
+  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  return s < 60 ? "just now" : s < 3600 ? Math.floor(s / 60) + " min ago" : s < 86400 ? Math.floor(s / 3600) + " h ago" : Math.floor(s / 86400) + " d ago";
+}
+const mb = b => (num(b) / 1048576).toFixed(num(b) < 10485760 ? 1 : 0) + " MB";
+const stChip = st => h("span", {class: "st " + st}, (st === "approved" ? "✓ " : st === "rejected" ? "✕ " : "• ") + String(st).toUpperCase());
+
+function videoBox(k){
+  if(sample || !k.path) return h("div", {class: "vph", role: "img", "aria-label": "Sample, no video"}, "SAMPLE", h("span", {}, "no video in preview"));
+  const v = h("video", {controls: true, preload: "metadata", playsinline: true});
+  v.autoplay = false; v.muted = false;
+  v.src = videoUrl(k.path);
+  return v;
+}
+function itemHead(k, extra){
+  return [
+    h("div", {class: "nm"}, String(k.name || "unnamed"), sample ? h("span", {class: "tag"}, "SAMPLE") : null, extra || null),
+    h("div", {class: "song"}, h("b", {}, String(k.act || "")), " — ", String(k.song || "")),
+    k.caption ? h("div", {class: "capt"}, "“" + String(k.caption) + "”") : null,
+    h("div", {class: "meta"}, `${sydFmt.format(new Date(k.created_at))} · ${ago(k.created_at)} · ${mb(k.size_bytes)}`)
+  ];
+}
+function act(btns, item, fn, okText){
+  return async () => {
+    btns.forEach(b => b.disabled = true);
+    const old = item.querySelector(".msg"); if(old) old.remove();
+    try{
+      await fn();
+      item.classList.add("gone");
+      setTimeout(() => { item.remove(); syncBadges(); load(); }, 250);
+      if(okText) $("stamp").textContent = okText;
+    }catch(e){
+      btns.forEach(b => b.disabled = false);
+      item.querySelector(".body").append(msg(String(e && e.message || e), true));
+    }
+  };
+}
+function queueItem(k){
+  const item = h("article", {class: "item", "data-id": k.id});
+  const ok = h("button", {class: "btn primary", type: "button"}, "Approve");
+  const no = h("button", {class: "btn bad", type: "button"}, "Reject");
+  const reason = h("input", {type: "text", maxlength: "200", placeholder: "Reason (optional)", "aria-label": "Reason for rejecting (optional)"});
+  const go = h("button", {class: "btn bad arm", type: "button"}, "Reject video");
+  const cancel = h("button", {class: "btn", type: "button"}, "Cancel");
+  const rej = h("div", {class: "rej", hidden: true}, reason, go, cancel);
+  const all = [ok, no, go, cancel];
+  ok.addEventListener("click", act(all, item, () => API().moderate(k.id, true, null)));
+  no.addEventListener("click", () => { rej.hidden = false; no.hidden = true; reason.focus(); });
+  cancel.addEventListener("click", () => { rej.hidden = true; no.hidden = false; reason.value = ""; });
+  const doRej = act(all, item, () => API().moderate(k.id, false, reason.value.trim().slice(0, 200)));
+  go.addEventListener("click", doRej);
+  reason.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); doRej(); } else if(e.key === "Escape") cancel.click(); });
+  item.append(videoBox(k), h("div", {class: "body"}, ...itemHead(k), h("div", {class: "acts"}, ok, no), rej));
+  return item;
+}
+function reportedItem(k){
+  const item = h("article", {class: "item", "data-id": k.id});
+  const hide = h("button", {class: "btn", type: "button"}, "Hide");
+  const keep = h("button", {class: "btn primary", type: "button"}, "Keep");
+  const del = h("button", {class: "btn bad", type: "button"}, "Delete");
+  const all = [hide, keep, del];
+  hide.addEventListener("click", act(all, item, () => API().moderate(k.id, false, "reported")));
+  keep.addEventListener("click", act(all, item, () => API().moderate(k.id, true, null)));
+  const doDel = act(all, item, () => API().remove(k.id));
+  let armed = null;
+  del.addEventListener("click", () => {
+    if(armed){ clearTimeout(armed); armed = null; doDel(); return; }
+    del.classList.add("arm"); del.textContent = "Tap again to delete";
+    armed = setTimeout(() => { armed = null; del.classList.remove("arm"); del.textContent = "Delete"; }, 4000);
+  });
+  const reps = h("span", {class: "st reports"}, `! ${k.reports} REPORT${k.reports === 1 ? "" : "S"}`);
+  item.append(videoBox(k), h("div", {class: "body"}, ...itemHead(k, reps),
+    h("div", {class: "meta"}, "last report ", ago(k.last_report), " · now ", stChip(k.status)),
+    h("div", {class: "acts"}, keep, hide, del)));
+  return item;
+}
+/* keep existing items in place (a playing video isn't interrupted by a refresh); add new, drop gone */
+function reconcile(host, rows, make, empty){
+  const want = new Set(rows.map(r => String(r.id)));
+  for(const el of [...host.children]) if(!el.dataset.id || !want.has(el.dataset.id)) el.remove();
+  let prev = null;
+  for(const r of rows){
+    let el = host.querySelector(`:scope > [data-id="${CSS.escape(String(r.id))}"]`);
+    if(!el){ el = make(r); prev ? prev.after(el) : host.prepend(el); }
+    prev = el;
+  }
+  if(!rows.length) host.replaceChildren(h("p", {class: "empty"}, empty));
+}
+function syncBadges(){
+  const q = $("queue").querySelectorAll(".item:not(.gone)").length, r = $("reported").querySelectorAll(".item:not(.gone)").length;
+  const qb = $("q-badge"); qb.textContent = q ? `${q} waiting` : "none waiting"; qb.classList.toggle("on", q > 0);
+  const rb = $("rep-badge"); rb.textContent = r ? `${r} to check` : "none"; rb.classList.toggle("on", r > 0);
+  if(!q && !$("queue").querySelector(".empty")) $("queue").replaceChildren(h("p", {class: "empty"}, "Nothing waiting. New uploads will show up here."));
+  if(!r && !$("reported").querySelector(".empty")) $("reported").replaceChildren(h("p", {class: "empty"}, "No open reports."));
+}
+function renderMod(m){
+  const fail = (box, e) => $(box).replaceChildren(e ? msg("Couldn't load: " + String(e.message || e), true) : "");
+  if(m.error){ fail("q-err", m.error); return; }
+  fail("q-err", m.qErr); fail("rep-err", m.rErr);
+  if(!m.qErr) reconcile($("queue"), m.queue || [], queueItem, "Nothing waiting. New uploads will show up here.");
+  if(!m.rErr) reconcile($("reported"), m.reported || [], reportedItem, "No open reports.");
+  syncBadges();
+  const ul = $("reviewed");
+  if(m.vErr){ ul.replaceChildren(h("li", {}, msg("Couldn't load: " + String(m.vErr.message || m.vErr), true))); return; }
+  const rec = m.recent || [];
+  if(!rec.length){ ul.replaceChildren(h("li", {class: "empty"}, "Nothing reviewed yet.")); return; }
+  ul.replaceChildren(...rec.map(k => h("li", {},
+    h("div", {class: "a"}, String(k.name || "unnamed"), h("span", {}, " · ", String(k.act || ""), " — ", String(k.song || ""))),
+    h("div", {class: "when", title: sydFmt.format(new Date(k.reviewed_at))}, ago(k.reviewed_at)),
+    h("div", {class: "row2"}, stChip(k.status), k.hidden ? h("span", {}, "hidden") : null,
+      !sample && k.path ? h("a", {href: videoUrl(k.path), target: "_blank", rel: "noopener noreferrer"}, "watch") : null),
+    k.review_note ? h("div", {class: "note"}, String(k.review_note)) : null)));
+}
+
 /* ---------- render ---------- */
 function render(d){
   const T = d.totals || {};
@@ -577,7 +843,9 @@ function render(d){
     tile("30 DAYS", T.visitors_30d, "visitors"),
     tile("ALL TIME", all, "visitors"),
     tile("RETURNING", ret, pct(ret, all) + "% of all visitors"),
-    tile("PAGE VIEWS", T.views_all, "all time"));
+    tile("PAGE VIEWS", T.views_all, "all time"),
+    tile("MEMBERS", (d.kickrolls || {}).members, "accounts"),
+    tile("PENDING", (d.kickrolls || {}).pending, num((d.kickrolls || {}).pending) ? "waiting for review" : "nothing waiting", null, num((d.kickrolls || {}).pending) ? "due" : null));
 
   renderDaily(d.daily || []);
   renderPages(d.pages || []);
@@ -846,7 +1114,7 @@ function sampleStats(n){
     referrers: [["direct", .46], ["instagram.com", .22], ["l.facebook.com", .12], ["t.co", .06], ["reddit.com", .05], ["sample-referrer.example", .02]]
       .map(([referrer, f]) => ({referrer, visitors: Math.max(1, Math.round(vis * .6 * f))})),
     hours: H.map((w, hour) => ({hour, views: Math.round(views * w / hw)})).filter(x => x.views > 0),
-    kickrolls: {videos: 37, ratings: 412, uploaders: 21, reported: 2}
+    kickrolls: {videos: 37, ratings: 412, uploaders: 21, reported: SAMPLE_MOD.reported().length, pending: SAMPLE_MOD.queue().length, members: 58}
   };
 }
 

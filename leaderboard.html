@@ -889,17 +889,19 @@ function wireUpload(act, key, t){
     KO.setMyName(name);
     const info = songInfo(act, key, t);
     go.disabled = true; go.textContent = "Uploading…"; prog.hidden = false; prog.firstElementChild.style.width = "0%";
+    busy++;
     try{
       const k = await KO.upload({file: f, act, songKey: key, song: info.text, name, caption: cap.value}, p => prog.firstElementChild.style.width = Math.round(p * 100) + "%");
       if(k && k.id) flashId = k.id;
       if(url){ URL.revokeObjectURL(url); url = ""; }
       await refresh();
       toast(k && k.status === "pending" ? "Uploaded! It goes live once it's reviewed" : "Kickroll posted. now get your mates to rate it");
+      authDirty = false;
       renderedBase = null; await route();
     }catch(err){
       fail(err);
       go.disabled = false; go.textContent = "Post kickroll"; prog.hidden = true;
-    }
+    }finally{ settle(); }
   });
 }
 
@@ -1003,6 +1005,29 @@ document.addEventListener("keydown", e => {
   }
 });
 
+// ---------- account ----------
+// posting / rating / reporting open KO's sign-in sheet themselves; re-render when someone signs in or out,
+// but not in the middle of an upload or vote (that finishes first, then the page refreshes)
+let busy = 0, authDirty = false;
+function settle(){ busy = Math.max(0, busy - 1); if(!busy && authDirty){ authDirty = false; authRerender(); } }
+async function authRerender(){
+  try{ await refresh(); }catch(e){ fail(e); }
+  renderedBase = null; await onHash();
+}
+function renderAcct(){
+  const u = KO.user(), el = $("#acct");
+  if(u){
+    el.innerHTML = `<span class="me"><span></span></span><button type="button" data-acct="out">Sign out</button>`;
+    el.querySelector(".me span").textContent = u.name || u.email || "signed in";
+    el.querySelector(".me").title = u.email || "";
+  }else el.innerHTML = `<button type="button" class="in" data-acct="in">Sign in</button>`;
+}
+$("#acct").addEventListener("click", e => {
+  const b = e.target.closest("[data-acct]"); if(!b) return;
+  if(b.dataset.acct === "in") KO.openAccount("Sign in or make a free account to post kickrolls and rate other people's.").catch(fail);
+  else { b.disabled = true; KO.signOut().then(() => toast("signed out")).catch(e => { b.disabled = false; fail(e); }); }
+});
+
 // ---------- actions ----------
 function redrawRate(id){
   const k = byId(id); if(!k) return;
@@ -1014,6 +1039,7 @@ async function rate(id, n){
   k.myStars = n; redrawRate(id);
   const again = $(`.rate[data-k="${CSS.escape(id)}"] .st[data-rate="${n}"]`, lbOpen ? $("#lb") : document);
   if(again) again.focus({preventScroll:true});
+  busy++;
   try{
     await KO.rate(id, n);
     patch(await KO.list({songKey: k.songKey}));
@@ -1022,15 +1048,17 @@ async function rate(id, n){
     if(f) f.focus({preventScroll:true});
     toast(`rated ${n} ★`);
   }catch(e){ k.myStars = prev; redrawRate(id); fail(e); }
+  finally{ settle(); }
 }
 async function report(btn, id){
-  btn.disabled = true;
+  btn.disabled = true; busy++;
   try{
     await KO.report(id);
     reported.add(id); store.set("ko26.reported", [...reported]);
     for(const b of $$(`[data-report="${CSS.escape(id)}"]`)){ b.textContent = "Reported"; b.classList.add("done"); b.disabled = true; b.removeAttribute("data-report"); }
     toast("reported. thanks, a human will look at it");
   }catch(e){ btn.disabled = false; fail(e); }
+  finally{ settle(); }
 }
 const armed = new Map();
 async function del(btn, id){
@@ -1090,6 +1118,8 @@ document.addEventListener("submit", e => {
   try{
     const r = await KO.ready();
     $("#demo").hidden = r.mode !== "demo";
+    renderAcct();
+    KO.onAuth(() => { renderAcct(); if(busy) authDirty = true; else authRerender(); });
     $("#footDl").textContent = sydney(KO.deadline) + " Sydney time";
     tick(); setInterval(tick, 30000);
     await refresh();

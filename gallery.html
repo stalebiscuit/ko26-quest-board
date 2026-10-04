@@ -1017,7 +1017,7 @@ document.addEventListener("keydown", e => {
     if(e.shiftKey && document.activeElement === first){ e.preventDefault(); last.focus(); }
     else if(!e.shiftKey && document.activeElement === last){ e.preventDefault(); first.focus(); }
   }
-});
+}, true);   // capture: runs before the account sheet's own Esc handler, so Esc there only closes the sheet
 // swipe left/right on the video (ignoring the native control bar at the bottom)
 (function(){
   let x0 = null, y0 = 0, t0 = 0;
