@@ -1,0 +1,1128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#0a0a0b">
+<title>KO26 Owner Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
+<style>
+/* Owner dashboard for the quest board. Same chrome as the public pages: warm near-black, gold item-frame corners, Cinzel labels. */
+:root{
+  color-scheme: dark;
+  --bg:#0a0a0b;
+  --panel:#16110a;
+  --panel-2:#1a1206;
+  --line:#3a2e1a;
+  --fg:#f4ecd8;
+  --fg-2:#e8d7a9;
+  --muted:#9a8f74;
+  --dim:#6b6250;
+  --gold:#c9a84c;
+  --gold-hi:#ffc85a;
+  --blood:#a3271a;
+  --blood-dk:#7c1f14;
+  --violet:#7b2cff;
+  --kick:#ffc85a;
+  --kick-ink:#1a1206;
+  --warn:#ff6a3d;
+  --rel:#72e6ad;
+  --blackletter:"Pirata One", "UnifrakturCook", "Old English Text MT", Georgia, serif;
+  --rpg:"Cinzel", "Trajan Pro", Georgia, serif;
+  --display:"Oswald", "Arial Narrow", system-ui, sans-serif;
+  --pixel:"Silkscreen", "Courier New", ui-monospace, monospace;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --tap:44px;
+  /* chart roles (validated: dark band, CVD ΔE 27, ≥3:1 on --panel) */
+  --c-surface:var(--panel);
+  --c-grid:#2a2216;
+  --c-axis:#4a3b22;
+  --c-new:#c98500;
+  --c-ret:#9085e9;
+  --c-one:#c98500;
+  --c-mark:#e8d7a9;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html{background-color:var(--bg)}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 260px at 50% 0, color-mix(in srgb,var(--violet) 14%,transparent), transparent 80%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb,var(--blood-dk) 18%,transparent), transparent 80%);
+  background-repeat:no-repeat;
+  color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;margin:0;
+  -webkit-tap-highlight-color:transparent;min-height:100vh;
+}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible,.chart:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+a{color:var(--gold-hi)}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:18px 64px}
+
+/* gold pixel item-frame corners (same as the board) */
+.gframe{position:relative}
+.gframe::before{content:"";position:absolute;inset:5px;pointer-events:none;z-index:2;--gc:var(--gold);
+  background:
+    linear-gradient(var(--gc),var(--gc)) left top/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px top 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px top 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px top 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px top 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px bottom 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px bottom 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px bottom 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px bottom 6px/3px 6px no-repeat}
+.thorn{position:relative;height:12px;margin:0;border:0}
+.thorn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
+.thorn::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:8px;transform:translate(-50%,-50%);background:var(--gold);clip-path:polygon(0 50%,40% 0,50% 50%,60% 0,100% 50%,60% 100%,50% 50%,40% 100%)}
+
+/* header */
+.top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:8px 20px;padding-bottom:12px}
+.eyebrow{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--gold)}
+.eyebrow .sep{color:var(--dim)}
+h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,48px);line-height:1;margin:2px 0 0;letter-spacing:.01em;color:var(--fg);
+  text-shadow:0 0 14px color-mix(in srgb,var(--gold) 30%,transparent)}
+.cred{font-size:12.5px;color:var(--muted);margin-top:4px}
+.who{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere;text-align:right}
+.who b{color:var(--fg-2);font-weight:600}
+
+/* buttons, inputs */
+.btn{border:1px solid var(--line);background:var(--panel);min-height:var(--tap);padding:8px 16px;font-family:var(--rpg);font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--fg);display:inline-flex;align-items:center;justify-content:center;gap:8px}
+.btn.primary{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}
+.btn:disabled{opacity:.55;cursor:default}
+@media (hover:hover){.btn:not(.primary):not(:disabled):hover{border-color:var(--gold);color:var(--gold-hi)}.btn.primary:not(:disabled):hover{background:var(--gold-hi)}}
+.link{border:0;background:none;padding:6px 0;color:var(--muted);font-size:13.5px;text-decoration:underline;text-underline-offset:3px;text-decoration-color:var(--dim)}
+@media (hover:hover){.link:hover{color:var(--gold-hi)}}
+label.f{display:block;font-family:var(--rpg);font-weight:700;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin:14px 0 6px}
+input.in{width:100%;min-height:var(--tap);background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:8px 12px;font:16px var(--body)}
+input.in:focus{border-color:var(--gold)}
+
+/* cards */
+.card{background:var(--panel);border:1px solid var(--line);padding:18px 18px 16px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 10%,transparent);min-width:0}
+.card h2{margin:0;font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.card .sub{margin:3px 0 0;font-size:13px;color:var(--muted)}
+.card-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 14px;margin-bottom:12px}
+.gate{max-width:440px;margin:28px auto 0;padding:24px 22px 20px}
+.gate h2{font-size:15px}
+.gate p{color:var(--fg-2);margin:10px 0 0;font-size:14.5px}
+.gate .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.gate .row .btn{flex:1}
+.msg{margin:12px 0 0;font-size:14px;line-height:1.45;color:var(--fg-2);padding:10px 12px;border-left:3px solid var(--gold);background:var(--panel-2)}
+.msg.err{border-left-color:var(--warn)}
+.msg.err::before{content:"! ";font-weight:700;color:var(--warn)}
+.sql{margin-top:14px}
+.sql .lbl{font-family:var(--rpg);font-weight:700;font-size:11.5px;letter-spacing:.12em;color:var(--muted);margin-bottom:6px}
+.sql .box{display:flex;align-items:stretch;border:1px solid var(--line);background:var(--bg)}
+.sql code{flex:1;min-width:0;padding:10px 12px;font:12.5px/1.5 ui-monospace,"SFMono-Regular",Menlo,Consolas,monospace;color:var(--fg);overflow-wrap:anywhere;user-select:all}
+.sql .box .btn{min-height:0;border:0;border-left:1px solid var(--line);font-size:12px;padding:6px 12px;flex:none}
+.sql ol{margin:10px 0 0;padding-left:20px;color:var(--muted);font-size:13px}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid var(--line);border-top-color:var(--gold-hi);border-radius:50%;animation:sp 1s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* toolbar: one row, above everything it scopes */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin:16px 0 14px}
+.range{display:inline-flex;background:var(--panel);border:1px solid var(--line);padding:3px;gap:3px}
+.range button{border:0;background:transparent;min-height:38px;min-width:64px;padding:6px 12px;font-family:var(--rpg);font-weight:700;font-size:13.5px;letter-spacing:.08em;color:var(--muted)}
+.range button[aria-pressed="true"]{background:var(--panel-2);color:var(--fg);box-shadow:inset 0 -2px 0 var(--gold)}
+.bar .btn{min-height:44px;font-size:13px;padding:8px 14px}
+.stamp{font-size:12.5px;color:var(--muted);font-variant-numeric:tabular-nums;display:inline-flex;align-items:center;gap:8px}
+.bar .grow{flex:1}
+.sample{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 14px;margin:14px 0 0;border:1px dashed var(--gold);background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--gold) 8%,transparent) 0 8px,transparent 8px 16px);color:var(--fg-2);font-size:13.5px}
+.sample b{font-family:var(--pixel);font-weight:400;font-size:12px;background:var(--gold-hi);color:var(--kick-ink);padding:2px 7px;letter-spacing:.04em}
+.tag{font-family:var(--pixel);font-size:9.5px;background:var(--gold-hi);color:var(--kick-ink);padding:1px 5px;line-height:1.6}
+.dash{transition:opacity .2s}
+.dash.busy .stats-area{opacity:.55}
+.stats-area{transition:opacity .2s}
+.err-line{margin:0 0 12px}
+
+/* KPI tiles */
+.kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.kpis .kpi.live{grid-column:1/-1}
+@media (min-width:900px){
+  .kpis{grid-template-columns:minmax(0,1.25fr) repeat(4,minmax(0,1fr))}
+  .kpis .kpi.live{grid-column:auto;grid-row:span 2;display:flex;flex-direction:column}
+  .kpis .kpi.live .v{font-size:64px;margin-top:auto}
+}
+.kpi.due .v{color:var(--gold-hi)}
+.kpi{background:var(--panel);border:1px solid var(--line);padding:12px 14px 12px;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 8%,transparent);min-width:0}
+.kpi .l{font-family:var(--rpg);font-weight:700;font-size:11px;letter-spacing:.1em;color:var(--muted);display:flex;align-items:center;gap:6px}
+.kpi .v{font-family:var(--display);font-weight:600;font-size:34px;line-height:1.05;margin-top:6px;color:var(--fg);white-space:nowrap}
+.kpi .v small{font-size:17px;font-weight:500;color:var(--fg-2);margin-left:6px;white-space:nowrap}
+.kpi .d{font-size:12px;color:var(--muted);margin-top:2px}
+.kpi.live .v{color:var(--gold-hi)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--rel);flex:none;box-shadow:0 0 0 3px color-mix(in srgb,var(--rel) 22%,transparent)}
+@media (prefers-reduced-motion:no-preference){.dot{animation:pulse 2s ease-in-out infinite}@keyframes pulse{50%{box-shadow:0 0 0 6px color-mix(in srgb,var(--rel) 0%,transparent)}}}
+
+.grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px;margin-top:12px}
+.span2{grid-column:1/-1}
+
+/* charts */
+.chart{position:relative;outline:none;touch-action:pan-y;-webkit-user-select:none;user-select:none}
+.chart svg{display:block;width:100%;overflow:visible}
+.chart text{font-family:var(--body);font-size:11px;fill:var(--muted);font-variant-numeric:tabular-nums}
+.chart text.mk{fill:var(--c-mark);font-family:var(--rpg);font-weight:700;font-size:10.5px;letter-spacing:.06em}
+.chart text.cap{fill:var(--fg-2);font-weight:600}
+.tip{position:absolute;z-index:5;pointer-events:none;min-width:150px;max-width:220px;background:#0e0b06;border:1px solid var(--gold);padding:8px 10px;font-size:12.5px;line-height:1.35;box-shadow:0 6px 18px rgba(0,0,0,.5)}
+.tip .t{font-family:var(--rpg);font-weight:700;font-size:11px;letter-spacing:.08em;color:var(--muted);margin-bottom:4px}
+.tip .big{font-family:var(--display);font-weight:600;font-size:20px;color:var(--fg);line-height:1.1}
+.tip .big span{font-family:var(--body);font-size:12px;font-weight:400;color:var(--muted);margin-left:4px}
+.tip .r{display:flex;align-items:center;gap:7px;margin-top:3px;color:var(--fg-2)}
+.tip .r b{font-weight:600;color:var(--fg);font-variant-numeric:tabular-nums;min-width:2.5em}
+.tip .k{width:12px;height:2px;flex:none}
+.tip .ev{margin-top:5px;padding-top:5px;border-top:1px solid var(--line);color:var(--gold-hi);font-family:var(--rpg);font-weight:700;font-size:11px;letter-spacing:.06em}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--fg-2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+.note2{font-size:12.5px;color:var(--muted);margin:8px 0 0}
+details.tv{margin-top:10px}
+details.tv summary{cursor:pointer;font-size:12.5px;color:var(--muted);padding:4px 0;width:max-content}
+details.tv .scroll{max-height:280px;overflow:auto;margin-top:6px;border:1px solid var(--line)}
+
+/* tables & bar lists */
+table.t{width:100%;border-collapse:collapse;font-size:13.5px}
+table.t th{font-family:var(--rpg);font-weight:700;font-size:10.5px;letter-spacing:.1em;color:var(--muted);text-align:right;padding:6px 8px;border-bottom:1px solid var(--line);position:sticky;top:0;background:var(--panel)}
+table.t th:first-child,table.t td:first-child{text-align:left}
+table.t td{padding:8px 8px;border-bottom:1px solid var(--c-grid);text-align:right;font-variant-numeric:tabular-nums;vertical-align:top}
+table.t td:first-child{overflow-wrap:anywhere;color:var(--fg)}
+table.t tr:last-child td{border-bottom:0}
+table.t .bar1{height:6px;margin-top:5px;background:var(--c-grid);border-radius:0 4px 4px 0}
+table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:0 4px 4px 0;min-width:2px}
+.blist{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.blist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;font-size:13.5px;align-items:baseline}
+.blist .n{overflow-wrap:anywhere;color:var(--fg)}
+.blist .n.q{color:var(--fg-2);font-style:italic}
+.blist .v{font-variant-numeric:tabular-nums;color:var(--fg)}
+.blist .v span{color:var(--muted);margin-left:6px}
+.blist .tr{grid-column:1/-1;height:8px;background:var(--c-grid);border-radius:0 4px 4px 0}
+.blist .tr i{display:block;height:100%;background:var(--c-one);border-radius:0 4px 4px 0;min-width:2px}
+.empty{color:var(--dim);font-style:italic;font-size:13.5px;margin:4px 0}
+.kr{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.kr > div{border:1px solid var(--line);background:var(--bg);padding:10px 12px;min-width:0}
+.kr .l{font-family:var(--rpg);font-weight:700;font-size:10.5px;letter-spacing:.1em;color:var(--muted)}
+.kr .v{font-family:var(--display);font-weight:600;font-size:28px;line-height:1.1;margin-top:4px}
+.kr .w{font-size:12px;color:var(--warn);margin-top:2px}
+/* moderation */
+.mod{margin-bottom:12px}
+.badge{display:inline-block;vertical-align:2px;margin-left:8px;font-family:var(--pixel);font-weight:400;font-size:10.5px;letter-spacing:0;text-transform:none;padding:2px 7px;background:var(--line);color:var(--muted)}
+.badge.on{background:var(--gold-hi);color:var(--kick-ink)}
+.mlist{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:10px}
+.mlist.one{grid-template-columns:minmax(0,1fr)}
+.item{border:1px solid var(--line);background:var(--bg);display:flex;flex-direction:column;min-width:0;transition:opacity .25s}
+.item.gone{opacity:0}
+.item video,.item .vph{display:block;width:100%;height:min(360px,56vh);background:#000;object-fit:contain;border-bottom:1px solid var(--line)}
+.mlist.one .item{display:grid;grid-template-columns:minmax(0,200px) minmax(0,1fr)}
+.mlist.one .item video,.mlist.one .item .vph{height:100%;min-height:220px;max-height:360px;border-bottom:0;border-right:1px solid var(--line)}
+.vph{display:flex!important;align-items:center;justify-content:center;flex-direction:column;gap:6px;color:var(--muted);font-family:var(--pixel);font-size:11px;text-align:center;padding:12px;
+  background:repeating-linear-gradient(135deg,#0d0a05 0 10px,#130f08 10px 20px)!important}
+.item .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
+.item .nm{font-weight:600;font-size:15.5px;color:var(--fg);overflow-wrap:anywhere;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.item .song{color:var(--fg-2);font-size:13.5px;overflow-wrap:anywhere}
+.item .song b{font-weight:600;color:var(--fg)}
+.item .capt{color:var(--fg-2);font-size:13.5px;font-style:italic;overflow-wrap:anywhere}
+.item .meta{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
+.item .acts{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px}
+.item .acts .btn{flex:1 1 auto;min-height:40px;font-size:12.5px;padding:6px 10px}
+.btn.bad{border-color:color-mix(in srgb,var(--warn) 60%,var(--line));color:#ffb39b}
+.btn.bad.arm{background:var(--warn);border-color:var(--warn);color:var(--kick-ink)}
+@media (hover:hover){.btn.bad:not(:disabled):not(.arm):hover{border-color:var(--warn);color:var(--warn)}}
+.rej{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.rej input{flex:1 1 100%;min-height:40px;background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:6px 10px;font:15px var(--body)}
+.rej input:focus{border-color:var(--warn)}
+.rej .btn{flex:1;min-height:40px;font-size:12.5px;padding:6px 10px}
+.item .msg{margin-top:8px;font-size:13px}
+.st{display:inline-flex;align-items:center;gap:4px;font-family:var(--rpg);font-weight:700;font-size:10px;letter-spacing:.08em;padding:1px 6px;border:1px solid currentColor;line-height:1.5;white-space:nowrap}
+.st.approved{color:var(--rel)}
+.st.rejected{color:var(--warn)}
+.st.pending{color:var(--gold-hi)}
+.st.reports{color:var(--warn)}
+.rlist{list-style:none;margin:0;padding:0}
+.rlist li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 10px;padding:9px 0;border-top:1px solid var(--c-grid);font-size:13.5px}
+.rlist li:first-child{border-top:0;padding-top:0}
+.rlist .a{overflow-wrap:anywhere;color:var(--fg)}
+.rlist .a span{color:var(--muted)}
+.rlist .when{color:var(--muted);font-size:12px;white-space:nowrap;text-align:right}
+.rlist .note{grid-column:1/-1;color:var(--fg-2);font-size:12.5px;overflow-wrap:anywhere}
+.rlist .note::before{content:"“"}.rlist .note::after{content:"”"}
+.rlist .row2{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;font-size:12px;color:var(--muted)}
+.rlist a{color:var(--gold);font-size:12px}
+.mgrid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:12px;margin-bottom:12px;align-items:start}
+.foot{margin-top:18px;font-size:12.5px;color:var(--dim);line-height:1.55}
+
+@media (max-width:760px){
+  .grid{grid-template-columns:minmax(0,1fr)}
+  .kpi .v{font-size:30px}
+  .kr{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .mgrid{grid-template-columns:minmax(0,1fr)}
+  .mlist.one .item{display:flex}
+  .mlist.one .item video,.mlist.one .item .vph{height:min(360px,56vh);min-height:0;border-right:0;border-bottom:1px solid var(--line)}
+  .card{padding:16px 14px 14px}
+  .who{text-align:left}
+  .range button{min-width:0;flex:1}
+  .range{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow">CHEF'S KO26 QUEST BOARD <span class="sep">·</span> OWNER</div>
+      <h1>Visitor Ledger</h1>
+      <div class="cred">Private page. Nothing links here.</div>
+    </div>
+    <div class="who" id="who" hidden></div>
+  </header>
+  <hr class="thorn">
+
+  <!-- status / loading -->
+  <section class="card gframe gate" id="v-loading">
+    <h2>Opening the ledger</h2>
+    <p><span class="spin" aria-hidden="true"></span> <span id="loading-msg">Loading…</span></p>
+  </section>
+
+  <!-- no keys -->
+  <section class="card gframe gate" id="v-connect" hidden>
+    <h2>Connect Supabase first</h2>
+    <p>Connect Supabase first (see supabase/README.md). Put the project URL and anon key in <code>ko-config.js</code>, run <code>supabase/setup.sql</code>, then come back here to sign in.</p>
+    <div class="row"><button class="btn primary" id="preview" type="button" data-preview>Preview with sample data</button></div>
+  </section>
+
+  <!-- couldn't reach supabase-js -->
+  <section class="card gframe gate" id="v-libfail" hidden>
+    <h2>Couldn't load Supabase</h2>
+    <p>The Supabase library didn't load (offline, or the CDN is blocked).</p>
+    <div class="row"><button class="btn primary" type="button" onclick="location.reload()">Try again</button><button class="btn" type="button" data-preview>Preview with sample data</button></div>
+  </section>
+
+  <!-- sign in / sign up -->
+  <section class="card gframe gate" id="v-signin" hidden>
+    <h2 id="si-title">Sign in</h2>
+    <form id="si-form" novalidate>
+      <label class="f" for="si-email">EMAIL</label>
+      <input class="in" id="si-email" type="email" autocomplete="username" inputmode="email" required>
+      <label class="f" for="si-pass">PASSWORD</label>
+      <input class="in" id="si-pass" type="password" autocomplete="current-password" required minlength="6">
+      <div class="row"><button class="btn primary" id="si-go" type="submit">Sign in</button></div>
+    </form>
+    <div id="si-msg"></div>
+    <div id="si-sql"></div>
+    <button class="link" id="si-toggle" type="button">First time? Create your admin account</button>
+  </section>
+
+  <!-- signed in but not admin -->
+  <section class="card gframe gate" id="v-notadmin" hidden>
+    <h2>This account isn't an admin yet</h2>
+    <p>Signed in as <b id="na-email"></b>. Make it the admin by running this once in Supabase:</p>
+    <div id="na-sql"></div>
+    <div class="row">
+      <button class="btn primary" id="na-again" type="button">Check again</button>
+      <button class="btn" data-signout type="button">Sign out</button>
+    </div>
+  </section>
+
+  <!-- dashboard -->
+  <main class="dash" id="v-dash" hidden>
+    <div class="sample" id="sample-banner" hidden><b>SAMPLE DATA</b> Made-up numbers to check the layout. Nothing on this page is real.</div>
+    <div class="bar" role="toolbar" aria-label="Dashboard controls">
+      <div class="range" role="group" aria-label="Range">
+        <button type="button" data-days="7" aria-pressed="false">7 days</button>
+        <button type="button" data-days="30" aria-pressed="true">30 days</button>
+        <button type="button" data-days="90" aria-pressed="false">90 days</button>
+      </div>
+      <button class="btn" id="refresh" type="button">Refresh</button>
+      <span class="stamp" id="stamp" aria-live="polite"></span>
+      <span class="grow"></span>
+      <button class="btn" data-signout type="button" id="signout">Sign out</button>
+    </div>
+    <div id="dash-err"></div>
+
+    <section class="card gframe mod" id="queue-card" aria-labelledby="q-h">
+      <div class="card-h"><div>
+        <h2 id="q-h">Review queue<span class="badge" id="q-badge"></span></h2>
+        <p class="sub">New uploads wait here until you approve them. Oldest first.</p>
+      </div></div>
+      <div id="q-err"></div>
+      <div class="mlist" id="queue"></div>
+    </section>
+    <div class="mgrid">
+      <section class="card gframe" id="rep-card" aria-labelledby="rep-h">
+        <div class="card-h"><div>
+          <h2 id="rep-h">Reported<span class="badge" id="rep-badge"></span></h2>
+          <p class="sub">Videos with reports since they were last reviewed. 3 reports hide a video automatically.</p>
+        </div></div>
+        <div id="rep-err"></div>
+        <div class="mlist one" id="reported"></div>
+      </section>
+      <section class="card gframe" id="rev-card" aria-labelledby="rev-h">
+        <div class="card-h"><div>
+          <h2 id="rev-h">Recently reviewed</h2>
+          <p class="sub">Last 20 decisions, by you or the automatic reviewer</p>
+        </div></div>
+        <ul class="rlist" id="reviewed"></ul>
+      </section>
+    </div>
+
+    <div class="stats-area">
+
+    <section class="kpis" id="kpis" aria-label="Headline numbers"></section>
+
+    <section class="card gframe" aria-labelledby="daily-h">
+      <div class="card-h">
+        <div>
+          <h2 id="daily-h">Visitors per day</h2>
+          <p class="sub" id="daily-sub"></p>
+        </div>
+        <div class="legend" aria-hidden="true">
+          <span><i style="background:var(--c-new)"></i>New</span>
+          <span><i style="background:var(--c-ret)"></i>Returning</span>
+        </div>
+      </div>
+      <div class="chart" id="daily" tabindex="0"></div>
+      <p class="note2" id="daily-note"></p>
+      <details class="tv"><summary>Show as table</summary><div class="scroll" id="daily-table"></div></details>
+    </section>
+
+    <div class="grid">
+      <section class="card gframe" aria-labelledby="pages-h">
+        <div class="card-h"><div><h2 id="pages-h">Pages</h2><p class="sub" id="pages-sub"></p></div></div>
+        <div id="pages"></div>
+      </section>
+      <section class="card gframe" aria-labelledby="hours-h">
+        <div class="card-h"><div><h2 id="hours-h">Views by hour</h2><p class="sub">Sydney time, selected range</p></div></div>
+        <div class="chart" id="hours" tabindex="0"></div>
+      </section>
+      <section class="card gframe" aria-labelledby="dev-h">
+        <div class="card-h"><div><h2 id="dev-h">Devices</h2><p class="sub">Share of visitors</p></div></div>
+        <ul class="blist" id="devices"></ul>
+      </section>
+      <section class="card gframe" aria-labelledby="ref-h">
+        <div class="card-h"><div><h2 id="ref-h">Top referrers</h2><p class="sub">Visitors arriving from another site</p></div></div>
+        <ul class="blist" id="refs"></ul>
+      </section>
+      <section class="card gframe span2" aria-labelledby="kr-h">
+        <div class="card-h"><div><h2 id="kr-h">Kickrolls</h2><p class="sub">All time</p></div></div>
+        <div class="kr" id="kr"></div>
+      </section>
+    </div>
+    </div>
+    <p class="foot">A visitor is one browser (a random id, no names or IPs). Returning means seen on more than one Sydney day. Browsers with Do Not Track on aren't counted. Your own visits to this page aren't counted.</p>
+  </main>
+</div>
+
+<script src="../ko-config.js"></script>
+<script>
+(function(){
+"use strict";
+const CFG = window.KO_CONFIG || {};
+const HAS_KEYS = !!(CFG.supabaseUrl && CFG.supabaseAnonKey);
+const SUPA_JS = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2";
+const TZ = "Australia/Sydney";
+const RAVE = "2026-10-03", DEADLINE = "2026-10-10";
+const $ = id => document.getElementById(id);
+const VIEWS = ["v-loading", "v-connect", "v-libfail", "v-signin", "v-notadmin", "v-dash"];
+
+let sb = null, session = null, sample = false, days = 30, busy = false, lastAt = 0, last = null;
+
+/* ---------- tiny DOM helpers: every string goes in as textContent ---------- */
+function h(tag, attrs, ...kids){
+  const el = document.createElement(tag);
+  for(const [k, v] of Object.entries(attrs || {})){
+    if(v == null || v === false) continue;
+    if(k === "class") el.className = v;
+    else if(k === "style") el.style.cssText = v;
+    else if(k.startsWith("on")) el.addEventListener(k.slice(2), v);
+    else el.setAttribute(k, v === true ? "" : v);
+  }
+  for(const c of kids.flat()){ if(c == null || c === false) continue; el.append(c instanceof Node ? c : document.createTextNode(String(c))); }
+  return el;
+}
+const NS = "http://www.w3.org/2000/svg";
+function s(tag, attrs, text){
+  const el = document.createElementNS(NS, tag);
+  for(const [k, v] of Object.entries(attrs || {})) if(v != null) el.setAttribute(k, v);
+  if(text != null) el.textContent = String(text);
+  return el;
+}
+const num = v => Number(v) || 0;
+const fmt = v => num(v).toLocaleString("en-AU");
+const pct = (a, b) => b ? Math.round(a / b * 100) : 0;
+
+function show(id){ for(const v of VIEWS) $(v).hidden = v !== id; }
+
+/* ---------- dates (Sydney) ---------- */
+const ymd = new Intl.DateTimeFormat("en-CA", {timeZone: TZ, year: "numeric", month: "2-digit", day: "2-digit"});
+const sydToday = () => ymd.format(new Date());
+const addDays = (iso, k) => { const d = new Date(iso + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + k); return d.toISOString().slice(0, 10); };
+const dayDiff = (a, b) => Math.round((new Date(b + "T00:00:00Z") - new Date(a + "T00:00:00Z")) / 864e5);
+const dShort = iso => new Date(iso + "T00:00:00Z").toLocaleDateString("en-AU", {day: "numeric", month: "short", timeZone: "UTC"});
+const dLong = iso => new Date(iso + "T00:00:00Z").toLocaleDateString("en-AU", {weekday: "short", day: "numeric", month: "short", timeZone: "UTC"});
+const hourName = hr => (hr % 12 || 12) + (hr < 12 ? "am" : "pm");
+
+/* ---------- SQL line from setup.sql ---------- */
+function sqlBlock(email, then){
+  const e = String(email || "you@example.com").trim().toLowerCase().replace(/'/g, "''");
+  const line = `insert into public.admins (user_id) select id from auth.users where email = '${e}';`;
+  const code = h("code", {}, line);
+  const btn = h("button", {class: "btn", type: "button"}, "Copy");
+  btn.addEventListener("click", async () => {
+    let ok = false;
+    try{ await navigator.clipboard.writeText(line); ok = true; }catch(_){
+      try{ const r = document.createRange(); r.selectNodeContents(code); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(r); ok = document.execCommand("copy"); }catch(__){}
+    }
+    btn.textContent = ok ? "Copied" : "Select & copy";
+    setTimeout(() => { btn.textContent = "Copy"; }, 1800);
+  });
+  return h("div", {class: "sql"},
+    h("div", {class: "lbl"}, "RUN ONCE IN SUPABASE"),
+    h("div", {class: "box"}, code, btn),
+    h("ol", {}, h("li", {}, "Supabase → SQL Editor → New query"), h("li", {}, "Paste, then Run"), h("li", {}, then || "Come back and sign in")));
+}
+const msg = (text, err) => h("p", {class: "msg" + (err ? " err" : ""), role: err ? "alert" : "status"}, text);
+
+/* ---------- Supabase ---------- */
+function loadLib(){
+  if(window.supabase && window.supabase.createClient) return Promise.resolve();
+  return new Promise((res, rej) => {
+    const el = document.createElement("script");
+    el.src = SUPA_JS; el.onload = res; el.onerror = () => rej(new Error("supabase-js didn't load"));
+    document.head.appendChild(el);
+  });
+}
+
+async function boot(){
+  if(!HAS_KEYS){ show("v-connect"); return; }
+  $("loading-msg").textContent = "Connecting to Supabase…";
+  try{ await loadLib(); }catch(e){ show("v-libfail"); return; }
+  sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, {
+    auth: {storageKey: "ko26.admin", persistSession: true, autoRefreshToken: true, detectSessionInUrl: true}
+  });
+  sb.auth.onAuthStateChange((ev, sess) => {
+    if(ev === "SIGNED_OUT"){ session = null; stopAuto(); showSignin(); }
+    else if(sess) session = sess;
+  });
+  const {data} = await sb.auth.getSession();
+  session = data && data.session;
+  if(session && !session.user.is_anonymous) enterDash();
+  else showSignin();
+}
+
+/* sign-in card */
+let signUpMode = false;
+function setMode(up){
+  signUpMode = up;
+  $("si-title").textContent = up ? "Create your admin account" : "Sign in";
+  $("si-go").textContent = up ? "Create account" : "Sign in";
+  $("si-toggle").textContent = up ? "Already have an account? Sign in" : "First time? Create your admin account";
+  $("si-pass").autocomplete = up ? "new-password" : "current-password";
+  $("si-msg").replaceChildren(); $("si-sql").replaceChildren();
+}
+function showSignin(){ $("who").hidden = true; show("v-signin"); }
+$("si-toggle").addEventListener("click", () => setMode(!signUpMode));
+$("si-form").addEventListener("submit", async ev => {
+  ev.preventDefault();
+  const email = $("si-email").value.trim(), password = $("si-pass").value;
+  const out = $("si-msg"); out.replaceChildren(); $("si-sql").replaceChildren();
+  if(!/^\S+@\S+\.\S+$/.test(email)){ out.append(msg("Enter a valid email.", true)); return; }
+  if(password.length < 6){ out.append(msg("Password needs at least 6 characters.", true)); return; }
+  if(!sb){ out.append(msg("Supabase isn't connected.", true)); return; }
+  const go = $("si-go"); go.disabled = true;
+  try{
+    if(signUpMode){
+      const {data, error} = await sb.auth.signUp({email, password, options: {emailRedirectTo: location.origin + location.pathname}});
+      if(error) throw error;
+      if(data.user && Array.isArray(data.user.identities) && data.user.identities.length === 0){
+        out.append(msg("That email already has an account. Sign in instead.", true)); setMode(false); return;
+      }
+      if(data.session){ session = data.session; enterDash(); return; }
+      out.append(msg("Account created. Check your email to confirm, then sign in."));
+      $("si-sql").append(sqlBlock(email));
+    }else{
+      const {data, error} = await sb.auth.signInWithPassword({email, password});
+      if(error) throw error;
+      session = data.session; $("si-pass").value = ""; enterDash();
+    }
+  }catch(e){
+    const m = String(e && e.message || e);
+    if(/confirm/i.test(m)) out.append(msg("Check your email to confirm, then sign in.", true));
+    else if(/invalid login/i.test(m)) out.append(msg("Wrong email or password.", true));
+    else out.append(msg(m, true));
+  }finally{ go.disabled = false; }
+});
+document.querySelectorAll("[data-signout]").forEach(b => b.addEventListener("click", async () => {
+  stopAuto();
+  if(sample){ sample = false; last = null; lastAt = 0; resetMod(); $("who").hidden = true; show(HAS_KEYS ? (sb ? "v-signin" : "v-libfail") : "v-connect"); return; }
+  if(sb) await sb.auth.signOut();
+  session = null; last = null; lastAt = 0; resetMod(); showSignin();
+}));
+$("na-again").addEventListener("click", () => enterDash());
+
+/* ---------- dashboard ---------- */
+function enterDash(){
+  const email = session && session.user && session.user.email || "";
+  const who = $("who"); who.replaceChildren("Signed in as ", h("b", {}, email)); who.hidden = !email;
+  $("signout").textContent = "Sign out";
+  $("sample-banner").hidden = true;
+  load(true);
+}
+function startSample(){
+  sample = true;
+  const who = $("who"); who.replaceChildren(h("span", {class: "tag"}, "SAMPLE DATA"), " preview, not signed in"); who.hidden = false;
+  $("signout").textContent = "Exit preview";
+  $("sample-banner").hidden = false;
+  load(true);
+}
+document.querySelectorAll("[data-preview]").forEach(b => b.addEventListener("click", startSample));
+
+async function fetchStats(n){
+  if(sample) return sampleStats(n);
+  const {data, error} = await sb.rpc("ko26_stats", {days: n});
+  if(error) throw error;
+  return typeof data === "string" ? JSON.parse(data) : data;
+}
+
+let again = false;
+async function load(first){
+  if(!sample && !session) return;
+  if(busy){ again = true; return; } busy = true;
+  const dash = $("v-dash");
+  if(first && !last){ $("loading-msg").textContent = "Reading the numbers…"; show("v-loading"); }
+  else dash.classList.add("busy");
+  $("stamp").replaceChildren(h("span", {class: "spin", "aria-hidden": "true"}), "updating…");
+  try{
+    const [data, mod] = await Promise.all([fetchStats(days), API().lists().catch(e => ({error: e}))]);
+    last = data; lastAt = Date.now();
+    $("dash-err").replaceChildren();
+    show("v-dash");
+    render(data);
+    renderMod(mod);
+    startAuto();
+  }catch(e){
+    const m = String(e && (e.message || e.details) || e);
+    if(/not allowed/i.test(m)){
+      stopAuto();
+      const email = session && session.user && session.user.email || "";
+      $("na-email").textContent = email;
+      $("na-sql").replaceChildren(sqlBlock(email, "Press Check again"));
+      show("v-notadmin");
+    }else if(last){
+      $("dash-err").replaceChildren(h("div", {class: "err-line"}, msg("Couldn't refresh: " + m, true)));
+    }else{
+      show("v-dash");
+      $("dash-err").replaceChildren(h("div", {class: "err-line"}, msg("Couldn't load stats: " + m, true)));
+    }
+  }finally{
+    busy = false; dash.classList.remove("busy");
+    setStamp();
+    if(again){ again = false; load(); }
+  }
+}
+function setStamp(){
+  if(!lastAt){ $("stamp").textContent = ""; return; }
+  const t = new Date(lastAt).toLocaleTimeString("en-AU", {hour: "2-digit", minute: "2-digit", hour12: false});
+  $("stamp").textContent = "updated " + t;
+}
+
+document.querySelectorAll(".range button").forEach(b => b.addEventListener("click", () => {
+  const n = Number(b.dataset.days); if(n === days) return;
+  days = n;
+  document.querySelectorAll(".range button").forEach(x => x.setAttribute("aria-pressed", String(x === b)));
+  load();
+}));
+$("refresh").addEventListener("click", () => load());
+
+/* auto-refresh every 60 s while the tab is visible */
+let timer = null;
+function startAuto(){ if(!timer) timer = setInterval(() => { if(document.visibilityState === "visible" && !$("v-dash").hidden) load(); }, 60000); }
+function stopAuto(){ clearInterval(timer); timer = null; }
+document.addEventListener("visibilitychange", () => {
+  if(document.visibilityState === "visible" && timer && !$("v-dash").hidden && Date.now() - lastAt > 60000) load();
+});
+
+
+/* ---------- moderation: review queue, reported, recently reviewed ---------- */
+const COLS = "id,created_at,act,song,name,caption,path,mime,size_bytes,status,hidden,reviewed_at,review_note";
+const videoUrl = path => `${CFG.supabaseUrl}/storage/v1/object/public/${CFG.bucket || "kickrolls"}/${String(path || "").split("/").map(encodeURIComponent).join("/")}`;
+const LIVE_MOD = {
+  async lists(){
+    const [q, r, v] = await Promise.all([
+      sb.from("kickrolls").select(COLS).eq("status", "pending").order("created_at", {ascending: true}).limit(100),
+      sb.from("reports").select("kickroll_id,created_at").order("created_at", {ascending: false}).limit(5000),
+      sb.from("kickrolls").select(COLS).not("reviewed_at", "is", null).order("reviewed_at", {ascending: false}).limit(20)
+    ]);
+    const out = {queue: q.data || [], recent: v.data || [], reported: [], qErr: q.error, vErr: v.error, rErr: r.error};
+    if(!r.error && r.data && r.data.length){
+      const agg = new Map();
+      for(const x of r.data){ const a = agg.get(x.kickroll_id) || {n: 0, last: x.created_at}; a.n++; if(x.created_at > a.last) a.last = x.created_at; agg.set(x.kickroll_id, a); }
+      const ids = [...agg.keys()].slice(0, 300);
+      const k = await sb.from("kickrolls").select(COLS).in("id", ids);
+      if(k.error) out.rErr = k.error;
+      else out.reported = (k.data || []).map(x => ({...x, reports: agg.get(x.id).n, last_report: agg.get(x.id).last}))
+        .filter(x => !x.reviewed_at || Date.parse(x.last_report) > Date.parse(x.reviewed_at))
+        .sort((a, b) => b.reports - a.reports || Date.parse(b.last_report) - Date.parse(a.last_report));
+    }
+    return out;
+  },
+  async moderate(id, approve, note){
+    const {error} = await sb.rpc("ko26_moderate", {kickroll: id, approve, note: note || null});
+    if(error) throw error;
+  },
+  async remove(id){
+    const {data, error} = await sb.from("kickrolls").delete().eq("id", id).select("id");
+    if(error) throw error;
+    if(!data || !data.length) throw new Error("Nothing was deleted (no permission, or it's already gone).");
+  }
+};
+/* sample moderation backend: fake rows, changes stay in this tab */
+const SAMPLE_MOD = (() => {
+  const ago = m => new Date(Date.now() - m * 60000).toISOString();
+  const mk = (i, o) => Object.assign({id: "sample-" + i, path: "", mime: "video/mp4", hidden: false, status: "pending", reviewed_at: null, review_note: null}, o);
+  let rows;
+  const init = () => { rows = [
+    mk(1, {name: "Sample Sam", act: "Sample Act One", song: "Placeholder Track (Sample Edit)", caption: "sample caption: front left, first drop", created_at: ago(190), size_bytes: 18.4e6}),
+    mk(2, {name: "Test Tess", act: "Sample Act Two", song: "Example Song", caption: "", created_at: ago(75), size_bytes: 7.2e6}),
+    mk(3, {name: "Demo Dee", act: "Sample Act Three", song: "Fake Tune <b>not real</b>", caption: "a deliberately long sample caption to check wrapping on a phone screen, nothing here is real", created_at: ago(12), size_bytes: 41.9e6}),
+    mk(4, {name: "Report Rae", act: "Sample Act Two", song: "Reported Sample Song", caption: "sample: reported video", created_at: ago(2900), size_bytes: 12e6, status: "approved", reviewed_at: ago(2800), review_note: "sample: auto-approved", reports: 2, last_report: ago(40)}),
+    mk(5, {name: "Flag Finn", act: "Sample Act One", song: "Another Sample Song", caption: "", created_at: ago(4000), size_bytes: 9e6, status: "approved", reviewed_at: ago(3900), review_note: null, reports: 1, last_report: ago(300)}),
+    ...["approved", "rejected", "approved", "approved", "rejected"].map((st, i) => mk(10 + i, {name: "Sample " + (i + 1), act: "Sample Act " + (i % 3 + 1), song: "Sample Song " + (i + 1), caption: "", created_at: ago(600 + i * 300), size_bytes: 5e6,
+      status: st, reviewed_at: ago(500 + i * 280), review_note: st === "rejected" ? (i === 1 ? "sample note: not a kick roll" : "sample note: link spam in caption") : (i === 0 ? "sample note: auto-approved" : null)}))
+  ]; };
+  init();
+  const recentOf = () => rows.filter(r => r.reviewed_at && !r.reports).concat(rows.filter(r => r.reports && r.reviewed_at && Date.parse(r.reviewed_at) > Date.parse(r.last_report)))
+    .sort((a, b) => Date.parse(b.reviewed_at) - Date.parse(a.reviewed_at)).slice(0, 20);
+  const api = {
+    reset: init,
+    queue: () => rows.filter(r => r.status === "pending").sort((a, b) => Date.parse(a.created_at) - Date.parse(b.created_at)),
+    reported: () => rows.filter(r => r.reports && r.status !== "rejected" && Date.parse(r.last_report) > Date.parse(r.reviewed_at || 0)),
+    async lists(){ return {queue: api.queue(), reported: api.reported(), recent: recentOf()}; },
+    async moderate(id, approve, note){ const r = rows.find(x => x.id === id); if(r){ r.status = approve ? "approved" : "rejected"; r.reviewed_at = new Date().toISOString(); r.review_note = note || null; if(approve) r.hidden = false; } },
+    async remove(id){ rows = rows.filter(x => x.id !== id); }
+  };
+  return api;
+})();
+const API = () => sample ? SAMPLE_MOD : LIVE_MOD;
+function resetMod(){ SAMPLE_MOD.reset(); for(const id of ["queue", "reported", "reviewed", "q-err", "rep-err"]) $(id).replaceChildren(); }
+
+const sydFmt = new Intl.DateTimeFormat("en-AU", {timeZone: TZ, day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false});
+function ago(iso){
+  const s = Math.max(0, (Date.now() - Date.parse(iso)) / 1000);
+  return s < 60 ? "just now" : s < 3600 ? Math.floor(s / 60) + " min ago" : s < 86400 ? Math.floor(s / 3600) + " h ago" : Math.floor(s / 86400) + " d ago";
+}
+const mb = b => (num(b) / 1048576).toFixed(num(b) < 10485760 ? 1 : 0) + " MB";
+const stChip = st => h("span", {class: "st " + st}, (st === "approved" ? "✓ " : st === "rejected" ? "✕ " : "• ") + String(st).toUpperCase());
+
+function videoBox(k){
+  if(sample || !k.path) return h("div", {class: "vph", role: "img", "aria-label": "Sample, no video"}, "SAMPLE", h("span", {}, "no video in preview"));
+  const v = h("video", {controls: true, preload: "metadata", playsinline: true});
+  v.autoplay = false; v.muted = false;
+  v.src = videoUrl(k.path);
+  return v;
+}
+function itemHead(k, extra){
+  return [
+    h("div", {class: "nm"}, String(k.name || "unnamed"), sample ? h("span", {class: "tag"}, "SAMPLE") : null, extra || null),
+    h("div", {class: "song"}, h("b", {}, String(k.act || "")), " — ", String(k.song || "")),
+    k.caption ? h("div", {class: "capt"}, "“" + String(k.caption) + "”") : null,
+    h("div", {class: "meta"}, `${sydFmt.format(new Date(k.created_at))} · ${ago(k.created_at)} · ${mb(k.size_bytes)}`)
+  ];
+}
+function act(btns, item, fn, okText){
+  return async () => {
+    btns.forEach(b => b.disabled = true);
+    const old = item.querySelector(".msg"); if(old) old.remove();
+    try{
+      await fn();
+      item.classList.add("gone");
+      setTimeout(() => { item.remove(); syncBadges(); load(); }, 250);
+      if(okText) $("stamp").textContent = okText;
+    }catch(e){
+      btns.forEach(b => b.disabled = false);
+      item.querySelector(".body").append(msg(String(e && e.message || e), true));
+    }
+  };
+}
+function queueItem(k){
+  const item = h("article", {class: "item", "data-id": k.id});
+  const ok = h("button", {class: "btn primary", type: "button"}, "Approve");
+  const no = h("button", {class: "btn bad", type: "button"}, "Reject");
+  const reason = h("input", {type: "text", maxlength: "200", placeholder: "Reason (optional)", "aria-label": "Reason for rejecting (optional)"});
+  const go = h("button", {class: "btn bad arm", type: "button"}, "Reject video");
+  const cancel = h("button", {class: "btn", type: "button"}, "Cancel");
+  const rej = h("div", {class: "rej", hidden: true}, reason, go, cancel);
+  const all = [ok, no, go, cancel];
+  ok.addEventListener("click", act(all, item, () => API().moderate(k.id, true, null)));
+  no.addEventListener("click", () => { rej.hidden = false; no.hidden = true; reason.focus(); });
+  cancel.addEventListener("click", () => { rej.hidden = true; no.hidden = false; reason.value = ""; });
+  const doRej = act(all, item, () => API().moderate(k.id, false, reason.value.trim().slice(0, 200)));
+  go.addEventListener("click", doRej);
+  reason.addEventListener("keydown", e => { if(e.key === "Enter"){ e.preventDefault(); doRej(); } else if(e.key === "Escape") cancel.click(); });
+  item.append(videoBox(k), h("div", {class: "body"}, ...itemHead(k), h("div", {class: "acts"}, ok, no), rej));
+  return item;
+}
+function reportedItem(k){
+  const item = h("article", {class: "item", "data-id": k.id});
+  const hide = h("button", {class: "btn", type: "button"}, "Hide");
+  const keep = h("button", {class: "btn primary", type: "button"}, "Keep");
+  const del = h("button", {class: "btn bad", type: "button"}, "Delete");
+  const all = [hide, keep, del];
+  hide.addEventListener("click", act(all, item, () => API().moderate(k.id, false, "reported")));
+  keep.addEventListener("click", act(all, item, () => API().moderate(k.id, true, null)));
+  const doDel = act(all, item, () => API().remove(k.id));
+  let armed = null;
+  del.addEventListener("click", () => {
+    if(armed){ clearTimeout(armed); armed = null; doDel(); return; }
+    del.classList.add("arm"); del.textContent = "Tap again to delete";
+    armed = setTimeout(() => { armed = null; del.classList.remove("arm"); del.textContent = "Delete"; }, 4000);
+  });
+  const reps = h("span", {class: "st reports"}, `! ${k.reports} REPORT${k.reports === 1 ? "" : "S"}`);
+  item.append(videoBox(k), h("div", {class: "body"}, ...itemHead(k, reps),
+    h("div", {class: "meta"}, "last report ", ago(k.last_report), " · now ", stChip(k.status)),
+    h("div", {class: "acts"}, keep, hide, del)));
+  return item;
+}
+/* keep existing items in place (a playing video isn't interrupted by a refresh); add new, drop gone */
+function reconcile(host, rows, make, empty){
+  const want = new Set(rows.map(r => String(r.id)));
+  for(const el of [...host.children]) if(!el.dataset.id || !want.has(el.dataset.id)) el.remove();
+  let prev = null;
+  for(const r of rows){
+    let el = host.querySelector(`:scope > [data-id="${CSS.escape(String(r.id))}"]`);
+    if(!el){ el = make(r); prev ? prev.after(el) : host.prepend(el); }
+    prev = el;
+  }
+  if(!rows.length) host.replaceChildren(h("p", {class: "empty"}, empty));
+}
+function syncBadges(){
+  const q = $("queue").querySelectorAll(".item:not(.gone)").length, r = $("reported").querySelectorAll(".item:not(.gone)").length;
+  const qb = $("q-badge"); qb.textContent = q ? `${q} waiting` : "none waiting"; qb.classList.toggle("on", q > 0);
+  const rb = $("rep-badge"); rb.textContent = r ? `${r} to check` : "none"; rb.classList.toggle("on", r > 0);
+  if(!q && !$("queue").querySelector(".empty")) $("queue").replaceChildren(h("p", {class: "empty"}, "Nothing waiting. New uploads will show up here."));
+  if(!r && !$("reported").querySelector(".empty")) $("reported").replaceChildren(h("p", {class: "empty"}, "No open reports."));
+}
+function renderMod(m){
+  const fail = (box, e) => $(box).replaceChildren(e ? msg("Couldn't load: " + String(e.message || e), true) : "");
+  if(m.error){ fail("q-err", m.error); return; }
+  fail("q-err", m.qErr); fail("rep-err", m.rErr);
+  if(!m.qErr) reconcile($("queue"), m.queue || [], queueItem, "Nothing waiting. New uploads will show up here.");
+  if(!m.rErr) reconcile($("reported"), m.reported || [], reportedItem, "No open reports.");
+  syncBadges();
+  const ul = $("reviewed");
+  if(m.vErr){ ul.replaceChildren(h("li", {}, msg("Couldn't load: " + String(m.vErr.message || m.vErr), true))); return; }
+  const rec = m.recent || [];
+  if(!rec.length){ ul.replaceChildren(h("li", {class: "empty"}, "Nothing reviewed yet.")); return; }
+  ul.replaceChildren(...rec.map(k => h("li", {},
+    h("div", {class: "a"}, String(k.name || "unnamed"), h("span", {}, " · ", String(k.act || ""), " — ", String(k.song || ""))),
+    h("div", {class: "when", title: sydFmt.format(new Date(k.reviewed_at))}, ago(k.reviewed_at)),
+    h("div", {class: "row2"}, stChip(k.status), k.hidden ? h("span", {}, "hidden") : null,
+      !sample && k.path ? h("a", {href: videoUrl(k.path), target: "_blank", rel: "noopener noreferrer"}, "watch") : null),
+    k.review_note ? h("div", {class: "note"}, String(k.review_note)) : null)));
+}
+
+/* ---------- render ---------- */
+function render(d){
+  const T = d.totals || {};
+  const all = num(T.visitors_all), ret = num(T.returning_all);
+  const tile = (label, value, desc, extra, cls) => h("div", {class: "kpi" + (cls ? " " + cls : "")},
+    h("div", {class: "l"}, cls === "live" ? h("span", {class: "dot", "aria-hidden": "true"}) : null, label),
+    h("div", {class: "v"}, fmt(value), extra ? h("small", {}, extra) : null),
+    h("div", {class: "d"}, desc));
+  $("kpis").replaceChildren(
+    tile("ACTIVE NOW", T.active_now, "last 5 minutes", null, "live"),
+    tile("TODAY", T.visitors_today, "visitors since midnight"),
+    tile("7 DAYS", T.visitors_7d, "visitors"),
+    tile("30 DAYS", T.visitors_30d, "visitors"),
+    tile("ALL TIME", all, "visitors"),
+    tile("RETURNING", ret, pct(ret, all) + "% of all visitors"),
+    tile("PAGE VIEWS", T.views_all, "all time"),
+    tile("MEMBERS", (d.kickrolls || {}).members, "accounts"),
+    tile("PENDING", (d.kickrolls || {}).pending, num((d.kickrolls || {}).pending) ? "waiting for review" : "nothing waiting", null, num((d.kickrolls || {}).pending) ? "due" : null));
+
+  renderDaily(d.daily || []);
+  renderPages(d.pages || []);
+  renderHours(d.hours || []);
+  renderBars($("devices"), (d.devices || []).map(x => ({name: x.device, v: num(x.visitors)})), "No visits in this range.");
+  renderBars($("refs"), (d.referrers || []).map(x => ({name: x.referrer, v: num(x.visitors), q: x.referrer === "direct"})), "No visits in this range.");
+  const K = d.kickrolls || {};
+  const kt = (l, v, w) => h("div", {}, h("div", {class: "l"}, l), h("div", {class: "v"}, fmt(v)), w || null);
+  $("kr").replaceChildren(kt("VIDEOS", K.videos), kt("RATINGS", K.ratings), kt("UPLOADERS", K.uploaders),
+    kt("REPORTED", K.reported, num(K.reported) ? h("div", {class: "w"}, "! needs a look") : null));
+}
+
+function renderDaily(rows){
+  const today = sydToday(), start = addDays(today, -(days - 1));
+  const by = new Map(rows.map(r => [String(r.day).slice(0, 10), r]));
+  const dates = Array.from({length: days}, (_, i) => addDays(start, i));
+  const nw = [], rt = [], vw = [];
+  for(const dt of dates){
+    const r = by.get(dt) || {};
+    const v = num(r.visitors), n = Math.min(num(r.new_visitors), v);
+    nw.push(n); rt.push(v - n); vw.push(num(r.views));
+  }
+  const tot = nw.map((n, i) => n + rt[i]);
+  const sumV = tot.reduce((a, b) => a + b, 0), sumNew = nw.reduce((a, b) => a + b, 0);
+  $("daily-sub").textContent = `Last ${days} days · ${fmt(sumNew)} new, ${fmt(sumV - sumNew)} returning visits by day`;
+
+  const events = [{date: RAVE, text: "RAVE DAY", long: "Rave day"}, {date: DEADLINE, text: "VOTING CLOSES", long: "Voting closes"}];
+  const markers = [], notes = [];
+  events.forEach((e, k) => {
+    const i = dayDiff(start, e.date);
+    if(i >= 0 && i < days) markers.push({i, text: e.text, row: k});
+    else if(i >= days){ const n = dayDiff(today, e.date); notes.push(`${e.long} ${dShort(e.date)}: in ${n} day${n === 1 ? "" : "s"}`); }
+    else notes.push(`${e.long} ${dShort(e.date)}: before this range`);
+  });
+  $("daily-note").textContent = notes.join(" · ");
+
+  const band = dates.length;
+  columnChart($("daily"), {
+    n: band, height: 240,
+    aria: `Visitors per day, last ${days} days. Use left and right arrow keys to read each day.`,
+    series: [{name: "New", color: "var(--c-new)", vals: nw}, {name: "Returning", color: "var(--c-ret)", vals: rt}],
+    tick: (i, room) => {
+      const every = Math.max(1, Math.ceil(62 / room));
+      return (band - 1 - i) % every === 0 ? dShort(dates[i]) : null;
+    },
+    markers,
+    tip: i => {
+      const ev = events.find(e => e.date === dates[i]);
+      return [
+        h("div", {class: "t"}, dLong(dates[i]).toUpperCase()),
+        h("div", {class: "big"}, fmt(tot[i]), h("span", {}, "visitors")),
+        h("div", {class: "r"}, h("i", {class: "k", style: "background:var(--c-new)"}), h("b", {}, fmt(nw[i])), "new"),
+        h("div", {class: "r"}, h("i", {class: "k", style: "background:var(--c-ret)"}), h("b", {}, fmt(rt[i])), "returning"),
+        h("div", {class: "r"}, h("i", {class: "k"}), h("b", {}, fmt(vw[i])), "page views"),
+        ev ? h("div", {class: "ev"}, ev.long.toUpperCase()) : null];
+    }
+  });
+
+  const tb = h("table", {class: "t"},
+    h("thead", {}, h("tr", {}, h("th", {}, "DAY"), h("th", {}, "NEW"), h("th", {}, "RETURNING"), h("th", {}, "VISITORS"), h("th", {}, "VIEWS"))),
+    h("tbody", {}, dates.map((dt, i) => h("tr", {}, h("td", {}, dLong(dt)), h("td", {}, fmt(nw[i])), h("td", {}, fmt(rt[i])), h("td", {}, fmt(tot[i])), h("td", {}, fmt(vw[i])))).reverse()));
+  $("daily-table").replaceChildren(tb);
+}
+
+function renderHours(rows){
+  const vals = Array(24).fill(0);
+  for(const r of rows){ const k = num(r.hour); if(k >= 0 && k < 24) vals[k] = num(r.views); }
+  const max = Math.max(...vals), peak = max > 0 ? vals.indexOf(max) : null;
+  columnChart($("hours"), {
+    n: 24, height: 190,
+    aria: "Page views by hour of day, Sydney time. Use arrow keys to read each hour.",
+    series: [{name: "Views", color: "var(--c-one)", vals}],
+    tick: (i, room) => {
+      const every = room >= 30 ? 3 : 6;
+      return i % every === 0 ? hourName(i) : null;
+    },
+    capIndex: peak,
+    tip: i => [
+      h("div", {class: "t"}, `${hourName(i)}–${hourName((i + 1) % 24)}`.toUpperCase()),
+      h("div", {class: "big"}, fmt(vals[i]), h("span", {}, "views")),
+      i === peak ? h("div", {class: "ev"}, "BUSIEST HOUR") : null]
+  });
+}
+
+function renderPages(rows){
+  const host = $("pages");
+  const tv = rows.reduce((a, r) => a + num(r.views), 0);
+  $("pages-sub").textContent = `${fmt(tv)} views, last ${days} days`;
+  if(!rows.length){ host.replaceChildren(h("p", {class: "empty"}, "No visits in this range.")); return; }
+  const max = Math.max(...rows.map(r => num(r.views)), 1);
+  host.replaceChildren(h("table", {class: "t"},
+    h("thead", {}, h("tr", {}, h("th", {}, "PAGE"), h("th", {}, "VIEWS"), h("th", {}, "VISITORS"))),
+    h("tbody", {}, rows.map(r => h("tr", {},
+      h("td", {}, String(r.page), h("div", {class: "bar1", "aria-hidden": "true"}, h("i", {style: `width:${(num(r.views) / max * 100).toFixed(1)}%`}))),
+      h("td", {}, fmt(r.views)), h("td", {}, fmt(r.visitors)))))));
+}
+
+function renderBars(ul, items, empty){
+  if(!items.length){ ul.replaceChildren(h("li", {class: "empty"}, empty)); return; }
+  const total = items.reduce((a, b) => a + b.v, 0) || 1, max = Math.max(...items.map(x => x.v), 1);
+  ul.replaceChildren(...items.map(x => h("li", {},
+    h("span", {class: "n" + (x.q ? " q" : "")}, x.q ? "direct / no referrer" : String(x.name)),
+    h("span", {class: "v"}, fmt(x.v), h("span", {}, pct(x.v, total) + "%")),
+    h("span", {class: "tr", "aria-hidden": "true"}, h("i", {style: `width:${(x.v / max * 100).toFixed(1)}%`})))));
+}
+
+/* ---------- column chart (stacked, one y axis, hover + keyboard tooltip) ---------- */
+function niceMax(v){
+  if(v <= 4) return {max: 4, step: 1};
+  const raw = v / 4, p = Math.pow(10, Math.floor(Math.log10(raw))), f = raw / p;
+  const step = (f <= 1 ? 1 : f <= 2 ? 2 : f <= 2.5 ? 2.5 : f <= 5 ? 5 : 10) * p;
+  return {max: Math.ceil(v / step) * step, step};
+}
+function topRound(x, y0, w, y1, r){
+  // square at the baseline (y0), rounded data-end (y1)
+  r = Math.max(0, Math.min(r, w / 2, y0 - y1));
+  return `M${x},${y0}V${y1 + r}Q${x},${y1} ${x + r},${y1}H${x + w - r}Q${x + w},${y1} ${x + w},${y1 + r}V${y0}Z`;
+}
+function columnChart(host, cfg){
+  host._cfg = cfg;
+  host.setAttribute("role", "img");
+  host.setAttribute("aria-label", cfg.aria);
+  drawColumns(host);
+  if(!host._ro && window.ResizeObserver){
+    host._ro = new ResizeObserver(() => { if(host.clientWidth && host.clientWidth !== host._w) drawColumns(host); });
+    host._ro.observe(host);
+  }
+  if(!host._wired){ wireTip(host); host._wired = true; }
+}
+function drawColumns(host){
+  const cfg = host._cfg, W = host.clientWidth; host._w = W;
+  if(!W) return;
+  const n = cfg.n, H = cfg.height;
+  const tot = Array.from({length: n}, (_, i) => cfg.series.reduce((a, se) => a + (se.vals[i] || 0), 0));
+  const {max, step} = niceMax(Math.max(...tot, 1));
+  const lw = Math.max(18, fmt(max).length * 6.6 + 8);
+  const m = {t: cfg.markers && cfg.markers.length ? 40 : (cfg.capIndex != null ? 20 : 10), r: 6, b: 24, l: lw};
+  const pw = W - m.l - m.r, ph = H - m.t - m.b, band = pw / n;
+  const bw = Math.max(1, Math.min(24, band * 0.72, band - 2));
+  const y = v => m.t + ph - v / max * ph;
+  const svg = s("svg", {viewBox: `0 0 ${W} ${H}`, height: H, "aria-hidden": "true", focusable: "false"});
+  // grid + y ticks
+  for(let v = 0; v <= max + 1e-9; v += step){
+    const yy = Math.round(y(v)) + .5;
+    if(v > 0) svg.append(s("line", {x1: m.l, x2: W - m.r, y1: yy, y2: yy, stroke: "var(--c-grid)", "stroke-width": 1}));
+    svg.append(s("text", {x: m.l - 6, y: yy + 3.5, "text-anchor": "end"}, fmt(v)));
+  }
+  // hover band (behind marks)
+  const hl = s("rect", {x: 0, y: m.t, width: band, height: ph, fill: "var(--fg)", opacity: 0, rx: 2});
+  svg.append(hl);
+  // bars
+  const g = s("g", {});
+  for(let i = 0; i < n; i++){
+    const x = m.l + i * band + (band - bw) / 2;
+    const segs = cfg.series.map(se => ({c: se.color, v: se.vals[i] || 0})).filter(z => z.v > 0);
+    let acc = 0;
+    segs.forEach((z, k) => {
+      let y0 = y(acc), y1 = y(acc + z.v);
+      acc += z.v;
+      if(k > 0) y0 -= 2;                       // 2px surface gap between stacked segments
+      if(y0 - y1 < .6) y1 = y0 - .6;           // never vanish
+      const isTop = k === segs.length - 1;
+      g.append(s("path", {d: isTop ? topRound(x, y0, bw, y1, 4) : `M${x},${y0}V${y1}H${x + bw}V${y0}Z`, fill: z.c}));
+    });
+  }
+  svg.append(g);
+  // event markers: a hairline pointer from the label down to just above that day's column
+  for(const mk of cfg.markers || []){
+    const x = Math.round(m.l + (mk.i + .5) * band) + .5;
+    const ly = 11 + mk.row * 12, end = Math.max(ly + 8, y(tot[mk.i]) - 7);
+    svg.append(s("line", {x1: x, x2: x, y1: ly + 3, y2: end, stroke: "var(--c-mark)", "stroke-width": 1, opacity: .6}));
+    svg.append(s("path", {d: `M${x - 3.5},${end}h7l-3.5,4.5z`, fill: "var(--c-mark)"}));
+    const right = x > W - 110;
+    svg.append(s("text", {class: "mk", x: right ? x - 5 : x + 5, y: ly, "text-anchor": right ? "end" : "start"}, mk.text));
+  }
+  if(cfg.capIndex != null){
+    const i = cfg.capIndex;
+    svg.append(s("text", {class: "cap", x: m.l + (i + .5) * band, y: y(tot[i]) - 6, "text-anchor": "middle"}, fmt(tot[i])));
+  }
+  // baseline
+  svg.append(s("line", {x1: m.l, x2: W - m.r, y1: Math.round(y(0)) + .5, y2: Math.round(y(0)) + .5, stroke: "var(--c-axis)", "stroke-width": 1}));
+  // x ticks
+  for(let i = 0; i < n; i++){
+    const t = cfg.tick(i, band);
+    if(t == null) continue;
+    const cx = m.l + (i + .5) * band;
+    const anchor = cx < m.l + 20 ? "start" : cx > W - 24 ? "end" : "middle";
+    svg.append(s("text", {x: anchor === "start" ? cx - Math.min(band / 2, 6) : anchor === "end" ? cx + Math.min(band / 2, 6) : cx, y: H - 6, "text-anchor": anchor}, t));
+  }
+  host.replaceChildren(svg, host._tipEl || (host._tipEl = h("div", {class: "tip", hidden: true})));
+  host._geo = {m, band, n, W, hl, ph};
+  if(host._idx != null && !host._tipEl.hidden) showTip(host, host._idx);
+}
+function showTip(host, i){
+  const G = host._geo; if(!G) return;
+  i = Math.max(0, Math.min(G.n - 1, i)); host._idx = i;
+  G.hl.setAttribute("x", G.m.l + i * G.band); G.hl.setAttribute("width", G.band); G.hl.setAttribute("opacity", .07);
+  const tip = host._tipEl;
+  tip.replaceChildren(...host._cfg.tip(i).filter(Boolean));
+  tip.hidden = false;
+  const tw = tip.offsetWidth, cx = G.m.l + (i + .5) * G.band;
+  let left = cx + G.band / 2 + 8;
+  if(left + tw > G.W) left = cx - G.band / 2 - 8 - tw;
+  left = Math.max(0, Math.min(G.W - tw, left));
+  tip.style.left = left + "px"; tip.style.top = (G.m.t) + "px";
+}
+function hideTip(host){
+  if(host._tipEl) host._tipEl.hidden = true;
+  if(host._geo) host._geo.hl.setAttribute("opacity", 0);
+}
+function wireTip(host){
+  const at = e => {
+    const G = host._geo; if(!G) return null;
+    const r = host.getBoundingClientRect(), x = e.clientX - r.left;
+    if(x < G.m.l - 4 || x > G.W) return null;
+    return Math.floor((x - G.m.l) / G.band);
+  };
+  host.addEventListener("pointermove", e => { const i = at(e); if(i == null) hideTip(host); else showTip(host, i); });
+  host.addEventListener("pointerdown", e => { const i = at(e); if(i != null) showTip(host, i); });
+  host.addEventListener("pointerleave", e => { if(e.pointerType === "mouse") hideTip(host); });
+  document.addEventListener("pointerdown", e => { if(!host.contains(e.target)) hideTip(host); });
+  host.addEventListener("keydown", e => {
+    const G = host._geo; if(!G) return;
+    const cur = host._idx == null || host._tipEl.hidden ? G.n - 1 : host._idx;
+    const map = {ArrowLeft: cur - 1, ArrowRight: cur + 1, Home: 0, End: G.n - 1};
+    if(e.key in map){ e.preventDefault(); showTip(host, map[e.key]); }
+    else if(e.key === "Escape") hideTip(host);
+  });
+  host.addEventListener("focus", () => { if(host.matches(":focus-visible") && host._geo) showTip(host, host._idx == null ? host._geo.n - 1 : host._idx); });
+  host.addEventListener("blur", () => hideTip(host));
+}
+
+/* ---------- sample data: obviously fake, seeded so layouts stay stable ---------- */
+function rng(seed){ return () => { seed |= 0; seed = seed + 0x6D2B79F5 | 0; let t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+function sampleStats(n){
+  const r = rng(2026), today = sydToday(), all = [];
+  for(let k = 89; k >= 0; k--){
+    const day = addDays(today, -k), dr = dayDiff(RAVE, day), dd = dayDiff(DEADLINE, day);
+    let v = 18 + 14 * r() + 9 * Math.sin(k / 3);
+    v += dr <= 0 ? 560 * Math.exp(dr / 5) : 320 * Math.exp(-dr / 2.5) + 50;
+    if(dd <= 0) v += 90 * Math.exp(dd / 2);
+    v = Math.round(v);
+    const nf = dr < -10 ? .7 : dr <= 1 ? .55 : .25;
+    const nv = Math.round(v * (nf + .1 * r()));
+    all.push({day, visitors: v, new_visitors: nv, views: Math.round(v * (1.7 + .8 * r()))});
+  }
+  const daily = all.slice(-n);
+  const sum = (a, f) => a.reduce((x, y) => x + f(y), 0);
+  const views = sum(daily, x => x.views), vis = sum(daily, x => x.visitors);
+  const visitorsAll = Math.round(sum(all, x => x.new_visitors) + 140);
+  const H = [2,1,1,0,0,0,1,3,6,8,9,11,14,12,10,10,12,15,20,26,30,27,18,8], hw = H.reduce((a, b) => a + b, 0);
+  return {
+    generated_at: new Date().toISOString(),
+    totals: {
+      visitors_all: visitorsAll,
+      views_all: Math.round(sum(all, x => x.views) + 600),
+      visitors_today: all[all.length - 1].visitors,
+      visitors_7d: Math.round(sum(all.slice(-7), x => x.visitors) * .7),
+      visitors_30d: Math.round(sum(all.slice(-30), x => x.visitors) * .58),
+      active_now: 2 + Math.floor(Math.random() * 9),
+      returning_all: Math.round(visitorsAll * .34)
+    },
+    daily,
+    pages: [["index", .58], ["leaderboard", .27], ["gallery", .15]].map(([page, f]) => ({page, views: Math.round(views * f), visitors: Math.round(vis * .55 * f + 3)})),
+    devices: [["phone", .72], ["desktop", .21], ["tablet", .06], ["unknown", .01]].map(([device, f]) => ({device, visitors: Math.max(1, Math.round(vis * .6 * f))})),
+    referrers: [["direct", .46], ["instagram.com", .22], ["l.facebook.com", .12], ["t.co", .06], ["reddit.com", .05], ["sample-referrer.example", .02]]
+      .map(([referrer, f]) => ({referrer, visitors: Math.max(1, Math.round(vis * .6 * f))})),
+    hours: H.map((w, hour) => ({hour, views: Math.round(views * w / hw)})).filter(x => x.views > 0),
+    kickrolls: {videos: 37, ratings: 412, uploaders: 21, reported: SAMPLE_MOD.reported().length, pending: SAMPLE_MOD.queue().length, members: 58}
+  };
+}
+
+boot().catch(e => {
+  show("v-dash");
+  $("dash-err").replaceChildren(msg("Something went wrong: " + String(e && e.message || e), true));
+});
+})();
+</script>
+</body>
+</html>
