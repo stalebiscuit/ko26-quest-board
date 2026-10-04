@@ -110,3 +110,83 @@ create policy "kickrolls delete own" on storage.objects for delete to authentica
 -- ---------- moderation (run by hand when needed) ----------
 -- hide a video:     update public.kickrolls set hidden = true where id = '...';
 -- see reported:     select k.*, count(*) from public.reports p join public.kickrolls k on k.id = p.kickroll_id group by k.id order by 2 desc;
+
+-- =====================================================================
+-- Visitor analytics (anonymous) + admin dashboard at /login/
+-- =====================================================================
+-- Each browser gets a random visitor id (no names, no IPs). Anyone can add a visit row; only admins can read them.
+
+create table if not exists public.visits (
+  id          bigint generated always as identity primary key,
+  created_at  timestamptz not null default now(),
+  visitor_id  uuid not null,
+  first_visit boolean not null default false,
+  page        text not null check (char_length(page) <= 40),
+  referrer    text check (char_length(referrer) <= 120),
+  device      text check (device in ('phone', 'tablet', 'desktop')),
+  lang        text check (char_length(lang) <= 20)
+);
+create index if not exists visits_created_idx on public.visits (created_at);
+create index if not exists visits_visitor_idx on public.visits (visitor_id);
+
+create table if not exists public.admins (user_id uuid primary key references auth.users(id) on delete cascade);
+alter table public.admins enable row level security;
+drop policy if exists "admins see themselves" on public.admins;
+create policy "admins see themselves" on public.admins for select to authenticated using (user_id = auth.uid());
+
+create or replace function public.ko26_is_admin() returns boolean
+language sql stable security definer set search_path = public as $$
+  select exists (select 1 from public.admins where user_id = auth.uid())
+$$;
+
+alter table public.visits enable row level security;
+drop policy if exists "anyone logs a visit" on public.visits;
+create policy "anyone logs a visit" on public.visits for insert to anon, authenticated
+  with check (created_at > now() - interval '5 minutes' and created_at < now() + interval '5 minutes');
+drop policy if exists "admins read visits" on public.visits;
+create policy "admins read visits" on public.visits for select to authenticated using (public.ko26_is_admin());
+
+-- One call returns everything the dashboard shows. Times are bucketed in Sydney time.
+create or replace function public.ko26_stats(days integer default 30) returns json
+language plpgsql stable security definer set search_path = public as $$
+declare since timestamptz := now() - make_interval(days => greatest(1, least(days, 365)));
+begin
+  if not public.ko26_is_admin() then raise exception 'not allowed'; end if;
+  return json_build_object(
+    'generated_at', now(),
+    'totals', (select json_build_object(
+        'visitors_all', (select count(distinct visitor_id) from visits),
+        'views_all', (select count(*) from visits),
+        'visitors_today', (select count(distinct visitor_id) from visits where created_at >= date_trunc('day', now() at time zone 'Australia/Sydney') at time zone 'Australia/Sydney'),
+        'visitors_7d', (select count(distinct visitor_id) from visits where created_at > now() - interval '7 days'),
+        'visitors_30d', (select count(distinct visitor_id) from visits where created_at > now() - interval '30 days'),
+        'active_now', (select count(distinct visitor_id) from visits where created_at > now() - interval '5 minutes'),
+        'returning_all', (select count(*) from (select visitor_id from visits group by visitor_id
+                                                having count(distinct (created_at at time zone 'Australia/Sydney')::date) > 1) r))),
+    'daily', (select coalesce(json_agg(d order by d.day), '[]') from (
+        select (v.created_at at time zone 'Australia/Sydney')::date as day,
+               count(distinct v.visitor_id) as visitors,
+               count(distinct v.visitor_id) filter (where f.first_day = (v.created_at at time zone 'Australia/Sydney')::date) as new_visitors,
+               count(*) as views
+        from visits v
+        join (select visitor_id, min((created_at at time zone 'Australia/Sydney')::date) as first_day from visits group by visitor_id) f using (visitor_id)
+        where v.created_at > since group by 1) d),
+    'pages', (select coalesce(json_agg(p order by p.views desc), '[]') from (
+        select page, count(*) as views, count(distinct visitor_id) as visitors from visits where created_at > since group by page) p),
+    'devices', (select coalesce(json_agg(x order by x.visitors desc), '[]') from (
+        select coalesce(device, 'unknown') as device, count(distinct visitor_id) as visitors from visits where created_at > since group by 1) x),
+    'referrers', (select coalesce(json_agg(x order by x.visitors desc), '[]') from (
+        select coalesce(nullif(referrer, ''), 'direct') as referrer, count(distinct visitor_id) as visitors from visits where created_at > since group by 1 limit 15) x),
+    'hours', (select coalesce(json_agg(x order by x.hour), '[]') from (
+        select extract(hour from created_at at time zone 'Australia/Sydney')::int as hour, count(*) as views from visits where created_at > since group by 1) x),
+    'kickrolls', (select json_build_object(
+        'videos', (select count(*) from kickrolls), 'ratings', (select count(*) from ratings),
+        'uploaders', (select count(distinct owner) from kickrolls), 'reported', (select count(distinct kickroll_id) from reports)))
+  );
+end $$;
+revoke all on function public.ko26_stats(integer) from public, anon;
+grant execute on function public.ko26_stats(integer) to authenticated;
+
+-- Make yourself the admin: sign up once on the /login/ page with your email and a password,
+-- then run this with YOUR email (not stored anywhere else):
+--   insert into public.admins (user_id) select id from auth.users where email = 'you@example.com';

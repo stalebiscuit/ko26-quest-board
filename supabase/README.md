@@ -10,3 +10,13 @@ Until this is done, leaderboard.html and gallery.html run in demo mode: uploads 
 Moderation: 3 reports hide a video automatically. To hide one yourself, run in SQL Editor: `update public.kickrolls set hidden = true where id = '…';`
 
 The deadline (10 Oct 2026, 23:59 Sydney) lives in two places: `ko26_deadline()` in setup.sql and `deadline` in ko-config.js.
+
+## Your private visitor dashboard
+
+Every page loads `ko-track.js`, which records anonymous visits: a random per-browser id, the page, phone/tablet/desktop, the referring site, and the language. It sends no names and no IPs, and skips browsers that send Do Not Track. Only admins can read this data.
+
+1. After the steps above, open `https://<your-site>/ko26-quest-board/login/`. Nothing on the site links to it.
+2. Tap **First time? Create your admin account** and sign up with your email and a password. Confirm the email if Supabase asks you to.
+3. In Supabase SQL Editor, run the line the page shows you:
+   `insert into public.admins (user_id) select id from auth.users where email = 'you@example.com';`
+4. Sign in. You'll see visitors right now, today, this week and all time, new vs returning per day, pages, devices, where people came from, busiest hours, and kickroll upload and rating counts.
