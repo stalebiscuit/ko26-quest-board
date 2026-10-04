@@ -489,6 +489,10 @@ body.playing .wrap{padding-bottom:calc(var(--np-h,64px) + 80px)}
 .mini.playing{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}
 .mini:disabled{opacity:.4;cursor:default}
 .card-tools{display:flex;flex-wrap:wrap;gap:8px}
+.sitenav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
+.sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
+@media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
 .np.sp{padding:0;background:#121212}
 .np-sp{display:flex;align-items:stretch}
 .np-sp iframe{flex:1;min-width:0;height:80px;border:0;display:block}
@@ -610,6 +614,7 @@ body.playing .toast{bottom:calc(var(--np-h,64px) + 28px + env(safe-area-inset-bo
       <div class="cell" id="hudClashCell"><b id="hudClash">0</b><span>clashes</span></div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html" aria-current="page">Quest board</a><a href="leaderboard.html">Kickroll leaderboard</a><a href="gallery.html">Gallery</a></nav>
     <div class="tabs" role="tablist" aria-label="Views">
       <button class="tab" role="tab" id="tab-tt" aria-selected="true" aria-controls="view-tt">Quest board</button>
       <button class="tab" role="tab" id="tab-card" aria-selected="false" aria-controls="view-card">Player card <span class="count zero" id="krCount">0</span></button>
