@@ -23,6 +23,18 @@
 //   await KO.linkPost({url, act, songKey, song, name, caption})   post a TikTok / Instagram link instead of uploading a file
 //   KO.profile() / await KO.saveProfile({tiktok, instagram})      the signed-in person's linked social handles
 //   KO.socialUrl("tiktok"|"instagram", handle)                    profile page link
+// Groups (friends compare kickrolls; account needed):
+//   await KO.myGroups()                  [{id, name, invite, isOwner, members}]
+//   await KO.createGroup(name) / KO.joinGroup(code)  -> {id, name}
+//   await KO.groupBoard(id)              {group:{id, name, invite, isOwner}, members:[{userId, name, isMe, isOwner, posts, avg, votes,
+//                                         best:{id, song, act, avg, votes}|null, bestScore, ratingsGiven, social:{tiktok, instagram}}]} ranked best first
+//   await KO.leaveGroup(id) / KO.groupAdmin(id, "remove"|"new_code"|"rename"|"delete", {target, name})
+//   KO.inviteUrl(code)                   link that opens groups.html and joins
+// Song ratings (rate the track itself, 1-5; only you and your group mates see them):
+//   await KO.rateSong({songKey, act, song, stars})     stars 0 removes your rating
+//   await KO.mySongRatings()             {songKey: stars} for the signed-in person
+//   await KO.songMates(songKey)          [{userId, name, stars, isMe}] you + group mates who rated it
+//   await KO.groupSongs(groupId)         [{songKey, act, song, avg, n, ratings:[{userId, name, stars, isMe}]}] best first
 // Every kickroll item: {id, act, songKey, song, name, caption, status, source:"upload"|"tiktok"|"instagram",
 //   url (video file, uploads only), link (the post on TikTok/Instagram), embedUrl (official player, or null),
 //   thumb (cover image or null), handle (the post's @handle), social:{tiktok, instagram} (uploader's linked socials),
@@ -196,6 +208,21 @@
         : /kickrolls_no_links/.test(error.message) ? "no links in names or captions" : /source_check|link_fields/.test(error.message) ? "that link doesn't look like a TikTok or Instagram post" : error.message);
       return fromRow(data, {status:data.status, avg:0, votes:0, mine:true, myStars:0, social:KO.profile()});
     },
+    async rateSong(o){
+      const q = o.stars ? sb.from("song_ratings").upsert({song_key:o.songKey, user_id:uid, act:o.act, song:o.song, stars:o.stars, updated_at:new Date().toISOString()}, {onConflict:"song_key,user_id"})
+                        : sb.from("song_ratings").delete().eq("song_key", o.songKey).eq("user_id", uid);
+      const { error } = await q; if(error) throw new Error(error.message);
+    },
+    async mySongRatings(){
+      if(!uid) return {};
+      const { data } = await sb.from("song_ratings").select("song_key, stars").eq("user_id", uid);
+      return Object.fromEntries((data || []).map(r => [r.song_key, r.stars]));
+    },
+    async rpc(fn, args){
+      const { data, error } = await sb.rpc(fn, args || {});
+      if(error) throw new Error(error.message);
+      return data;
+    },
     async loadProfile(){
       if(!uid){ myProfile = {tiktok:"", instagram:""}; return; }
       const { data } = await sb.from("profiles").select("tiktok, instagram").eq("user_id", uid).maybeSingle();
@@ -268,6 +295,35 @@
       return (await demo.list({songKey:o.songKey})).find(x => x.id === k.id);
     },
     async loadProfile(){ myProfile = ls.get("ko26.demoProfile", {tiktok:"", instagram:""}); },
+    async rateSong(o){ const r = ls.get("ko26.demoSongs", {}); if(o.stars) r[o.songKey] = {stars:o.stars, act:o.act, song:o.song}; else delete r[o.songKey]; ls.set("ko26.demoSongs", r); },
+    async mySongRatings(){ return Object.fromEntries(Object.entries(ls.get("ko26.demoSongs", {})).map(([k, v]) => [k, v.stars])); },
+    // demo groups: on this device only, you're the only member
+    async rpc(fn, a){
+      if(fn === "ko26_song_mates"){ const r = ls.get("ko26.demoSongs", {})[a.key]; return r ? [{user_id:"demo-user", stars:r.stars, is_me:true, name:KO.myName() || "You"}] : []; }
+      if(fn === "ko26_group_songs") return Object.entries(ls.get("ko26.demoSongs", {})).map(([k, v]) => ({song_key:k, act:v.act, song:v.song, avg:v.stars, n:1,
+        ratings:[{user_id:"demo-user", stars:v.stars, is_me:true, name:KO.myName() || "You"}]})).sort((x, y) => y.avg - x.avg);
+      const gs = ls.get("ko26.demoGroups", []); const save = () => ls.set("ko26.demoGroups", gs);
+      const find = id => { const g = gs.find(x => x.id === id); if(!g) throw new Error("you are not in that group"); return g; };
+      if(fn === "ko26_group_create"){ const g = {id:"demo-g-" + Date.now().toString(36), name:a.gname.trim(), invite:Math.random().toString(36).slice(2, 10).toUpperCase()}; gs.push(g); save(); return {id:g.id, name:g.name, code:g.invite}; }
+      if(fn === "ko26_group_join") throw new Error("joining needs the live leaderboard (demo mode is this device only)");
+      if(fn === "ko26_my_groups") return gs.map(g => ({id:g.id, name:g.name, code:g.invite, invite:g.invite, is_owner:true, members:1}));
+      if(fn === "ko26_group_board"){
+        const g = find(a.g), mine = (await demo.list()).filter(k => k.mine), rated = mine.filter(k => k.votes);
+        const best = rated.sort((x, y) => y.score - x.score)[0];
+        return {group:{id:g.id, name:g.name, invite:g.invite, is_owner:true, owner:"demo-user"}, members:[{user_id:"demo-user", is_me:true, name:KO.myName() || "You",
+          tiktok:myProfile.tiktok, instagram:myProfile.instagram, posts:mine.length, avg_stars: rated.length ? rated.reduce((s, k) => s + k.avg, 0) / rated.length : null,
+          votes: mine.reduce((s, k) => s + k.votes, 0), best_score: best ? best.score : null, best: best ? {id:best.id, song:best.song, act:best.act, avg:best.avg, votes:best.votes} : null, ratings_given:0}]};
+      }
+      if(fn === "ko26_group_leave") throw new Error("you own this group: delete it instead, or it stays yours");
+      if(fn === "ko26_group_admin"){
+        const g = find(a.g);
+        if(a.action === "delete"){ gs.splice(gs.indexOf(g), 1); save(); return {}; }
+        if(a.action === "rename"){ g.name = a.new_name.trim(); save(); return {}; }
+        if(a.action === "new_code"){ g.invite = Math.random().toString(36).slice(2, 10).toUpperCase(); save(); return {code:g.invite}; }
+        throw new Error("only one member in demo mode");
+      }
+      throw new Error("unknown");
+    },
     async saveProfile(p){ ls.set("ko26.demoProfile", p); },
     async rate(id, stars){ await tx("ratings", "readwrite", s => s.put({id, kickrollId:id, stars})); },
     async report(){},
@@ -426,6 +482,43 @@
     if(L.source === "instagram" && !L.handle) L.handle = myProfile.instagram || null;
     return impl.linkPost({...L, thumb, act:o.act, songKey:o.songKey, song:o.song, name:String(o.name).trim().slice(0, 24), caption:String(o.caption || "").trim().slice(0, 140)});
   };
+  // ---- groups ----
+  const grp = (fn, args) => impl.rpc(fn, args);
+  KO.inviteUrl = code => location.href.replace(/[^/]*([?#].*)?$/, "") + "groups.html#join=" + encodeURIComponent(code);
+  KO.myGroups = async () => { if(!me) return []; return ((await grp("ko26_my_groups")) || []).map(g => ({id:g.id, name:g.name, invite:g.invite, isOwner:!!g.is_owner, members:Number(g.members) || 1})); };
+  KO.createGroup = async name => {
+    name = String(name || "").trim();
+    if(!name || name.length > 40) throw new Error("give the group a name (up to 40 characters)");
+    if(/(https?:|www\.)/i.test(name)) throw new Error("no links in group names");
+    await KO.requireAccount("Make a free account to start a group with your friends.");
+    return grp("ko26_group_create", {gname:name});
+  };
+  KO.joinGroup = async code => {
+    code = String(code || "").trim().replace(/^.*join=/, "").replace(/[^A-Za-z0-9]/g, "");
+    if(code.length < 6) throw new Error("that invite code looks too short");
+    await KO.requireAccount("Make a free account (or sign in) to join your friends' group.");
+    return grp("ko26_group_join", {code});
+  };
+  KO.groupBoard = async id => {
+    const d = await grp("ko26_group_board", {g:id});
+    return {group:{id:d.group.id, name:d.group.name, invite:d.group.invite, isOwner:!!d.group.is_owner},
+      members:(d.members || []).map(m => ({userId:m.user_id, name:m.name || "Raver", isMe:!!m.is_me, isOwner:m.user_id === d.group.owner,
+        posts:Number(m.posts) || 0, avg:m.avg_stars == null ? null : Number(m.avg_stars), votes:Number(m.votes) || 0,
+        bestScore:m.best_score == null ? null : Number(m.best_score), best:m.best || null, ratingsGiven:Number(m.ratings_given) || 0,
+        social:{tiktok:m.tiktok || "", instagram:m.instagram || ""}}))};
+  };
+  KO.leaveGroup = id => grp("ko26_group_leave", {g:id});
+  KO.rateSong = async o => {
+    const stars = Math.max(0, Math.min(5, Math.round(Number(o.stars) || 0)));
+    await KO.requireAccount("Make a free account to rate songs and see what your group thinks.");
+    return impl.rateSong({songKey:o.songKey, act:o.act, song:String(o.song || "").slice(0, 300), stars});
+  };
+  KO.mySongRatings = async () => me ? impl.mySongRatings() : {};
+  const mates = rs => (rs || []).map(r => ({userId:r.user_id, name:r.name || "Raver", stars:Number(r.stars), isMe:!!r.is_me}));
+  KO.songMates = async key => me ? mates(await grp("ko26_song_mates", {key})) : [];
+  KO.groupSongs = async id => ((await grp("ko26_group_songs", {g:id})) || []).map(x => ({songKey:x.song_key, act:x.act, song:x.song, avg:Number(x.avg), n:Number(x.n), ratings:mates(x.ratings)}));
+  KO.groupAdmin = (id, action, o = {}) => grp("ko26_group_admin", {g:id, action, target:o.target || null, new_name:o.name || null});
+
   KO.saveProfile = async p => {
     await KO.requireAccount("Sign in to link your TikTok and Instagram.");
     const tiktok = cleanHandle(p.tiktok, 24), instagram = cleanHandle(p.instagram, 30);
