@@ -281,6 +281,7 @@ a{color:inherit}
 
 /* ---------- song view ---------- */
 .songgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.songgrid.closed .up{order:2}
 .up{border:1px solid var(--gold);background:linear-gradient(180deg,color-mix(in srgb,var(--gold) 7%,var(--panel)),var(--panel-2));padding:18px 16px 16px}
 .up h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:16px;letter-spacing:.08em;color:var(--gold-hi)}
 .up .sub{margin:2px 0 12px;font-size:13px;color:var(--muted)}
@@ -623,11 +624,13 @@ function onHash(){ routing = routing.then(route).catch(fail); return routing; }
 async function route(){
   const r = parseHash(), base = baseOf(r);
   if(base !== renderedBase){
-    const target = navClick ? 0 : (mem[base] || 0); navClick = false;
+    const fresh = navClick || !(base in mem); navClick = false;
     renderedBase = base;
     if(Date.now() - loadedAt > 15000) await refresh();
     render(r);
-    scrollTo(0, target);
+    // new act/song page: start at the breadcrumb (skip the big header on phones); back/forward: restore where you were
+    const cr = $("#crumbs");
+    scrollTo(0, fresh ? (r.act && !cr.hidden ? Math.max(0, cr.getBoundingClientRect().top + scrollY - 8) : Math.min(scrollY, $(".bar").getBoundingClientRect().top + scrollY - 8)) : mem[base]);
   }
   syncLightbox(r.play);
 }
@@ -781,7 +784,7 @@ function songView(act, key, t){
   const s = KO.sets[act], info = songInfo(act, key, t), ranked = KO.rank(info.ks), closed = KO.closed();
   let h = `<header class="head gframe" data-stage="${esc(s.stage)}"><div class="h-top">${emblem(act, "h-em")}<div class="h-id"><div class="stage">${esc(act)} · ${esc(KO.STAGES[s.stage] || s.stage)}</div><h2>${esc(info.title)}</h2><div class="when">${esc(info.artist || "unknown artist")}${info.tr ? (/^\d+$/.test(String(info.tr.n)) ? ` <span>· #${esc(info.tr.n)} in the set</span>` : ` <span>· expected song</span>`) : ""}</div></div></div>`;
   h += `<div class="h-stats"><span class="pill">${plural(ranked.length, "kickroll")}</span>${info.tr ? "" : `<span class="pill fan">added by fans</span>`}${W.bySong[key] ? `<span class="lead">${crownTag()}<span>${esc(W.bySong[key].name)}</span>${scoreTxt(W.bySong[key])}</span>` : ""}</div></header>`;
-  h += `<div class="songgrid">`;
+  h += `<div class="songgrid${closed ? " closed" : ""}">`;
   // upload
   const name = KO.myName();
   h += `<form class="up" id="up" autocomplete="off"><h3>Upload your kickroll</h3>${closed ? "" : `<p class="sub">A short clip of you kick rolling to this song. Up to ${Math.round(KO.maxBytes / 1048576)} MB.</p>`}`;
