@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="KO26 Groups: start a group with your rave crew, share the invite link, and compare your kickrolls on your own leaderboard.">
+<meta name="theme-color" content="#0a0a0b">
+<title>Groups · KO26 Kickrolls</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
+<style>
+/* Groups: same quest-board chrome as index.html (warm near-black, gold item frames, Knockout purple) */
+:root{
+  color-scheme: dark;
+  --bg:#0a0a0b;
+  --panel:#16110a;
+  --panel-2:#1a1206;
+  --line:#3a2e1a;
+  --fg:#f4ecd8;
+  --fg-2:#e8d7a9;
+  --muted:#9a8f74;
+  --dim:#6b6250;
+  --gold:#c9a84c;
+  --gold-hi:#ffc85a;
+  --blood:#a3271a;
+  --blood-dk:#7c1f14;
+  --violet:#7b2cff;
+  --pink:#ff2e6e;
+  --arena:#3fd2ff;
+  --pit:#ff4f6e;
+  --oasis:#ffa94d;
+  --kick:#ffc85a;
+  --kick-ink:#1a1206;
+  --warn:#ff6a3d;
+  --rel:#72e6ad;
+  --scrim:rgba(6,5,3,.78);
+  --blackletter:"Pirata One", "UnifrakturCook", "Old English Text MT", Georgia, serif;
+  --rpg:"Cinzel", "Trajan Pro", Georgia, serif;
+  --display:"Oswald", "Arial Narrow", system-ui, sans-serif;
+  --poster:"Oswald", "Arial Narrow", "Impact", sans-serif;
+  --pixel:"Silkscreen", "Courier New", ui-monospace, monospace;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --p-bg:#120a24;
+  --p-block:#4a1f8a;
+  --p-block-2:#5524a0;
+  --p-picked:#6a2fc8;
+  --p-ink:#ffffff;
+  --p-soft:#d9c8ff;
+  --p-frame:#e7dcff;
+  --p-violet:#a855f7;
+  --p-magenta:#e94fd6;
+  --p-star:rgba(255,200,90,.8);
+  --tap:44px;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html{background-color:var(--bg)}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 260px at 50% 0, color-mix(in srgb,var(--violet) 14%,transparent), transparent 80%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb,var(--blood-dk) 18%,transparent), transparent 80%);
+  background-repeat:no-repeat;
+  color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;margin:0;
+  -webkit-tap-highlight-color:transparent;overflow-x:hidden;
+}
+body.lb-open{overflow:hidden}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+button:disabled{cursor:default}
+button:focus-visible,input:focus-visible,a:focus-visible,.pick:focus-within{outline:2px solid var(--gold-hi);outline-offset:2px}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:18px 72px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* gold pixel item-frame corners (stepped) */
+.gframe{position:relative}
+.gframe::before{content:"";position:absolute;inset:5px;pointer-events:none;z-index:2;--gc:var(--gold);
+  background:
+    linear-gradient(var(--gc),var(--gc)) left top/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px top 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px top 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px top 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px top 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px bottom 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px bottom 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px bottom 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px bottom 6px/3px 6px no-repeat}
+.thorn{position:relative;height:12px;margin:0;border:0}
+.thorn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
+.thorn::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:8px;transform:translate(-50%,-50%);background:var(--gold);clip-path:polygon(0 50%,40% 0,50% 50%,60% 0,100% 50%,60% 100%,50% 50%,40% 100%)}
+.emblem{display:block;color:var(--fg)}
+.ic{width:1em;height:1em;flex:none;display:inline-block;vertical-align:-.12em}
+
+/* ---------- header / HUD ---------- */
+.top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px 24px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand .emblem{width:118px;height:auto;flex:none}
+.brand .txt{min-width:0}
+.eyebrow{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--gold)}
+.eyebrow .sep{color:var(--dim)}
+.brand h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(32px,5.4vw,50px);line-height:1;margin:2px 0 0;letter-spacing:.01em;text-wrap:balance;color:var(--fg);
+  text-shadow:0 0 14px color-mix(in srgb,var(--gold) 30%,transparent)}
+.cd{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.04em;color:var(--fg-2);font-variant-numeric:tabular-nums}
+.cd::before{content:"";width:8px;height:8px;background:var(--rel);box-shadow:0 0 8px var(--rel);flex:none}
+.cd.closed{color:var(--gold-hi)}
+.cd.closed::before{background:var(--gold-hi);box-shadow:0 0 8px var(--gold-hi)}
+.hud{display:flex;gap:6px}
+.hud .cell{min-width:68px;border:1px solid var(--line);background:var(--panel);padding:6px 10px 7px;text-align:center;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent)}
+.hud .cell b{display:block;font-family:var(--display);font-weight:700;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.hud .cell span{font-family:var(--rpg);font-weight:700;font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.hud .cell.kr b{color:var(--gold-hi)}
+.top .thorn{grid-column:1/-1}
+.sitenav{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
+.sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
+@media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
+.acct{position:relative;display:flex;align-items:center;gap:6px;min-width:0;margin-left:auto}
+.acct .who{display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:22ch;font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.acct .who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct .who i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.acct .btn{min-height:40px;padding:6px 14px;font-size:12.5px}
+.acct .me{display:inline-flex;align-items:center;gap:7px;min-height:40px;min-width:0;max-width:24ch;padding:0 10px 0 12px;border:1px solid color-mix(in srgb,var(--rel) 45%,var(--line));background:var(--panel);font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.acct .me i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.acct .me span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct .me::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-2px) rotate(45deg);margin-left:2px}
+.acct .me[aria-expanded="true"]{border-color:var(--gold)}
+.acct .me[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+.amenu{position:absolute;right:0;top:calc(100% + 6px);z-index:25;width:min(320px,calc(100vw - 32px));background:var(--panel-2);border:1px solid var(--gold);box-shadow:0 10px 32px var(--scrim);padding:16px;display:grid;gap:10px}
+.amenu h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi)}
+.amenu p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.amenu label{display:grid;gap:4px;font-family:var(--rpg);font-weight:700;font-size:11.5px;letter-spacing:.08em;color:var(--muted)}
+.amenu .inp{display:flex;align-items:center;border:1px solid var(--line);background:var(--bg)}
+.amenu .inp:focus-within{outline:2px solid var(--gold-hi);outline-offset:1px}
+.amenu .inp b{padding:0 2px 0 10px;color:var(--dim);font-family:var(--body);font-weight:500;font-size:16px}
+.amenu .inp .ico{width:15px;height:15px;margin-left:10px;color:var(--fg-2)}
+.amenu input{flex:1;min-width:0;min-height:var(--tap);border:0;background:transparent;color:var(--fg);padding:8px 10px 8px 2px;font:16px var(--body);outline:none}
+.amenu .msg{min-height:18px;font-size:13px;color:var(--warn)}
+.amenu .msg.ok{color:var(--rel)}
+.amenu .row{display:flex;gap:8px}
+.amenu .row .btn{flex:1}
+.amenu hr{border:0;border-top:1px solid var(--line);margin:2px 0}
+.acct .amenu .inp{padding:0;min-height:0;width:auto;border:1px solid var(--line);background:var(--bg)}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.demo{margin:0 0 12px;padding:7px 12px;font-size:12.5px;line-height:1.4;color:var(--fg-2);border:1px solid color-mix(in srgb,var(--p-violet) 45%,var(--line));background:color-mix(in srgb,var(--violet) 12%,var(--panel));display:flex;gap:8px;align-items:baseline}
+.demo b{font-family:var(--pixel);font-weight:400;font-size:9.5px;background:var(--p-violet);color:var(--p-bg);padding:0 5px;flex:none}
+
+/* view toggle + breadcrumb */
+.bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin:4px 0 14px}
+.tabs{display:flex;gap:4px;background:var(--panel);padding:4px;border:1px solid var(--line)}
+.tab{white-space:nowrap;border:0;background:transparent;min-height:40px;padding:8px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.1em;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center;justify-content:center;text-decoration:none}
+.tab[aria-current="true"]{background:var(--panel-2);color:var(--fg);box-shadow:inset 0 -2px 0 var(--gold)}
+.count{font-family:var(--pixel);font-size:10px;background:var(--gold-hi);color:var(--kick-ink);padding:1px 6px}
+.crumbs{display:flex;flex-wrap:wrap;align-items:center;gap:2px 6px;margin:0 0 14px;padding:0;list-style:none;font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;color:var(--muted);min-width:0}
+.crumbs li{display:flex;align-items:center;gap:6px;min-width:0}
+.crumbs li + li::before{content:"›";color:var(--gold);font-size:16px;line-height:1}
+.crumbs a{display:inline-flex;align-items:center;gap:6px;min-height:var(--tap);padding:0 2px;color:var(--fg-2);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--gold) 55%,transparent);text-underline-offset:4px;overflow-wrap:anywhere}
+.crumbs a.back{text-decoration:none;border:1px solid var(--line);background:var(--panel);padding:0 12px 0 10px;color:var(--fg)}
+.crumbs a.back::before{content:"";width:7px;height:7px;border-left:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg);margin-right:2px}
+.crumbs span[aria-current]{color:var(--fg);overflow-wrap:anywhere;padding:10px 0}
+@media (hover:hover){.crumbs a:hover{color:var(--gold-hi)}.crumbs a.back:hover{border-color:var(--gold)}}
+
+/* shared bits */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border:1px solid var(--line);background:var(--panel);min-height:var(--tap);padding:8px 16px;font-family:var(--rpg);font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--fg);text-decoration:none}
+.btn.primary{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}
+.btn:disabled{opacity:.5}
+@media (hover:hover){.btn:not(:disabled):not(.primary):hover{border-color:var(--gold);color:var(--gold-hi)}.btn.primary:not(:disabled):hover{background:var(--gold-hi)}}
+.mini{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:0 11px;border:1px solid var(--line);background:var(--bg);color:var(--muted);font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.mini:disabled{opacity:.6}
+@media (hover:hover){.mini:not(:disabled):hover{border-color:var(--gold);color:var(--gold-hi)}}
+.mini.armed{border-color:var(--warn);color:var(--kick-ink);background:var(--warn)}
+.mini.done{color:var(--dim);border-style:dashed}
+.note{margin:0 0 14px;padding:12px 14px;border-left:3px solid var(--gold);background:var(--panel);color:var(--fg-2);font-size:14px;line-height:1.5}
+.note b{color:var(--gold-hi)}
+.empty{color:var(--muted);padding:16px 4px;line-height:1.6;margin:0}
+.empty b{color:var(--fg)}
+.pill{display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0 8px;border:1px solid var(--line);font-family:var(--display);font-weight:500;font-size:12.5px;letter-spacing:.04em;color:var(--fg-2);white-space:nowrap}
+.pill.fan{border-color:color-mix(in srgb,var(--p-violet) 70%,transparent);color:var(--p-soft);background:color-mix(in srgb,var(--p-violet) 14%,transparent);text-transform:uppercase;font-size:11.5px;letter-spacing:.06em}
+.pill.mine{border-color:var(--rel);color:var(--rel);text-transform:uppercase;font-size:11.5px;letter-spacing:.06em}
+.crown{display:inline-flex;align-items:center;gap:5px;font-family:var(--pixel);font-size:10px;line-height:1.6;padding:0 6px;background:var(--gold-hi);color:var(--kick-ink);white-space:nowrap;flex:none}
+.crown .ic{width:13px;height:10px;vertical-align:0}
+.crown.lead{background:transparent;color:var(--gold-hi);border:1px solid color-mix(in srgb,var(--gold) 70%,transparent)}
+.sc{font-family:var(--display);font-weight:500;font-size:13px;letter-spacing:.03em;color:var(--muted);white-space:nowrap;font-variant-numeric:tabular-nums}
+.sc b{color:var(--gold-hi);font-weight:600}
+.src{color:var(--fg-2);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--gold) 60%,transparent);text-underline-offset:3px}
+.loading{padding:40px 0;text-align:center;font-family:var(--rpg);font-weight:700;letter-spacing:.12em;color:var(--muted)}
+
+/* video thumbs */
+.vbox{position:relative;display:block;width:100%;aspect-ratio:9/16;background:radial-gradient(circle at 50% 35%,var(--p-block),var(--p-bg) 85%);overflow:hidden;border:0;padding:0}
+.vbox video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vbox .pl{position:absolute;right:6px;bottom:6px;width:30px;height:30px;display:grid;place-items:center;background:color-mix(in srgb,var(--bg) 70%,transparent);border:1px solid color-mix(in srgb,var(--fg) 40%,transparent);color:var(--fg);z-index:1}
+.vbox .pl .ic{width:12px;height:12px}
+@media (hover:hover){button.vbox:hover .pl{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}}
+
+/* link posts: covers, branded placeholders, platform labels, social icons */
+.cover{position:absolute;inset:0;display:grid;place-items:center;overflow:hidden}
+.cover.ph.tiktok{background:radial-gradient(circle at 50% 42%,#1d1d22,#050506 75%)}
+.cover.ph.instagram{background:linear-gradient(150deg,#4a1f8a 0%,#9b2f7f 52%,#e0793a 100%)}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cover .gl{width:38%;max-width:52px;height:auto;aspect-ratio:1;color:#fff;opacity:.92}
+.cover.tiktok .gl{filter:drop-shadow(-2px -1px 0 #25f4ee) drop-shadow(2px 1px 0 #fe2c55)}
+.cover:not(.ph) .gl{display:none}
+.cover .plat{position:absolute;left:5px;top:5px;z-index:1}
+.sthumb .cover .plat,.trow .cover .plat{display:none}
+.sthumb .cover .gl,.trow .cover .gl{width:50%}
+.plat{display:inline-flex;align-items:center;gap:4px;min-height:20px;padding:0 6px;font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;color:#fff;background:rgba(0,0,0,.72);border:1px solid rgba(255,255,255,.22)}
+.plat .ic{width:11px;height:11px}
+.plat.tiktok{box-shadow:inset 2px 0 0 #25f4ee,inset -2px 0 0 #fe2c55}
+.plat.instagram{background:linear-gradient(120deg,#6a2fc8,#c13584 60%,#e0793a);border-color:transparent}
+.src-l{display:flex;flex-wrap:wrap;align-items:center;gap:6px;font-size:13px;color:var(--fg-2)}
+.src-l .hd{overflow-wrap:anywhere}
+.soc{display:inline-flex;gap:4px;vertical-align:middle;margin-left:6px}
+.soc a{display:inline-grid;place-items:center;width:28px;height:28px;border:1px solid var(--line);background:var(--bg);color:var(--fg-2)}
+.soc a .ic{width:14px;height:14px}
+@media (hover:hover){.soc a:hover{border-color:var(--gold);color:var(--gold-hi)}}
+.nmrow{display:flex;flex-wrap:wrap;align-items:center;gap:4px 0;min-width:0}
+a.mini{text-decoration:none}
+/* star rating */
+.rate{display:flex;flex-wrap:wrap;align-items:center;gap:4px 10px}
+.stars{display:flex}
+.st{width:var(--tap);height:var(--tap);border:0;background:transparent;padding:0;display:grid;place-items:center;color:var(--gold)}
+.st svg{width:26px;height:26px;fill:transparent;stroke:currentColor;stroke-width:1.6;stroke-linejoin:round}
+.st.on{color:var(--gold-hi)}
+.st.on svg{fill:currentColor;filter:drop-shadow(0 0 5px color-mix(in srgb,var(--gold-hi) 55%,transparent))}
+.st:disabled{color:var(--dim)}
+.st:disabled.on{color:var(--gold)}
+@media (hover:hover){.stars:not(.off):hover .st svg{fill:currentColor;color:var(--gold-hi)}.stars:not(.off) .st:hover ~ .st svg{fill:transparent;color:var(--gold)}}
+.rate .yr{font-size:12.5px;color:var(--muted);flex-basis:100%}
+.rate .yr b{color:var(--fg-2);font-weight:600}
+
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--panel-2);color:var(--gold-hi);border:1px solid var(--gold);padding:10px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.06em;z-index:60;max-width:calc(100% - 32px);width:max-content;text-align:center;box-shadow:0 6px 24px var(--scrim)}
+.toast.err{border-color:var(--warn);color:var(--warn)}
+.foot{margin-top:32px;color:var(--dim);font-size:12.5px;line-height:1.6;max-width:70ch}
+
+/* ---------- groups ---------- */
+.pitch{border:1px solid var(--gold);padding:26px 22px 22px;background:radial-gradient(ellipse 70% 90% at 0 0,color-mix(in srgb,var(--violet) 22%,transparent),transparent 70%),radial-gradient(ellipse 60% 90% at 100% 100%,color-mix(in srgb,var(--blood) 20%,transparent),transparent 70%),var(--panel-2);max-width:760px}
+.pitch::before{inset:6px}
+.pitch h2{margin:0 0 8px;font-family:var(--blackletter);font-weight:400;font-size:40px;line-height:1.05;color:var(--fg)}
+.pitch p{margin:0 0 16px;font-size:16px;line-height:1.55;color:var(--fg-2);max-width:56ch}
+.pitch .err{color:var(--warn);font-size:14.5px}
+.pitch .row{display:flex;flex-wrap:wrap;gap:8px}
+.sec-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:6px 12px;margin:0 0 10px}
+.sec-h h2{margin:0;font-family:var(--rpg);font-weight:700;font-size:16px;letter-spacing:.08em;color:var(--fg-2)}
+.sec-h span{font-size:13px;color:var(--muted)}
+.groups{list-style:none;margin:0 0 22px;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.gcard{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;align-items:center;padding:14px 14px 14px 16px;border:1px solid var(--line);background:var(--panel);color:var(--fg);text-decoration:none;box-shadow:inset 3px 0 0 var(--gold);min-height:76px}
+@media (hover:hover){.gcard:hover{border-color:var(--gold);background:color-mix(in srgb,var(--gold) 6%,var(--panel))}}
+.gcard b{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere}
+.gcard .m{grid-column:1;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:13px;color:var(--muted)}
+.gcard .chev{grid-column:2;grid-row:1/span 2;width:10px;height:10px;border-right:2px solid var(--gold);border-top:2px solid var(--gold);transform:rotate(45deg)}
+.tag{display:inline-flex;align-items:center;gap:4px;font-family:var(--pixel);font-size:9.5px;line-height:1.7;padding:0 5px;white-space:nowrap}
+.tag.own{background:var(--gold-hi);color:var(--kick-ink)}
+.tag.own .ic{width:11px;height:9px;vertical-align:0}
+.tag.you{background:var(--rel);color:var(--kick-ink)}
+.acts2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:900px}
+.panel{border:1px solid var(--line);background:var(--panel);padding:16px}
+.panel h3{margin:0 0 4px;font-family:var(--rpg);font-weight:700;font-size:14.5px;letter-spacing:.08em;color:var(--gold-hi)}
+.panel p{margin:0 0 10px;font-size:13px;color:var(--muted);line-height:1.45}
+.inrow{display:flex;gap:8px}
+.inp{flex:1;min-width:0;width:100%;min-height:var(--tap);background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:8px 12px;font:16px var(--body);border-radius:0}
+.inp::placeholder{color:var(--dim)}
+.inp:focus{border-color:var(--gold)}
+.inp:focus-visible{outline:0;box-shadow:0 0 0 1px var(--gold-hi)}
+.empty-g{margin:0 0 18px;padding:16px;border:1px dashed var(--line);color:var(--muted);line-height:1.55}
+.empty-g b{color:var(--fg)}
+
+.ghead{border:1px solid var(--line);padding:20px 22px 20px;margin-bottom:14px;background:linear-gradient(180deg,color-mix(in srgb,var(--p-violet) 10%,var(--panel)),var(--panel-2))}
+.ghead::before{inset:6px}
+.ghead .ey{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.1em;color:var(--gold)}
+.ghead h2{margin:3px 0 6px;font-family:var(--blackletter);font-weight:400;font-size:44px;line-height:1;overflow-wrap:anywhere;color:var(--fg)}
+.ghead .m{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-family:var(--display);font-size:14px;letter-spacing:.03em;color:var(--fg-2)}
+.gview{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.invite{border:1px solid var(--gold);background:color-mix(in srgb,var(--gold) 6%,var(--panel));padding:14px 16px;display:grid;gap:10px}
+.invite h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--gold-hi)}
+.invite .link{font-family:ui-monospace,Menlo,monospace;font-size:13.5px;color:var(--fg-2);background:var(--bg);border:1px solid var(--line);padding:10px 12px;overflow-wrap:anywhere;user-select:all}
+.invite .row{display:flex;flex-wrap:wrap;gap:8px}
+.invite .code{font-family:var(--pixel);font-size:11px;letter-spacing:.06em;color:var(--fg)}
+.calls{display:flex;flex-wrap:wrap;gap:8px}
+.call{display:flex;align-items:center;gap:10px;min-width:0;flex:1 1 220px;padding:10px 14px;border:1px solid var(--line);background:var(--panel-2)}
+.call .ic{width:22px;height:22px;flex:none;color:var(--gold-hi)}
+.call span{display:block;font-family:var(--rpg);font-weight:700;font-size:11px;letter-spacing:.08em;color:var(--muted)}
+.call b{display:block;font-family:var(--display);font-weight:700;font-size:18px;text-transform:uppercase;line-height:1.15;overflow-wrap:anywhere}
+.sortbar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 12px}
+.sortbar h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:16px;letter-spacing:.08em;color:var(--fg-2)}
+.seg{display:flex;gap:4px;background:var(--panel);padding:4px;border:1px solid var(--line)}
+.seg button{border:0;background:transparent;min-height:38px;padding:6px 12px;font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.seg button[aria-pressed="true"]{background:var(--panel-2);color:var(--fg);box-shadow:inset 0 -2px 0 var(--gold)}
+.board{list-style:none;margin:0;padding:0;border:1px solid var(--line);background:var(--panel)}
+.board > li + li{border-top:1px solid var(--line)}
+.mrow{display:grid;grid-template-columns:48px minmax(0,1.3fr) repeat(3,74px) minmax(0,1.5fr);gap:6px 12px;align-items:center;padding:12px 14px 12px 10px}
+.mrow.me{background:linear-gradient(90deg,color-mix(in srgb,var(--rel) 9%,transparent),transparent 70%);box-shadow:inset 3px 0 0 var(--rel)}
+.mrow.hd{padding-block:8px;background:var(--panel-2);font-family:var(--rpg);font-weight:700;font-size:10.5px;letter-spacing:.1em;color:var(--muted)}
+.mrow.hd span{text-align:center}
+.mrow.hd span:nth-child(2),.mrow.hd span:last-child{text-align:left}
+.medal{width:40px;height:40px;display:grid;place-items:center;font-family:var(--display);font-weight:700;font-size:18px;color:var(--fg-2);font-variant-numeric:tabular-nums;justify-self:center}
+.medal.m1,.medal.m2,.medal.m3{border-radius:50%;color:var(--kick-ink);position:relative;box-shadow:inset 0 -3px 0 rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.35)}
+.medal.m1{background:radial-gradient(circle at 35% 30%,#fff1b8,#ffc85a 45%,#b8892c);box-shadow:inset 0 -3px 0 rgba(0,0,0,.25),inset 0 2px 0 rgba(255,255,255,.35),0 0 14px color-mix(in srgb,var(--gold-hi) 55%,transparent)}
+.medal.m2{background:radial-gradient(circle at 35% 30%,#ffffff,#cfd4da 45%,#8a9099)}
+.medal.m3{background:radial-gradient(circle at 35% 30%,#ffd9b3,#d08a4e 45%,#8a5228)}
+.medal.m1::before,.medal.m2::before,.medal.m3::before{content:"";position:absolute;top:-7px;left:50%;width:16px;height:9px;transform:translateX(-50%);background:linear-gradient(90deg,var(--pit) 50%,var(--arena) 50%);clip-path:polygon(0 0,100% 0,75% 100%,25% 100%);z-index:-1}
+.who{min-width:0;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
+.who b{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere}
+.who .crw{display:inline-flex;color:var(--gold-hi)}
+.who .crw .ic{width:16px;height:12px}
+.stat{text-align:center;font-family:var(--display);font-variant-numeric:tabular-nums}
+.stat b{display:block;font-weight:700;font-size:20px;line-height:1.1;color:var(--fg)}
+.stat small{display:none;font-family:var(--rpg);font-weight:700;font-size:9.5px;letter-spacing:.08em;color:var(--muted)}
+.stat.k b{color:var(--gold-hi)}
+.stat.dim b{color:var(--dim)}
+.best{min-width:0;font-size:13.5px;line-height:1.35;color:var(--fg-2)}
+.best a{color:var(--fg);font-weight:600;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--gold) 55%,transparent);text-underline-offset:3px;overflow-wrap:anywhere}
+.best span{color:var(--muted)}
+.best .none{color:var(--dim)}
+.solo{margin:10px 0 0;padding:12px 14px;border-left:3px solid var(--gold);background:var(--panel);color:var(--fg-2);font-size:14px}
+.manage{border:1px solid var(--line);background:var(--panel)}
+.manage summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:var(--tap);padding:10px 16px;font-family:var(--rpg);font-weight:700;font-size:14px;letter-spacing:.08em;color:var(--fg-2)}
+.manage summary::-webkit-details-marker{display:none}
+.manage summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:rotate(45deg) translateY(-2px)}
+.manage[open] summary::after{transform:rotate(-135deg)}
+.manage .in{padding:4px 16px 16px;display:grid;gap:18px;border-top:1px solid var(--line)}
+.manage h4{margin:12px 0 6px;font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.manage p{margin:0 0 8px;font-size:13px;color:var(--muted);line-height:1.45}
+.manage .warn{color:color-mix(in srgb,var(--warn) 85%,var(--muted))}
+.mlist{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.mlist li{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 6px 6px 12px;border:1px solid var(--line);background:var(--bg)}
+.mlist li span{min-width:0;overflow-wrap:anywhere;font-weight:600}
+.btn.danger{border-color:var(--warn);color:var(--warn)}
+.btn.danger:not(:disabled):hover{background:var(--warn);color:var(--kick-ink)}
+.btn.armed,.mini.armed{background:var(--warn);border-color:var(--warn);color:var(--kick-ink)}
+.leave{justify-self:start}
+.gtabs{display:flex;gap:4px;background:var(--panel);padding:4px;border:1px solid var(--line);justify-self:start}
+.gtabs button{border:0;background:transparent;min-height:40px;padding:8px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.1em;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center}
+.gtabs button[aria-selected="true"]{background:var(--panel-2);color:var(--fg);box-shadow:inset 0 -2px 0 var(--gold)}
+.sub2{font-size:13px;color:var(--muted)}
+.slist{list-style:none;margin:0;padding:0;border:1px solid var(--line);background:var(--panel)}
+.slist li + li{border-top:1px solid var(--line)}
+.srate{display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:12px;align-items:center;padding:12px 14px 12px 10px}
+.srate .sn{font-family:var(--display);font-weight:700;font-size:16px;color:var(--fg-2);text-align:center}
+.stx{min-width:0;display:grid;gap:2px}
+.stx a{font-weight:600;font-size:15.5px;color:var(--fg);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--p-violet) 70%,transparent);text-underline-offset:3px;overflow-wrap:anywhere}
+.stx > span{font-size:13px;color:var(--muted);overflow-wrap:anywhere}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chip{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.03em;padding:1px 7px;border:1px solid color-mix(in srgb,var(--p-violet) 55%,var(--line));color:var(--p-soft);white-space:nowrap}
+.chip.me{border-color:var(--rel);color:var(--rel)}
+.savg{text-align:right}
+.savg b{display:block;font-family:var(--display);font-weight:700;font-size:30px;line-height:1;color:var(--p-soft);font-variant-numeric:tabular-nums;text-shadow:0 0 12px color-mix(in srgb,var(--p-violet) 60%,transparent)}
+.savg small{font-family:var(--display);font-size:12px;color:var(--muted);white-space:nowrap}
+
+@media (max-width:760px){
+  .wrap{padding-block:14px 80px}
+  .top{grid-template-columns:minmax(0,1fr);gap:12px}
+  .brand .emblem{width:84px}
+  .brand h1{font-size:34px}
+  .pitch{padding:22px 16px 18px}
+  .pitch h2{font-size:32px}
+  .acts2{grid-template-columns:minmax(0,1fr)}
+  .ghead{padding:18px 18px 20px}
+  .ghead h2{font-size:34px}
+  .mrow.hd{display:none}
+  .mrow{grid-template-columns:44px repeat(3,minmax(0,1fr));gap:8px 8px;padding:12px 12px 12px 8px}
+  .mrow .who{grid-column:2/-1}
+  .mrow .stat{grid-row:2;background:var(--bg);border:1px solid var(--line);padding:5px 2px}
+  .mrow .s1{grid-column:2}.mrow .s2{grid-column:3}.mrow .s3{grid-column:4}
+  .mrow .stat small{display:block}
+  .mrow .stat b{font-size:18px}
+  .mrow .best{grid-column:2/-1;grid-row:3}
+  .mrow .medal{grid-row:1/span 2;align-self:start}
+  .seg{width:100%}
+  .seg button{flex:1;padding-inline:4px;font-size:12px;letter-spacing:.03em}
+}
+@media (max-width:380px){
+  .brand .emblem{width:70px}
+  .brand h1{font-size:30px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .view{animation:fadein .18s ease-out}
+  @keyframes fadein{from{opacity:.3;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg class="emblem logo" viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
+      <div class="txt">
+        <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Crews</div>
+        <h1>Groups</h1>
+        <div class="cd" id="cd">your crew's own kickroll leaderboard</div>
+      </div>
+    </div>
+    <div class="thorn" aria-hidden="true"></div>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html">Quest board</a><a href="leaderboard.html">Leaderboard</a><a href="gallery.html">Gallery</a><a href="groups.html" aria-current="page">Groups</a><span class="acct" id="acct" aria-live="polite"></span></nav>
+  </header>
+
+  <p class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></p>
+
+  <main id="main" tabindex="-1"><p class="loading">Loading…</p></main>
+
+  <p class="foot">A group only compares its members' kickrolls from the main <a class="src" href="leaderboard.html">leaderboard</a>: posts are approved kickrolls, ratings come from everyone at KO26. Anyone with the invite link can join, so share it with your crew only.</p>
+</div>
+<div class="toast" id="toast" role="status" hidden></div>
+
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+<symbol id="i-crown" viewBox="0 0 20 14"><path fill="currentColor" d="M1 3.5l4.6 4L10 .8l4.4 6.7L19 3.5 17.2 13H2.8z"/></symbol>
+<symbol id="i-tt" viewBox="0 0 24 24"><path fill="currentColor" d="M14.2 2h3.1c.3 2.3 1.7 3.8 4 4.1v3.2c-1.5 0-2.8-.4-4-1.1v6.6a6.3 6.3 0 1 1-6.3-6.3c.3 0 .7 0 1 .1v3.3a3.1 3.1 0 1 0 2.2 3V2z"/></symbol>
+<symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></symbol>
+<symbol id="logo1" viewBox="0 0 400 150"> <defs> <filter id="l1glow" x="-10%" y="-20%" width="120%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/> <feFlood flood-color="#C9A84C" flood-opacity="0.45" result="c"/> <feComposite in="c" in2="b" operator="in" result="g"/> <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge> </filter> <path id="l1fang" d="M92 12 C30 38 26 108 88 140 C58 112 56 52 92 12 Z M60 33 L34 27 L51 47 Z M45 65 L18 74 L45 83 Z M50 103 L32 122 L59 115 Z"/> </defs> <g filter="url(#l1glow)"> <g fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round"> <use href="#l1fang"/> <use href="#l1fang" transform="translate(400 0) scale(-1 1)"/> </g> <path d="M200 8 C202 22 204 26 216 30 C204 34 202 38 200 52 C198 38 196 34 184 30 C196 26 198 22 200 8 Z" fill="#C9A84C" stroke="#FFC85A" stroke-width="0.6" stroke-linejoin="round"/> <path d="M139.26 74.59Q138.3 74.59 137.53 75.55V102.05Q137.53 109.44 143.86 111.17Q147.13 111.94 151.64 111.94V114.72Q135.9 120 134.84 120Q131.96 120 128.98 115.92Q126.01 111.84 126.01 106.37V74.11Q126.01 73.44 137 69.36Q147.99 65.28 149.62 65.28Q150.2 65.28 150.97 68.06Q151.74 70.85 152.74 74.78Q153.75 78.72 154.86 80.59Q155.96 82.46 159.03 82.46V84.38Q156.92 85.34 151.88 87.79Q146.84 90.24 146.46 90.24Q145.02 90.24 142.81 82.42Q140.6 74.59 139.26 74.59ZM166.79 113.47V65.95Q166.79 63.36 165.93 62.26Q165.06 61.15 162.95 61.15V58.46Q175.43 51.94 185.22 46.18L186.76 49.25Q185.8 49.73 184.07 51.12Q182.34 52.51 181.19 53.95Q178.31 57.6 178.31 62.21V70.37Q188.2 65.28 189.83 65.28Q192.9 65.28 195.69 69.12Q198.47 72.96 198.47 77.57V105.79Q198.47 111.07 203.18 112.03V114.14L192.71 120Q190.6 119.14 188.78 117.17Q186.95 115.2 186.95 113.47V85.63Q186.95 76.22 183.5 74.98Q181.86 74.4 178.31 74.4V105.79Q178.31 111.65 182.25 112.42V114.53L172.55 120Q170.44 119.14 168.62 117.17Q166.79 115.2 166.79 113.47ZM233.59 65.28Q234.07 65.28 235.99 66.77Q237.91 68.26 239.83 70.9Q241.75 73.54 241.75 76.03V92.16Q241.75 93.89 236.66 96.38Q231.58 98.88 226.82 100.46Q222.07 102.05 221.69 102.05Q221.69 109.44 228.12 111.17Q231.29 111.94 235.7 111.94V114.72Q219.96 120 218.9 120Q216.02 120 213.05 115.92Q210.07 111.84 210.07 106.37V74.11Q210.07 73.44 221.02 69.36Q231.96 65.28 233.59 65.28ZM221.59 75.55V97.73Q230.23 95.33 230.23 87.36V80.54Q230.23 77.86 228.98 75.98Q227.74 74.11 225.82 74.11Q223.9 74.11 221.59 75.55ZM252.87 56.93Q252.87 55.1 262.66 50.64Q272.46 46.18 274.57 46.18Q275.34 46.18 275.82 46.9Q276.3 47.62 276.58 48.19L277.45 50.02Q278.12 51.26 278.79 52.42Q280.04 54.72 281.96 54.72V56.64Q280.42 57.31 277.83 58.75Q271.78 62.02 271.3 62.02Q269.86 62.02 268.66 57.79Q267.46 53.57 266.12 53.57Q264.39 53.57 264.39 56.45V70.56H274.18V72.86L269.38 75.26H264.39V105.79Q264.39 111.65 268.33 112.42V114.53L258.63 120Q256.52 119.14 254.7 117.17Q252.87 115.2 252.87 113.47V75.26H247.02V73.15L252.87 70.56Z" fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round" paint-order="stroke"/> <path d="M128 136 L272 136" stroke="#C9A84C" stroke-width="1.2"/> <path d="M200 130 L206 136 L200 142 L194 136 Z" fill="#C9A84C"/> </g></symbol>
+<symbol id="i-share" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"><path d="M12 15V3M7 8l5-5 5 5M5 12v8h14v-8"/></g></symbol>
+<symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="8" y="8" width="12" height="12"/><path d="M16 8V4H4v12h4"/></g></symbol>
+<symbol id="i-stack" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="1"/><path d="M10 9l5 3-5 3z" fill="currentColor"/></g></symbol>
+</svg>
+
+<script src="ko-config.js"></script>
+<script src="ko-supa.js"></script>
+<script src="ko-track.js" defer></script>
+<script>
+(function(){
+"use strict";
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"})[c]);
+const https = u => /^https:\/\//i.test(String(u || "")) ? String(u) : "";
+const ICON = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg>`;
+const plural = (n, w, ws) => n + " " + (n === 1 ? w : (ws || w + "s"));
+const NET = {tiktok:"TikTok", instagram:"Instagram"};
+const QUIET = /^(sign in to do that|cancelled)$/i;
+
+let toastT = 0;
+function toast(msg, err){
+  const t = $("#toast"); t.textContent = msg; t.classList.toggle("err", !!err); t.hidden = false;
+  clearTimeout(toastT); toastT = setTimeout(() => t.hidden = true, err ? 4200 : 2600);
+}
+const fail = e => { const m = (e && e.message) || String(e); if(!QUIET.test(m)) toast(m, true); };
+
+// ---------- routing: #  |  #g=<id>  |  #join=<code> ----------
+const route = () => { const p = new URLSearchParams(location.hash.replace(/^#/, "")); return {g: p.get("g") || "", join: p.get("join") || ""}; };
+let sortBy = "rated", tab = "members", songs = null, songsErr = "", board = null, joinTried = "", joinErr = "";
+let seq = 0;
+async function render(){
+  const my = ++seq, main = $("#main"), r = route();
+  const set = html => { if(my === seq){ main.innerHTML = `<div class="view">${html}</div>`; } };
+  if(r.join && r.join !== joinTried){ joinTried = r.join; joinErr = ""; set(`<p class="loading">Joining the group…</p>`); return joinFlow(r.join); }
+  if(!KO.user()){ document.title = "Groups · KO26 Kickrolls"; return set(pitchHTML(r.join)); }
+  try{
+    if(r.g){
+      const [b, ss] = await Promise.all([KO.groupBoard(r.g), KO.groupSongs(r.g).then(x => { songsErr = ""; return x; }, e => { songsErr = (e && e.message) || String(e); return []; })]);
+      if(my !== seq) return;
+      board = b; songs = ss; document.title = b.group.name + " · Groups · KO26";
+      set(groupHTML(b));
+    }else{
+      const gs = await KO.myGroups();
+      if(my !== seq) return;
+      document.title = "Groups · KO26 Kickrolls";
+      set(listHTML(gs));
+    }
+  }catch(e){
+    set(`<p class="note">${esc(r.g ? "Couldn't open that group: " : "Couldn't load your groups: ")}<b>${esc((e && e.message) || e)}</b>. <a class="src" href="#">Back to your groups</a></p>`);
+  }
+}
+addEventListener("hashchange", () => { if(!route().join){ joinErr = ""; joinTried = ""; } render(); scrollTo(0, 0); });
+
+async function joinFlow(code){
+  try{
+    const g = await KO.joinGroup(code);
+    toast(`You're in ${g && g.name ? g.name : "the group"}`);
+    history.replaceState(null, "", "#g=" + encodeURIComponent(g.id));
+  }catch(e){
+    const m = (e && e.message) || String(e);
+    if(!QUIET.test(m)) joinErr = m;
+  }
+  render();
+}
+
+// ---------- views ----------
+function pitchHTML(join){
+  if(join){
+    return `<section class="pitch gframe"><h2>You're invited</h2><p>A friend wants you in their KO26 group. Sign in or make a free account to join and see who's kick rolling hardest.</p>${joinErr ? `<p class="err">${esc(joinErr)}</p>` : ""}<div class="row"><button type="button" class="btn primary" data-act="join-again">Join the group</button><a class="btn" href="#">What are groups?</a></div></section>`;
+  }
+  return `<section class="pitch gframe"><h2>Your crew's leaderboard</h2><p>Start a group with your rave crew, share the invite link, and see who posted the most kickrolls and who's rated highest.</p><div class="row"><button type="button" class="btn primary" data-act="signin">Sign in</button></div></section>`;
+}
+function listHTML(gs){
+  const r = route();
+  let h = "";
+  if(joinErr) h += `<p class="note">That invite didn't work: <b>${esc(joinErr)}</b>${r.join ? "" : ""}</p>`;
+  h += `<div class="sec-h"><h2>Your groups</h2><span>${gs.length ? plural(gs.length, "group") : ""}</span></div>`;
+  if(!gs.length) h += `<p class="empty-g"><b>No groups yet.</b> Make one and send the link to your mates.</p>`;
+  else{
+    h += `<ul class="groups">`;
+    for(const g of gs) h += `<li><a class="gcard" href="#g=${esc(encodeURIComponent(g.id))}"><b>${esc(g.name)}</b><span class="m"><span>${plural(g.members, "member")}</span>${g.isOwner ? `<span class="tag own">${ICON("crown")}owner</span>` : ""}</span><i class="chev" aria-hidden="true"></i></a></li>`;
+    h += `</ul>`;
+  }
+  h += `<div class="acts2">
+    <form class="panel" data-form="create" autocomplete="off"><h3>Create a group</h3><p>Name it after your crew. You'll get an invite link to share.</p><div class="inrow"><label class="sr" for="gName">Group name</label><input class="inp" id="gName" maxlength="40" placeholder="e.g. Front Left Crew"><button class="btn primary" type="submit">Create</button></div></form>
+    <form class="panel" data-form="join" autocomplete="off"><h3>Join with a code</h3><p>Paste the invite link or just the code a friend sent you.</p><div class="inrow"><label class="sr" for="gCode">Invite code or link</label><input class="inp" id="gCode" maxlength="200" placeholder="code or invite link" autocapitalize="characters" spellcheck="false"><button class="btn" type="submit">Join</button></div></form>
+  </div>`;
+  return h;
+}
+function socials(m){
+  const s = m.social || {}, out = [];
+  for(const net of ["tiktok", "instagram"]){
+    const hd = String(s[net] || "").replace(/^@/, ""), u = hd && https(KO.socialUrl(net, hd));
+    if(u) out.push(`<a href="${esc(u)}" target="_blank" rel="noopener noreferrer" aria-label="${esc(m.name)} on ${NET[net]} (@${esc(hd)})" title="@${esc(hd)} on ${NET[net]}">${ICON(net === "tiktok" ? "tt" : "ig")}</a>`);
+  }
+  return out.length ? `<span class="soc">${out.join("")}</span>` : "";
+}
+const avgTxt = m => m.avg == null || !isFinite(m.avg) ? "–" : m.avg.toFixed(1);
+function sorted(ms){
+  const idx = new Map(ms.map((m, i) => [m, i]));
+  if(sortBy === "posts") return ms.slice().sort((a, b) => b.posts - a.posts || idx.get(a) - idx.get(b));
+  if(sortBy === "votes") return ms.slice().sort((a, b) => b.votes - a.votes || idx.get(a) - idx.get(b));
+  return ms.slice();
+}
+function boardHTML(ms){
+  let h = `<ol class="board"><li class="mrow hd" aria-hidden="true"><span>#</span><span>Member</span><span>Posts</span><span>Avg ★</span><span>Votes</span><span>Best kickroll</span></li>`;
+  sorted(ms).forEach((m, i) => {
+    const best = m.best && m.best.act ? `<a href="leaderboard.html#act=${esc(encodeURIComponent(m.best.act))}">${esc(m.best.song || "kickroll")}</a> <span>· ${esc(m.best.act)}${m.best.votes ? ` · ★${Number(m.best.avg || 0).toFixed(1)}` : ""}</span>` : `<span class="none">${m.posts ? "no rated kickroll yet" : "no kickrolls yet"}</span>`;
+    h += `<li class="mrow${m.isMe ? " me" : ""}"><span class="medal${i < 3 && (m.posts || m.votes) ? " m" + (i + 1) : ""}" aria-label="rank ${i + 1}">${i + 1}</span>
+      <span class="who"><b>${esc(m.name)}</b>${m.isOwner ? `<span class="crw" title="group owner">${ICON("crown")}<span class="sr">owner</span></span>` : ""}${m.isMe ? `<span class="tag you">you</span>` : ""}${socials(m)}</span>
+      <span class="stat s1 k${m.posts ? "" : " dim"}"><b>${m.posts}</b><small>posts</small></span>
+      <span class="stat s2${m.avg == null ? " dim" : ""}"><b>${avgTxt(m)}</b><small>avg ★</small></span>
+      <span class="stat s3${m.votes ? "" : " dim"}"><b>${m.votes}</b><small>votes</small></span>
+      <span class="best">${best}</span></li>`;
+  });
+  return h + `</ol>`;
+}
+function groupHTML(b){
+  const g = b.group, ms = b.members, url = KO.inviteUrl(g.invite);
+  let h = `<ol class="crumbs" aria-label="Breadcrumb"><li><a class="back" href="#">Your groups</a></li><li><span aria-current="page">${esc(g.name)}</span></li></ol>`;
+  h += `<header class="ghead gframe"><div class="ey">Group</div><h2>${esc(g.name)}</h2><div class="m"><span class="pill">${plural(ms.length, "member")}</span>${g.isOwner ? `<span class="tag own">${ICON("crown")}you own this group</span>` : ""}</div></header><div class="gview">`;
+  h += `<section class="invite" aria-label="Invite"><h3>Invite your crew</h3><div class="link" id="invLink">${esc(url)}</div><div class="row"><button type="button" class="btn primary" data-act="share">${ICON("share")}Share invite</button><button type="button" class="btn" data-act="copycode">${ICON("copy")}Copy code <span class="code">${esc(g.invite)}</span></button></div></section>`;
+  const posted = ms.filter(m => m.posts > 0);
+  if(posted.length){
+    const most = ms.slice().sort((a, b) => b.posts - a.posts)[0];
+    const rated = ms.filter(m => m.avg != null && isFinite(m.avg));
+    const top = rated.slice().sort((a, b) => b.avg - a.avg || b.votes - a.votes)[0];
+    h += `<div class="calls"><div class="call">${ICON("stack")}<div><span>Most kickrolls</span><b>${esc(most.name)}</b></div></div>${top ? `<div class="call">${ICON("crown")}<div><span>Highest rated</span><b>${esc(top.name)}</b></div></div>` : ""}</div>`;
+  }
+  h += `<div class="gtabs" role="tablist" aria-label="Group views"><button type="button" role="tab" data-tab="members" aria-selected="${tab === "members"}">Kickrolls</button><button type="button" role="tab" data-tab="songs" aria-selected="${tab === "songs"}">Songs <span class="count">${songs ? songs.length : 0}</span></button></div>`;
+  h += `<section aria-label="Group leaderboard" data-pane="members"${tab === "members" ? "" : " hidden"}><div class="sortbar"><h3>Leaderboard</h3><div class="seg" role="group" aria-label="Sort by">${[["rated", "Best rated"], ["posts", "Most posts"], ["votes", "Most votes"]].map(([k, t]) => `<button type="button" data-sort="${k}" aria-pressed="${sortBy === k}">${t}</button>`).join("")}</div></div><div style="height:10px"></div><div id="boardBox">${boardHTML(ms)}</div>`;
+  if(ms.length < 2) h += `<p class="solo">Just you so far. Share the invite link to fill your leaderboard.</p>`;
+  h += `</section><section aria-label="Group song ratings" data-pane="songs"${tab === "songs" ? "" : " hidden"}>${songsHTML()}</section>`;
+  if(g.isOwner){
+    const others = ms.filter(m => !m.isMe);
+    h += `<details class="manage"><summary>Manage group</summary><div class="in">
+      <form data-form="rename" autocomplete="off"><h4>Rename</h4><div class="inrow"><label class="sr" for="rnName">New name</label><input class="inp" id="rnName" maxlength="40" value="${esc(g.name)}"><button class="btn" type="submit">Save</button></div></form>
+      <div><h4>Invite link</h4><p class="warn">A new link replaces the current one: the old link and code stop working.</p><button type="button" class="btn" data-act="newcode">New invite link</button></div>
+      <div><h4>Members</h4>${others.length ? `<ul class="mlist">${others.map(m => `<li><span>${esc(m.name)}</span><button type="button" class="mini" data-remove="${esc(m.userId)}">Remove</button></li>`).join("")}</ul>` : `<p>Nobody else yet.</p>`}</div>
+      <form data-form="delete" autocomplete="off"><h4>Delete group</h4><p class="warn">This removes the group for everyone. Kickrolls stay on the main leaderboard. Type the group name to confirm.</p><div class="inrow"><label class="sr" for="delName">Type the group name</label><input class="inp" id="delName" maxlength="40" placeholder="${esc(g.name)}"><button class="btn danger" type="submit" id="delGo" disabled>Delete</button></div></form>
+    </div></details>`;
+  }else{
+    h += `<button type="button" class="btn leave" data-act="leave">Leave group</button>`;
+  }
+  return h + `</div>`;
+}
+
+function songHref(s){
+  const set = KO.sets[s.act], listed = set && (set.tracks || []).some(t => t.key === s.songKey);
+  return "leaderboard.html#act=" + encodeURIComponent(s.act) + "&song=" + encodeURIComponent(s.songKey) + (listed ? "" : "&t=" + encodeURIComponent(s.song || ""));
+}
+function songsHTML(){
+  if(songsErr) return `<p class="note">Couldn't load the group's song ratings: <b>${esc(songsErr)}</b></p>`;
+  if(!songs || !songs.length) return `<p class="empty-g"><b>No one's rated a song yet.</b> Open any song on the <a class="src" href="leaderboard.html">leaderboard</a> and tap the ♪ stars.</p>`;
+  let h = `<div class="sortbar"><h3>Songs</h3><span class="sub2">group average, best first</span></div><div style="height:10px"></div><ol class="slist">`;
+  songs.forEach((s, i) => {
+    const j = String(s.song || "").indexOf(" - "), title = j > 0 ? s.song.slice(j + 3) : (s.song || s.songKey), artist = j > 0 ? s.song.slice(0, j) : "";
+    h += `<li class="srate"><span class="sn">${i + 1}</span><div class="stx"><a href="${esc(songHref(s))}">${esc(title)}</a><span>${artist ? esc(artist) + " · " : ""}${esc(s.act)}</span><span class="chips">${(s.ratings || []).map(r => `<span class="chip${r.isMe ? " me" : ""}">${esc(r.isMe ? "you" : r.name)} ★${esc(r.stars)}</span>`).join("")}</span></div><div class="savg"><b>${isFinite(s.avg) ? s.avg.toFixed(1) : "–"}</b><small>♪★ · ${plural(s.n || 0, "rating")}</small></div></li>`;
+  });
+  return h + `</ol>`;
+}
+
+// ---------- actions ----------
+function arm(btn, label, ms){
+  if(btn.classList.contains("armed")) return true;
+  btn.dataset.orig = btn.textContent; btn.classList.add("armed"); btn.textContent = label;
+  setTimeout(() => { if(btn.isConnected && btn.classList.contains("armed")){ btn.classList.remove("armed"); btn.textContent = btn.dataset.orig; } }, ms || 4000);
+  return false;
+}
+async function copy(text){
+  try{ await navigator.clipboard.writeText(text); return true; }
+  catch(e){
+    const t = document.createElement("textarea"); t.value = text; t.setAttribute("readonly", ""); t.style.position = "fixed"; t.style.opacity = "0";
+    document.body.appendChild(t); t.select(); let ok = false; try{ ok = document.execCommand("copy"); }catch(_){} t.remove(); return ok;
+  }
+}
+const gid = () => route().g;
+document.addEventListener("click", async e => {
+  const tb = e.target.closest("[data-tab]");
+  if(tb){ tab = tb.dataset.tab; for(const b of $$("[data-tab]")) b.setAttribute("aria-selected", String(b === tb)); for(const p of $$("[data-pane]")) p.hidden = p.dataset.pane !== tab; return; }
+  const s = e.target.closest("[data-sort]");
+  if(s){ sortBy = s.dataset.sort; for(const b of $$("[data-sort]")) b.setAttribute("aria-pressed", String(b === s)); if(board) $("#boardBox").innerHTML = boardHTML(board.members); return; }
+  const rm = e.target.closest("[data-remove]");
+  if(rm){
+    if(!arm(rm, "Tap again to remove")) return;
+    rm.disabled = true;
+    try{ await KO.groupAdmin(gid(), "remove", {target: rm.dataset.remove}); toast("removed from the group"); render(); }catch(err){ rm.disabled = false; fail(err); }
+    return;
+  }
+  const a = e.target.closest("[data-act]"); if(!a) return;
+  const act = a.dataset.act;
+  if(act === "signin") KO.openAccount("Sign in or make a free account to start a group with your crew.").catch(fail);
+  else if(act === "join-again"){ joinTried = ""; render(); }
+  else if(act === "share" && board){
+    const url = KO.inviteUrl(board.group.invite), title = `Join ${board.group.name} on the KO26 kickroll leaderboard`;
+    if(navigator.share){
+      try{ await navigator.share({title, text: title, url}); }catch(err){ if(err && err.name !== "AbortError") toast((await copy(url)) ? "invite link copied" : "couldn't share. copy the link above", !navigator.clipboard); }
+    }else toast((await copy(url)) ? "invite link copied" : "couldn't copy. select the link above", false);
+  }
+  else if(act === "copycode" && board) toast((await copy(board.group.invite)) ? "code copied: " + board.group.invite : "couldn't copy the code");
+  else if(act === "newcode"){
+    if(!arm(a, "Tap again: old link stops working")) return;
+    a.disabled = true;
+    try{ await KO.groupAdmin(gid(), "new_code"); toast("new invite link ready"); render(); }catch(err){ a.disabled = false; fail(err); }
+  }
+  else if(act === "leave"){
+    if(!arm(a, "Tap again to leave")) return;
+    a.disabled = true;
+    try{ await KO.leaveGroup(gid()); toast("you left the group"); location.hash = "#"; }catch(err){ a.disabled = false; a.classList.remove("armed"); a.textContent = "Leave group"; fail(err); }
+  }
+});
+document.addEventListener("input", e => {
+  if(e.target.id === "delName" && board) $("#delGo").disabled = e.target.value.trim() !== board.group.name.trim();
+});
+document.addEventListener("submit", async e => {
+  const f = e.target.closest("[data-form]"); if(!f) return;
+  e.preventDefault();
+  const kind = f.dataset.form, btn = f.querySelector("[type=submit]");
+  btn.disabled = true;
+  try{
+    if(kind === "create"){
+      const g = await KO.createGroup($("#gName").value);
+      toast(`${g.name || "Group"} created. now share the link`);
+      location.hash = "#g=" + encodeURIComponent(g.id);
+    }else if(kind === "join"){
+      const v = $("#gCode").value.trim();
+      if(!v){ $("#gCode").focus(); throw new Error("paste the invite link or code"); }
+      const g = await KO.joinGroup(v);
+      toast(`You're in ${g.name || "the group"}`);
+      location.hash = "#g=" + encodeURIComponent(g.id);
+    }else if(kind === "rename"){
+      const n = $("#rnName").value.trim();
+      if(!n || n.length > 40) throw new Error("give the group a name (up to 40 characters)");
+      if(/(https?:|www\.)/i.test(n)) throw new Error("no links in group names");
+      await KO.groupAdmin(gid(), "rename", {name: n}); toast("group renamed"); render();
+    }else if(kind === "delete"){
+      if(!board || $("#delName").value.trim() !== board.group.name.trim()) throw new Error("type the group name exactly to confirm");
+      await KO.groupAdmin(gid(), "delete"); toast("group deleted"); location.hash = "#";
+    }
+  }catch(err){ fail(err); }
+  finally{ if(btn.isConnected) btn.disabled = kind === "delete" ? ($("#delName") && board ? $("#delName").value.trim() !== board.group.name.trim() : true) : false; }
+});
+
+// ---------- account chip + menu (same as leaderboard.html / gallery.html) ----------
+function renderAcct(){
+  const u = KO.user(), el = $("#acct");
+  menuClose();
+  if(!u){ el.innerHTML = `<button type="button" class="btn" data-acct="in">Sign in</button>`; return; }
+  const label = u.name || u.email || "signed in";
+  el.innerHTML = `<button type="button" class="me" data-acct="menu" aria-expanded="false" aria-controls="amenu"><i aria-hidden="true"></i><span></span><span class="sr"> · account menu</span></button>`;
+  const me = el.querySelector(".me"); me.querySelector("span").textContent = label; me.title = u.email || label;
+}
+const icoSvg = net => `<svg class="ico" aria-hidden="true"><use href="#i-${net === "tiktok" ? "tt" : "ig"}"/></svg>`;
+function menuClose(){ const m = $("#amenu"); if(m) m.remove(); const me = $("#acct .me"); if(me) me.setAttribute("aria-expanded", "false"); }
+function menuOpen(){
+  menuClose();
+  const me = $("#acct .me"); if(!me) return;
+  const p = KO.profile ? KO.profile() : {tiktok: "", instagram: ""};
+  const field = net => `<label>${NET[net]}<span class="inp">${icoSvg(net)}<b aria-hidden="true">@</b><input name="${net}" maxlength="${net === "tiktok" ? 40 : 50}" autocomplete="off" autocapitalize="none" spellcheck="false" placeholder="yourhandle" inputmode="text"></span></label>`;
+  $("#acct").insertAdjacentHTML("beforeend", `<form class="amenu" id="amenu" aria-label="Account"><h3>Your socials</h3><p>Shown as small links next to your name on your kickrolls.</p>${field("tiktok")}${field("instagram")}<div class="msg" role="status"></div><div class="row"><button class="btn primary" type="submit">Save</button></div><hr><div class="row"><button class="btn" type="button" data-acct="out">Sign out</button></div></form>`);
+  const f = $("#amenu"); f.tiktok.value = p.tiktok || ""; f.instagram.value = p.instagram || "";
+  me.setAttribute("aria-expanded", "true");
+  f.tiktok.focus();
+}
+$("#acct").addEventListener("click", e => {
+  e.stopPropagation();
+  const b = e.target.closest("[data-acct]"); if(!b) return;
+  if(b.dataset.acct === "in") KO.openAccount("Sign in or make a free account to start a group with your crew.").then(() => toast("signed in"), fail);
+  else if(b.dataset.acct === "menu") (b.getAttribute("aria-expanded") === "true" ? menuClose : menuOpen)();
+  else { menuClose(); KO.signOut().then(() => toast("signed out")).catch(fail); }
+});
+$("#acct").addEventListener("submit", async e => {
+  e.preventDefault(); e.stopPropagation();
+  const f = e.target, msg = f.querySelector(".msg"), go = f.querySelector("[type=submit]");
+  msg.className = "msg"; msg.textContent = ""; go.disabled = true;
+  try{
+    const r = await KO.saveProfile({tiktok: f.tiktok.value, instagram: f.instagram.value});
+    f.tiktok.value = r.tiktok || ""; f.instagram.value = r.instagram || "";
+    msg.className = "msg ok"; msg.textContent = "Saved.";
+    if(route().g) render();
+  }catch(err){ const t = (err && err.message) || "couldn't save that"; if(!QUIET.test(t)) msg.textContent = t; }
+  finally{ go.disabled = false; }
+}, true);
+document.addEventListener("click", () => { if($("#amenu")) menuClose(); });
+document.addEventListener("keydown", e => { if(e.key === "Escape" && $("#amenu")){ menuClose(); const me = $("#acct .me"); if(me) me.focus(); } });
+
+// ---------- start ----------
+(async function start(){
+  try{
+    const r = await KO.ready();
+    $("#demo").hidden = r.mode !== "demo";
+    renderAcct();
+    KO.onAuth(() => { renderAcct(); render(); });
+    await render();
+  }catch(e){
+    $("#main").innerHTML = `<p class="note">Groups couldn't load: <b></b>. Check your connection and reload.</p>`;
+    $("#main b").textContent = (e && e.message) || String(e);
+  }
+})();
+})();
+</script>
+</body>
+</html>
