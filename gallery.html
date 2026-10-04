@@ -171,7 +171,8 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .kc-hit{position:absolute;inset:0;z-index:2;width:100%;height:100%;border:0;padding:0;margin:0;background:transparent;cursor:pointer}
 .kc-hit:focus-visible{outline:none}
 /* link posts: cover image or a drawn placeholder (never the official logos) */
-.cover{position:absolute;inset:0;z-index:0;display:grid;place-items:center;overflow:hidden}
+.cover{position:absolute;inset:0;z-index:0;display:grid;place-items:start center;padding-top:32%;overflow:hidden}
+.srow .th .cover{place-items:center;padding-top:0}
 .cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .cover .ph{width:34%;max-width:72px;height:auto;aspect-ratio:1}
 .cover.tt{background:radial-gradient(circle at 50% 38%,#26262b,#050506 75%)}
@@ -199,7 +200,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .soc.lg a .ico{width:17px;height:17px}
 .kc.crowned{border-color:var(--gold)}
 .kc.crowned.gframe::before{--gc:var(--gold-hi)}
-.kc-top{position:absolute;left:13px;right:13px;top:13px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
+.kc-top{position:absolute;left:13px;right:13px;top:13px;z-index:3;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
 .stg{font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sc);background:rgba(6,5,3,.72);border:1px solid color-mix(in srgb,var(--sc) 60%,transparent);padding:2px 6px;line-height:1.2;white-space:nowrap;margin-left:auto}
 .rank{display:inline-flex;align-items:center;gap:4px;font-family:var(--display);font-weight:700;font-size:15px;line-height:1;padding:5px 8px;background:rgba(6,5,3,.8);color:var(--gold-hi);border:1px solid var(--gold);font-variant-numeric:tabular-nums}
 .rank.r1{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:var(--kick-ink);border-color:var(--gold-hi);box-shadow:0 0 14px color-mix(in srgb,var(--gold-hi) 60%,transparent)}
@@ -216,6 +217,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .kc-play{position:absolute;left:50%;top:44%;z-index:3;width:52px;height:52px;margin:-26px 0 0 -26px;display:grid;place-items:center;background:rgba(6,5,3,.55);border:1px solid color-mix(in srgb,var(--fg) 40%,transparent);pointer-events:none;opacity:0}
 .kc-play .ico{width:18px;height:18px;margin-left:3px}
 .kc.still .kc-play,.kc.link .kc-play{opacity:1}
+.kc.link:has(.cover:not(.has-img)) .kc-play{display:none}
 .big .kc-name{font-size:clamp(24px,3.4vw,34px)}
 .big .kc-song{font-size:15px}
 .big .kc-stars{font-size:14px}
@@ -457,6 +459,8 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
   .kc-song{font-size:12.5px}
   .kc-stars{font-size:11.5px;gap:5px}
   .meter{font-size:11px;letter-spacing:0}
+  li:not(.big) > .kc .plat .lbl{display:none}
+  li:not(.big) > .kc .plat{padding:3px 5px}
   .big .kc-name{font-size:26px}
   .stages{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:2px 16px 10px;scroll-padding-inline:16px;overscroll-behavior-x:contain}
   .stages > li{scroll-snap-align:start}
@@ -779,7 +783,7 @@ function cover(k){
   return c;
 }
 function media(k, autoplay){ return isLink(k) ? cover(k) : gridVideo(k, autoplay); }
-function platBadge(k){ const n = NET[k.source]; return n ? h("span", {class: "plat " + n.cls}, icon(n.icon), n.label) : null; }
+function platBadge(k){ const n = NET[k.source]; return n ? h("span", {class: "plat " + n.cls, title: n.label}, icon(n.icon), h("span", {class: "lbl", text: n.label})) : null; }
 const outLabel = k => "Open on " + ((NET[k.source] || {}).label || "the app");
 function socials(k, big){
   const s = k.social || {}, out = h("span", {class: "soc" + (big ? " lg" : "")});

@@ -1118,7 +1118,7 @@ function showEmbed(k){
     const f = document.createElement("iframe");
     f.className = k.source; f.src = eu; f.title = `${k.name}'s kickroll on ${NET[k.source]}`;
     f.allow = "autoplay; encrypted-media; fullscreen; picture-in-picture"; f.allowFullscreen = true;
-    f.referrerPolicy = "strict-origin-when-cross-origin"; f.loading = "eager";
+    f.setAttribute("referrerpolicy", "strict-origin-when-cross-origin");
     e.appendChild(f);
   }else{
     e.innerHTML = `<div class="noemb">${cover(k)}${https(k.link) ? `<a class="btn primary" href="${esc(https(k.link))}" target="_blank" rel="noopener">Watch on ${esc(NET[k.source])} ↗</a>` : ""}</div>`;
