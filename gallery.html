@@ -166,10 +166,41 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
   box-shadow:inset 0 -3px 0 var(--sc)}
 .kc.gframe::before{--gc:color-mix(in srgb,var(--gold) 0%,transparent)}
 @media (hover:hover){.kc:hover.gframe::before{--gc:var(--gold-hi)} .kc:hover{border-color:var(--gold)}}
-.kc:focus-visible.gframe::before{--gc:var(--gold-hi)}
+.kc:has(.kc-hit:focus-visible).gframe::before{--gc:var(--gold-hi)}
+.kc:has(.kc-hit:focus-visible){outline:2px solid var(--gold-hi);outline-offset:2px}
+.kc-hit{position:absolute;inset:0;z-index:2;width:100%;height:100%;border:0;padding:0;margin:0;background:transparent;cursor:pointer}
+.kc-hit:focus-visible{outline:none}
+/* link posts: cover image or a drawn placeholder (never the official logos) */
+.cover{position:absolute;inset:0;z-index:0;display:grid;place-items:start center;padding-top:32%;overflow:hidden}
+.srow .th .cover{place-items:center;padding-top:0}
+.cover img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.cover .ph{width:34%;max-width:72px;height:auto;aspect-ratio:1}
+.cover.tt{background:radial-gradient(circle at 50% 38%,#26262b,#050506 75%)}
+.cover.tt .ph{color:#f4f4f4;filter:drop-shadow(-3px -2px 0 #25f4ee) drop-shadow(3px 2px 0 #fe2c55)}
+.cover.ig{background:linear-gradient(225deg,#7b2cff 0%,#c13584 40%,#f56040 75%,#ffc85a 100%)}
+.cover.ig .ph{color:#fff;opacity:.92}
+.cover.has-img .ph{display:none}
+.plat{display:inline-flex;align-items:center;gap:4px;font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;line-height:1.2;padding:2px 6px;white-space:nowrap;color:#fff;border:1px solid rgba(255,255,255,.5)}
+.plat .ico{width:11px;height:11px}
+.plat.tt{background:#111}
+.plat.ig{background:linear-gradient(90deg,#8a3ab9,#e1306c,#f56040);border-color:transparent}
+.kc-top .plat{margin-left:auto}
+.kc-top .plat + .stg{margin-left:0}
+.handle{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.03em;color:var(--fg-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+/* uploader socials: small icon links next to names */
+.nm-row{display:flex;align-items:center;gap:6px;min-width:0;max-width:100%}
+.nm-row > :first-child{min-width:0}
+.soc{display:inline-flex;gap:4px;flex:none;pointer-events:auto}
+.soc a{position:relative;z-index:5;width:26px;height:26px;display:grid;place-items:center;border:1px solid color-mix(in srgb,var(--fg) 30%,transparent);background:rgba(6,5,3,.6);color:var(--fg);text-shadow:none}
+.soc a::after{content:"";position:absolute;inset:-9px}
+.soc a .ico{width:13px;height:13px}
+@media (hover:hover){.soc a:hover{border-color:var(--gold-hi);color:var(--gold-hi)}}
+.soc.lg a{width:36px;height:36px}
+.soc.lg a::after{inset:-4px}
+.soc.lg a .ico{width:17px;height:17px}
 .kc.crowned{border-color:var(--gold)}
 .kc.crowned.gframe::before{--gc:var(--gold-hi)}
-.kc-top{position:absolute;left:13px;right:13px;top:13px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
+.kc-top{position:absolute;left:13px;right:13px;top:13px;z-index:3;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
 .stg{font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sc);background:rgba(6,5,3,.72);border:1px solid color-mix(in srgb,var(--sc) 60%,transparent);padding:2px 6px;line-height:1.2;white-space:nowrap;margin-left:auto}
 .rank{display:inline-flex;align-items:center;gap:4px;font-family:var(--display);font-weight:700;font-size:15px;line-height:1;padding:5px 8px;background:rgba(6,5,3,.8);color:var(--gold-hi);border:1px solid var(--gold);font-variant-numeric:tabular-nums}
 .rank.r1{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:var(--kick-ink);border-color:var(--gold-hi);box-shadow:0 0 14px color-mix(in srgb,var(--gold-hi) 60%,transparent)}
@@ -185,7 +216,8 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .kc-stars .nv{color:var(--muted)}
 .kc-play{position:absolute;left:50%;top:44%;z-index:3;width:52px;height:52px;margin:-26px 0 0 -26px;display:grid;place-items:center;background:rgba(6,5,3,.55);border:1px solid color-mix(in srgb,var(--fg) 40%,transparent);pointer-events:none;opacity:0}
 .kc-play .ico{width:18px;height:18px;margin-left:3px}
-.kc.still .kc-play{opacity:1}
+.kc.still .kc-play,.kc.link .kc-play{opacity:1}
+.kc.link:has(.cover:not(.has-img)) .kc-play{display:none}
 .big .kc-name{font-size:clamp(24px,3.4vw,34px)}
 .big .kc-song{font-size:15px}
 .big .kc-stars{font-size:14px}
@@ -277,7 +309,11 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .act-g[open] .chev::before{transform:translateY(2px) rotate(-135deg)}
 .srows{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .srow{width:100%;border:0;border-top:1px solid var(--line);background:transparent;display:grid;grid-template-columns:54px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;text-align:left;color:var(--fg)}
-.srows li:first-child .srow{border-top:0}
+.srows li{display:flex;align-items:center;border-top:1px solid var(--line)}
+.srows li:first-child{border-top:0}
+.srows li .srow{border-top:0;flex:1;min-width:0}
+.srows li > .soc{padding-right:12px}
+.srow .th .cover .ph{width:60%}
 @media (hover:hover){.srow:hover{background:color-mix(in srgb,var(--gold) 6%,transparent)}}
 .srow .th{position:relative;width:54px;height:72px;background:radial-gradient(circle at 50% 40%,var(--p-block-2),var(--p-bg) 90%);overflow:hidden;border:1px solid var(--line)}
 .srow .th video{width:100%;height:100%;object-fit:cover;display:block}
@@ -345,6 +381,41 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .rate-n .mine-r{color:var(--gold-hi)}
 .lb-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:2px}
 .lb-acts .btn{flex:1 1 auto}
+.lb-embed{position:relative;height:100%;max-width:100%;aspect-ratio:9/16;background:#000;box-shadow:0 0 0 1px color-mix(in srgb,var(--gold) 45%,transparent),0 0 40px rgba(0,0,0,.6)}
+.lb-embed.ig{aspect-ratio:9/19;overflow-y:auto;background:#fff;-webkit-overflow-scrolling:touch}
+.lb-embed iframe{display:block;width:100%;height:100%;border:0}
+.lb-embed.ig iframe{min-height:100%}
+.lb-embed.noembed{display:grid;place-items:center}
+.lb-embed .cover{position:absolute;inset:0}
+.watchout{position:relative;z-index:2;display:inline-flex;align-items:center;gap:8px;min-height:54px;padding:10px 20px;background:rgba(6,5,3,.85);border:1px solid var(--gold-hi);color:var(--gold-hi);font-family:var(--display);font-weight:700;font-size:18px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none}
+.watchout .ico{width:18px;height:18px}
+.champ-vid .lb-embed{width:100%;height:100%;aspect-ratio:auto;border:2px solid var(--gold-hi);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 30%,transparent),0 0 40px color-mix(in srgb,var(--gold-hi) 35%,transparent)}
+.champ-vid .lb-embed.ig{aspect-ratio:auto}
+.champ-name-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.champ-out{color:var(--p-soft);font-size:14px;text-underline-offset:3px}
+.lb-name-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+/* account menu */
+.navrow{position:relative}
+.acct .me{display:inline-flex;align-items:center;gap:7px;min-height:40px;min-width:0;max-width:24ch;padding:0 10px 0 12px;border:1px solid color-mix(in srgb,var(--rel) 45%,var(--line));background:var(--panel);font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.acct .me i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.acct .me span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.acct .me::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-2px) rotate(45deg);margin-left:2px}
+.acct .me[aria-expanded="true"]{border-color:var(--gold)}
+.acct .me[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+.amenu{position:absolute;right:0;top:calc(100% + 6px);z-index:25;width:min(320px,calc(100vw - 32px));background:var(--panel-2);border:1px solid var(--gold);box-shadow:0 10px 32px var(--scrim);padding:16px;display:grid;gap:10px}
+.amenu h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi)}
+.amenu p{margin:0;color:var(--muted);font-size:13px;line-height:1.45}
+.amenu label{display:grid;gap:4px;font-family:var(--rpg);font-weight:700;font-size:11.5px;letter-spacing:.08em;color:var(--muted)}
+.amenu .inp{display:flex;align-items:center;border:1px solid var(--line);background:var(--bg)}
+.amenu .inp:focus-within{outline:2px solid var(--gold-hi);outline-offset:1px}
+.amenu .inp b{padding:0 2px 0 10px;color:var(--dim);font-family:var(--body);font-weight:500;font-size:16px}
+.amenu .inp .ico{width:15px;height:15px;margin-left:10px;color:var(--fg-2)}
+.amenu input{flex:1;min-width:0;min-height:var(--tap);border:0;background:transparent;color:var(--fg);padding:8px 10px 8px 2px;font:16px var(--body);outline:none}
+.amenu .msg{min-height:18px;font-size:13px;color:var(--warn)}
+.amenu .msg.ok{color:var(--rel)}
+.amenu .row{display:flex;gap:8px}
+.amenu .row .btn{flex:1}
+.amenu hr{border:0;border-top:1px solid var(--line);margin:2px 0}
 .small{min-height:38px;padding:6px 12px;font-size:12px;letter-spacing:.08em;color:var(--muted)}
 .small.done{color:var(--dim);border-style:dashed}
 .small.arm{border-color:var(--warn);color:var(--warn);background:color-mix(in srgb,var(--warn) 10%,var(--panel))}
@@ -361,6 +432,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
   .lb{grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
   .lb-stage{padding:calc(60px + env(safe-area-inset-top,0px)) 0 0}
   .lb-stage video{height:100%;width:100%;box-shadow:none}
+  .lb-embed{box-shadow:none}
   .lb-nav{top:auto;bottom:60px;margin:0}
   .lb-prev{left:8px}.lb-next{right:8px}
   .lb-panel{border-left:0;border-top:1px solid var(--line);max-height:46vh;padding:14px 16px calc(16px + env(safe-area-inset-bottom,0px));gap:10px}
@@ -387,6 +459,8 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
   .kc-song{font-size:12.5px}
   .kc-stars{font-size:11.5px;gap:5px}
   .meter{font-size:11px;letter-spacing:0}
+  li:not(.big) > .kc .plat .lbl{display:none}
+  li:not(.big) > .kc .plat{padding:3px 5px}
   .big .kc-name{font-size:26px}
   .stages{grid-template-columns:none;grid-auto-flow:column;grid-auto-columns:78%;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:2px 16px 10px;scroll-padding-inline:16px;overscroll-behavior-x:contain}
   .stages > li{scroll-snap-align:start}
@@ -471,12 +545,13 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
       <button class="lb-x" id="lbX" aria-label="Close"><svg class="ico"><use href="#i-x"/></svg></button>
     </div>
     <video id="lbVid" playsinline controls loop preload="metadata"></video>
+    <div class="lb-embed" id="lbEmbed" hidden></div>
     <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous kickroll"><svg class="ico"><use href="#i-left"/></svg></button>
     <button class="lb-nav lb-next" id="lbNext" aria-label="Next kickroll"><svg class="ico"><use href="#i-right"/></svg></button>
   </div>
   <aside class="lb-panel" id="lbPanel">
     <div class="lb-kicker" id="lbKicker"></div>
-    <h2 class="lb-name" id="lbName"></h2>
+    <div class="lb-name-row"><h2 class="lb-name" id="lbName"></h2><span id="lbSoc"></span></div>
     <p class="lb-cap" id="lbCap"></p>
     <div class="lb-song"><b id="lbTitle"></b><span id="lbArtist"></span><em id="lbAct"></em></div>
     <div class="rate">
@@ -485,6 +560,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
       <div class="rate-n" id="rateN"></div>
     </div>
     <div class="lb-acts">
+      <a class="btn" id="lbOut" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="ico"><use href="#i-out"/></svg><span>Open on TikTok</span></a>
       <a class="btn" id="lbLink" href="leaderboard.html"><svg class="ico"><use href="#i-out"/></svg>See this song on the leaderboard</a>
     </div>
     <div class="lb-meta">
@@ -509,6 +585,9 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 <symbol id="i-out" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.4" d="M10 4H4v16h16v-6M14 3h7v7M21 3L11 13"/></symbol>
 <symbol id="i-flag" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" d="M5 22V3M5 4h12l-2.5 4.5L17 13H5"/></symbol>
 <symbol id="i-bin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" d="M3 6h18M8 6V3h8v3M6 6l1 15h10l1-15M10 10v8M14 10v8"/></symbol>
+<symbol id="i-note" viewBox="0 0 24 24"><path fill="currentColor" d="M14 2h3.2c.3 2.2 1.9 3.9 4.3 4.2v3.3c-1.6 0-3.1-.5-4.3-1.3v7.3A6.5 6.5 0 1 1 10.7 9v3.4a3.2 3.2 0 1 0 3.3 3.1z"/></symbol>
+<symbol id="i-cam" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.3" cy="6.7" r="1.3" fill="currentColor"/></symbol>
+<symbol id="i-reel" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><path d="M2.5 8h19M8 2.5l3 5.5M14 2.5l3 5.5"/></g><path fill="currentColor" d="M10 11.5v6.5l5.5-3.25z"/></symbol>
 <symbol id="i-shuffle" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2.2" d="M3 6h4c5 0 5 12 10 12h4M3 18h4c2 0 3-2 4-4M13 10c1-2 2-4 4-4h4M18 3l3 3-3 3M18 15l3 3-3 3"/></symbol>
 <symbol id="em-aversion" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--sw,2.5)"><path d="M32 38C24 28 12 30 12 38C12 46 24 48 32 38C40 28 52 30 52 38C52 46 40 48 32 38Z"/><path class="a" style="color:var(--acc,#FFC85A)" d="M32 9Q33 15 39 16Q33 17 32 23Q31 17 25 16Q31 15 32 9Z"/></g></symbol>
 <symbol id="em-big-k" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--sw,2.5)"><circle cx="32" cy="24" r="12"/><path d="M22 18Q32 27 42 18"/><path d="M24 33Q30 24 32 12"/><path class="a" style="color:var(--acc,#FFC85A)" d="M24 42L22 47"/><path class="a" style="color:var(--acc,#FFC85A)" d="M32 42V48"/><path class="a" style="color:var(--acc,#FFC85A)" d="M40 42L42 47"/><path d="M14 54Q32 48 50 54"/><path d="M9 14L12 11"/><path d="M53 9L56 12"/><circle class="a" style="color:var(--acc,#FFC85A)" cx="54" cy="24" r="1.5" fill="currentColor" stroke="none"/><circle cx="11" cy="28" r="1.5" fill="currentColor" stroke="none"/></g></symbol>
@@ -687,14 +766,56 @@ function gridVideo(k, autoplay){
 }
 function resetPlayers(){ if(playIO) playIO.disconnect(); if(loadIO) loadIO.disconnect(); vis.clear(); }
 
+// ---------- link posts (TikTok / Instagram) ----------
+const NET = {tiktok: {label: "TikTok", cls: "tt", icon: "i-note"}, instagram: {label: "Instagram", cls: "ig", icon: "i-cam"}};
+const isLink = k => k.source === "tiktok" || k.source === "instagram";
+const httpsUrl = u => /^https:\/\//i.test(String(u || "")) ? String(u) : "";
+// cover: thumb if it loads, else the drawn placeholder (TikTok covers expire after a day, so every <img> falls back)
+function cover(k){
+  const n = NET[k.source] || NET.tiktok;
+  const c = h("span", {class: "cover " + n.cls, "aria-hidden": "true"}, icon(k.source === "instagram" ? "i-reel" : "i-note", "ph"));
+  const src = httpsUrl(k.thumb);
+  if(src){
+    const img = h("img", {alt: "", loading: "lazy", decoding: "async", referrerpolicy: "no-referrer"});
+    img.addEventListener("error", () => { img.remove(); c.classList.remove("has-img"); }, {once: true});
+    img.src = src; c.classList.add("has-img"); c.prepend(img);
+  }
+  return c;
+}
+function media(k, autoplay){ return isLink(k) ? cover(k) : gridVideo(k, autoplay); }
+function platBadge(k){ const n = NET[k.source]; return n ? h("span", {class: "plat " + n.cls, title: n.label}, icon(n.icon), h("span", {class: "lbl", text: n.label})) : null; }
+const outLabel = k => "Open on " + ((NET[k.source] || {}).label || "the app");
+function socials(k, big){
+  const s = k.social || {}, out = h("span", {class: "soc" + (big ? " lg" : "")});
+  for(const net of ["tiktok", "instagram"]){
+    const handle = String(s[net] || (k.source === net ? k.handle : "") || "").replace(/^@/, "");
+    const url = handle && httpsUrl(KO.socialUrl(net, handle));
+    if(url) out.append(h("a", {href: url, target: "_blank", rel: "noopener noreferrer", "aria-label": `${k.name} on ${NET[net].label} (@${handle})`, title: `@${handle} on ${NET[net].label}`, onclick: e => e.stopPropagation()}, icon(NET[net].icon)));
+  }
+  return out.childElementCount ? out : null;
+}
+// official player iframe (or cover + big link when there's no player); built fresh each time so switching tears it down
+function embedBox(k, extraCls){
+  const n = NET[k.source] || NET.tiktok, src = httpsUrl(k.embedUrl), link = httpsUrl(k.link);
+  const box = h("div", {class: "lb-embed " + (k.source === "instagram" ? "ig" : "tt") + (src ? "" : " noembed") + (extraCls ? " " + extraCls : "")});
+  if(src){
+    box.append(h("iframe", {src, title: `${k.name}'s kickroll on ${n.label}`, allow: "autoplay; encrypted-media; fullscreen; picture-in-picture", allowfullscreen: true,
+      referrerpolicy: "strict-origin-when-cross-origin", loading: "lazy", scrolling: k.source === "instagram" ? "yes" : "no"}));
+  } else {
+    box.append(cover(k));
+    if(link) box.append(h("a", {class: "watchout", href: link, target: "_blank", rel: "noopener noreferrer"}, `Watch on ${n.label}`, icon("i-out")));
+  }
+  return box;
+}
+
 // ---------- card ----------
 // opts: {rank, ribbon, big, crowned, ago, emblem, label}
 function card(k, opts = {}){
   const st = stageOf(k), song = splitSong(k);
-  const b = h("button", {class: "kc gframe" + (opts.crowned ? " crowned" : "") + (reduced ? " still" : ""), "data-id": k.id, type: "button",
-    style: `--sc:${scVar(st)}`,
-    "aria-label": `${k.name}: ${song.title}${song.artist ? " by " + song.artist : ""}, ${k.act}. ${k.votes ? fmt1(k.avg) + " stars from " + votesTxt(k.votes) : "no votes yet"}`});
-  b.append(gridVideo(k, true));
+  const link = isLink(k);
+  const b = h("div", {class: "kc gframe" + (opts.crowned ? " crowned" : "") + (reduced ? " still" : "") + (link ? " link" : ""), "data-id": k.id, style: `--sc:${scVar(st)}`});
+  b.append(media(k, true), h("button", {class: "kc-hit", type: "button", onclick: () => openId(k.id),
+    "aria-label": `${k.name}: ${song.title}${song.artist ? " by " + song.artist : ""}, ${k.act}${link ? ", " + NET[k.source].label + " post" : ""}. ${k.votes ? fmt1(k.avg) + " stars from " + votesTxt(k.votes) : "no votes yet"}`}));
   if(opts.emblem){ const em = emblem(k.act, "em"); if(em) b.append(em); }
   const top = h("span", {class: "kc-top"});
   if(opts.rank){
@@ -704,16 +825,17 @@ function card(k, opts = {}){
   }
   if(opts.ribbon) top.append(h("span", {class: "ribbon", text: opts.ribbon}));
   if(opts.ago) top.append(h("span", {class: "ago", text: ago(k.createdAt)}));
+  if(link) top.append(platBadge(k));
   if(!opts.ribbon && st) top.append(h("span", {class: "stg", text: (stageName(st) || "").replace(/^The /, "")}));
   b.append(top, h("span", {class: "kc-play", "aria-hidden": "true"}, icon("i-play")));
   const meta = h("span", {class: "kc-meta"},
-    h("b", {class: "kc-name", text: k.name}),
+    h("span", {class: "nm-row"}, h("b", {class: "kc-name", text: k.name}), socials(k)),
+    link && k.handle ? h("span", {class: "handle", text: "@" + String(k.handle).replace(/^@/, "")}) : null,
     h("span", {class: "kc-song", text: song.title}),
     h("span", {class: "kc-act", text: k.act + (song.artist && song.artist.toLowerCase() !== k.act.toLowerCase() ? " · " + song.artist : "")}));
   if(opts.big && k.caption) meta.append(h("span", {class: "cap-line", text: "“" + k.caption + "”"}));
   meta.append(starsLine(k));
   b.append(meta);
-  b.addEventListener("click", () => openId(k.id));
   return b;
 }
 
@@ -771,18 +893,19 @@ function renderWinners(m){
     const st = stageOf(o), song = splitSong(o);
     const sec = h("section", {class: "poster champ", style: `--sc:${scVar(st)}`, "aria-label": "Overall champion"},
       h("span", {class: "brackets", "aria-hidden": "true"}), h("span", {class: "notch", "aria-hidden": "true"}));
-    const vid = h("div", {class: "champ-vid"}, card(o, {crowned: true}));
+    const vid = h("div", {class: "champ-vid"}, isLink(o) ? embedBox(o) : card(o, {crowned: true}));
     const info = h("div", {class: "champ-info"},
       crown("crown"),
       h("p", {class: "champ-k", text: "KO26 Kickroll Champion"}),
       h("span", {class: "status" + (closed ? " final" : "")}, h("b", {text: closed ? "FINAL" : "LIVE"}), closed ? "Winner · final results" : "Current leader · " + clockText()),
-      h("h2", {class: "champ-name", text: o.name}),
+      h("div", {class: "champ-name-row"}, h("h2", {class: "champ-name", text: o.name}), socials(o, true)),
       o.caption ? h("p", {class: "champ-cap", text: "“" + o.caption + "”"}) : null,
       h("div", {class: "champ-song"}, song.title, song.artist ? h("span", {text: song.artist}) : null),
       h("div", {class: "champ-act", text: o.act + (st ? " · " + stageName(st) : "")}),
       h("div", {class: "bigstars"}, meter(o.avg), h("span", null, h("b", {text: fmt1(o.avg)}), " avg · " + votesTxt(o.votes))),
-      h("button", {class: "btn primary", type: "button", onclick: () => openId(o.id)}, icon("i-play"), "Watch with sound"));
-    vid.querySelector(".kc").tabIndex = -1;
+      h("button", {class: "btn primary", type: "button", onclick: () => openId(o.id)}, icon("i-play"), isLink(o) ? "Watch & rate" : "Watch with sound"),
+      isLink(o) && httpsUrl(o.link) ? h("a", {class: "champ-out", href: httpsUrl(o.link), target: "_blank", rel: "noopener noreferrer"}, outLabel(o) + " ↗") : null);
+    const hit = vid.querySelector(".kc-hit"); if(hit) hit.tabIndex = -1;
     sec.append(vid, info);
     m.append(sec);
   } else {
@@ -833,11 +956,11 @@ function renderWinners(m){
       const rows = h("ul", {class: "srows"});
       for(const k of ks){
         const song = splitSong(k);
-        const th = h("span", {class: "th"}, gridVideo(k, false));
+        const th = h("span", {class: "th"}, media(k, false));
         rows.append(h("li", null, h("button", {class: "srow", type: "button", onclick: () => openId(k.id), "aria-label": `${song.title}: ${lead.toLowerCase()} ${k.name}`},
           th,
           h("span", {class: "t"}, h("b", {text: song.title}), song.artist ? h("small", {text: song.artist}) : null),
-          h("span", {class: "w"}, h("b", null, crown(), h("span", {text: k.name})), h("small", {text: `${fmt1(k.avg)}★ · ${votesTxt(k.votes)}`})))));
+          h("span", {class: "w"}, h("b", null, crown(), h("span", {text: k.name})), h("small", {text: `${fmt1(k.avg)}★ · ${votesTxt(k.votes)}`}))), socials(k)));
       }
       d.append(rows); box.append(d);
     });
@@ -884,13 +1007,22 @@ function fill(){
   lb.style.setProperty("--sc", scVar(st));
   $("lbCount").textContent = `${S.lb + 1} / ${S.seq.length}`;
   $("lbPrev").disabled = S.lb <= 0; $("lbNext").disabled = S.lb >= S.seq.length - 1;
-  const src = safeUrl(k.url);
   if(lbVid.dataset.id !== k.id){
     lbVid.dataset.id = k.id;
-    lbVid.src = src;
-    lbVid.muted = false;
-    const p = lbVid.play(); if(p) p.catch(() => {});
+    teardown();
+    if(isLink(k)){
+      lbVid.hidden = true;
+      const box = embedBox(k); box.id = "lbEmbed";
+      $("lbEmbed").replaceWith(box);
+    } else {
+      lbVid.hidden = false;
+      lbVid.src = safeUrl(k.url);
+      lbVid.muted = false;
+      const p = lbVid.play(); if(p) p.catch(() => {});
+    }
   }
+  const out = $("lbOut"), link = isLink(k) && httpsUrl(k.link);
+  out.hidden = !link; if(link){ out.href = link; out.lastElementChild.textContent = outLabel(k) + " ↗"; }
   // kicker: leader / winner tags
   const W = KO.winners(S.all), tags = [];
   const L = closed ? "winner" : "leader";
@@ -904,6 +1036,7 @@ function fill(){
   if(k.mine) kick.append(h("span", {class: "tag mine", text: "your video"}));
   kick.hidden = !kick.childElementCount;
   $("lbName").textContent = k.name;
+  $("lbSoc").replaceChildren(socials(k, true) || "");
   $("lbCap").textContent = k.caption ? "“" + k.caption + "”" : "";
   $("lbTitle").textContent = song.title;
   $("lbArtist").textContent = song.artist;
@@ -981,12 +1114,17 @@ function showLb(id){
   }
   fill();
 }
+// stop whatever is playing: the file video, and any TikTok / Instagram iframe (removed, so it can't keep playing)
+function teardown(){
+  lbVid.pause(); if(lbVid.getAttribute("src")){ lbVid.removeAttribute("src"); lbVid.load(); }
+  const e = $("lbEmbed"); e.replaceChildren(); e.className = "lb-embed"; e.hidden = true;
+}
 function hideLb(){
   if(S.lb < 0) return;
   S.lb = -1;
-  lbVid.pause(); lbVid.removeAttribute("src"); lbVid.load(); delete lbVid.dataset.id;
+  teardown(); delete lbVid.dataset.id;
   lb.hidden = true; document.body.classList.remove("lb-open"); $("page").inert = false;
-  if(S.dirty){ S.dirty = false; render.keepScroll = true; render(); const el = document.querySelector(`[data-id="${CSS.escape(String(lastId || ""))}"]`); if(el) el.focus({preventScroll: true}); }
+  if(S.dirty){ S.dirty = false; render.keepScroll = true; render(); const el = document.querySelector(`[data-id="${CSS.escape(String(lastId || ""))}"] .kc-hit`); if(el) el.focus({preventScroll: true}); }
   else if(lastFocus && document.contains(lastFocus)) lastFocus.focus({preventScroll: true});
   reconcile();
 }
@@ -1023,7 +1161,7 @@ document.addEventListener("keydown", e => {
   let x0 = null, y0 = 0, t0 = 0;
   const stage = $("lbStage");
   stage.addEventListener("touchstart", e => {
-    const t = e.touches[0], r = lbVid.getBoundingClientRect();
+    const t = e.touches[0], r = (lbVid.hidden ? $("lbEmbed") : lbVid).getBoundingClientRect();
     if(e.touches.length !== 1 || (t.clientY > r.bottom - 56 && t.clientY < r.bottom)){ x0 = null; return; }
     x0 = t.clientX; y0 = t.clientY; t0 = Date.now();
   }, {passive: true});
@@ -1067,16 +1205,54 @@ addEventListener("hashchange", route);
 function renderAcct(){
   const box = $("acct"), u = KO.user && KO.user();
   box.replaceChildren();
-  if(u){
-    const label = u.name || u.email || "signed in";
-    box.append(h("span", {class: "who", title: u.email || label}, h("i", {"aria-hidden": "true"}), h("span", {text: label})),
-      h("button", {class: "btn", type: "button", onclick: async () => { try{ await KO.signOut(); toast("signed out"); }catch(e){ fail(e); } }}, "Sign out"));
-  } else {
+  if(!u){
     box.append(h("button", {class: "btn", type: "button", onclick: () => KO.openAccount().then(() => toast("signed in"), fail)}, "Sign in"));
+    return;
   }
+  const label = u.name || u.email || "signed in";
+  const me = h("button", {class: "me", type: "button", "aria-expanded": "false", "aria-controls": "amenu", title: u.email || label},
+    h("i", {"aria-hidden": "true"}), h("span", {text: label}), h("span", {class: "sr", text: " · account menu"}));
+  me.addEventListener("click", e => { e.stopPropagation(); toggleMenu(me.getAttribute("aria-expanded") !== "true"); });
+  box.append(me);
 }
-async function onAuthChange(){
-  renderAcct();
+// account menu: "Your socials" (KO.saveProfile) + Sign out
+let menu = null;
+function toggleMenu(open){
+  const me = $("acct").querySelector(".me");
+  if(menu){ menu.remove(); menu = null; }
+  if(me) me.setAttribute("aria-expanded", String(!!open));
+  if(!open || !me) return;
+  const p = KO.profile ? KO.profile() : {tiktok: "", instagram: ""};
+  const field = (net, val) => h("label", null, NET[net].label,
+    h("span", {class: "inp"}, icon(NET[net].icon), h("b", {text: "@", "aria-hidden": "true"}),
+      h("input", {name: net, value: val || "", maxlength: net === "tiktok" ? "40" : "50", autocomplete: "off", autocapitalize: "none", spellcheck: "false", placeholder: "yourhandle", inputmode: "text"})));
+  const msg = h("div", {class: "msg", role: "status"});
+  const save = h("button", {class: "btn primary", type: "submit"}, "Save");
+  const form = h("form", {class: "amenu", id: "amenu", "aria-label": "Account"},
+    h("h3", {text: "Your socials"}),
+    h("p", {text: "Shown as small links next to your name on your kickrolls."}),
+    field("tiktok", p.tiktok), field("instagram", p.instagram), msg,
+    h("div", {class: "row"}, save),
+    h("hr"),
+    h("div", {class: "row"}, h("button", {class: "btn", type: "button", onclick: async () => { toggleMenu(false); try{ await KO.signOut(); toast("signed out"); }catch(e){ fail(e); } }}, "Sign out")));
+  form.addEventListener("click", e => e.stopPropagation());
+  form.addEventListener("submit", async e => {
+    e.preventDefault(); msg.className = "msg"; msg.textContent = ""; save.disabled = true;
+    try{
+      const r = await KO.saveProfile({tiktok: form.tiktok.value, instagram: form.instagram.value});
+      form.tiktok.value = r.tiktok || ""; form.instagram.value = r.instagram || "";
+      msg.className = "msg ok"; msg.textContent = "Saved.";
+      refreshData();
+    }catch(err){ if(!cancelled(err)){ msg.textContent = (err && err.message) || "couldn't save that"; } }
+    finally{ save.disabled = false; }
+  });
+  document.querySelector(".navrow").append(form);
+  menu = form;
+  form.tiktok.focus();
+}
+document.addEventListener("click", () => { if(menu) toggleMenu(false); });
+document.addEventListener("keydown", e => { if(e.key === "Escape" && menu){ const me = $("acct").querySelector(".me"); toggleMenu(false); if(me) me.focus(); } });
+async function refreshData(){
   if(!S.ready) return;
   const curId = S.lb >= 0 ? (S.seq[S.lb] || {}).id : null;
   try{ await load(); }catch(e){ fail(e); }
@@ -1085,6 +1261,11 @@ async function onAuthChange(){
     const i = S.seq.findIndex(k => k.id === curId);
     if(i >= 0){ S.lb = i; fill(); } else closeLb();
   }
+}
+async function onAuthChange(){
+  toggleMenu(false);
+  renderAcct();
+  await refreshData();
 }
 
 // ---------- boot ----------

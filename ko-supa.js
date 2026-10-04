@@ -19,6 +19,14 @@
 //   KO.onAuth(fn)                        fn(user) whenever someone signs in or out
 //   await KO.requireAccount(reason)      resolves with the user; opens the sign-in / sign-up sheet first if needed
 //   KO.openAccount() / await KO.signOut()
+//   KO.parseLink(text)                   TikTok / Instagram post link -> {source, url, id, handle, short} (throws on anything else)
+//   await KO.linkPost({url, act, songKey, song, name, caption})   post a TikTok / Instagram link instead of uploading a file
+//   KO.profile() / await KO.saveProfile({tiktok, instagram})      the signed-in person's linked social handles
+//   KO.socialUrl("tiktok"|"instagram", handle)                    profile page link
+// Every kickroll item: {id, act, songKey, song, name, caption, status, source:"upload"|"tiktok"|"instagram",
+//   url (video file, uploads only), link (the post on TikTok/Instagram), embedUrl (official player, or null),
+//   thumb (cover image or null), handle (the post's @handle), social:{tiktok, instagram} (uploader's linked socials),
+//   createdAt, avg, votes, score, mine, myStars}
 // Posting, rating and reporting need an account (email + password, email confirmed). Supabase Auth hashes the
 // passwords (bcrypt); this site never sees or stores them. Browsing needs nothing.
 // Kickrolls carry status: "approved" (public), or "pending" / "rejected" (only the uploader sees those).
@@ -73,6 +81,37 @@
     }
   }
 
+  // ======================= TikTok / Instagram links =======================
+  const RX = {
+    tt: /^https?:\/\/(?:www\.|m\.)?tiktok\.com\/@([A-Za-z0-9._]{2,24})\/video\/(\d{8,25})/i,
+    ttShort: /^https?:\/\/(?:(?:vm|vt)\.tiktok\.com\/[A-Za-z0-9]{5,20}|(?:www\.)?tiktok\.com\/t\/[A-Za-z0-9]{5,20})\/?/i,
+    ig: /^https?:\/\/(?:www\.)?instagram\.com\/(?:([A-Za-z0-9._]{1,30})\/)?(reel|reels|p|tv)\/([A-Za-z0-9_-]{5,40})/i
+  };
+  const cleanHandle = (h, max) => { h = String(h || "").trim().replace(/^https?:\/\/(www\.)?(tiktok|instagram)\.com\/@?/i, "").replace(/^@/, "").replace(/[/?#].*$/, ""); return /^[A-Za-z0-9._]+$/.test(h) && h.length <= max ? h : ""; };
+  KO.parseLink = text => {
+    const t = String(text || "").trim().match(/https?:\/\/\S+/); const u = t ? t[0] : "";
+    let m;
+    if((m = RX.tt.exec(u))) return {source:"tiktok", url:`https://www.tiktok.com/@${m[1]}/video/${m[2]}`, id:m[2], handle:m[1], short:false};
+    if((m = RX.ttShort.exec(u))) return {source:"tiktok", url:m[0].replace(/^http:/, "https:").replace(/\/?$/, "/"), id:null, handle:null, short:true};
+    if((m = RX.ig.exec(u))){ const kind = m[2].toLowerCase() === "p" ? "p" : "reel"; return {source:"instagram", url:`https://www.instagram.com/${kind}/${m[3]}/`, id:m[3], handle:m[1] && !/^(reel|reels|p|tv)$/i.test(m[1]) ? m[1] : null, short:false}; }
+    throw new Error("paste a TikTok or Instagram post link (tiktok.com/@you/video/… or instagram.com/reel/…)");
+  };
+  // TikTok's public oEmbed (CORS-open): real @handle, video id and cover for a link, short links included when TikTok allows
+  async function tiktokInfo(url){
+    try{
+      const c = new AbortController(); const t = setTimeout(() => c.abort(), 7000);
+      const r = await fetch("https://www.tiktok.com/oembed?url=" + encodeURIComponent(url), {signal:c.signal}); clearTimeout(t);
+      if(!r.ok) return null;
+      const j = await r.json(); const m = /cite="([^"]+)"/.exec(j.html || ""); const p = m ? RX.tt.exec(m[1]) : null;
+      return {id: p ? p[2] : null, handle: j.author_unique_id || (p && p[1]) || null, thumb: /^https:\/\//.test(j.thumbnail_url || "") ? j.thumbnail_url : null, url: p ? `https://www.tiktok.com/@${p[1]}/video/${p[2]}` : null};
+    }catch(e){ return null; }
+  }
+  KO.embedUrl = (source, id, link) => source === "tiktok" && id ? `https://www.tiktok.com/player/v1/${encodeURIComponent(id)}?loop=1&rel=0&music_info=1&description=1`
+    : source === "instagram" && id ? `https://www.instagram.com/${/\/p\//.test(link || "") ? "p" : "reel"}/${encodeURIComponent(id)}/embed/` : null;
+  KO.socialUrl = (net, h) => !h ? null : net === "tiktok" ? `https://www.tiktok.com/@${encodeURIComponent(h)}` : `https://www.instagram.com/${encodeURIComponent(h)}/`;
+  let myProfile = {tiktok:"", instagram:""};
+  KO.profile = () => ({...myProfile});
+
   // ======================= live: Supabase =======================
   let sb = null, uid = null;
   const live = {
@@ -113,15 +152,14 @@
         const { data: rs } = await sb.from("ratings").select("kickroll_id, stars").eq("rater", uid).in("kickroll_id", ids);
         for(const r of rs || []) mine[r.kickroll_id] = r.stars;
       }
-      const out = data.map(x => shape({id:x.id, act:x.act, songKey:x.song_key, song:x.song, name:x.name, caption:x.caption || "", status:"approved",
-        url: live.url(x.path), createdAt:x.created_at, avg:Number(x.avg_stars), votes:x.votes, mine: !!uid && x.owner === uid, myStars: mine[x.id] || 0}));
+      const out = data.map(x => fromRow(x, {status:"approved", avg:Number(x.avg_stars), votes:x.votes, mine: !!uid && x.owner === uid, myStars: mine[x.id] || 0,
+        social:{tiktok:x.owner_tiktok || "", instagram:x.owner_instagram || ""}}));
       if(uid){  // my own uploads that are still waiting for review (or were turned down)
         let q2 = sb.from("kickrolls").select("*").eq("owner", uid).neq("status", "approved");
         if(act) q2 = q2.eq("act", act);
         if(songKey) q2 = q2.eq("song_key", songKey);
         const { data: own } = await q2;
-        for(const x of own || []) out.push(shape({id:x.id, act:x.act, songKey:x.song_key, song:x.song, name:x.name, caption:x.caption || "", status:x.status,
-          reviewNote:x.review_note || "", url: live.url(x.path), createdAt:x.created_at, avg:0, votes:0, mine:true, myStars:0}));
+        for(const x of own || []) out.push(fromRow(x, {status:x.status, reviewNote:x.review_note || "", avg:0, votes:0, mine:true, myStars:0, social:KO.profile()}));
       }
       return out;
     },
@@ -148,7 +186,24 @@
         throw new Error(/kickrolls_one_per_song|duplicate key/.test(error.message) ? "you've already posted a kickroll to this song. delete it first to post a new one"
           : /kickrolls_no_links/.test(error.message) ? "no links in names or captions" : error.message);
       }
-      return shape({id:data.id, act, songKey, song, name, caption: caption || "", status:data.status, url: live.url(path), createdAt:data.created_at, avg:0, votes:0, mine:true, myStars:0});
+      return fromRow(data, {status:data.status, avg:0, votes:0, mine:true, myStars:0, social:KO.profile()});
+    },
+    async linkPost(o){
+      const row = {act:o.act, song_key:o.songKey, song:o.song, name:o.name, caption:o.caption || null, source:o.source, external_url:o.url, external_id:o.id, handle:o.handle, thumb_url:o.thumb};
+      const { data, error } = await sb.from("kickrolls").insert(row).select().single();
+      if(error) throw new Error(/kickrolls_one_external|external_url/.test(error.message) ? "that post is already on the leaderboard"
+        : /kickrolls_one_per_song/.test(error.message) ? "you've already posted a kickroll to this song. delete it first to post a new one"
+        : /kickrolls_no_links/.test(error.message) ? "no links in names or captions" : /source_check|link_fields/.test(error.message) ? "that link doesn't look like a TikTok or Instagram post" : error.message);
+      return fromRow(data, {status:data.status, avg:0, votes:0, mine:true, myStars:0, social:KO.profile()});
+    },
+    async loadProfile(){
+      if(!uid){ myProfile = {tiktok:"", instagram:""}; return; }
+      const { data } = await sb.from("profiles").select("tiktok, instagram").eq("user_id", uid).maybeSingle();
+      myProfile = {tiktok:(data && data.tiktok) || "", instagram:(data && data.instagram) || ""};
+    },
+    async saveProfile(p){
+      const { error } = await sb.from("profiles").upsert({user_id:uid, tiktok:p.tiktok || null, instagram:p.instagram || null, updated_at:new Date().toISOString()}, {onConflict:"user_id"});
+      if(error) throw error;
     },
     async rate(id, stars){
       const { error } = await sb.from("ratings").upsert({kickroll_id:id, rater:uid, stars}, {onConflict:"kickroll_id,rater"});
@@ -161,10 +216,16 @@
     async remove(id){
       const { data } = await sb.from("kickrolls").select("path").eq("id", id).single();
       const { error } = await sb.from("kickrolls").delete().eq("id", id); if(error) throw error;
-      if(data) await sb.storage.from(CFG.bucket).remove([data.path]);
+      if(data && data.path) await sb.storage.from(CFG.bucket).remove([data.path]);
     }
   };
   const errText = t => { try{ const j = JSON.parse(t); return j.message || j.error; }catch(e){ return ""; } };
+  function fromRow(x, extra){
+    const source = x.source || "upload";
+    return shape({id:x.id, act:x.act, songKey:x.song_key, song:x.song, name:x.name, caption:x.caption || "", createdAt:x.created_at, source,
+      url: source === "upload" && x.path ? live.url(x.path) : null, link: x.external_url || null, embedUrl: KO.embedUrl(source, x.external_id, x.external_url),
+      thumb: x.thumb_url || null, handle: x.handle || "", ...extra, social: extra.social || {tiktok:"", instagram:""}});
+  }
 
   // ======================= demo: IndexedDB on this device =======================
   let idb = null;
@@ -185,9 +246,11 @@
       return ks.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(k => {
         const mine = rs.filter(r => r.kickrollId === k.id);
         const avg = mine.length ? mine.reduce((s, r) => s + r.stars, 0) / mine.length : 0;
-        if(!urls.has(k.id)) urls.set(k.id, URL.createObjectURL(k.blob));
-        return shape({id:k.id, act:k.act, songKey:k.songKey, song:k.song, name:k.name, caption:k.caption, status:"approved", url:urls.get(k.id), createdAt:k.createdAt,
-          avg, votes:mine.length, mine: !!k.mine, myStars: mine.length ? mine[0].stars : 0});
+        if(k.blob && !urls.has(k.id)) urls.set(k.id, URL.createObjectURL(k.blob));
+        const source = k.source || "upload";
+        return shape({id:k.id, act:k.act, songKey:k.songKey, song:k.song, name:k.name, caption:k.caption, status:"approved", createdAt:k.createdAt, source,
+          url: k.blob ? urls.get(k.id) : null, link:k.link || null, embedUrl: KO.embedUrl(source, k.externalId, k.link), thumb:k.thumb || null, handle:k.handle || "",
+          social: k.mine ? KO.profile() : {tiktok:"", instagram:""}, avg, votes:mine.length, mine: !!k.mine, myStars: mine.length ? mine[0].stars : 0});
       });
     },
     async upload({file, act, songKey, song, name, caption}, onProgress){
@@ -196,6 +259,16 @@
       await tx("kickrolls", "readwrite", s => s.put(k));
       return (await demo.list({songKey})).find(x => x.id === k.id);
     },
+    async linkPost(o){
+      const dup = (await all("kickrolls")).find(k => k.link === o.url || (o.id && k.externalId === o.id));
+      if(dup) throw new Error("that post is already on the leaderboard");
+      const k = {id: "demo-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), act:o.act, songKey:o.songKey, song:o.song, name:o.name, caption:o.caption || "",
+        source:o.source, link:o.url, externalId:o.id, handle:o.handle, thumb:o.thumb, createdAt:new Date().toISOString(), mine:true};
+      await tx("kickrolls", "readwrite", s => s.put(k));
+      return (await demo.list({songKey:o.songKey})).find(x => x.id === k.id);
+    },
+    async loadProfile(){ myProfile = ls.get("ko26.demoProfile", {tiktok:"", instagram:""}); },
+    async saveProfile(p){ ls.set("ko26.demoProfile", p); },
     async rate(id, stars){ await tx("ratings", "readwrite", s => s.put({id, kickrollId:id, stars})); },
     async report(){},
     async remove(id){ await tx("kickrolls", "readwrite", s => s.delete(id)); await tx("ratings", "readwrite", s => s.delete(id)); },
@@ -215,7 +288,10 @@
     me = u && !u.is_anonymous ? {id:u.id, email:u.email || "", name:(u.user_metadata && u.user_metadata.name) || ""} : null;
     uid = me && me.id;
     if(me && me.name && !KO.myName()) KO.setMyName(me.name);
-    if((me && me.id) !== was) authFns.forEach(f => { try{ f(me); }catch(e){} });
+    if((me && me.id) !== was){
+      const fire = () => authFns.forEach(f => { try{ f(me); }catch(e){} });
+      if(impl && impl.loadProfile) impl.loadProfile().catch(() => {}).then(fire); else fire();
+    }
   }
   KO.user = () => me;
   KO.onAuth = fn => { authFns.push(fn); };
@@ -320,7 +396,7 @@
   let impl = null, readyP = null;
   KO.ready = () => readyP || (readyP = (async () => {
     await loadSets();
-    try{ await live.init(); impl = live; KO.mode = "live"; return {mode:"live"}; }
+    try{ await live.init(); impl = live; KO.mode = "live"; if(me) await live.loadProfile().catch(() => {}); return {mode:"live"}; }
     catch(e){ await demo.init(); impl = demo; KO.mode = "demo"; return {mode:"demo", reason: e && e.message}; }
   })());
   const guard = () => { if(KO.closed()) throw new Error("voting and uploads closed on " + KO.deadline.toLocaleDateString()); };
@@ -335,6 +411,29 @@
     return impl.upload({...o, name:String(o.name).trim().slice(0, 24), caption:String(o.caption || "").trim().slice(0, 140)}, p);
   };
   KO.rate = async (id, stars) => { guard(); await KO.requireAccount("Make a free account to rate kickrolls: one vote per person keeps it fair."); return impl.rate(id, Math.max(1, Math.min(5, Math.round(stars)))); };
+  KO.linkPost = async o => {
+    guard();
+    const L = KO.parseLink(o.url);
+    if(!String(o.name || "").trim()) throw new Error("add your name");
+    if(/(https?:|www\.)/i.test(o.caption || "")) throw new Error("no links in captions");
+    await KO.requireAccount("Make a free account to post your kickroll. It keeps the leaderboard spam-free.");
+    let thumb = null;
+    if(L.source === "tiktok"){
+      const info = await tiktokInfo(L.url);
+      if(info){ if(info.url){ L.url = info.url; L.id = info.id; L.short = false; } L.handle = info.handle || L.handle; thumb = info.thumb; }
+      else if(!L.short) throw new Error("TikTok couldn't find that video. is it public?");
+    }
+    if(L.source === "instagram" && !L.handle) L.handle = myProfile.instagram || null;
+    return impl.linkPost({...L, thumb, act:o.act, songKey:o.songKey, song:o.song, name:String(o.name).trim().slice(0, 24), caption:String(o.caption || "").trim().slice(0, 140)});
+  };
+  KO.saveProfile = async p => {
+    await KO.requireAccount("Sign in to link your TikTok and Instagram.");
+    const tiktok = cleanHandle(p.tiktok, 24), instagram = cleanHandle(p.instagram, 30);
+    if(String(p.tiktok || "").trim() && !tiktok) throw new Error("that TikTok handle doesn't look right");
+    if(String(p.instagram || "").trim() && !instagram) throw new Error("that Instagram handle doesn't look right");
+    await impl.saveProfile({tiktok, instagram}); myProfile = {tiktok, instagram};
+    return KO.profile();
+  };
   KO.report = async id => { await KO.requireAccount("Sign in to report a video."); return impl.report(id); };
   KO.remove = id => impl.remove(id);
 })();

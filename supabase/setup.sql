@@ -59,6 +59,43 @@ create index if not exists kickrolls_status_idx on public.kickrolls (status);
 -- one video per person per song (delete yours to post a better take)
 create unique index if not exists kickrolls_one_per_song on public.kickrolls (owner, song_key);
 
+-- ---------- linked posts: a TikTok / Instagram post instead of an upload ----------
+alter table public.kickrolls add column if not exists source text not null default 'upload';
+alter table public.kickrolls add column if not exists external_url text;
+alter table public.kickrolls add column if not exists external_id text;
+alter table public.kickrolls add column if not exists handle text;
+alter table public.kickrolls add column if not exists thumb_url text;
+alter table public.kickrolls alter column path drop not null;
+alter table public.kickrolls alter column mime drop not null;
+alter table public.kickrolls alter column size_bytes drop not null;
+alter table public.kickrolls drop constraint if exists kickrolls_source_check;
+alter table public.kickrolls add constraint kickrolls_source_check check (
+  (source = 'upload' and path is not null and mime is not null and size_bytes is not null)
+  or (source = 'tiktok' and external_url ~ '^https://([a-z]+\.)?tiktok\.com/' and path is null)
+  or (source = 'instagram' and external_url ~ '^https://(www\.)?instagram\.com/(reel|reels|p|tv)/[A-Za-z0-9_-]+' and path is null));
+alter table public.kickrolls drop constraint if exists kickrolls_link_fields;
+alter table public.kickrolls add constraint kickrolls_link_fields check (
+  char_length(coalesce(external_url, '')) <= 300 and char_length(coalesce(external_id, '')) <= 64
+  and coalesce(handle, '') ~ '^[A-Za-z0-9._]{0,30}$' and coalesce(thumb_url, '') ~ '^(https://\S+)?$' and char_length(coalesce(thumb_url, '')) <= 1000);
+-- the same post can only be entered once, by anyone (stops people claiming someone else's video twice over)
+create unique index if not exists kickrolls_one_external on public.kickrolls (source, external_id) where external_id is not null;
+create unique index if not exists kickrolls_one_external_url on public.kickrolls (external_url) where external_url is not null;
+
+-- ---------- profiles: the socials people link to their account ----------
+create table if not exists public.profiles (
+  user_id    uuid primary key default auth.uid() references auth.users(id) on delete cascade,
+  tiktok     text check (tiktok ~ '^[A-Za-z0-9._]{2,24}$'),
+  instagram  text check (instagram ~ '^[A-Za-z0-9._]{1,30}$'),
+  updated_at timestamptz not null default now()
+);
+alter table public.profiles enable row level security;
+drop policy if exists "read profiles" on public.profiles;
+create policy "read profiles" on public.profiles for select to anon, authenticated using (true);
+drop policy if exists "write own profile" on public.profiles;
+create policy "write own profile" on public.profiles for insert to authenticated with check (public.ko26_is_member() and user_id = auth.uid());
+drop policy if exists "update own profile" on public.profiles;
+create policy "update own profile" on public.profiles for update to authenticated using (user_id = auth.uid()) with check (user_id = auth.uid());
+
 -- ---------- star ratings: one per account per video ----------
 create table if not exists public.ratings (
   kickroll_id uuid not null references public.kickrolls(id) on delete cascade,
@@ -80,13 +117,15 @@ create table if not exists public.reports (
 drop view if exists public.kickroll_scores;
 create view public.kickroll_scores with (security_invoker = on) as
 select k.id, k.created_at, k.owner, k.act, k.song_key, k.song, k.name, k.caption, k.path, k.mime, k.size_bytes,
+       k.source, k.external_url, k.external_id, k.handle, k.thumb_url, pr.tiktok as owner_tiktok, pr.instagram as owner_instagram,
        coalesce(round(avg(r.stars)::numeric, 2), 0) as avg_stars,
        count(r.stars)::int as votes,
        (select count(*) from public.reports p where p.kickroll_id = k.id)::int as report_count
 from public.kickrolls k
 left join public.ratings r on r.kickroll_id = k.id
+left join public.profiles pr on pr.user_id = k.owner
 where not k.hidden and k.status = 'approved'
-group by k.id
+group by k.id, pr.user_id
 having (select count(*) from public.reports p where p.kickroll_id = k.id) < 3;
 
 -- ---------- row level security ----------
@@ -100,7 +139,7 @@ create policy "read videos" on public.kickrolls for select to anon, authenticate
 drop policy if exists "upload own video before deadline" on public.kickrolls;
 create policy "upload own video before deadline" on public.kickrolls for insert to authenticated
   with check (public.ko26_is_member() and owner = auth.uid() and now() < public.ko26_deadline() and hidden = false
-              and path like auth.uid()::text || '/%');
+              and ((source = 'upload' and path like auth.uid()::text || '/%') or (source <> 'upload' and path is null)));
 drop policy if exists "delete own video" on public.kickrolls;
 create policy "delete own video" on public.kickrolls for delete to authenticated using (owner = auth.uid() or public.ko26_is_admin());
 
@@ -151,6 +190,17 @@ begin
    where id = kickroll;
 end $fn$;
 revoke all on function public.ko26_moderate(uuid, boolean, text) from public, anon;
+-- the reviewer fills in a linked post's real video id / handle / cover once it has expanded a short link
+create or replace function public.ko26_set_link(kickroll uuid, ext_id text, ext_url text, ext_handle text, thumb text) returns void
+language plpgsql security definer set search_path = public as $fn$
+begin
+  if not public.ko26_is_admin() then raise exception 'not allowed'; end if;
+  update public.kickrolls set external_id = coalesce(ext_id, external_id), external_url = coalesce(ext_url, external_url),
+         handle = coalesce(ext_handle, handle), thumb_url = coalesce(thumb, thumb_url)
+   where id = kickroll and source <> 'upload';
+end $fn$;
+revoke all on function public.ko26_set_link(uuid, text, text, text, text) from public, anon;
+grant execute on function public.ko26_set_link(uuid, text, text, text, text) to authenticated;
 grant execute on function public.ko26_moderate(uuid, boolean, text) to authenticated;
 
 -- ---------- video storage: public bucket, 50 MB per file, video only ----------
