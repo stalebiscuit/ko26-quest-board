@@ -149,7 +149,7 @@ create policy "admins read visits" on public.visits for select to authenticated 
 
 -- One call returns everything the dashboard shows. Times are bucketed in Sydney time.
 create or replace function public.ko26_stats(days integer default 30) returns json
-language plpgsql stable security definer set search_path = public as $$
+language plpgsql stable security definer set search_path = public as $fn$
 declare since timestamptz := now() - make_interval(days => greatest(1, least(days, 365)));
 begin
   if not public.ko26_is_admin() then raise exception 'not allowed'; end if;
