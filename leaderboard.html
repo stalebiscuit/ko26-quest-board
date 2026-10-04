@@ -68,7 +68,7 @@ body{
 body.lb-open{overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
 button:disabled{cursor:default}
-button:focus-visible,input:focus-visible,a:focus-visible,label:focus-within{outline:2px solid var(--gold-hi);outline-offset:2px}
+button:focus-visible,input:focus-visible,a:focus-visible,.pick:focus-within{outline:2px solid var(--gold-hi);outline-offset:2px}
 a{color:inherit}
 .wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:18px 72px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -216,7 +216,7 @@ a{color:inherit}
 .tile .ld.none{color:var(--dim);font-size:12.5px}
 
 /* ---------- act view ---------- */
-.head{--c:var(--gold);border:1px solid var(--line);padding:18px 18px 16px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--panel)),var(--panel-2));margin-bottom:14px}
+.head{--c:var(--gold);border:1px solid var(--line);padding:20px 22px 22px;background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--panel)),var(--panel-2));margin-bottom:14px}
 .head::before{inset:6px}
 .head[data-stage="arena"]{--c:var(--arena)}
 .head[data-stage="pit"]{--c:var(--pit)}
@@ -277,6 +277,7 @@ a{color:inherit}
 .inp{flex:1;min-width:0;width:100%;min-height:var(--tap);background:var(--bg);color:var(--fg);border:1px solid var(--line);padding:8px 12px;font:16px var(--body);border-radius:0}
 .inp::placeholder{color:var(--dim)}
 .inp:focus{border-color:var(--gold)}
+.inp:focus-visible{outline:0;box-shadow:0 0 0 1px var(--gold-hi)}
 
 /* ---------- song view ---------- */
 .songgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
@@ -300,7 +301,7 @@ a{color:inherit}
 .prev .pinfo .bad{color:var(--warn)}
 .prog{height:8px;background:var(--line);overflow:hidden}
 .prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--gold),var(--gold-hi));box-shadow:0 0 10px var(--gold-hi)}
-.up .closed{margin:0;font-size:14px;color:var(--gold-hi)}
+.up .closed{margin:0 0 14px;font-size:14px;color:var(--gold-hi)}
 .list-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px}
 .list-h h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:16px;letter-spacing:.08em;color:var(--fg-2)}
 .list-h span{font-size:13px;color:var(--muted)}
@@ -389,6 +390,7 @@ a{color:inherit}
   .kc.first .vbox{width:100%;height:auto;grid-row:1/span 3}
   .kc.first .rate,.kc.first .tools{grid-column:2}
 }
+@media (min-width:981px){.lc .vbox{aspect-ratio:1/1}}
 @media (max-width:980px){
   .stages{grid-template-columns:minmax(0,1fr);gap:26px}
   .jump{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;position:sticky;top:0;z-index:10;background:var(--bg);padding:8px 16px;margin:0 -16px 12px}
@@ -407,7 +409,7 @@ a{color:inherit}
   .bar{gap:8px}
   .tabs{width:100%}
   .tab{flex:1;padding-inline:8px}
-  .head{padding:16px 14px 14px}
+  .head{padding:18px 18px 22px}
   .h-em{width:64px;height:64px}
   .h-em svg{width:48px;height:48px}
   .head h2{font-size:34px}
@@ -782,8 +784,8 @@ function songView(act, key, t){
   h += `<div class="songgrid">`;
   // upload
   const name = KO.myName();
-  h += `<form class="up" id="up" autocomplete="off"><h3>Upload your kickroll</h3><p class="sub">${closed ? "Uploads are closed." : `A short clip of you kick rolling to this song. Up to ${Math.round(KO.maxBytes / 1048576)} MB.`}</p>`;
-  if(closed) h += `<p class="closed">Uploads and voting closed ${esc(sydney(KO.deadline))} Sydney time. These results are final.</p>`;
+  h += `<form class="up" id="up" autocomplete="off"><h3>Upload your kickroll</h3>${closed ? "" : `<p class="sub">A short clip of you kick rolling to this song. Up to ${Math.round(KO.maxBytes / 1048576)} MB.</p>`}`;
+  if(closed) h += `<p class="closed" style="margin-top:6px">Uploads and voting closed ${esc(sydney(KO.deadline))} Sydney time. These results are final.</p>`;
   h += `<fieldset${closed ? " disabled" : ""}>
     <label class="fld"><span>Your name</span><input class="inp" id="upName" maxlength="24" value="${esc(name)}" placeholder="what people call you" autocapitalize="words"></label>
     <div class="fld"><span>Video</span><label class="pick" id="upPick">${ICON("up")}<span id="upPickTxt">Pick a video<small>from your camera roll, or film one now</small></span><input type="file" id="upFile" accept="video/*"></label></div>
@@ -818,7 +820,7 @@ function sydney(d){
   try{ return d.toLocaleString("en-AU", {timeZone:"Australia/Sydney", weekday:"short", day:"numeric", month:"short", hour:"numeric", minute:"2-digit"}); }
   catch(e){ return d.toLocaleString(); }
 }
-const mb = b => (b / 1048576).toFixed(b < 10485760 ? 1 : 0) + " MB";
+const mb = b => b < 1048576 ? Math.max(1, Math.round(b / 1024)) + " KB" : (b / 1048576).toFixed(b < 10485760 ? 1 : 0) + " MB";
 
 let flashId = "";
 function wireUpload(act, key, t){
