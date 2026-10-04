@@ -100,6 +100,7 @@ button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{o
 .thorn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
 .thorn::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:8px;transform:translate(-50%,-50%);background:var(--gold);clip-path:polygon(0 50%,40% 0,50% 50%,60% 0,100% 50%,60% 100%,50% 50%,40% 100%)}
 .ico{width:1em;height:1em;flex:none;fill:currentColor}
+svg.crown{height:auto}
 .px{shape-rendering:crispEdges}
 
 /* ---------- site nav (shared with leaderboard.html) ---------- */
@@ -162,7 +163,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .kc:focus-visible.gframe::before{--gc:var(--gold-hi)}
 .kc.crowned{border-color:var(--gold)}
 .kc.crowned.gframe::before{--gc:var(--gold-hi)}
-.kc-top{position:absolute;left:8px;right:8px;top:8px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
+.kc-top{position:absolute;left:13px;right:13px;top:13px;z-index:3;display:flex;justify-content:space-between;align-items:flex-start;gap:6px;pointer-events:none}
 .stg{font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--sc);background:rgba(6,5,3,.72);border:1px solid color-mix(in srgb,var(--sc) 60%,transparent);padding:2px 6px;line-height:1.2;white-space:nowrap;margin-left:auto}
 .rank{display:inline-flex;align-items:center;gap:4px;font-family:var(--display);font-weight:700;font-size:15px;line-height:1;padding:5px 8px;background:rgba(6,5,3,.8);color:var(--gold-hi);border:1px solid var(--gold);font-variant-numeric:tabular-nums}
 .rank.r1{background:linear-gradient(135deg,var(--gold-hi),var(--gold));color:var(--kick-ink);border-color:var(--gold-hi);box-shadow:0 0 14px color-mix(in srgb,var(--gold-hi) 60%,transparent)}
@@ -170,7 +171,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .rank.r3{background:linear-gradient(135deg,#f0b27a,var(--bronze));color:#1a0d04;border-color:#f0b27a}
 .rank .ico{width:16px;height:12px}
 .ribbon{font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.12em;text-transform:uppercase;line-height:1.2;padding:3px 7px;background:var(--sc);color:var(--kick-ink);max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.kc-meta{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:10px 12px 12px;display:flex;flex-direction:column;gap:2px;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.8)}
+.kc-meta{position:absolute;left:0;right:0;bottom:0;z-index:3;padding:10px 14px 15px;display:flex;flex-direction:column;gap:2px;pointer-events:none;text-shadow:0 1px 3px rgba(0,0,0,.8)}
 .kc-name{font-family:var(--display);font-weight:700;font-size:19px;line-height:1.05;letter-spacing:.02em;text-transform:uppercase;overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .kc-song{font-weight:600;font-size:13.5px;line-height:1.25;color:var(--fg-2);overflow-wrap:anywhere;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .kc-act{font-family:var(--display);font-weight:500;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--sc);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -218,6 +219,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 .champ-vid{position:relative;aspect-ratio:9/16;max-height:72vh;width:100%;justify-self:center}
 .champ-vid .kc{border:2px solid var(--gold-hi);box-shadow:0 0 0 4px color-mix(in srgb,var(--gold) 30%,transparent),0 0 40px color-mix(in srgb,var(--gold-hi) 35%,transparent)}
 .champ-vid .kc.gframe::before{--gc:var(--gold-hi)}
+.champ-vid .kc-meta{display:none}
 .champ-info{min-width:0;display:flex;flex-direction:column;align-items:flex-start;gap:8px}
 .champ-info .crown{width:96px;height:auto;color:var(--gold-hi);filter:drop-shadow(0 0 16px color-mix(in srgb,var(--gold-hi) 70%,transparent))}
 .champ-k{font-family:var(--lockup);font-size:clamp(26px,3.6vw,44px);line-height:.95;text-transform:uppercase;letter-spacing:.015em;margin:4px 0 0;text-shadow:0 0 12px color-mix(in srgb,var(--p-violet) 70%,transparent),0 0 32px color-mix(in srgb,var(--p-violet) 38%,transparent)}
@@ -373,7 +375,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
   .seg button{font-size:13px;letter-spacing:.04em;padding:6px 3px}
   .wall{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:128px;gap:8px}
   .wall > li.big{grid-row:span 4}
-  .kc-meta{padding:8px 9px 10px}
+  .kc-meta{padding:8px 11px 14px}
   .kc-name{font-size:16px}
   .kc-song{font-size:12.5px}
   .kc-stars{font-size:11.5px;gap:5px}
@@ -662,6 +664,8 @@ document.addEventListener("visibilitychange", reconcile);
 function gridVideo(k, autoplay){
   const v = h("video", {muted: true, loop: true, playsinline: true, preload: "metadata", "aria-hidden": "true", tabindex: "-1", disablepictureinpicture: true});
   v.muted = true; v.defaultMuted = true;
+  // nudge past 0 so phones paint a still frame for clips that aren't playing
+  v.addEventListener("loadedmetadata", () => { if(v.paused && !v.currentTime){ try{ v.currentTime = 0.05; }catch(e){} } }, {once: true});
   const src = safeUrl(k.url);
   if(src){
     v.dataset.src = posterUrl(src);
@@ -782,7 +786,7 @@ function renderWinners(m){
   const ul = h("ul", {class: "stages"});
   for(const st of STAGE_ORDER){
     const k = W.byStage[st];
-    if(k){ push(k); ul.append(h("li", null, card(k, {ribbon: `${stageName(st)} · ${lead}`, crowned: true, emblem: true}))); }
+    if(k){ push(k); ul.append(h("li", null, card(k, {ribbon: `${stageName(st).replace(/^The /, "")} ${closed ? "champion" : "leader"}`, crowned: true, emblem: true}))); }
     else ul.append(h("li", null, h("div", {class: "slot", style: `--sc:${scVar(st)}`}, crown("crown"), h("b", {text: stageName(st)}), h("span", {text: closed ? "No rated kickrolls here." : "No rated kickrolls yet. Yours could take it."}))));
   }
   sec2.append(ul); m.append(sec2);

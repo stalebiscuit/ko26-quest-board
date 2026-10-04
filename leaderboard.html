@@ -305,25 +305,25 @@ a{color:inherit}
 .list-h h3{margin:0;font-family:var(--rpg);font-weight:700;font-size:16px;letter-spacing:.08em;color:var(--fg-2)}
 .list-h span{font-size:13px;color:var(--muted)}
 .krs{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.kr{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px 14px;padding:12px;border:1px solid var(--line);background:var(--panel);align-items:start}
-.kr .vbox{border:1px solid color-mix(in srgb,var(--gold) 40%,transparent)}
-.kr .info{min-width:0;display:grid;gap:6px;align-content:start}
-.kr .rk{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.kr .rk .no{font-family:var(--display);font-weight:700;font-size:20px;line-height:1;color:var(--fg-2);font-variant-numeric:tabular-nums}
-.kr .nm{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere;margin:0}
-.kr .cap{margin:0;font-size:14px;line-height:1.45;color:var(--fg-2);overflow-wrap:anywhere}
-.kr .when{font-size:12px;color:var(--dim)}
-.kr .rate{grid-column:1/-1;border-top:1px solid var(--line);padding-top:6px}
-.kr .tools{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
-.kr.flash{border-color:var(--rel);box-shadow:0 0 0 1px var(--rel),0 0 18px color-mix(in srgb,var(--rel) 35%,transparent)}
-.kr.first{grid-template-columns:minmax(0,1fr);border-color:var(--gold);background:radial-gradient(ellipse 80% 50% at 50% 0,color-mix(in srgb,var(--p-violet) 22%,transparent),transparent 70%),var(--panel-2);padding:16px}
-.kr.first .vbox{width:min(100%,340px);justify-self:center;box-shadow:0 0 0 1px var(--gold),0 0 26px color-mix(in srgb,var(--p-violet) 45%,transparent)}
-.kr.first .no{color:var(--gold-hi);font-size:26px}
-.kr.first .nm{font-size:26px}
-.kr .rate .sc{font-size:14px}
+.kc{display:grid;grid-template-columns:112px minmax(0,1fr);gap:10px 14px;padding:12px;border:1px solid var(--line);background:var(--panel);align-items:start}
+.kc .vbox{border:1px solid color-mix(in srgb,var(--gold) 40%,transparent)}
+.kc .info{min-width:0;display:grid;gap:6px;align-content:start}
+.kc .rk{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.kc .rk .no{font-family:var(--display);font-weight:700;font-size:20px;line-height:1;color:var(--fg-2);font-variant-numeric:tabular-nums}
+.kc .nm{font-family:var(--display);font-weight:700;font-size:20px;line-height:1.1;text-transform:uppercase;letter-spacing:.02em;overflow-wrap:anywhere;margin:0}
+.kc .cap{margin:0;font-size:14px;line-height:1.45;color:var(--fg-2);overflow-wrap:anywhere}
+.kc .when{font-size:12px;color:var(--dim)}
+.kc .rate{grid-column:1/-1;border-top:1px solid var(--line);padding-top:6px}
+.kc .tools{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.kc.flash{border-color:var(--rel);box-shadow:0 0 0 1px var(--rel),0 0 18px color-mix(in srgb,var(--rel) 35%,transparent)}
+.kc.first{grid-template-columns:minmax(0,1fr);border-color:var(--gold);background:radial-gradient(ellipse 80% 50% at 50% 0,color-mix(in srgb,var(--p-violet) 22%,transparent),transparent 70%),var(--panel-2);padding:16px}
+.kc.first .vbox{width:auto;height:min(58vh,500px);max-width:100%;justify-self:center;box-shadow:0 0 0 1px var(--gold),0 0 26px color-mix(in srgb,var(--p-violet) 45%,transparent)}
+.kc.first .no{color:var(--gold-hi);font-size:26px}
+.kc.first .nm{font-size:26px}
+.kc .rate .sc{font-size:14px}
 
 /* ---------- top 20 ---------- */
-.sec-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px}
+.sec-h{display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 10px}
 .sec-h h2{margin:0;font-family:var(--rpg);font-weight:700;font-size:16px;letter-spacing:.08em;color:var(--fg-2)}
 .sec-h span{font-size:13px;color:var(--muted);text-align:right}
 .leaders{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-bottom:26px}
@@ -385,9 +385,9 @@ a{color:inherit}
   .songgrid{grid-template-columns:minmax(0,1fr) 360px;align-items:start}
   .songgrid .up{grid-column:2;grid-row:1;position:sticky;top:14px}
   .songgrid .ranked{grid-column:1;grid-row:1}
-  .kr.first{grid-template-columns:300px minmax(0,1fr);align-items:start}
-  .kr.first .vbox{width:100%}
-  .kr.first .rate,.kr.first .tools{grid-column:2}
+  .kc.first{grid-template-columns:300px minmax(0,1fr);align-items:start}
+  .kc.first .vbox{width:100%;height:auto;grid-row:1/span 3}
+  .kc.first .rate,.kc.first .tools{grid-column:2}
 }
 @media (max-width:980px){
   .stages{grid-template-columns:minmax(0,1fr);gap:26px}
@@ -411,8 +411,8 @@ a{color:inherit}
   .h-em{width:64px;height:64px}
   .h-em svg{width:48px;height:48px}
   .head h2{font-size:34px}
-  .kr{grid-template-columns:96px minmax(0,1fr);padding:10px}
-  .kr.first{padding:14px 12px}
+  .kc{grid-template-columns:96px minmax(0,1fr);padding:10px}
+  .kc.first{padding:14px 12px}
   .trow{grid-template-columns:30px 50px minmax(0,1fr) auto;gap:10px;padding-right:10px}
   .trow .rk{font-size:19px}
   .trow.r1 .rk{font-size:22px}
@@ -422,7 +422,7 @@ a{color:inherit}
   .brand .emblem{width:70px}
   .brand h1{font-size:30px}
   .tile .nm{font-size:16.5px}
-  .kr{grid-template-columns:84px minmax(0,1fr)}
+  .kc{grid-template-columns:84px minmax(0,1fr)}
   .st{width:42px}
 }
 @media (prefers-reduced-motion:no-preference){
@@ -659,7 +659,7 @@ function render(r){
   main.innerHTML = `<div class="view">${html}</div>`;
   hydrate(main);
   if(r.act && r.song) wireUpload(r.act, r.song, r.t);
-  if(flashId){ const el = main.querySelector(`.kr[data-k="${CSS.escape(flashId)}"]`); flashId = ""; if(el){ el.classList.add("flash"); setTimeout(() => el.scrollIntoView({block:"center", behavior: reduceMotion.matches ? "auto" : "smooth"}), 60); } }
+  if(flashId){ const el = main.querySelector(`.kc[data-k="${CSS.escape(flashId)}"]`); flashId = ""; if(el){ el.classList.add("flash"); setTimeout(() => el.scrollIntoView({block:"center", behavior: reduceMotion.matches ? "auto" : "smooth"}), 60); } }
 }
 
 // ---------- bits ----------
@@ -783,7 +783,7 @@ function songView(act, key, t){
   // upload
   const name = KO.myName();
   h += `<form class="up" id="up" autocomplete="off"><h3>Upload your kickroll</h3><p class="sub">${closed ? "Uploads are closed." : `A short clip of you kick rolling to this song. Up to ${Math.round(KO.maxBytes / 1048576)} MB.`}</p>`;
-  if(closed) h += `<p class="closed">Uploads and voting closed on ${esc(KO.deadline.toLocaleDateString(undefined, {day:"numeric", month:"short"}))}. These results are final.</p>`;
+  if(closed) h += `<p class="closed">Uploads and voting closed ${esc(sydney(KO.deadline))} Sydney time. These results are final.</p>`;
   h += `<fieldset${closed ? " disabled" : ""}>
     <label class="fld"><span>Your name</span><input class="inp" id="upName" maxlength="24" value="${esc(name)}" placeholder="what people call you" autocapitalize="words"></label>
     <div class="fld"><span>Video</span><label class="pick" id="upPick">${ICON("up")}<span id="upPickTxt">Pick a video<small>from your camera roll, or film one now</small></span><input type="file" id="upFile" accept="video/*"></label></div>
@@ -800,7 +800,7 @@ function songView(act, key, t){
     h += `<ol class="krs">`;
     ranked.forEach((k, i) => {
       const crowned = i === 0 && k.votes > 0;
-      h += `<li class="kr${i === 0 ? " first gframe" : ""}" data-k="${esc(k.id)}">${thumbBtn(k)}<div class="info"><div class="rk"><span class="no">#${i + 1}</span>${crowned ? crownTag() : ""}</div><p class="nm">${esc(k.name)}</p>${k.caption ? `<p class="cap">${esc(k.caption)}</p>` : ""}<span class="when">${esc(ago(k.createdAt))}</span></div>${rateHTML(k)}<div class="tools">${toolsHTML(k)}</div></li>`;
+      h += `<li class="kc${i === 0 ? " first gframe" : ""}" data-k="${esc(k.id)}">${thumbBtn(k)}<div class="info"><div class="rk"><span class="no">#${i + 1}</span>${crowned ? crownTag() : ""}</div><p class="nm">${esc(k.name)}</p>${k.caption ? `<p class="cap">${esc(k.caption)}</p>` : ""}<span class="when">${esc(ago(k.createdAt))}</span></div>${rateHTML(k)}<div class="tools">${toolsHTML(k)}</div></li>`;
     });
     h += `</ol>`;
   }
@@ -813,6 +813,10 @@ function ago(iso){
   if(m < 1) return "just now"; if(m < 60) return m + " min ago";
   const h = Math.round(m / 60); if(h < 24) return plural(h, "hour") + " ago";
   return new Date(t).toLocaleDateString(undefined, {weekday:"short", day:"numeric", month:"short"});
+}
+function sydney(d){
+  try{ return d.toLocaleString("en-AU", {timeZone:"Australia/Sydney", weekday:"short", day:"numeric", month:"short", hour:"numeric", minute:"2-digit"}); }
+  catch(e){ return d.toLocaleString(); }
 }
 const mb = b => (b / 1048576).toFixed(b < 10485760 ? 1 : 0) + " MB";
 
@@ -872,7 +876,7 @@ function topView(){
       h += `<div class="lc nobody ${cls}" data-stage="${esc(st)}"><div class="lab">${esc(label)}</div><div class="vbox">no votes yet</div><div class="lt"><span>rate a kickroll to start the race</span></div></div>`;
       continue;
     }
-    h += `<div class="lc ${cls}" data-stage="${esc(st)}"><div class="lab"><span>${esc(label)}</span>${crownTag(closed ? "winner" : "leader")}</div>${thumbBtn(k)}<a class="lt" href="${esc(kHref(k))}"><b>${esc(k.name)}</b><span>${esc(k.song)}</span><span>${esc(k.act)}</span>${scoreTxt(k)}</a></div>`;
+    h += `<div class="lc ${cls}" data-stage="${esc(st)}"><div class="lab"><span>${esc(label)}</span><span class="crown${closed ? "" : " lead"}" title="${closed ? "winner" : "leader"}">${ICON("crown")}</span></div>${thumbBtn(k)}<a class="lt" href="${esc(kHref(k))}"><b>${esc(k.name)}</b><span>${esc(k.song)}</span><span>${esc(k.act)}</span>${scoreTxt(k)}</a></div>`;
   }
   h += `</div><div class="sec-h"><h2>Top 20</h2><span>every song, every stage</span></div>`;
   if(!top.length){
@@ -1050,7 +1054,7 @@ document.addEventListener("submit", e => {
   try{
     const r = await KO.ready();
     $("#demo").hidden = r.mode !== "demo";
-    $("#footDl").textContent = KO.deadline.toLocaleString(undefined, {weekday:"short", day:"numeric", month:"short", hour:"numeric", minute:"2-digit"});
+    $("#footDl").textContent = sydney(KO.deadline) + " Sydney time";
     tick(); setInterval(tick, 30000);
     await refresh();
     addEventListener("hashchange", onHash);
