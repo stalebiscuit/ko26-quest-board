@@ -251,9 +251,8 @@ function statusOf(r){
   }
   const diff = dayNum(r.date) - dayNum(todayIn(r.tz));   // >0 = days to go
   if(diff === 0) return {k:"live", label:"Live now", diff};
-  if(diff > 0) return {k:"upcoming", label:"Upcoming", sub: diff === 1 ? "tomorrow" : diff <= 30 ? "in " + diff + " days" : "", diff};
-  if(diff >= -9) return {k:"recent", label:"Last weekend", diff};
-  return {k:"past", label:"Past", diff};
+  if(diff > 0) return {k:"upcoming", label: niceDate(r.date), sub: diff === 1 ? "tomorrow" : diff <= 30 ? "in " + diff + " days" : "", diff};
+  return {k: diff >= -9 ? "recent" : "past", label: niceDate(r.date), diff};
 }
 function niceDate(d){
   try{ return new Intl.DateTimeFormat("en-AU", {timeZone:"UTC", weekday:"short", day:"numeric", month:"short", year:"numeric"}).format(new Date(d + "T00:00:00Z")).replace(/,/g, ""); }
