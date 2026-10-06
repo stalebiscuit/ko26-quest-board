@@ -1,0 +1,935 @@
+{
+ "sets": [
+  {
+   "event": "Aqua Color Fest Puebla, Mexico",
+   "date": "2026-08-08",
+   "url": "https://1001.tl/kd8shdt",
+   "tracks": [
+    [
+     "01",
+     "Project One - Move With The One (Intro Edit)"
+    ],
+    [
+     "02",
+     "Project One - Soul Searching"
+    ],
+    [
+     "03",
+     "Project One - The Upside Down"
+    ],
+    [
+     "04",
+     "Project One - Resurrection"
+    ],
+    [
+     "05",
+     "Project One - Luminosity"
+    ],
+    [
+     "06",
+     "Project One - Move Your Body"
+    ],
+    [
+     "07",
+     "Project One - Million Miles"
+    ],
+    [
+     "08",
+     "Project One - Rate Reducer (Headhunterz Remix) (Live Edit)"
+    ],
+    [
+     "09",
+     "Project One - The Story Unfolds"
+    ],
+    [
+     "10",
+     "Project One - It's An Edit (2026 Edit)"
+    ],
+    [
+     "11",
+     "Project One - Rise & Fall"
+    ],
+    [
+     "12",
+     "Project One - ID"
+    ],
+    [
+     "13",
+     "Project One - Life Beyond Earth (2018 Edit)"
+    ],
+    [
+     "14",
+     "Project One - Love Is Not Enough"
+    ],
+    [
+     "15",
+     "Project One - The Art Of Creation (Defqon.1 2018 Live Edit)"
+    ],
+    [
+     "16",
+     "Project One - Transforming"
+    ],
+    [
+     "17",
+     "Project One - The Zero Hour (Live Edit)"
+    ]
+   ],
+   "video": {
+    "id": "OjKxol9DKfE",
+    "dur": "47:36"
+   },
+   "cues": null
+  },
+  {
+   "event": "Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands",
+   "date": "2026-01-03",
+   "url": "https://1001.tl/2pbm2xgk",
+   "tracks": [
+    [
+     "01",
+     "Project One - Life Beyond Earth"
+    ],
+    [
+     "02",
+     "Project One - Numbers (Wildstylez Remix)"
+    ],
+    [
+     "03",
+     "Project One - Halfway There"
+    ],
+    [
+     "04",
+     "Project One - It's An Edit"
+    ],
+    [
+     "05",
+     "Project One - Raiders Of The Sun (Headhunterz Edit) (Edit)"
+    ],
+    [
+     "06",
+     "Project One - Rate Reducer (Headhunterz Remix)"
+    ],
+    [
+     "07",
+     "Project One - The World Is Yours"
+    ],
+    [
+     "08",
+     "Project One - The Story Unfolds"
+    ],
+    [
+     "09",
+     "Project One - The Zero Hour (Qlimax 2016 Live Edit)"
+    ],
+    [
+     "10",
+     "Headhunterz & Wildstylez - Project 1 (Sound Rush Remix)"
+    ]
+   ],
+   "video": {
+    "id": "WGi6uVioMas",
+    "dur": "36:05"
+   },
+   "cues": null
+  },
+  {
+   "event": "Resurrection, Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands",
+   "date": "2026-01-03",
+   "url": "https://1001.tl/q000z41",
+   "tracks": [
+    [
+     "01",
+     "Project One - Resurrection"
+    ],
+    [
+     "02",
+     "Project One - Maximum Force (Defqon.1 Anthem 2018)"
+    ],
+    [
+     "03",
+     "Project One - Love Is Not Enough"
+    ],
+    [
+     "04",
+     "Project One - Move With The One"
+    ],
+    [
+     "w/",
+     "Project One - Move Your Body"
+    ],
+    [
+     "05",
+     "Project One - Journey Of The Mind"
+    ],
+    [
+     "06",
+     "Project One - One Without A Second"
+    ],
+    [
+     "07",
+     "Project One - The Creation Of Art"
+    ],
+    [
+     "08",
+     "Project One - Luminosity"
+    ],
+    [
+     "09",
+     "Project One - The Art Of Creation"
+    ]
+   ],
+   "video": {
+    "id": "Nfmc6sq1Tr8",
+    "dur": "29:33"
+   },
+   "cues": null
+  },
+  {
+   "event": "KNOCKOUT OUTDOOR 2026 ENDSHOW (UNCUT STRAGHT FROM THE LIVE STREAM) (SPECIAL PERFORMANCE PROJECT ONE)",
+   "date": "2026-10-03",
+   "url": "https://www.youtube.com/watch?v=7PBBRNrQPng",
+   "tracks": [],
+   "video": {
+    "id": "7PBBRNrQPng",
+    "dur": "21:43"
+   },
+   "cues": null,
+   "extra": true
+  }
+ ],
+ "released": [
+  {
+   "artist": "Project One",
+   "title": "The Story Unfolds",
+   "plays": 2,
+   "sets": [
+    0,
+    1
+   ],
+   "sp": "3lUOtCvwx0Ji1w4H62cngQ",
+   "spotify": "https://open.spotify.com/track/3lUOtCvwx0Ji1w4H62cngQ",
+   "sp_title": "Headhunterz, Wildstylez, Project One - The Story Unfolds - Original Mix",
+   "release_date": "2008-10-20",
+   "album": {
+    "id": "4vK1EOss3LRhrpRxuoaknR",
+    "name": "The Story Unfolds / Raiders Of The Sun",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/3lUOtCvwx0Ji1w4H62cngQ",
+   "yt": {
+    "id": "rgeN_Uhfr4I",
+    "channel": "Headhunterz",
+    "dur": 353
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Resurrection",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "sp": "7IOKoeqoZtAOpya4fABmob",
+   "spotify": "https://open.spotify.com/track/7IOKoeqoZtAOpya4fABmob",
+   "sp_title": "Project One - Resurrection",
+   "release_date": "2018-10-11",
+   "album": {
+    "id": "6PQtZnBw0hVwGXlm2WuMXb",
+    "name": "Resurrection",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/7IOKoeqoZtAOpya4fABmob",
+   "yt": {
+    "id": "Q3XYeaWc1L0",
+    "channel": "Art of Creation",
+    "dur": 208
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Luminosity",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "sp": "3tsCJT6vwRpluXrK3XDdkb",
+   "spotify": "https://open.spotify.com/track/3tsCJT6vwRpluXrK3XDdkb",
+   "sp_title": "Project One - Luminosity - Pro Mix",
+   "release_date": "2017-11-10",
+   "album": {
+    "id": "4f31rfa3gQCRf3O1qYdY9Q",
+    "name": "EP I",
+    "type": "album"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/3tsCJT6vwRpluXrK3XDdkb",
+   "yt": {
+    "id": "0tqLaN8Egzg",
+    "channel": "Q-dance",
+    "dur": 200
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "The Upside Down",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/track/0Ruke6176pqWxtKyktLUOb",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3640338492",
+   "release_date": "2025-11-27",
+   "sp": "0Ruke6176pqWxtKyktLUOb",
+   "album": {
+    "id": "1BWkYpg39kZo6kUO2cFgww",
+    "name": "The Upside Down",
+    "type": "single"
+   },
+   "sp_title": "Project One, Headhunterz, Wildstylez - The Upside Down",
+   "yt": {
+    "id": "g6JXTUreHO8",
+    "channel": "Project One - Topic",
+    "dur": 213
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Life Beyond Earth",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/track/0LrWTspVs8iqsl65hkwN3P",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3576246231",
+   "release_date": "2008-07-11",
+   "sp": "0LrWTspVs8iqsl65hkwN3P",
+   "album": {
+    "id": null,
+    "name": "Project One",
+    "type": "album"
+   },
+   "sp_title": "Project One - Life Beyond Earth",
+   "yt": {
+    "id": "MZ-Jl9ePnB4",
+    "channel": "Project One - Topic",
+    "dur": 250
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Numbers (Wildstylez Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "sp": "1Kc0A7bkhiRFmE36GeMJqg",
+   "spotify": "https://open.spotify.com/track/1Kc0A7bkhiRFmE36GeMJqg",
+   "sp_title": "Headhunterz, Wildstylez, Project One - Numbers - Wildstylez RMX",
+   "release_date": "2009-04-24",
+   "album": {
+    "id": "7F2eIYXZE5ppeM1enuiro1",
+    "name": "Rate Reducer / Numbers Remixes",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/1Kc0A7bkhiRFmE36GeMJqg",
+   "yt": {
+    "id": "tjEvdPWpl5E",
+    "channel": "Headhunterz",
+    "dur": 358
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Halfway There",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "sp": "2X2kQyTklcgDOv0LM9py6z",
+   "spotify": "https://open.spotify.com/track/2X2kQyTklcgDOv0LM9py6z",
+   "sp_title": "Headhunterz, Wildstylez, Project One - Halfway There - Original Mix",
+   "release_date": "2008-08-09",
+   "album": {
+    "id": "1qyW261EOImSvGltVtRZF9",
+    "name": "The World Is Yours / Halfway There",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/2X2kQyTklcgDOv0LM9py6z",
+   "yt": {
+    "id": "KbzHI7WNvXw",
+    "channel": "Headhunterz",
+    "dur": 298
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "It's An Edit",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "sp": "1Ihy9QTVXij0kKwKr2ZmCm",
+   "spotify": "https://open.spotify.com/track/1Ihy9QTVXij0kKwKr2ZmCm",
+   "sp_title": "Project One - It's An Edit - Pro Mix",
+   "release_date": "2017-11-10",
+   "album": {
+    "id": "4f31rfa3gQCRf3O1qYdY9Q",
+    "name": "EP I",
+    "type": "album"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/1Ihy9QTVXij0kKwKr2ZmCm",
+   "yt": {
+    "id": "iAdcV9ZQ0ZU",
+    "channel": "Q-dance",
+    "dur": 269
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Rate Reducer (Headhunterz Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "sp": "5ZChknRtglrcCEHyIz9DoR",
+   "spotify": "https://open.spotify.com/track/5ZChknRtglrcCEHyIz9DoR",
+   "sp_title": "Headhunterz, Wildstylez, Project One - Rate Reducer - Headhunterz RMX",
+   "release_date": "2009-04-24",
+   "album": {
+    "id": "7F2eIYXZE5ppeM1enuiro1",
+    "name": "Rate Reducer / Numbers Remixes",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/5ZChknRtglrcCEHyIz9DoR",
+   "yt": null
+  },
+  {
+   "artist": "Project One",
+   "title": "The World Is Yours",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "sp": "160nkt0xpwKYOj3hfkudGy",
+   "spotify": "https://open.spotify.com/track/160nkt0xpwKYOj3hfkudGy",
+   "sp_title": "Headhunterz, Wildstylez, Project One - The World Is Yours - Original Mix",
+   "release_date": "2008-08-09",
+   "album": {
+    "id": "1qyW261EOImSvGltVtRZF9",
+    "name": "The World Is Yours / Halfway There",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/160nkt0xpwKYOj3hfkudGy",
+   "yt": {
+    "id": "DcpMdC2DCus",
+    "channel": "Headhunterz",
+    "dur": 318
+   }
+  },
+  {
+   "artist": "Headhunterz & Wildstylez",
+   "title": "Project 1 (Sound Rush Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "sp": "3T3FbGRQ0ZQ0G84AzylIZ4",
+   "spotify": "https://open.spotify.com/track/3T3FbGRQ0ZQ0G84AzylIZ4",
+   "sp_title": "Headhunterz, Wildstylez, Sound Rush, Eurielle - Project 1 - Sound Rush Remix - Edit",
+   "release_date": "2017-11-10",
+   "album": {
+    "id": "4f31rfa3gQCRf3O1qYdY9Q",
+    "name": "EP I",
+    "type": "album"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/3T3FbGRQ0ZQ0G84AzylIZ4",
+   "yt": {
+    "id": "4MzGxAfbnUA",
+    "channel": "Q-dance",
+    "dur": 251
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Maximum Force (Defqon.1 Anthem 2018)",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "sp": "1U0sygn6gImMD3BoybYFNd",
+   "spotify": "https://open.spotify.com/track/1U0sygn6gImMD3BoybYFNd",
+   "sp_title": "Project One, Headhunterz, Wildstylez - Maximum Force (Defqon.1 Anthem 2018) - Pro Mix",
+   "release_date": "2018-05-15",
+   "album": {
+    "id": "3pbkUpBS8cF7mXMJn3aafA",
+    "name": "Maximum Force (Defqon.1 Anthem 2018)",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/1U0sygn6gImMD3BoybYFNd",
+   "yt": {
+    "id": "S02H-lQyghs",
+    "channel": "Q-dance",
+    "dur": 284
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Move With The One",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "sp": "2MiwNiDqpQjeWa4Ajc0eLT",
+   "spotify": "https://open.spotify.com/track/2MiwNiDqpQjeWa4Ajc0eLT",
+   "sp_title": "Project One, Headhunterz, Wildstylez - Move With The One",
+   "release_date": "2026-08-21",
+   "album": {
+    "id": "3r2qyOLYjPvP0hHz3qeDsD",
+    "name": "Move With The One",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/2MiwNiDqpQjeWa4Ajc0eLT",
+   "yt": {
+    "id": "3m6ExcGzk4k",
+    "channel": "Art of Creation",
+    "dur": 184
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Journey Of The Mind",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "sp": "4AkU0GgysCbG75vNq09abL",
+   "spotify": "https://open.spotify.com/track/4AkU0GgysCbG75vNq09abL",
+   "sp_title": "Project One, Wildstylez, Headhunterz - Journey Of The Mind",
+   "release_date": "2018-12-17",
+   "album": {
+    "id": "1PmHVrljyA6IkTQlccT49I",
+    "name": "Journey Of The Mind",
+    "type": "single"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/4AkU0GgysCbG75vNq09abL",
+   "yt": {
+    "id": "lY9pM4iTBto",
+    "channel": "Art of Creation",
+    "dur": 281
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "One Without A Second",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "sp": "6SUlsdWTf4tgNqdvA4AltM",
+   "spotify": "https://open.spotify.com/track/6SUlsdWTf4tgNqdvA4AltM",
+   "sp_title": "Project One - One Without A Second - Pro Mix",
+   "release_date": "2017-11-10",
+   "album": {
+    "id": "4f31rfa3gQCRf3O1qYdY9Q",
+    "name": "EP I",
+    "type": "album"
+   },
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/6SUlsdWTf4tgNqdvA4AltM",
+   "yt": {
+    "id": "XpSwhV5sGPs",
+    "channel": "Q-dance",
+    "dur": 257
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "The Art Of Creation",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "spotify": "https://open.spotify.com/track/2iZFcRfVvr8bwizCeyBzEz",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3576246301",
+   "release_date": "2008-11-14",
+   "sp": "2iZFcRfVvr8bwizCeyBzEz",
+   "album": {
+    "id": null,
+    "name": "The Art Of Creation / Numbers",
+    "type": "single"
+   },
+   "sp_title": "Project One - The Art Of Creation",
+   "yt": {
+    "id": "DRwH4yeBgP8",
+    "channel": "Headhunterz",
+    "dur": 349
+   }
+  }
+ ],
+ "unreleased": [
+  {
+   "artist": "Project One",
+   "title": "Move Your Body",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=UPkrBh6zTBI",
+    "yt_id": "UPkrBh6zTBI"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Love Is Not Enough",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=J_yLjOfNmnc",
+    "yt_id": "J_yLjOfNmnc"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Soul Searching",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=wQ3QfxQ-chE",
+    "yt_id": "wQ3QfxQ-chE"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Million Miles",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=c8jG17RjIUY",
+    "yt_id": "c8jG17RjIUY"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Rise & Fall",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=jdjSR2GiuNo",
+    "yt_id": "jdjSR2GiuNo"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Transforming",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=D6Rj45PmmDU",
+    "yt_id": "D6Rj45PmmDU"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "The Creation Of Art",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Resurrection, Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands (2026-01-03)",
+    "url": "https://1001.tl/q000z41"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=hWnVgbIaDgU",
+    "yt_id": "hWnVgbIaDgU"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "Move With The One (Intro Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "tool",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Project One",
+   "title": "Rate Reducer (Headhunterz Remix) (Live Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "youtube",
+    "url": "https://www.youtube.com/watch?v=fD4zKCwfwPs",
+    "yt_id": "fD4zKCwfwPs"
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "It's An Edit (2026 Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Project One",
+   "title": "ID",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "ID",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Project One",
+   "title": "Life Beyond Earth (2018 Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "soundcloud",
+    "url": "https://soundcloud.com/kelvin-carli-725440120/project-one-life-beyond-earth-2018-edit",
+    "yt_id": null
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "The Art Of Creation (Defqon.1 2018 Live Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": {
+    "type": "soundcloud",
+    "url": "https://soundcloud.com/kelvin-carli-725440120/project-one-art-of-creation-defqon1-2018-live-edit",
+    "yt_id": null
+   }
+  },
+  {
+   "artist": "Project One",
+   "title": "The Zero Hour (Live Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Project One",
+   "title": "Raiders Of The Sun (Headhunterz Edit) (Edit)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands (2026-01-03)",
+    "url": "https://1001.tl/2pbm2xgk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Project One",
+   "title": "The Zero Hour (Qlimax 2016 Live Edit)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands (2026-01-03)",
+    "url": "https://1001.tl/2pbm2xgk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  }
+ ],
+ "unknown_ids": 0,
+ "own_note": "No YouTube or Spotify release found for Move Your Body (Eiffel 65 remix), Love Is Not Enough, Soul Searching, Million Miles, Rise & Fall, Transforming or The Creation Of Art, so they are listed as unreleased."
+}

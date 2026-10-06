@@ -146,7 +146,9 @@
     async init(){
       if(!CFG.supabaseUrl || !CFG.supabaseAnonKey) throw new Error("no keys");
       if(!window.supabase){
-        await new Promise((res, rej) => { const s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"; s.onload = res; s.onerror = () => rej(new Error("supabase-js didn't load")); document.head.appendChild(s); });
+        // jsdelivr first, unpkg as a backup if that request fails
+        const load = src => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = () => { s.remove(); rej(new Error("supabase-js didn't load")); }; document.head.appendChild(s); });
+        await load("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2").catch(() => load("https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"));
       }
       sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, {auth:{persistSession:true, storageKey:"ko26.auth", detectSessionInUrl:true}});
       const { data:{ session } } = await sb.auth.getSession();
