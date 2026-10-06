@@ -80,12 +80,8 @@ alter table public.kickrolls drop constraint if exists kickrolls_rave_check;
 alter table public.kickrolls add constraint kickrolls_rave_check check (rave ~ '^[a-z0-9]{2,16}$');
 create index if not exists kickrolls_rave_idx on public.kickrolls (rave);
 -- one video per person per song per rave (delete yours to post a better take)
-do $fn$ begin
-  if not exists (select 1 from pg_indexes where schemaname = 'public' and indexname = 'kickrolls_one_per_song' and indexdef like '%(owner, rave, song_key)%') then
-    drop index if exists public.kickrolls_one_per_song;
-    create unique index kickrolls_one_per_song on public.kickrolls (owner, rave, song_key);
-  end if;
-end $fn$;
+drop index if exists public.kickrolls_one_per_song;
+create unique index if not exists kickrolls_one_per_song_rave on public.kickrolls (owner, rave, song_key);
 
 -- ---------- linked posts: a TikTok / Instagram post instead of an upload ----------
 alter table public.kickrolls add column if not exists source text not null default 'upload';
@@ -393,12 +389,8 @@ create index if not exists song_ratings_user_idx on public.song_ratings (user_id
 alter table public.song_ratings add column if not exists rave text not null default 'ko26';
 alter table public.song_ratings drop constraint if exists song_ratings_rave_check;
 alter table public.song_ratings add constraint song_ratings_rave_check check (rave ~ '^[a-z0-9]{2,16}$');
-do $fn$ begin
-  if not exists (select 1 from pg_indexes where schemaname = 'public' and indexname = 'song_ratings_pkey' and indexdef like '%(rave, song_key, user_id)%') then
-    alter table public.song_ratings drop constraint if exists song_ratings_pkey;
-    alter table public.song_ratings add constraint song_ratings_pkey primary key (rave, song_key, user_id);
-  end if;
-end $fn$;
+alter table public.song_ratings drop constraint if exists song_ratings_pkey;
+alter table public.song_ratings add constraint song_ratings_pkey primary key (rave, song_key, user_id);
 alter table public.song_ratings enable row level security;
 create or replace function public.ko26_shares_group(other uuid) returns boolean
 language sql stable security definer set search_path = public as $fn$
