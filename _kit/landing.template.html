@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chef's Quest Boards</title>
+<meta name="description" content="Chef's rave planners: set times, artist sheets and kick roll picks for each HSU rave.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
+<style>
+/* Landing: the lobby of quest boards. Same chrome as every edition (near-black, warm panels, gold), one card per rave, newest first. */
+:root{
+  color-scheme:dark;
+  --bg:#0a0a0b;--panel:#16110a;--line:#3a2e1a;
+  --fg:#f4ecd8;--fg-2:#e8d7a9;--muted:#9a8f74;--dim:#6b6250;
+  --gold:#c9a84c;--gold-hi:#ffc85a;--blood-dk:#7c1f14;--violet:#7b2cff;
+  --blackletter:"Pirata One",Georgia,serif;--rpg:"Cinzel",Georgia,serif;
+  --display:"Oswald","Arial Narrow",system-ui,sans-serif;--pixel:"Silkscreen","Courier New",monospace;
+  --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{background:var(--bg)}
+body{margin:0;background-color:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;
+  background-image:
+    radial-gradient(ellipse 70% 260px at 50% 0,color-mix(in srgb,var(--violet) 12%,transparent),transparent 80%),
+    radial-gradient(ellipse 50% 40% at 100% 100%,color-mix(in srgb,var(--blood-dk) 18%,transparent),transparent 80%);
+  background-repeat:no-repeat}
+a{color:inherit}
+a:focus-visible{outline:2px solid var(--gold-hi);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding:22px 16px 64px}
+
+.top{display:flex;align-items:center;gap:16px;padding-bottom:14px}
+.top svg{width:118px;height:auto;flex:none;color:var(--fg)}
+.eyebrow{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--gold)}
+h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54px);line-height:1;margin:2px 0 0;color:var(--fg);
+  text-shadow:0 0 14px color-mix(in srgb,var(--gold) 30%,transparent)}
+.cred{font-size:12.5px;color:var(--muted);margin-top:4px}
+.cred b{color:var(--fg-2);font-weight:600}
+.thorn{position:relative;height:12px;margin:4px 0 22px}
+.thorn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
+.thorn::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:8px;transform:translate(-50%,-50%);background:var(--gold);clip-path:polygon(0 50%,40% 0,50% 50%,60% 0,100% 50%,60% 100%,50% 50%,40% 100%)}
+.intro{color:var(--muted);max-width:60ch;margin:0 0 22px}
+.intro b{color:var(--fg-2);font-weight:600}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:22px}
+.card{position:relative;display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);
+  box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 10%,transparent);transition:border-color .15s,transform .15s}
+.card:hover{border-color:var(--gold)}
+@media (hover:hover){.card:hover{transform:translateY(-2px)}}
+.card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--line);background:#120a24}
+.body{padding:14px 16px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:end}
+.name{font-family:var(--display);font-weight:700;font-size:26px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em}
+.sub{grid-column:1;font-size:13.5px;color:var(--muted)}
+.chip{grid-column:1;justify-self:start;font-family:var(--pixel);font-size:11px;letter-spacing:.06em;padding:4px 8px 3px;border:1px solid var(--line);color:var(--fg-2)}
+.chip.live{border-color:var(--gold);color:var(--gold-hi)}
+.go{grid-column:2;grid-row:1/span 3;align-self:center;font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--bg);background:var(--gold);padding:11px 14px;white-space:nowrap}
+.card:hover .go{background:var(--gold-hi)}
+/* stepped gold item-frame corners, as on the boards */
+.card::before{content:"";position:absolute;inset:5px;pointer-events:none;z-index:2;--gc:var(--gold);
+  background:
+    linear-gradient(var(--gc),var(--gc)) left top/18px 3px no-repeat,linear-gradient(var(--gc),var(--gc)) left top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/18px 3px no-repeat,linear-gradient(var(--gc),var(--gc)) right top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/18px 3px no-repeat,linear-gradient(var(--gc),var(--gc)) left bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/18px 3px no-repeat,linear-gradient(var(--gc),var(--gc)) right bottom/3px 18px no-repeat}
+.foot{margin-top:28px;font-size:12.5px;color:var(--dim);max-width:70ch}
+@media (max-width:560px){
+  .top svg{width:84px}
+  .body{grid-template-columns:1fr}
+  .go{grid-column:1;grid-row:auto;justify-self:stretch;text-align:center;margin-top:6px}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>__GLOW__ __LOGO__</defs></svg>
+<div class="wrap">
+  <header class="top">
+    <svg viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
+    <div>
+      <div class="eyebrow">HSU raves · picks · kick rolls</div>
+      <h1>Chef's Quest Boards</h1>
+      <div class="cred"><b>@danielhdmn</b></div>
+    </div>
+  </header>
+  <div class="thorn"></div>
+  <p class="intro">one board per rave. tap an act for their recent sets, mark the songs you'll <b>kick roll</b> to, and build your run. picks are saved per rave in this browser.</p>
+  <div class="grid" id="eds"></div>
+  <p class="foot">set times and lineups from HSU Events' official posts. tracklists from 1001Tracklists. previews via Deezer. emblems and key art are original artwork, not official logos.</p>
+</div>
+<script>
+/* One entry per rave, newest first. To add a rave: build its folder (see PLAYBOOK.md), drop its key art in assets/, add a line here. */
+const EDITIONS = [
+  {path:"epik26/", art:"assets/epik-26.png", name:"EPIK 2026", sub:"Sat 12 Dec 2026 · Sydney Showground", status:"lineup out · set times tba", live:true},
+  {path:"ko26/",   art:"assets/knockout-26.png", name:"Knockout Outdoor 2026", sub:"Sat 3 Oct 2026 · ENGIE Stadium, Sydney Showground", status:"set times · done", live:false},
+];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+document.getElementById("eds").innerHTML = EDITIONS.map(e => `
+  <a class="card" href="${esc(e.path)}">
+    <img src="${esc(e.art)}" alt="${esc(e.name)} key art" width="1920" height="1080" loading="lazy">
+    <div class="body">
+      <div class="name">${esc(e.name)}</div>
+      <div class="sub">${esc(e.sub)}</div>
+      <span class="chip${e.live ? " live" : ""}">${esc(e.status)}</span>
+      <span class="go">open board &rarr;</span>
+    </div>
+  </a>`).join("");
+</script>
+</body>
+</html>

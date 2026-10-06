@@ -1,0 +1,1 @@
+<filter id="l1glow" x="-10%" y="-20%" width="120%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/> <feFlood flood-color="#C9A84C" flood-opacity="0.45" result="c"/> <feComposite in="c" in2="b" operator="in" result="g"/> <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge> </filter>

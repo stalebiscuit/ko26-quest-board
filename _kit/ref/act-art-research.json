@@ -1,0 +1,206 @@
+{
+ "suae": {
+  "artist": "Suae",
+  "subgenre": "euphoric hardstyle / classics (Aussie)",
+  "vibe": "starry-eyed, uplifting, nostalgic HTID-era euphoria",
+  "motif": "a radiant four-point star-comet soaring upward on a long luminous tail above a small cluster of five tiny stars"
+ },
+ "weaver": {
+  "artist": "Weaver",
+  "subgenre": "Aussie hard dance / hardstyle-meets-UK hardcore",
+  "vibe": "emotive, heart-on-sleeve, 'Broken Heart' bittersweet energy",
+  "motif": "a heart woven from interlaced glowing ribbons, split down the middle by a small gold zig-zag crack"
+ },
+ "hixxy": {
+  "artist": "Hixxy",
+  "subgenre": "UK happy hardcore legend",
+  "vibe": "playful, bouncy, old-school rave joy",
+  "motif": "a spinning vinyl record bursting with confetti and sparkles, its centre label a simple smiling face"
+ },
+ "sickmode": {
+  "artist": "Sickmode",
+  "subgenre": "rawstyle (meme-chaos party raw)",
+  "vibe": "loud, unhinged, 'banger after banger' chaos",
+  "motif": "a cracked fever thermometer exploding at the top into jagged shards and sparks"
+ },
+ "rebelion": {
+  "artist": "Rebelion",
+  "subgenre": "dirty rawstyle",
+  "vibe": "gritty, screeching 'zaag' raw, menacing",
+  "motif": "a big hooked-tooth circular saw blade, tilted, biting into a metal bar and spraying a fan of sparks"
+ },
+ "tnt": {
+  "artist": "TNT (Technoboy 'n' Tuneboy)",
+  "subgenre": "Italian hardstyle classics / reverse bass",
+  "vibe": "explosive, thunderous, old-school reverse bass power",
+  "motif": "a bundle of three dynamite sticks bound with a band, a lit fuse throwing sparks"
+ },
+ "da-tweekaz": {
+  "artist": "Da Tweekaz",
+  "subgenre": "euphoric party hardstyle (Norwegian, pop remixes)",
+  "vibe": "cheerful, singalong, party-anthem fun",
+  "motif": "a banded Viking drinking horn raised high, overflowing with glowing foam and bubbles"
+ },
+ "ran-d": {
+  "artist": "Ran-D",
+  "subgenre": "euphoric raw / hardstyle (Resonance show, KO26 anthem 'Level Up')",
+  "vibe": "epic, cinematic, emotional raw power",
+  "motif": "a two-pronged crystal tuning fork vibrating with concentric resonance rings and three stacked level-up chevrons above"
+ },
+ "headhunterz": {
+  "artist": "Headhunterz",
+  "subgenre": "euphoric hardstyle legend",
+  "vibe": "majestic, soaring, legendary",
+  "motif": "a fierce dragon eye with a slit pupil under a spiked armoured brow ridge"
+ },
+ "d-block-s-te-fan": {
+  "artist": "D-Block & S-te-Fan",
+  "subgenre": "euphoric / classic hardstyle",
+  "vibe": "timeless, melodic, 'The Clock' / 'Shivers' euphoria",
+  "motif": "a twin-bell alarm clock trembling with vibration marks"
+ },
+ "dimitri-k": {
+  "artist": "Dimitri K (ft. MC Robs)",
+  "subgenre": "uptempo hardcore",
+  "vibe": "relentless, war-like, ground-shaking",
+  "motif": "an armoured fist punching down into the ground, jagged cracks and shockwave rings bursting outward"
+ },
+ "aversion": {
+  "artist": "Aversion",
+  "subgenre": "rawstyle (party raw with a hopeful edge)",
+  "vibe": "hard-hitting yet dreamy, 'Live Forever'",
+  "motif": "a jagged spiked infinity loop wreathed in flame with a small star above"
+ },
+ "kruelty": {
+  "artist": "Kruelty",
+  "subgenre": "raw / uptempo industrial",
+  "vibe": "cold, cybernetic, menacing",
+  "motif": "a horned angular machine helmet with a glitch-split visor and offset scanlines"
+ },
+ "dual-damage": {
+  "artist": "Dual Damage",
+  "subgenre": "rawstyle (Get Wrecked)",
+  "vibe": "destructive, heavy, double impact",
+  "motif": "two wrecking balls on chains smashing together in a bright impact flash, one cracked"
+ },
+ "big-k": {
+  "artist": "Big K",
+  "subgenre": "raw party hardstyle",
+  "vibe": "bouncy, rowdy party energy",
+  "motif": "a mirror disco ball bouncing off a springy floor with impact marks and confetti"
+ },
+ "radical-redemption": {
+  "artist": "Radical Redemption",
+  "subgenre": "rawstyle / hardcore ('Brutal')",
+  "vibe": "brutal, dark, laser-lit aggression",
+  "motif": "a stylised horned skull firing twin laser beams from its eye sockets"
+ },
+ "warface": {
+  "artist": "Warface",
+  "subgenre": "rawstyle",
+  "vibe": "battle-scarred, aggressive, warrior",
+  "motif": "a battle mask with angry eye slits, war-paint stripes and a crack"
+ },
+ "lekkerfaces": {
+  "artist": "Lekkerfaces",
+  "subgenre": "uptempo hardcore (Hyper Live)",
+  "vibe": "hyper, manic, unhinged",
+  "motif": "a manic grinning cartoon mask with hypnotic spiral eyes and jagged energy spikes"
+ },
+ "toza": {
+  "artist": "TOZA (ft. MC Pez)",
+  "subgenre": "rawstyle / hard dance hybrid",
+  "vibe": "go-fast, hyper, unstoppable",
+  "motif": "a jagged lightning bolt racing forward with speed streaks"
+ },
+ "the-straikerz": {
+  "artist": "The Straikerz",
+  "subgenre": "rawstyle (playful kickroll raw)",
+  "vibe": "cheeky, high-score, kickroll fun",
+  "motif": "a football mid-flight with flaming kick streaks behind it"
+ },
+ "noisemakers": {
+  "artist": "Noisemakers",
+  "subgenre": "rawstyle (live)",
+  "vibe": "loud, raw, abrasive",
+  "motif": "a megaphone blasting jagged noise waves"
+ },
+ "slaughterhouse": {
+  "artist": "Slaughterhouse",
+  "subgenre": "uptempo / horror hardcore",
+  "vibe": "dark, horror-movie, relentless",
+  "motif": "a tilted butcher's cleaver with a gleaming edge and a hang-hole"
+ },
+ "greazy-texas-fuckerz": {
+  "artist": "Greazy Texas Fuckerz (GPF vs Lil Texas)",
+  "subgenre": "uptempo / hardcore party chaos",
+  "vibe": "rowdy, cowboy chaos, greasy party",
+  "motif": "a cowboy hat with a lone star badge and a dripping grease drop"
+ },
+ "technikore-jts": {
+  "artist": "Technikore & JTS",
+  "subgenre": "UK hardcore / happy hardcore",
+  "vibe": "nostalgic, joyful rave",
+  "motif": "an old-school boombox with glowing speakers and musical sparkles"
+ },
+ "frontliner": {
+  "artist": "Frontliner (The Melodyman Live)",
+  "subgenre": "euphoric hardstyle",
+  "vibe": "melodic, uplifting, soaring",
+  "motif": "a pair of beamed music notes with spread feathered wings"
+ },
+ "wildstylez": {
+  "artist": "Wildstylez (The Journey)",
+  "subgenre": "euphoric hardstyle classics",
+  "vibe": "timeless, sunny, summer euphoria",
+  "motif": "a rising sun with radiating rays over a curling wave"
+ },
+ "gammer": {
+  "artist": "Gammer (The Journey)",
+  "subgenre": "UK hardcore / hard dance",
+  "vibe": "cheeky, energetic, meme-famous",
+  "motif": "a retro microwave oven with dials and heat waves rising"
+ },
+ "tha-playah": {
+  "artist": "Tha Playah (The Journey)",
+  "subgenre": "mainstream hardcore legend",
+  "vibe": "mischievous, joker-like, 'Why So Serious?'",
+  "motif": "a three-pointed jester's cap with bells"
+ },
+ "satirized": {
+  "artist": "Satirized (Neon Funfair Live)",
+  "subgenre": "uptempo / frenchcore (BKJN)",
+  "vibe": "neon carnival, playful-hard",
+  "motif": "a Ferris wheel ringed with glowing bulbs"
+ },
+ "yoshiko": {
+  "artist": "Yoshiko (Insolent Live)",
+  "subgenre": "uptempo hardcore (BKJN)",
+  "vibe": "cute chaos, cheeky, insolent",
+  "motif": "a hatching egg with a zig-zag crack and a cheeky little devil horn poking out"
+ },
+ "major-conspiracy": {
+  "artist": "Major Conspiracy (Vol Gas! 2nd Gear Live)",
+  "subgenre": "uptempo hardcore (BKJN)",
+  "vibe": "full-throttle, high-octane",
+  "motif": "a gear stick with a round knob and a rubber boot, motion streaks"
+ },
+ "noxiouz": {
+  "artist": "Noxiouz (The Catalyst Live)",
+  "subgenre": "uptempo hardcore (BKJN)",
+  "vibe": "volatile, explosive reaction",
+  "motif": "an Erlenmeyer flask with a bubbling reaction and a spark"
+ },
+ "the-dope-doctor": {
+  "artist": "The Dope Doctor (Ghost Mode Live)",
+  "subgenre": "uptempo / hardcore (BKJN)",
+  "vibe": "spooky, eerie, ghost-mode",
+  "motif": "a floating ghost with a medical cross on its chest"
+ },
+ "da-mouth-of-madness": {
+  "artist": "Da Mouth of Madness (Tribute to Dr. Peacock)",
+  "subgenre": "frenchcore (Dr. Peacock tribute, BKJN)",
+  "vibe": "theatrical, dark, plague-doctor madness",
+  "motif": "a plague-doctor beak mask in a top hat with a peacock-feather eye"
+ }
+}

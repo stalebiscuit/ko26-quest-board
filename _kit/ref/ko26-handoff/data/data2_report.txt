@@ -1,0 +1,67 @@
+data2.json consolidation report (generated 2026-10-01)
+Counts = unique tracks (plays in brackets). Sum of plays + unknown_ids = total track rows for every artist (validated).
+
+Artist                   sets  rows       released     unreleased unknown_ids
+Suae                        3    77     44 ( 47 pl)     27 ( 27 pl)           3
+Weaver                      3    55     29 ( 40 pl)     11 ( 15 pl)           0
+Hixxy                       3    72     46 ( 55 pl)      9 ( 12 pl)           5
+Sickmode                    3    93     41 ( 63 pl)     21 ( 30 pl)           0
+Rebelion                    3    77     29 ( 50 pl)     17 ( 27 pl)           0
+TNT                         2    57     27 ( 49 pl)      4 (  8 pl)           0
+Da Tweekaz                  3    91     32 ( 64 pl)     13 ( 27 pl)           0
+Ran-D                       3    40     29 ( 34 pl)      5 (  6 pl)           0
+Headhunterz                 1    22     17 ( 17 pl)      5 (  5 pl)           0
+D-Block & S-te-Fan          0     0      0 (  0 pl)      0 (  0 pl)           0
+Dimitri K                   3    88     52 ( 61 pl)     14 ( 27 pl)           0
+Aversion                    3    59     26 ( 43 pl)     10 ( 16 pl)           0
+Kruelty                     3    97     49 ( 73 pl)     16 ( 23 pl)           1
+Dual Damage                 2    42     29 ( 29 pl)     11 ( 13 pl)           0
+Big K                       3    59     24 ( 41 pl)     12 ( 18 pl)           0
+Radical Redemption          2    40     26 ( 26 pl)     12 ( 13 pl)           1
+Warface                     3    45     26 ( 27 pl)     13 ( 18 pl)           0
+Lekkerfaces                 3    75     45 ( 55 pl)     15 ( 18 pl)           2
+Toza                        3    92     21 ( 58 pl)     13 ( 34 pl)           0
+The Straikerz               2    56     27 ( 39 pl)     11 ( 17 pl)           0
+Noisemakers                 0     0      0 (  0 pl)      0 (  0 pl)           0
+Slaughterhouse              2    44     18 ( 31 pl)      8 ( 13 pl)           0
+Greazy Texas Fuckerz        3   115     77 ( 92 pl)     21 ( 22 pl)           1
+Technikore & JTS            3    65     41 ( 50 pl)     11 ( 15 pl)           0
+Frontliner                  3    29     18 ( 18 pl)      3 ( 11 pl)           0
+Wildstylez                  3    47     32 ( 40 pl)      7 (  7 pl)           0
+Gammer                      2    87     32 ( 47 pl)     25 ( 36 pl)           4
+Tha Playah                  2    36     26 ( 31 pl)      5 (  5 pl)           0
+Satirized                   3    60     37 ( 44 pl)     11 ( 14 pl)           2
+Yoshiko                     2    56     31 ( 33 pl)     18 ( 18 pl)           5
+Major Conspiracy            0     0      0 (  0 pl)      0 (  0 pl)           0
+Noxiouz                     3    60     36 ( 47 pl)      9 ( 13 pl)           0
+The Dope Doctor             2    27     15 ( 17 pl)      6 ( 10 pl)           0
+Da Mouth of Madness         0     0      0 (  0 pl)      0 (  0 pl)           0
+TOTAL                      79  1863    982 (1321 pl)    363 (518 pl)          24
+
+Unreleased by kind (per-artist entries): edit=258, mashup=39, tool=31, ID=27, unreleased=8
+Entries flagged confidence='guess': 158 (mostly third-party DJ edits/VIPs/flips; an edit by the performing act itself is treated as confident).
+Note: 'confidence':'guess' is also set on a few released items where release status is doubtful; the field is optional and absent when confident.
+
+10 least-sure classifications:
+ 1. Michael Calfan & Axwell vs. Empire Of The Sun - Resurrection vs. Walking On A Dream (Ran-D Remix)
+    -> mashup (guess): labelled Remix but structurally a mashup; may exist as a free Ran-D release
+ 2. Frontliner - No Receta (Nexus 2026 Anthem)
+    -> released (guess): 2026 event anthem; release timing unverified
+ 3. Satirized & Lekkerfaces ft. MC Flo - Thunder (Dynamite Saturday 2026 OST)
+    -> unreleased (guess): 2026 event OST; may already be out
+ 4. Major Conspiracy - Down Under (KNOCKOUT X BKJN 2026 OST)
+    -> unreleased (guess): Knockout 2026 OST, likely pre-release at time of the sets
+ 5. TNT - 2001 / 2002 / 2003 / 2004 / 2005
+    -> released (guess): year-titled tracks; could be live 'decade' edits rather than releases
+ 6. Suae & Technikore - Infinity Castle Theme (also Red & Blue Theme, Zankyou Sanka)
+    -> edit (guess): anime-theme reworks; may be free downloads
+ 7. Neophyte Records All Stars - Neophyte Records Mashup #2
+    -> mashup (guess): label mashup that may have been issued on vinyl/digital
+ 8. Charli xcx - Break The Rules (Ran-D Remix)
+    -> released (guess): pop remix by a hardstyle DJ; could be an unofficial bootleg
+ 9. Dimitri K - The Dimi Counter
+    -> tool (guess): title reads like a live intro/counter tool
+10. Mutilator - To The Ground (Rebelion Re-Fuk)
+    -> released (guess): 'Re-Fuk' could be a DJ-only edit
+
+Rules applied: 'ID - ID' rows -> unknown_ids count; artist/title 'ID' or '(ID' -> ID; 'Mashup'/'Mash' or 'A vs. B' / 'A x B' titles -> mashup; 'Tool'/'Intro' -> tool; Live Edit, Bootleg, Exclusive, Closing Edit, 2026 Edit/Rework, B2B, Overdose 'Dose' edits -> edit (confident); other Edit/VIP/Flip/Rework/Re-Edit -> edit (guess unless by the performing act); 2026 event OSTs -> unreleased (guess). Acappellas kept as released (Spotify query drops the word Acappella). Dedup is per artist, case-insensitive, artist order-insensitive, '&'=='and'.
