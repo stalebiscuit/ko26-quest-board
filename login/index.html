@@ -248,6 +248,7 @@ table.t .bar1 i{display:block;height:100%;background:var(--c-one);border-radius:
 .item .body{padding:10px 12px 12px;display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
 .item .nm{font-weight:600;font-size:15.5px;color:var(--fg);overflow-wrap:anywhere;display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px}
 .item .song{color:var(--fg-2);font-size:13.5px;overflow-wrap:anywhere}
+.rv{display:inline-block;margin-right:6px;padding:1px 5px;border:1px solid var(--line);font-size:11px;letter-spacing:.06em;color:var(--gold-hi);vertical-align:1px;white-space:nowrap}
 .item .song b{font-weight:600;color:var(--fg)}
 .item .capt{color:var(--fg-2);font-size:13.5px;font-style:italic;overflow-wrap:anywhere}
 .item .meta{color:var(--muted);font-size:12.5px;font-variant-numeric:tabular-nums}
@@ -672,11 +673,18 @@ document.addEventListener("visibilitychange", () => {
 
 
 /* ---------- moderation: review queue, reported, recently reviewed ---------- */
-const COLS = "id,created_at,owner,act,song,name,caption,path,mime,size_bytes,status,hidden,reviewed_at,review_note,source,external_url,external_id,handle,thumb_url";
+const COLS0 = "id,created_at,owner,act,song,name,caption,path,mime,size_bytes,status,hidden,reviewed_at,review_note,source,external_url,external_id,handle,thumb_url";
+let COLS = COLS0 + ",rave";   // which rave's leaderboard; dropped again if the database hasn't had the multi-rave setup.sql yet
+const raveName = id => ((CFG.raves || {})[id] || {}).short || String(id || "").toUpperCase();
+const raveChip = k => k.rave ? h("span", {class: "rv", title: ((CFG.raves || {})[k.rave] || {}).name || k.rave}, raveName(k.rave)) : null;
 let PROFILES = new Map();
 const videoUrl = path => `${CFG.supabaseUrl}/storage/v1/object/public/${CFG.bucket || "kickrolls"}/${String(path || "").split("/").map(encodeURIComponent).join("/")}`;
 const LIVE_MOD = {
   async lists(){
+    if(COLS !== COLS0){
+      const t = await sb.from("kickrolls").select(COLS).limit(1);
+      if(t.error && /rave/.test(t.error.message || "")) COLS = COLS0;
+    }
     const [q, r, v] = await Promise.all([
       sb.from("kickrolls").select(COLS).eq("status", "pending").order("created_at", {ascending: true}).limit(100),
       sb.from("reports").select("kickroll_id,created_at").order("created_at", {ascending: false}).limit(5000),
@@ -713,7 +721,7 @@ const LIVE_MOD = {
 /* sample moderation backend: fake rows, changes stay in this tab */
 const SAMPLE_MOD = (() => {
   const ago = m => new Date(Date.now() - m * 60000).toISOString();
-  const mk = (i, o) => Object.assign({id: "sample-" + i, owner: "sample-u" + i, source: "upload", path: "", mime: "video/mp4", hidden: false, status: "pending", reviewed_at: null, review_note: null}, o);
+  const mk = (i, o) => Object.assign({id: "sample-" + i, owner: "sample-u" + i, rave: i % 3 ? "ko26" : "epik26", source: "upload", path: "", mime: "video/mp4", hidden: false, status: "pending", reviewed_at: null, review_note: null}, o);
   const link = (src, id, handle, o) => Object.assign({source: src, path: null, mime: null, size_bytes: null, external_id: id, handle,
     external_url: src === "tiktok" ? (id ? `https://www.tiktok.com/@${handle || "sample.user"}/video/${id}` : "https://vt.tiktok.com/ZSsample/") : `https://www.instagram.com/reel/${id}/`, thumb_url: null}, o);
   const profiles = [{user_id: "sample-u6", tiktok: "sample.dancer", instagram: null}, {user_id: "sample-u7", tiktok: null, instagram: "sample_raver"}, {user_id: "sample-u8", tiktok: "sample.someone", instagram: "sample.someone"}];
@@ -820,7 +828,7 @@ function videoBox(k){
 function itemHead(k, extra){
   return [
     h("div", {class: "nm"}, String(k.name || "unnamed"), ...platBits(k), sample ? h("span", {class: "tag"}, "SAMPLE") : null, extra || null),
-    h("div", {class: "song"}, h("b", {}, String(k.act || "")), " — ", String(k.song || "")),
+    h("div", {class: "song"}, raveChip(k), h("b", {}, String(k.act || "")), " — ", String(k.song || "")),
     k.caption ? h("div", {class: "capt"}, "“" + String(k.caption) + "”") : null,
     h("div", {class: "meta"}, `${sydFmt.format(new Date(k.created_at))} · ${ago(k.created_at)} · ${isLink(k) ? "linked post" : mb(k.size_bytes)}`),
     extLink(k),
@@ -913,7 +921,7 @@ function renderMod(m){
   const rec = m.recent || [];
   if(!rec.length){ ul.replaceChildren(h("li", {class: "empty"}, "Nothing reviewed yet.")); return; }
   ul.replaceChildren(...rec.map(k => h("li", {},
-    h("div", {class: "a"}, String(k.name || "unnamed"), h("span", {}, " · ", String(k.act || ""), " — ", String(k.song || ""))),
+    h("div", {class: "a"}, String(k.name || "unnamed"), h("span", {}, " · ", raveChip(k) || "", String(k.act || ""), " — ", String(k.song || ""))),
     h("div", {class: "when", title: sydFmt.format(new Date(k.reviewed_at))}, ago(k.reviewed_at)),
     h("div", {class: "row2"}, stChip(k.status), ...platBits(k), k.hidden ? h("span", {}, "hidden") : null,
       !sample && !isLink(k) && k.path ? h("a", {href: videoUrl(k.path), target: "_blank", rel: "noopener noreferrer"}, "watch") : null, extLink(k)),
@@ -946,7 +954,8 @@ function render(d){
   renderBars($("refs"), (d.referrers || []).map(x => ({name: x.referrer, v: num(x.visitors), q: x.referrer === "direct"})), "No visits in this range.");
   const K = d.kickrolls || {};
   const kt = (l, v, w) => h("div", {}, h("div", {class: "l"}, l), h("div", {class: "v"}, fmt(v)), w || null);
-  $("kr").replaceChildren(kt("VIDEOS", K.videos), kt("RATINGS", K.ratings), kt("UPLOADERS", K.uploaders),
+  const byRave = Object.entries(K.by_rave || {}).map(([id, n]) => raveName(id) + " " + fmt(n)).join(" · ");
+  $("kr").replaceChildren(kt("VIDEOS", K.videos, byRave ? h("div", {class: "w", style: "color:var(--muted)"}, byRave) : null), kt("RATINGS", K.ratings), kt("UPLOADERS", K.uploaders),
     kt("REPORTED", K.reported, num(K.reported) ? h("div", {class: "w"}, "! needs a look") : null));
 }
 
@@ -1206,7 +1215,7 @@ function sampleStats(n){
     referrers: [["direct", .46], ["instagram.com", .22], ["l.facebook.com", .12], ["t.co", .06], ["reddit.com", .05], ["sample-referrer.example", .02]]
       .map(([referrer, f]) => ({referrer, visitors: Math.max(1, Math.round(vis * .6 * f))})),
     hours: H.map((w, hour) => ({hour, views: Math.round(views * w / hw)})).filter(x => x.views > 0),
-    kickrolls: {videos: 37, ratings: 412, uploaders: 21, reported: SAMPLE_MOD.reported().length, pending: SAMPLE_MOD.queue().length, members: 58}
+    kickrolls: {videos: 37, by_rave: {ko26: 31, epik26: 6}, ratings: 412, uploaders: 21, reported: SAMPLE_MOD.reported().length, pending: SAMPLE_MOD.queue().length, members: 58}
   };
 }
 

@@ -2,7 +2,8 @@
 """Automatic kickroll review helper, used by the scheduled Claude reviewer (see tools/REVIEWER.md).
 
   python3 tools/moderate.py fetch            sign in as the moderator, download every pending kickroll (and recently
-                                             reported ones), write a 6-frame contact sheet per video, print JSON
+                                             reported ones) from every rave, write a 6-frame contact sheet per video,
+                                             print JSON (each item says which rave's leaderboard it's on: "rave")
   python3 tools/moderate.py decide ID approve|reject "short reason"
 
 Needs environment variables KO26_MOD_EMAIL and KO26_MOD_PASSWORD (an account listed in public.admins), set in the
@@ -121,7 +122,7 @@ def fetch():
     for k, why in [(k, "pending") for k in pending] + [(k, f"reported x{counts[k['id']]}") for k in flagged]:
         if (k.get("source") or "upload") != "upload":
             img, info, note = link_item(k, tok)
-            items.append({"id": k["id"], "why": why, "source": k["source"], "name": k["name"], "caption": k.get("caption"), "act": k["act"],
+            items.append({"id": k["id"], "why": why, "rave": k.get("rave") or "ko26", "source": k["source"], "name": k["name"], "caption": k.get("caption"), "act": k["act"],
                           "song": k["song"], "created_at": k["created_at"], "post": (info or {}).get("url") or k["external_url"],
                           "post_handle": (info or {}).get("handle") or k.get("handle"), "post_title": (info or {}).get("title", ""),
                           "cover_image": img, "note": note})
@@ -133,7 +134,7 @@ def fetch():
             img, dur = sheet(vid, os.path.join(OUT, k["id"] + ".jpg"))
         except Exception as e:
             img, dur = None, 0
-        items.append({"id": k["id"], "why": why, "name": k["name"], "caption": k.get("caption"), "act": k["act"], "song": k["song"],
+        items.append({"id": k["id"], "why": why, "rave": k.get("rave") or "ko26", "name": k["name"], "caption": k.get("caption"), "act": k["act"], "song": k["song"],
                       "created_at": k["created_at"], "seconds": round(dur, 1), "size_mb": round(k["size_bytes"] / 1048576, 1),
                       "contact_sheet": img, "video": url})
     print(json.dumps(items, indent=1))

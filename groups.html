@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="KO26 Groups: start a group with your rave crew, share the invite link, and compare your kickrolls on your own leaderboard.">
+<meta name="description" content="Groups: start a group with your rave crew, share the invite link, and compare your kickrolls from every rave on your own leaderboard.">
 <meta name="theme-color" content="#0a0a0b">
-<title>Groups · KO26 Kickrolls</title>
+<title>Groups · Kickrolls</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
@@ -260,6 +260,12 @@ a.mini{text-decoration:none}
 .tag.own{background:var(--gold-hi);color:var(--kick-ink)}
 .tag.own .ic{width:11px;height:9px;vertical-align:0}
 .tag.you{background:var(--rel);color:var(--kick-ink)}
+/* which rave a kickroll / song is from: KO26 purple, EPIK red */
+.rvt{--rc:var(--gold);display:inline-flex;align-items:center;font-family:var(--display);font-weight:700;font-size:10.5px;letter-spacing:.08em;line-height:1;padding:3px 6px 2px;border:1px solid color-mix(in srgb,var(--rc) 60%,transparent);color:var(--rc);background:color-mix(in srgb,var(--rc) 12%,transparent);white-space:nowrap;vertical-align:1px;text-decoration:none}
+.rvt.ko{--rc:#b98cff}
+.rvt.epik{--rc:#ff6b6b}
+.ravef{margin:0 0 12px}
+.ravef .seg{display:inline-flex;flex-wrap:wrap}
 .acts2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;max-width:900px}
 .panel{border:1px solid var(--line);background:var(--panel);padding:16px}
 .panel h3{margin:0 0 4px;font-family:var(--rpg);font-weight:700;font-size:14.5px;letter-spacing:.08em;color:var(--gold-hi)}
@@ -393,20 +399,20 @@ a.mini{text-decoration:none}
     <div class="brand">
       <svg class="emblem logo" viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
       <div class="txt">
-        <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Crews</div>
+        <div class="eyebrow">Every rave <span class="sep">·</span> Crews</div>
         <h1>Groups</h1>
         <div class="cd" id="cd">your crew's own kickroll leaderboard</div>
       </div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
-    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="ko26.html">Quest board</a><a href="leaderboard.html">Leaderboard</a><a href="gallery.html">Gallery</a><a href="groups.html" aria-current="page">Groups</a><span class="acct" id="acct" aria-live="polite"></span></nav>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="groups.html" aria-current="page">Groups</a><span class="acct" id="acct" aria-live="polite"></span></nav>
   </header>
 
   <p class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></p>
 
   <main id="main" tabindex="-1"><p class="loading">Loading…</p></main>
 
-  <p class="foot">A group only compares its members' kickrolls from the main <a class="src" href="leaderboard.html">leaderboard</a>: posts are approved kickrolls, ratings come from everyone at KO26. Anyone with the invite link can join, so share it with your crew only.</p>
+  <p class="foot">Groups work across every rave: a group compares its members' kickrolls from each rave's leaderboard (pick a rave on the <a class="src" href="index.html">All raves</a> page). Posts are approved kickrolls, ratings come from everyone at that rave. Anyone with the invite link can join, so share it with your crew only.</p>
 </div>
 <div class="toast" id="toast" role="status" hidden></div>
 
@@ -421,7 +427,7 @@ a.mini{text-decoration:none}
 </svg>
 
 <script src="ko-config.js"></script>
-<script src="ko-supa.js"></script>
+<script src="ko-supa.js" data-global></script>
 <script src="ko-track.js" defer></script>
 <script>
 (function(){
@@ -434,6 +440,11 @@ const ICON = n => `<svg class="ic" aria-hidden="true"><use href="#i-${n}"/></svg
 const plural = (n, w, ws) => n + " " + (n === 1 ? w : (ws || w + "s"));
 const NET = {tiktok:"TikTok", instagram:"Instagram"};
 const QUIET = /^(sign in to do that|cancelled)$/i;
+// groups are global: every rave's kickrolls and songs, labelled, with an optional filter
+const RAVE_IDS = Object.keys(KO.RAVES || {});
+const rvTag = id => `<span class="rvt ${esc((KO.RAVES[id] || {}).theme || "")}">${esc(KO.raveName(id))}</span>`;
+const lbLink = (rave, act, key, song) => KO.raveHref("leaderboard.html", rave) + "#act=" + encodeURIComponent(act) + (key ? "&song=" + encodeURIComponent(key) + (song ? "&t=" + encodeURIComponent(song) : "") : "");
+let raveF = "";
 
 let toastT = 0;
 function toast(msg, err){
@@ -450,17 +461,17 @@ async function render(){
   const my = ++seq, main = $("#main"), r = route();
   const set = html => { if(my === seq){ main.innerHTML = `<div class="view">${html}</div>`; } };
   if(r.join && r.join !== joinTried){ joinTried = r.join; joinErr = ""; set(`<p class="loading">Joining the group…</p>`); return joinFlow(r.join); }
-  if(!KO.user()){ document.title = "Groups · KO26 Kickrolls"; return set(pitchHTML(r.join)); }
+  if(!KO.user()){ document.title = "Groups · Kickrolls"; return set(pitchHTML(r.join)); }
   try{
     if(r.g){
-      const [b, ss] = await Promise.all([KO.groupBoard(r.g), KO.groupSongs(r.g).then(x => { songsErr = ""; return x; }, e => { songsErr = (e && e.message) || String(e); return []; })]);
+      const [b, ss] = await Promise.all([KO.groupBoard(r.g, raveF), KO.groupSongs(r.g, raveF).then(x => { songsErr = ""; return x; }, e => { songsErr = (e && e.message) || String(e); return []; })]);
       if(my !== seq) return;
-      board = b; songs = ss; document.title = b.group.name + " · Groups · KO26";
+      board = b; songs = ss; document.title = b.group.name + " · Groups";
       set(groupHTML(b));
     }else{
       const gs = await KO.myGroups();
       if(my !== seq) return;
-      document.title = "Groups · KO26 Kickrolls";
+      document.title = "Groups · Kickrolls";
       set(listHTML(gs));
     }
   }catch(e){
@@ -484,9 +495,9 @@ async function joinFlow(code){
 // ---------- views ----------
 function pitchHTML(join){
   if(join){
-    return `<section class="pitch gframe"><h2>You're invited</h2><p>A friend wants you in their KO26 group. Sign in or make a free account to join and see who's kick rolling hardest.</p>${joinErr ? `<p class="err">${esc(joinErr)}</p>` : ""}<div class="row"><button type="button" class="btn primary" data-act="join-again">Join the group</button><a class="btn" href="#">What are groups?</a></div></section>`;
+    return `<section class="pitch gframe"><h2>You're invited</h2><p>A friend wants you in their kickroll group. Sign in or make a free account to join and see who's kick rolling hardest.</p>${joinErr ? `<p class="err">${esc(joinErr)}</p>` : ""}<div class="row"><button type="button" class="btn primary" data-act="join-again">Join the group</button><a class="btn" href="#">What are groups?</a></div></section>`;
   }
-  return `<section class="pitch gframe"><h2>Your crew's leaderboard</h2><p>Start a group with your rave crew, share the invite link, and see who posted the most kickrolls and who's rated highest.</p><div class="row"><button type="button" class="btn primary" data-act="signin">Sign in</button></div></section>`;
+  return `<section class="pitch gframe"><h2>Your crew's leaderboard</h2><p>Start a group with your rave crew, share the invite link, and see who posted the most kickrolls and who's rated highest, at every rave.</p><div class="row"><button type="button" class="btn primary" data-act="signin">Sign in</button></div></section>`;
 }
 function listHTML(gs){
   const r = route();
@@ -523,7 +534,7 @@ function sorted(ms){
 function boardHTML(ms){
   let h = `<ol class="board"><li class="mrow hd" aria-hidden="true"><span>#</span><span>Member</span><span>Posts</span><span>Avg ★</span><span>Votes</span><span>Best kickroll</span></li>`;
   sorted(ms).forEach((m, i) => {
-    const best = m.best && m.best.act ? `<a href="leaderboard.html#act=${esc(encodeURIComponent(m.best.act))}">${esc(m.best.song || "kickroll")}</a> <span>· ${esc(m.best.act)}${m.best.votes ? ` · ★${Number(m.best.avg || 0).toFixed(1)}` : ""}</span>` : `<span class="none">${m.posts ? "no rated kickroll yet" : "no kickrolls yet"}</span>`;
+    const best = m.best && m.best.act ? `${rvTag(m.best.rave)} <a href="${esc(lbLink(m.best.rave, m.best.act, m.best.songKey, m.best.song))}">${esc(m.best.song || "kickroll")}</a> <span>· ${esc(m.best.act)}${m.best.votes ? ` · ★${Number(m.best.avg || 0).toFixed(1)}` : ""}</span>` : `<span class="none">${m.posts ? "no rated kickroll yet" : "no kickrolls yet"}</span>`;
     h += `<li class="mrow${m.isMe ? " me" : ""}"><span class="medal${i < 3 && (m.posts || m.votes) ? " m" + (i + 1) : ""}" aria-label="rank ${i + 1}">${i + 1}</span>
       <span class="who"><b>${esc(m.name)}</b>${m.isOwner ? `<span class="crw" title="group owner">${ICON("crown")}<span class="sr">owner</span></span>` : ""}${m.isMe ? `<span class="tag you">you</span>` : ""}${socials(m)}</span>
       <span class="stat s1 k${m.posts ? "" : " dim"}"><b>${m.posts}</b><small>posts</small></span>
@@ -545,6 +556,7 @@ function groupHTML(b){
     const top = rated.slice().sort((a, b) => b.avg - a.avg || b.votes - a.votes)[0];
     h += `<div class="calls"><div class="call">${ICON("stack")}<div><span>Most kickrolls</span><b>${esc(most.name)}</b></div></div>${top ? `<div class="call">${ICON("crown")}<div><span>Highest rated</span><b>${esc(top.name)}</b></div></div>` : ""}</div>`;
   }
+  if(RAVE_IDS.length > 1) h += `<div class="ravef"><div class="seg" role="group" aria-label="Which rave">${[["", "All raves"]].concat(RAVE_IDS.map(id => [id, KO.raveName(id)])).map(([id, t]) => `<button type="button" data-rave="${esc(id)}" aria-pressed="${raveF === id}">${esc(t)}</button>`).join("")}</div></div>`;
   h += `<div class="gtabs" role="tablist" aria-label="Group views"><button type="button" role="tab" data-tab="members" aria-selected="${tab === "members"}">Kickrolls</button><button type="button" role="tab" data-tab="songs" aria-selected="${tab === "songs"}">Songs <span class="count">${songs ? songs.length : 0}</span></button></div>`;
   h += `<section aria-label="Group leaderboard" data-pane="members"${tab === "members" ? "" : " hidden"}><div class="sortbar"><h3>Leaderboard</h3><div class="seg" role="group" aria-label="Sort by">${[["rated", "Best rated"], ["posts", "Most posts"], ["votes", "Most votes"]].map(([k, t]) => `<button type="button" data-sort="${k}" aria-pressed="${sortBy === k}">${t}</button>`).join("")}</div></div><div style="height:10px"></div><div id="boardBox">${boardHTML(ms)}</div>`;
   if(ms.length < 2) h += `<p class="solo">Just you so far. Share the invite link to fill your leaderboard.</p>`;
@@ -563,17 +575,14 @@ function groupHTML(b){
   return h + `</div>`;
 }
 
-function songHref(s){
-  const set = KO.sets[s.act], listed = set && (set.tracks || []).some(t => t.key === s.songKey);
-  return "leaderboard.html#act=" + encodeURIComponent(s.act) + "&song=" + encodeURIComponent(s.songKey) + (listed ? "" : "&t=" + encodeURIComponent(s.song || ""));
-}
+const songHref = s => lbLink(s.rave, s.act, s.songKey, s.song);
 function songsHTML(){
   if(songsErr) return `<p class="note">Couldn't load the group's song ratings: <b>${esc(songsErr)}</b></p>`;
-  if(!songs || !songs.length) return `<p class="empty-g"><b>No one's rated a song yet.</b> Open any song on the <a class="src" href="leaderboard.html">leaderboard</a> and tap the ♪ stars.</p>`;
+  if(!songs || !songs.length) return `<p class="empty-g"><b>No one's rated a song${raveF ? " from " + esc(KO.raveName(raveF)) : ""} yet.</b> Open any song on a rave's leaderboard (from <a class="src" href="index.html">All raves</a>) and tap the ♪ stars.</p>`;
   let h = `<div class="sortbar"><h3>Songs</h3><span class="sub2">group average, best first</span></div><div style="height:10px"></div><ol class="slist">`;
   songs.forEach((s, i) => {
     const j = String(s.song || "").indexOf(" - "), title = j > 0 ? s.song.slice(j + 3) : (s.song || s.songKey), artist = j > 0 ? s.song.slice(0, j) : "";
-    h += `<li class="srate"><span class="sn">${i + 1}</span><div class="stx"><a href="${esc(songHref(s))}">${esc(title)}</a><span>${artist ? esc(artist) + " · " : ""}${esc(s.act)}</span><span class="chips">${(s.ratings || []).map(r => `<span class="chip${r.isMe ? " me" : ""}">${esc(r.isMe ? "you" : r.name)} ★${esc(r.stars)}</span>`).join("")}</span></div><div class="savg"><b>${isFinite(s.avg) ? s.avg.toFixed(1) : "–"}</b><small>♪★ · ${plural(s.n || 0, "rating")}</small></div></li>`;
+    h += `<li class="srate"><span class="sn">${i + 1}</span><div class="stx"><a href="${esc(songHref(s))}">${esc(title)}</a><span>${rvTag(s.rave)} ${artist ? esc(artist) + " · " : ""}${esc(s.act)}</span><span class="chips">${(s.ratings || []).map(r => `<span class="chip${r.isMe ? " me" : ""}">${esc(r.isMe ? "you" : r.name)} ★${esc(r.stars)}</span>`).join("")}</span></div><div class="savg"><b>${isFinite(s.avg) ? s.avg.toFixed(1) : "–"}</b><small>♪★ · ${plural(s.n || 0, "rating")}</small></div></li>`;
   });
   return h + `</ol>`;
 }
@@ -594,6 +603,8 @@ async function copy(text){
 }
 const gid = () => route().g;
 document.addEventListener("click", async e => {
+  const rb = e.target.closest("[data-rave]");
+  if(rb){ if(raveF !== rb.dataset.rave){ raveF = rb.dataset.rave; await render(); const nb = $(`[data-rave="${CSS.escape(raveF)}"]`); if(nb) nb.focus({preventScroll:true}); } return; }
   const tb = e.target.closest("[data-tab]");
   if(tb){ tab = tb.dataset.tab; for(const b of $$("[data-tab]")) b.setAttribute("aria-selected", String(b === tb)); for(const p of $$("[data-pane]")) p.hidden = p.dataset.pane !== tab; return; }
   const s = e.target.closest("[data-sort]");
@@ -610,7 +621,7 @@ document.addEventListener("click", async e => {
   if(act === "signin") KO.openAccount("Sign in or make a free account to start a group with your crew.").catch(fail);
   else if(act === "join-again"){ joinTried = ""; render(); }
   else if(act === "share" && board){
-    const url = KO.inviteUrl(board.group.invite), title = `Join ${board.group.name} on the KO26 kickroll leaderboard`;
+    const url = KO.inviteUrl(board.group.invite), title = `Join ${board.group.name} on Chef's kickroll leaderboards`;
     if(navigator.share){
       try{ await navigator.share({title, text: title, url}); }catch(err){ if(err && err.name !== "AbortError") toast((await copy(url)) ? "invite link copied" : "couldn't share. copy the link above", !navigator.clipboard); }
     }else toast((await copy(url)) ? "invite link copied" : "couldn't copy. select the link above", false);

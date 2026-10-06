@@ -3,9 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="KO26 Kickroll Leaderboard: post your kick roll to the song, rate everyone else's, crown a winner for every song, artist and stage.">
+<meta name="description" content="Kickroll Leaderboard: post your kick roll to the song, rate everyone else's, crown a winner for every song, artist and stage.">
 <meta name="theme-color" content="#0a0a0b">
 <title>Kickroll Leaderboard · KO26</title>
+<script src="ko-config.js"></script>
+<script>
+// which rave this page shows (?rave=, default ko26): sets the theme before first paint; ko-supa.js does the rest
+(function(){ var C = window.KO_CONFIG || {}, R = C.raves || {}, q = (new URLSearchParams(location.search).get("rave") || "").toLowerCase();
+  var id = R[q] ? q : (C.defaultRave || "ko26"), r = R[id] || {};
+  document.documentElement.dataset.rave = id; document.documentElement.dataset.theme = r.theme || "ko";
+  document.title = "Kickroll Leaderboard · " + (r.short || id.toUpperCase()); })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
@@ -51,7 +59,16 @@
   --p-violet:#a855f7;
   --p-magenta:#e94fd6;
   --p-star:rgba(255,200,90,.8);
+  --main:#ffc85a;
   --tap:44px;
+}
+/* EPIK edition: crimson-black (same palette as epik26/index.html); layout identical */
+html[data-theme="epik"]{
+  --bg:#0d0507; --panel:#180a0d; --panel-2:#1f0b0f; --line:#3f1b21;
+  --fg:#f7eeea; --fg-2:#f0d9d2; --muted:#ab8d8d; --dim:#735458;
+  --violet:#c4161f; --pink:#ff6b6b; --warn:#ff9a3d; --scrim:rgba(8,2,4,.8); --main:#ff8a8a;
+  --p-bg:#14040a; --p-block:#4a0810; --p-block-2:#560a13; --p-picked:#8e0d16;
+  --p-soft:#ffcfcf; --p-frame:#ffffff; --p-violet:#c4161f; --p-magenta:#ff6b6b; --p-star:rgba(255,138,138,.55);
 }
 [hidden]{display:none!important}
 *{box-sizing:border-box}
@@ -264,6 +281,9 @@ a.mini{text-decoration:none}
 .stg[data-stage="arena"]{--c:var(--arena)}
 .stg[data-stage="pit"]{--c:var(--pit)}
 .stg[data-stage="oasis"]{--c:var(--oasis)}
+.stg[data-stage="main"]{--c:var(--main)}
+.stages.one{grid-template-columns:minmax(0,1fr)}
+.stages.one .acts{grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr))}
 .stg-h{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 10px;padding:0 2px 8px;border-bottom:2px solid var(--c)}
 .stg-h .nm{display:flex;flex-direction:column;line-height:1}
 .stg-h .the{font-family:var(--display);font-weight:600;font-size:11px;letter-spacing:.34em;color:var(--muted)}
@@ -292,6 +312,7 @@ a.mini{text-decoration:none}
 .head[data-stage="arena"]{--c:var(--arena)}
 .head[data-stage="pit"]{--c:var(--pit)}
 .head[data-stage="oasis"]{--c:var(--oasis)}
+.head[data-stage="main"]{--c:var(--main)}
 .h-top{display:grid;grid-template-columns:auto minmax(0,1fr);gap:14px;align-items:center}
 .h-em{width:78px;height:78px;flex:none;display:grid;place-items:center;color:var(--p-soft);--acc:var(--gold-hi);--sw:2.4;
   background:radial-gradient(circle at 50% 40%,var(--p-block-2),var(--p-bg) 95%);border:1px solid var(--gold);
@@ -419,6 +440,7 @@ a.mini{text-decoration:none}
 .lc[data-stage="arena"]{--c:var(--arena)}
 .lc[data-stage="pit"]{--c:var(--pit)}
 .lc[data-stage="oasis"]{--c:var(--oasis)}
+.lc[data-stage="main"]{--c:var(--main)}
 .lc.all{border-color:var(--gold);background:var(--panel-2)}
 .lc .lab{display:flex;align-items:center;justify-content:space-between;gap:6px;padding:10px 10px 8px;font-family:var(--rpg);font-weight:700;font-size:11.5px;letter-spacing:.08em;color:var(--c)}
 .lc .vbox{aspect-ratio:4/5}
@@ -494,6 +516,7 @@ a.mini{text-decoration:none}
   .jump button[data-jump="arena"]{--c:var(--arena)}
   .jump button[data-jump="pit"]{--c:var(--pit)}
   .jump button[data-jump="oasis"]{--c:var(--oasis)}
+  .stages.one{gap:0}
   .leaders{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media (max-width:760px){
@@ -541,7 +564,7 @@ a.mini{text-decoration:none}
     <div class="brand">
       <svg class="emblem logo" viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
       <div class="txt">
-        <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Kickrolls</div>
+        <div class="eyebrow" id="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Kickrolls</div>
         <h1>Kickroll Leaderboard</h1>
         <div class="cd" id="cd" aria-live="polite">loading…</div>
       </div>
@@ -552,7 +575,7 @@ a.mini{text-decoration:none}
       <div class="cell"><b id="hudS">0</b><span>songs</span></div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
-    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="ko26.html">Quest board</a><a href="leaderboard.html" aria-current="page">Leaderboard</a><a href="gallery.html">Gallery</a><a href="groups.html">Groups</a><span class="acct" id="acct" aria-live="polite"></span></nav>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="ko26.html" data-nav="board">Quest board</a><a href="leaderboard.html?rave=ko26" data-nav="leaderboard.html" aria-current="page">Leaderboard</a><a href="gallery.html?rave=ko26" data-nav="gallery.html">Gallery</a><span class="acct" id="acct" aria-live="polite"></span></nav>
   </header>
 
   <p class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></p>
@@ -567,7 +590,7 @@ a.mini{text-decoration:none}
 
   <main id="main" tabindex="-1"><p class="loading">Loading the board…</p></main>
 
-  <p class="foot">Post a short clip of you kick rolling to a song from an act's KO26 set, then rate everyone else's. Ranking uses a weighted average, so one 5-star vote can't beat twenty 4.8s. Uploads and voting close <b id="footDl">7 days after the rave</b>; after that the winners are final. Report anything that isn't a kickroll.</p>
+  <p class="foot">Post a short clip of you kick rolling to a song from an act's <span class="rv-short">KO26</span> set, then rate everyone else's. Ranking uses a weighted average, so one 5-star vote can't beat twenty 4.8s. Uploads and voting close <b id="footDl">7 days after the rave</b>; after that the winners are final. Report anything that isn't a kickroll.</p>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbName" hidden>
@@ -624,7 +647,6 @@ a.mini{text-decoration:none}
 <symbol id="logo1" viewBox="0 0 400 150"> <defs> <filter id="l1glow" x="-10%" y="-20%" width="120%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/> <feFlood flood-color="#C9A84C" flood-opacity="0.45" result="c"/> <feComposite in="c" in2="b" operator="in" result="g"/> <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge> </filter> <path id="l1fang" d="M92 12 C30 38 26 108 88 140 C58 112 56 52 92 12 Z M60 33 L34 27 L51 47 Z M45 65 L18 74 L45 83 Z M50 103 L32 122 L59 115 Z"/> </defs> <g filter="url(#l1glow)"> <g fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round"> <use href="#l1fang"/> <use href="#l1fang" transform="translate(400 0) scale(-1 1)"/> </g> <path d="M200 8 C202 22 204 26 216 30 C204 34 202 38 200 52 C198 38 196 34 184 30 C196 26 198 22 200 8 Z" fill="#C9A84C" stroke="#FFC85A" stroke-width="0.6" stroke-linejoin="round"/> <path d="M139.26 74.59Q138.3 74.59 137.53 75.55V102.05Q137.53 109.44 143.86 111.17Q147.13 111.94 151.64 111.94V114.72Q135.9 120 134.84 120Q131.96 120 128.98 115.92Q126.01 111.84 126.01 106.37V74.11Q126.01 73.44 137 69.36Q147.99 65.28 149.62 65.28Q150.2 65.28 150.97 68.06Q151.74 70.85 152.74 74.78Q153.75 78.72 154.86 80.59Q155.96 82.46 159.03 82.46V84.38Q156.92 85.34 151.88 87.79Q146.84 90.24 146.46 90.24Q145.02 90.24 142.81 82.42Q140.6 74.59 139.26 74.59ZM166.79 113.47V65.95Q166.79 63.36 165.93 62.26Q165.06 61.15 162.95 61.15V58.46Q175.43 51.94 185.22 46.18L186.76 49.25Q185.8 49.73 184.07 51.12Q182.34 52.51 181.19 53.95Q178.31 57.6 178.31 62.21V70.37Q188.2 65.28 189.83 65.28Q192.9 65.28 195.69 69.12Q198.47 72.96 198.47 77.57V105.79Q198.47 111.07 203.18 112.03V114.14L192.71 120Q190.6 119.14 188.78 117.17Q186.95 115.2 186.95 113.47V85.63Q186.95 76.22 183.5 74.98Q181.86 74.4 178.31 74.4V105.79Q178.31 111.65 182.25 112.42V114.53L172.55 120Q170.44 119.14 168.62 117.17Q166.79 115.2 166.79 113.47ZM233.59 65.28Q234.07 65.28 235.99 66.77Q237.91 68.26 239.83 70.9Q241.75 73.54 241.75 76.03V92.16Q241.75 93.89 236.66 96.38Q231.58 98.88 226.82 100.46Q222.07 102.05 221.69 102.05Q221.69 109.44 228.12 111.17Q231.29 111.94 235.7 111.94V114.72Q219.96 120 218.9 120Q216.02 120 213.05 115.92Q210.07 111.84 210.07 106.37V74.11Q210.07 73.44 221.02 69.36Q231.96 65.28 233.59 65.28ZM221.59 75.55V97.73Q230.23 95.33 230.23 87.36V80.54Q230.23 77.86 228.98 75.98Q227.74 74.11 225.82 74.11Q223.9 74.11 221.59 75.55ZM252.87 56.93Q252.87 55.1 262.66 50.64Q272.46 46.18 274.57 46.18Q275.34 46.18 275.82 46.9Q276.3 47.62 276.58 48.19L277.45 50.02Q278.12 51.26 278.79 52.42Q280.04 54.72 281.96 54.72V56.64Q280.42 57.31 277.83 58.75Q271.78 62.02 271.3 62.02Q269.86 62.02 268.66 57.79Q267.46 53.57 266.12 53.57Q264.39 53.57 264.39 56.45V70.56H274.18V72.86L269.38 75.26H264.39V105.79Q264.39 111.65 268.33 112.42V114.53L258.63 120Q256.52 119.14 254.7 117.17Q252.87 115.2 252.87 113.47V75.26H247.02V73.15L252.87 70.56Z" fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round" paint-order="stroke"/> <path d="M128 136 L272 136" stroke="#C9A84C" stroke-width="1.2"/> <path d="M200 130 L206 136 L200 142 L194 136 Z" fill="#C9A84C"/> </g></symbol>
 </svg>
 
-<script src="ko-config.js"></script>
 <script src="ko-supa.js"></script>
 <script src="ko-track.js" defer></script>
 <script>
@@ -637,10 +659,25 @@ const store = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
-const STAGE_ORDER = ["arena", "pit", "oasis"];
-const STAGE_WORD = {arena:"Arena", pit:"Megapit", oasis:"Oasis"};
-const toMin = t => { const [h, m] = String(t).split(":").map(Number); return ((h < 12 ? h + 12 : h) * 60) + (m || 0); };
-const when = s => `${s.start}–${s.end} pm`;
+// stages come from the rave's json (event.stages); KO26's three by default. Set again once KO.ready() has loaded them.
+let STAGE_ORDER = ["arena", "pit", "oasis"];
+let STAGE_WORD = {arena:"Arena", pit:"Megapit", oasis:"Oasis"};
+function setStages(){
+  const known = {arena:"Arena", pit:"Megapit", oasis:"Oasis"};
+  STAGE_ORDER = Object.keys(KO.STAGES);
+  STAGE_WORD = Object.fromEntries(STAGE_ORDER.map(st => [st, known[st] || String(KO.STAGES[st]).replace(/^The\s+/i, "").replace(/\s+Stage$/i, "")]));
+}
+const RAVE = KO.raveInfo, RS = RAVE.short;
+const toMin = t => { if(!t) return 0; const [h, m] = String(t).split(":").map(Number); return ((h < 12 ? h + 12 : h) * 60) + (m || 0); };
+const when = s => s.start && s.end ? `${s.start}–${s.end} pm` : "set time TBA";
+// this rave's name, nav and links (the theme was set in <head>)
+(function raveChrome(){
+  const dot = ' <span class="sep">·</span> ';
+  $("#eyebrow").innerHTML = [RS, RAVE.tagline, "Kickrolls"].filter(Boolean).map(esc).join(dot);
+  for(const a of $$(".sitenav [data-nav]")) a.href = a.dataset.nav === "board" ? (RAVE.board || "index.html") : KO.raveHref(a.dataset.nav);
+  for(const el of $$(".rv-short")) el.textContent = RS;
+  const md = document.querySelector('meta[name="description"]'); if(md) md.content = RS + " " + md.content;
+})();
 const plural = (n, w, ws) => n + " " + (n === 1 ? w : (ws || w + "s"));
 const safeUrl = u => /^(https?:|blob:)/i.test(String(u || "")) ? String(u) : "";
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -740,9 +777,9 @@ function render(r){
   const isTop = r.view === "top" && !r.act;
   $("#tabTop").setAttribute("aria-current", String(isTop));
   $("#tabArtists").setAttribute("aria-current", String(!isTop));
-  let html = "", crumbs = null, title = "Kickroll Leaderboard · KO26";
+  let html = "", crumbs = null, title = "Kickroll Leaderboard · " + RS;
   if(r.act && !KO.sets[r.act]){
-    html = `<p class="note">Couldn't find the act <b>${esc(r.act)}</b> in the KO26 line-up. <a class="src" href="#">Back to all artists</a></p>`;
+    html = `<p class="note">Couldn't find the act <b>${esc(r.act)}</b> in the ${esc(RS)} line-up. <a class="src" href="#">Back to all artists</a></p>`;
   }else if(r.act && r.song){
     const v = songView(r.act, r.song, r.t); html = v.html; title = v.title + " · Kickrolls";
     crumbs = [["All artists", "#"], [r.act, actHref(r.act)], [v.title, null]];
@@ -770,7 +807,7 @@ function render(r){
 // ---------- bits ----------
 function emblem(act, cls){
   const id = "em-" + KO.slug(act);
-  return document.getElementById(id)
+  return RAVE.actIcons !== false && document.getElementById(id)
     ? `<span class="${cls}" aria-hidden="true"><svg viewBox="0 0 64 64"><use href="#${esc(id)}"/></svg></span>`
     : `<span class="${cls}" aria-hidden="true"><i>${esc(String(act).trim().charAt(0).toUpperCase())}</i></span>`;
 }
@@ -837,9 +874,9 @@ function toolsHTML(k){
 }
 const groupBy = (list, f) => { const m = new Map(); for(const x of list){ const k = f(x); if(!m.has(k)) m.set(k, []); m.get(k).push(x); } return m; };
 const actsByStage = () => {
-  const out = {arena:[], pit:[], oasis:[]};
+  const out = Object.fromEntries(STAGE_ORDER.map(st => [st, []]));
   for(const [act, s] of Object.entries(KO.sets)) (out[s.stage] || (out[s.stage] = [])).push(act);
-  for(const st in out) out[st].sort((a, b) => toMin(KO.sets[a].start) - toMin(KO.sets[b].start));
+  for(const st in out) out[st].sort((a, b) => toMin(KO.sets[a].start) - toMin(KO.sets[b].start));   // stable: no set times keeps the json's order
   return out;
 };
 
@@ -847,7 +884,8 @@ const actsByStage = () => {
 function artistsView(){
   const byAct = groupBy(PUB, k => k.act), groups = actsByStage();
   const stages = STAGE_ORDER.filter(st => groups[st] && groups[st].length).concat(Object.keys(groups).filter(st => !STAGE_ORDER.includes(st) && groups[st].length));
-  let h = `<div class="jump" role="group" aria-label="Jump to stage">${stages.map(st => `<button type="button" data-jump="${esc(st)}">${esc(STAGE_WORD[st] || st)}</button>`).join("")}</div><div class="stages">`;
+  let h = stages.length > 1 ? `<div class="jump" role="group" aria-label="Jump to stage">${stages.map(st => `<button type="button" data-jump="${esc(st)}">${esc(STAGE_WORD[st] || st)}</button>`).join("")}</div>` : "";
+  h += `<div class="stages${stages.length > 1 ? "" : " one"}">`;
   for(const st of stages){
     const acts = groups[st], n = acts.reduce((s, a) => s + (byAct.get(a) || []).length, 0);
     const name = KO.STAGES[st] || st, word = name.replace(/^The\s+/i, "");
@@ -872,15 +910,17 @@ function actView(act){
   const ownSongs = groupBy(ALL.filter(k => k.act === act && !isPub(k) && isMine(k)), k => k.songKey);
   const fans = [...new Set([...bySong.keys(), ...ownSongs.keys()])].filter(key => !seen.has(key));
   const lead = W.byAct[act];
-  let h = `<header class="head gframe" data-stage="${esc(s.stage)}"><div class="h-top">${emblem(act, "h-em")}<div class="h-id"><div class="stage">${esc(KO.STAGES[s.stage] || s.stage)}</div><h2>${esc(act)}</h2><div class="when">${esc(when(s))} <span>· ${toMin(s.end) - toMin(s.start)} min${s.tag ? " · " + esc(s.tag) : ""}</span></div></div></div>`;
+  let h = `<header class="head gframe" data-stage="${esc(s.stage)}"><div class="h-top">${emblem(act, "h-em")}<div class="h-id"><div class="stage">${esc(KO.STAGES[s.stage] || s.stage)}</div><h2>${esc(act)}</h2><div class="when">${esc(when(s))}${s.start && s.end ? ` <span>· ${toMin(s.end) - toMin(s.start)} min${s.tag ? " · " + esc(s.tag) : ""}</span>` : s.tag ? ` <span>· ${esc(s.tag)}</span>` : ""}</div></div></div>`;
   h += `<div class="h-stats"><span class="pill">${plural(ks.length, "kickroll")}</span><span class="pill">${plural(bySong.size, "song")} rolled</span>`;
   if(lead) h += `<span class="lead">${crownTag()}<a href="${esc(kHref(lead))}">${esc(lead.name)}</a>${socials(lead)}${scoreTxt(lead)}</span>`;
   h += `</div></header><div class="actgrid"><div class="side">`;
   const vidId = s.video && /^[\w-]{6,20}$/.test(s.video.id) ? s.video.id : "";
   if(vidId){
-    h += `<button type="button" class="facade" data-yt="${esc(vidId)}" aria-label="Play ${esc(act)}'s KO26 set on YouTube"><img src="https://i.ytimg.com/vi/${esc(vidId)}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="yp">${ICON("play")}</span><span class="yt-t"><b>${esc(s.video.title || act + " @ KO26")}</b><span>${esc([s.video.dur, s.video.channel].filter(Boolean).join(" · "))}</span></span></button>`;
+    h += `<button type="button" class="facade" data-yt="${esc(vidId)}" aria-label="Play ${esc(act)}'s ${esc(RS)} set on YouTube"><img src="https://i.ytimg.com/vi/${esc(vidId)}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><span class="yp">${ICON("play")}</span><span class="yt-t"><b>${esc(s.video.title || act + " @ " + RS)}</b><span>${esc([s.video.dur, s.video.channel].filter(Boolean).join(" · "))}</span></span></button>`;
   }
-  if(s.source === "expected"){
+  if(s.source === "expected" && !tracks.length){
+    h += `<p class="note"><b>Tracklist not posted yet.</b> Add the song you kick rolled to at the bottom of the list, then post your kickroll to it.</p>`;
+  }else if(s.source === "expected"){
     h += `<p class="note"><b>Tracklist not posted yet — expected songs.</b> These are what ${esc(act)} has been playing lately. If your song isn't here, add it at the bottom of the list.</p>`;
   }else if(safeUrl(s.url)){
     h += `<p class="srcline"><a class="src" href="${esc(safeUrl(s.url))}" target="_blank" rel="noopener">tracklist from 1001Tracklists ↗</a>${s.complete ? "" : " · some songs not IDed yet"}</p>`;
@@ -1041,7 +1081,10 @@ function wireUpload(act, key, t){
 // ---------- 4. top 20 ----------
 function topView(){
   const top = KO.rank(PUB).slice(0, 20), closed = KO.closed();
-  const cards = [["Overall", W.overall, "", "all"]].concat(STAGE_ORDER.map(st => [KO.STAGES[st] || st, W.byStage[st], st, ""]));
+  // one stage: the overall leader plus the top three acts' leaders; several stages: one card per stage
+  const cards = [["Overall", W.overall, "", "all"]].concat(STAGE_ORDER.length > 1
+    ? STAGE_ORDER.map(st => [KO.STAGES[st] || st, W.byStage[st], st, ""])
+    : KO.rank(Object.values(W.byAct)).slice(0, 3).map(k => [k.act, k, (KO.sets[k.act] || {}).stage || "", ""]));
   let h = `<div class="sec-h"><h2>${closed ? "Winners" : "Current leaders"}</h2><span>${closed ? "final" : "can still change until voting closes"}</span></div><div class="leaders">`;
   for(const [label, k, st, cls] of cards){
     if(!k){
@@ -1334,7 +1377,7 @@ document.addEventListener("click", e => {
     const box = document.createElement("div"); box.className = "yt";
     const f = document.createElement("iframe");
     f.src = "https://www.youtube-nocookie.com/embed/" + encodeURIComponent(t.dataset.yt) + "?autoplay=1&rel=0&playsinline=1";
-    f.title = t.getAttribute("aria-label") || "KO26 set"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
+    f.title = t.getAttribute("aria-label") || RS + " set"; f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen"; f.allowFullscreen = true;
     box.appendChild(f); t.replaceWith(box);
   }
 });
@@ -1362,6 +1405,7 @@ document.addEventListener("submit", e => {
 (async function start(){
   try{
     const r = await KO.ready();
+    setStages();
     $("#demo").hidden = r.mode !== "demo";
     renderAcct();
     KO.onAuth(() => { renderAcct(); if(busy) authDirty = true; else authRerender(); });

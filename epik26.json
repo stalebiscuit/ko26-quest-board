@@ -1,0 +1,146 @@
+{
+ "event": {
+  "name": "EPIK 2026",
+  "date": "2026-12-12",
+  "venue": "Sydney Showground",
+  "tz": "Australia/Sydney",
+  "stages": {
+   "main": "Main Stage"
+  }
+ },
+ "updated": "2026-10-06",
+ "acts": {
+  "Project One": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Code Black": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "MISH": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Mutilator": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Noxiouz": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Phuture Noize": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Rebelion": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "The Saints": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Suae": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Kid Finley": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "Weaver": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  },
+  "JTS": {
+   "stage": "main",
+   "start": null,
+   "end": null,
+   "tag": null,
+   "video": null,
+   "source": "expected",
+   "url": null,
+   "complete": false,
+   "tracks": []
+  }
+ }
+}

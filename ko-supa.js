@@ -1,9 +1,13 @@
-// Shared data layer for the Kickroll Leaderboard (leaderboard.html) and Gallery (gallery.html).
+// Shared data layer for the Kickroll Leaderboard (leaderboard.html), Gallery (gallery.html) and Groups (groups.html).
+// Every rave has its own leaderboard: the page's ?rave= (default ko26, see `raves` in ko-config.js) picks the rave, its
+// songs (<rave>.json), its deadline, and which kickrolls / song ratings are listed and posted. Groups are global.
 // Live mode: Supabase (anonymous sign-in, table kickrolls / ratings / reports, view kickroll_scores, bucket kickrolls).
 // Demo mode (no keys in ko-config.js, or Supabase unreachable): the same API backed by IndexedDB on this device.
 //
 //   await KO.ready()                     -> {mode: "live" | "demo", reason?}
-//   KO.sets                              -> KO26 sets: {act: {stage, start, end, url, video, tracks:[{n, text, artist, title, key, id}]}}
+//   KO.rave / KO.raveInfo / KO.RAVES     current rave id ("ko26"), its ko-config entry {name, short, tagline, board, theme, deadline}, all raves
+//   KO.raveName(id) / KO.raveHref(page, id?)  short name ("EPIK26") / "leaderboard.html?rave=epik26"
+//   KO.sets                              -> this rave's sets: {act: {stage, start, end, url, video, tracks:[{n, text, artist, title, key, id}]}}
 //   KO.songs()                           -> flat list of every song: {act, stage, key, text, artist, title, n}
 //   await KO.list({act?, songKey?})      -> kickrolls: {id, act, songKey, song, name, caption, url, createdAt, avg, votes, score, mine, myStars}
 //   await KO.upload({file, act, songKey, song, name, caption}, onProgress(0..1)) -> kickroll
@@ -26,15 +30,15 @@
 // Groups (friends compare kickrolls; account needed):
 //   await KO.myGroups()                  [{id, name, invite, isOwner, members}]
 //   await KO.createGroup(name) / KO.joinGroup(code)  -> {id, name}
-//   await KO.groupBoard(id)              {group:{id, name, invite, isOwner}, members:[{userId, name, isMe, isOwner, posts, avg, votes,
-//                                         best:{id, song, act, avg, votes}|null, bestScore, ratingsGiven, social:{tiktok, instagram}}]} ranked best first
+//   await KO.groupBoard(id, rave?)       (every rave, or just one) {group:{id, name, invite, isOwner}, members:[{userId, name, isMe, isOwner, posts, avg, votes,
+//                                         best:{id, rave, song, songKey, act, avg, votes}|null, raves:[...], bestScore, ratingsGiven, social:{tiktok, instagram}}]} ranked best first
 //   await KO.leaveGroup(id) / KO.groupAdmin(id, "remove"|"new_code"|"rename"|"delete", {target, name})
 //   KO.inviteUrl(code)                   link that opens groups.html and joins
 // Song ratings (rate the track itself, 1-5; only you and your group mates see them):
 //   await KO.rateSong({songKey, act, song, stars})     stars 0 removes your rating
 //   await KO.mySongRatings()             {songKey: stars} for the signed-in person
 //   await KO.songMates(songKey)          [{userId, name, stars, isMe}] you + group mates who rated it
-//   await KO.groupSongs(groupId)         [{songKey, act, song, avg, n, ratings:[{userId, name, stars, isMe}]}] best first
+//   await KO.groupSongs(groupId, rave?)  [{rave, songKey, act, song, avg, n, ratings:[{userId, name, stars, isMe}]}] best first
 // Every kickroll item: {id, act, songKey, song, name, caption, status, source:"upload"|"tiktok"|"instagram",
 //   url (video file, uploads only), link (the post on TikTok/Instagram), embedUrl (official player, or null),
 //   thumb (cover image or null), handle (the post's @handle), social:{tiktok, instagram} (uploader's linked socials),
@@ -43,10 +47,19 @@
 // passwords (bcrypt); this site never sees or stores them. Browsing needs nothing.
 // Kickrolls carry status: "approved" (public), or "pending" / "rejected" (only the uploader sees those).
 (function(){
-  const CFG = Object.assign({bucket:"kickrolls", maxUploadMB:50, deadline:"2026-10-10T23:59:59+11:00"}, window.KO_CONFIG || {});
+  const CFG = Object.assign({bucket:"kickrolls", maxUploadMB:50, defaultRave:"ko26"}, window.KO_CONFIG || {});
+  if(!CFG.raves) CFG.raves = {ko26:{name:"Knockout Outdoor 2026", short:"KO26", tagline:"Level Up", board:"ko26.html", theme:"ko", deadline: CFG.deadline || "2026-10-10T23:59:59+11:00"}};
   const KO = window.KO = {};
   KO.config = CFG;
-  KO.deadline = new Date(CFG.deadline);
+  // ---- which rave this page is about: ?rave=<id>, else the default ----
+  KO.RAVES = CFG.raves;
+  const askedRave = (new URLSearchParams(location.search).get("rave") || "").toLowerCase();
+  KO.rave = /^[a-z0-9]{2,16}$/.test(askedRave) && CFG.raves[askedRave] ? askedRave : (CFG.raves[CFG.defaultRave] ? CFG.defaultRave : Object.keys(CFG.raves)[0]);
+  KO.raveInfo = Object.assign({short: KO.rave.toUpperCase(), name: KO.rave.toUpperCase()}, CFG.raves[KO.rave]);
+  KO.raveName = id => ((CFG.raves[id] || {}).short) || String(id || "").toUpperCase();
+  KO.raveHref = (page, id) => page + "?rave=" + encodeURIComponent(id || KO.rave);
+  const GLOBAL = !!(document.currentScript && document.currentScript.hasAttribute("data-global"));   // groups.html: no rave of its own
+  KO.deadline = new Date(KO.raveInfo.deadline || CFG.deadline || "2026-10-10T23:59:59+11:00");
   KO.closed = () => Date.now() >= KO.deadline.getTime();
   KO.timeLeft = () => Math.max(0, KO.deadline.getTime() - Date.now());
   KO.maxBytes = CFG.maxUploadMB * 1024 * 1024;
@@ -74,16 +87,19 @@
   KO.myName = () => String(ls.get("ko26.name", "") || "").slice(0, 24);
   KO.setMyName = n => ls.set("ko26.name", String(n || "").slice(0, 24));
 
-  // ---- the KO26 sets: ko26.json, built from each act's 1001Tracklists listing ----
+  // ---- this rave's sets: <rave>.json (ko26.json is built from each act's 1001Tracklists listing) ----
   KO.sets = {};
   const slug = s => String(s).normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   KO.slug = slug;
   KO.songs = () => Object.entries(KO.sets).flatMap(([act, s]) => (s.tracks || []).map(t => ({act, stage: s.stage, ...t})));
   KO.song = key => KO.songs().find(s => s.key === key);
   async function loadSets(){
-    const r = await fetch("ko26.json", {cache: "no-cache"});
+    if(GLOBAL){ KO.event = {}; return; }
+    const r = await fetch(KO.rave + ".json", {cache: "no-cache"});
+    if(!r.ok) throw new Error("couldn't load the " + KO.raveInfo.short + " songs (" + r.status + ")");
     const d = await r.json();
     KO.event = d.event || {};
+    if(d.event && d.event.stages) KO.STAGES = d.event.stages;
     for(const [act, s] of Object.entries(d.acts || {})){
       s.tracks = (s.tracks || []).map(([n, text], i) => {
         const j = text.indexOf(" - ");
@@ -125,12 +141,14 @@
   KO.profile = () => ({...myProfile});
 
   // ======================= live: Supabase =======================
-  let sb = null, uid = null;
+  let sb = null, uid = null, noRaveCol = false;
   const live = {
     async init(){
       if(!CFG.supabaseUrl || !CFG.supabaseAnonKey) throw new Error("no keys");
       if(!window.supabase){
-        await new Promise((res, rej) => { const s = document.createElement("script"); s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"; s.onload = res; s.onerror = () => rej(new Error("supabase-js didn't load")); document.head.appendChild(s); });
+        // jsdelivr first, unpkg as a backup if that request fails
+        const load = src => new Promise((res, rej) => { const s = document.createElement("script"); s.src = src; s.onload = res; s.onerror = () => { s.remove(); rej(new Error("supabase-js didn't load")); }; document.head.appendChild(s); });
+        await load("https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2").catch(() => load("https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"));
       }
       sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey, {auth:{persistSession:true, storageKey:"ko26.auth", detectSessionInUrl:true}});
       const { data:{ session } } = await sb.auth.getSession();
@@ -154,10 +172,12 @@
     async signOut(){ await sb.auth.signOut(); },
     url: path => `${CFG.supabaseUrl}/storage/v1/object/public/${CFG.bucket}/${path.split("/").map(encodeURIComponent).join("/")}`,
     async list({act, songKey} = {}){
-      let q = sb.from("kickroll_scores").select("*").order("created_at", {ascending:false}).limit(1000);
-      if(act) q = q.eq("act", act);
-      if(songKey) q = q.eq("song_key", songKey);
-      const { data, error } = await q; if(error) throw error;
+      const base = () => { let q = sb.from("kickroll_scores").select("*").order("created_at", {ascending:false}).limit(1000);
+        if(act) q = q.eq("act", act); if(songKey) q = q.eq("song_key", songKey); return q; };
+      let { data, error } = await base().eq("rave", KO.rave);
+      // the database hasn't had the multi-rave setup.sql yet: every kickroll is KO26
+      if(error && /rave/.test(error.message || "") && KO.rave === "ko26"){ noRaveCol = true; ({ data, error } = await base()); }
+      if(error) throw error;
       const ids = data.map(x => x.id);
       let mine = {};
       if(ids.length){
@@ -168,6 +188,7 @@
         social:{tiktok:x.owner_tiktok || "", instagram:x.owner_instagram || ""}}));
       if(uid){  // my own uploads that are still waiting for review (or were turned down)
         let q2 = sb.from("kickrolls").select("*").eq("owner", uid).neq("status", "approved");
+        if(!noRaveCol) q2 = q2.eq("rave", KO.rave);
         if(act) q2 = q2.eq("act", act);
         if(songKey) q2 = q2.eq("song_key", songKey);
         const { data: own } = await q2;
@@ -177,7 +198,7 @@
     },
     async upload({file, act, songKey, song, name, caption}, onProgress){
       const ext = (file.name.match(/\.(mp4|mov|webm|m4v)$/i) || [".mp4"])[0].toLowerCase();
-      const path = `${uid}/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}${ext}`;
+      const path = `${uid}/${KO.rave}/${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 8)}${ext}`;
       const { data:{ session } } = await sb.auth.getSession();
       await new Promise((res, rej) => {  // XHR for upload progress
         const x = new XMLHttpRequest();
@@ -191,7 +212,7 @@
         x.onerror = () => rej(new Error("network error during upload"));
         x.send(file);
       });
-      const row = {act, song_key: songKey, song, name, caption: caption || null, path, mime: file.type || "video/mp4", size_bytes: file.size};
+      const row = {rave: KO.rave, act, song_key: songKey, song, name, caption: caption || null, path, mime: file.type || "video/mp4", size_bytes: file.size};
       const { data, error } = await sb.from("kickrolls").insert(row).select().single();
       if(error){
         await sb.storage.from(CFG.bucket).remove([path]);
@@ -201,7 +222,7 @@
       return fromRow(data, {status:data.status, avg:0, votes:0, mine:true, myStars:0, social:KO.profile()});
     },
     async linkPost(o){
-      const row = {act:o.act, song_key:o.songKey, song:o.song, name:o.name, caption:o.caption || null, source:o.source, external_url:o.url, external_id:o.id, handle:o.handle, thumb_url:o.thumb};
+      const row = {rave: KO.rave, act:o.act, song_key:o.songKey, song:o.song, name:o.name, caption:o.caption || null, source:o.source, external_url:o.url, external_id:o.id, handle:o.handle, thumb_url:o.thumb};
       const { data, error } = await sb.from("kickrolls").insert(row).select().single();
       if(error) throw new Error(/kickrolls_one_external|external_url/.test(error.message) ? "that post is already on the leaderboard"
         : /kickrolls_one_per_song/.test(error.message) ? "you've already posted a kickroll to this song. delete it first to post a new one"
@@ -209,13 +230,13 @@
       return fromRow(data, {status:data.status, avg:0, votes:0, mine:true, myStars:0, social:KO.profile()});
     },
     async rateSong(o){
-      const q = o.stars ? sb.from("song_ratings").upsert({song_key:o.songKey, user_id:uid, act:o.act, song:o.song, stars:o.stars, updated_at:new Date().toISOString()}, {onConflict:"song_key,user_id"})
-                        : sb.from("song_ratings").delete().eq("song_key", o.songKey).eq("user_id", uid);
+      const q = o.stars ? sb.from("song_ratings").upsert({rave:KO.rave, song_key:o.songKey, user_id:uid, act:o.act, song:o.song, stars:o.stars, updated_at:new Date().toISOString()}, {onConflict:"rave,song_key,user_id"})
+                        : sb.from("song_ratings").delete().eq("rave", KO.rave).eq("song_key", o.songKey).eq("user_id", uid);
       const { error } = await q; if(error) throw new Error(error.message);
     },
     async mySongRatings(){
       if(!uid) return {};
-      const { data } = await sb.from("song_ratings").select("song_key, stars").eq("user_id", uid);
+      const { data } = await sb.from("song_ratings").select("song_key, stars").eq("user_id", uid).eq("rave", KO.rave);
       return Object.fromEntries((data || []).map(r => [r.song_key, r.stars]));
     },
     async rpc(fn, args){
@@ -249,7 +270,7 @@
   const errText = t => { try{ const j = JSON.parse(t); return j.message || j.error; }catch(e){ return ""; } };
   function fromRow(x, extra){
     const source = x.source || "upload";
-    return shape({id:x.id, act:x.act, songKey:x.song_key, song:x.song, name:x.name, caption:x.caption || "", createdAt:x.created_at, source,
+    return shape({id:x.id, rave:x.rave || "ko26", act:x.act, songKey:x.song_key, song:x.song, name:x.name, caption:x.caption || "", createdAt:x.created_at, source,
       url: source === "upload" && x.path ? live.url(x.path) : null, link: x.external_url || null, embedUrl: KO.embedUrl(source, x.external_id, x.external_url),
       thumb: x.thumb_url || null, handle: x.handle || "", ...extra, social: extra.social || {tiktok:"", instagram:""}});
   }
@@ -267,40 +288,44 @@
         r.onsuccess = () => res(r.result); r.onerror = () => rej(r.error);
       });
     },
-    async list({act, songKey} = {}){
-      const ks = (await all("kickrolls")).filter(k => (!act || k.act === act) && (!songKey || k.songKey === songKey));
+    // demo rows from before multi-rave have no rave: they're KO26. rave "*" lists every rave (demo groups)
+    async list({act, songKey, rave} = {}){
+      rave = rave || KO.rave;
+      const ks = (await all("kickrolls")).filter(k => (rave === "*" || (k.rave || "ko26") === rave) && (!act || k.act === act) && (!songKey || k.songKey === songKey));
       const rs = await all("ratings");
       return ks.sort((a, b) => b.createdAt.localeCompare(a.createdAt)).map(k => {
         const mine = rs.filter(r => r.kickrollId === k.id);
         const avg = mine.length ? mine.reduce((s, r) => s + r.stars, 0) / mine.length : 0;
         if(k.blob && !urls.has(k.id)) urls.set(k.id, URL.createObjectURL(k.blob));
         const source = k.source || "upload";
-        return shape({id:k.id, act:k.act, songKey:k.songKey, song:k.song, name:k.name, caption:k.caption, status:"approved", createdAt:k.createdAt, source,
+        return shape({id:k.id, rave:k.rave || "ko26", act:k.act, songKey:k.songKey, song:k.song, name:k.name, caption:k.caption, status:"approved", createdAt:k.createdAt, source,
           url: k.blob ? urls.get(k.id) : null, link:k.link || null, embedUrl: KO.embedUrl(source, k.externalId, k.link), thumb:k.thumb || null, handle:k.handle || "",
           social: k.mine ? KO.profile() : {tiktok:"", instagram:""}, avg, votes:mine.length, mine: !!k.mine, myStars: mine.length ? mine[0].stars : 0});
       });
     },
     async upload({file, act, songKey, song, name, caption}, onProgress){
       for(let p = 0; p <= 1; p += .25){ onProgress && onProgress(p); await new Promise(r => setTimeout(r, 60)); }
-      const k = {id: "demo-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), act, songKey, song, name, caption: caption || "", blob:file, createdAt:new Date().toISOString(), mine:true};
+      if((await all("kickrolls")).some(x => x.mine && (x.rave || "ko26") === KO.rave && x.songKey === songKey)) throw new Error("you've already posted a kickroll to this song. delete it first to post a new one");
+      const k = {id: "demo-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), rave: KO.rave, act, songKey, song, name, caption: caption || "", blob:file, createdAt:new Date().toISOString(), mine:true};
       await tx("kickrolls", "readwrite", s => s.put(k));
       return (await demo.list({songKey})).find(x => x.id === k.id);
     },
     async linkPost(o){
       const dup = (await all("kickrolls")).find(k => k.link === o.url || (o.id && k.externalId === o.id));
       if(dup) throw new Error("that post is already on the leaderboard");
-      const k = {id: "demo-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), act:o.act, songKey:o.songKey, song:o.song, name:o.name, caption:o.caption || "",
+      const k = {id: "demo-" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6), rave: KO.rave, act:o.act, songKey:o.songKey, song:o.song, name:o.name, caption:o.caption || "",
         source:o.source, link:o.url, externalId:o.id, handle:o.handle, thumb:o.thumb, createdAt:new Date().toISOString(), mine:true};
       await tx("kickrolls", "readwrite", s => s.put(k));
       return (await demo.list({songKey:o.songKey})).find(x => x.id === k.id);
     },
     async loadProfile(){ myProfile = ls.get("ko26.demoProfile", {tiktok:"", instagram:""}); },
-    async rateSong(o){ const r = ls.get("ko26.demoSongs", {}); if(o.stars) r[o.songKey] = {stars:o.stars, act:o.act, song:o.song}; else delete r[o.songKey]; ls.set("ko26.demoSongs", r); },
-    async mySongRatings(){ return Object.fromEntries(Object.entries(ls.get("ko26.demoSongs", {})).map(([k, v]) => [k, v.stars])); },
+    // demo song ratings: {"<rave>|<songKey>": {stars, act, song}}; keys without a "|" are from before multi-rave (KO26)
+    async rateSong(o){ const r = ls.get("ko26.demoSongs", {}), k = KO.rave + "|" + o.songKey; if(KO.rave === "ko26") delete r[o.songKey]; if(o.stars) r[k] = {stars:o.stars, act:o.act, song:o.song}; else delete r[k]; ls.set("ko26.demoSongs", r); },
+    async mySongRatings(){ return Object.fromEntries(demoSongs().filter(x => x.rave === KO.rave).map(x => [x.songKey, x.stars])); },
     // demo groups: on this device only, you're the only member
     async rpc(fn, a){
-      if(fn === "ko26_song_mates"){ const r = ls.get("ko26.demoSongs", {})[a.key]; return r ? [{user_id:"demo-user", stars:r.stars, is_me:true, name:KO.myName() || "You"}] : []; }
-      if(fn === "ko26_group_songs") return Object.entries(ls.get("ko26.demoSongs", {})).map(([k, v]) => ({song_key:k, act:v.act, song:v.song, avg:v.stars, n:1,
+      if(fn === "ko26_song_mates"){ const r = demoSongs().find(x => x.rave === (a.rv || "ko26") && x.songKey === a.key); return r ? [{user_id:"demo-user", rave:r.rave, stars:r.stars, is_me:true, name:KO.myName() || "You"}] : []; }
+      if(fn === "ko26_group_songs") return demoSongs().filter(v => !a.rv || v.rave === a.rv).map(v => ({rave:v.rave, song_key:v.songKey, act:v.act, song:v.song, avg:v.stars, n:1,
         ratings:[{user_id:"demo-user", stars:v.stars, is_me:true, name:KO.myName() || "You"}]})).sort((x, y) => y.avg - x.avg);
       const gs = ls.get("ko26.demoGroups", []); const save = () => ls.set("ko26.demoGroups", gs);
       const find = id => { const g = gs.find(x => x.id === id); if(!g) throw new Error("you are not in that group"); return g; };
@@ -308,11 +333,12 @@
       if(fn === "ko26_group_join") throw new Error("joining needs the live leaderboard (demo mode is this device only)");
       if(fn === "ko26_my_groups") return gs.map(g => ({id:g.id, name:g.name, code:g.invite, invite:g.invite, is_owner:true, members:1}));
       if(fn === "ko26_group_board"){
-        const g = find(a.g), mine = (await demo.list()).filter(k => k.mine), rated = mine.filter(k => k.votes);
+        const g = find(a.g), mine = (await demo.list({rave: a.rv || "*"})).filter(k => k.mine), rated = mine.filter(k => k.votes);
         const best = rated.sort((x, y) => y.score - x.score)[0];
         return {group:{id:g.id, name:g.name, invite:g.invite, is_owner:true, owner:"demo-user"}, members:[{user_id:"demo-user", is_me:true, name:KO.myName() || "You",
           tiktok:myProfile.tiktok, instagram:myProfile.instagram, posts:mine.length, avg_stars: rated.length ? rated.reduce((s, k) => s + k.avg, 0) / rated.length : null,
-          votes: mine.reduce((s, k) => s + k.votes, 0), best_score: best ? best.score : null, best: best ? {id:best.id, song:best.song, act:best.act, avg:best.avg, votes:best.votes} : null, ratings_given:0}]};
+          votes: mine.reduce((s, k) => s + k.votes, 0), best_score: best ? best.score : null, best: best ? {id:best.id, rave:best.rave, song:best.song, song_key:best.songKey, act:best.act, avg:best.avg, votes:best.votes} : null,
+          raves:[...new Set((await demo.list({rave:"*"})).filter(k => k.mine).map(k => k.rave))], ratings_given:0}]};
       }
       if(fn === "ko26_group_leave") throw new Error("you own this group: delete it instead, or it stays yours");
       if(fn === "ko26_group_admin"){
@@ -335,6 +361,8 @@
     async signOut(){ setUser(null); }
   };
 
+  const demoSongs = () => Object.entries(ls.get("ko26.demoSongs", {})).map(([k, v]) => { const i = k.indexOf("|");
+    return {rave: i > 0 ? k.slice(0, i) : "ko26", songKey: i > 0 ? k.slice(i + 1) : k, stars:v.stars, act:v.act, song:v.song}; });
   function shape(k){ k.score = KO.score(k.avg, k.votes); return k; }
 
   // ======================= accounts =======================
@@ -455,7 +483,7 @@
     try{ await live.init(); impl = live; KO.mode = "live"; if(me) await live.loadProfile().catch(() => {}); return {mode:"live"}; }
     catch(e){ await demo.init(); impl = demo; KO.mode = "demo"; return {mode:"demo", reason: e && e.message}; }
   })());
-  const guard = () => { if(KO.closed()) throw new Error("voting and uploads closed on " + KO.deadline.toLocaleDateString()); };
+  const guard = () => { if(KO.closed()) throw new Error(KO.raveInfo.short + " voting and uploads closed on " + KO.deadline.toLocaleDateString()); };
   KO.list = o => impl.list(o);
   KO.upload = async (o, p) => {
     guard();
@@ -499,12 +527,13 @@
     await KO.requireAccount("Make a free account (or sign in) to join your friends' group.");
     return grp("ko26_group_join", {code});
   };
-  KO.groupBoard = async id => {
-    const d = await grp("ko26_group_board", {g:id});
+  KO.groupBoard = async (id, rave) => {
+    const d = await grp("ko26_group_board", {g:id, rv:rave || null});
     return {group:{id:d.group.id, name:d.group.name, invite:d.group.invite, isOwner:!!d.group.is_owner},
       members:(d.members || []).map(m => ({userId:m.user_id, name:m.name || "Raver", isMe:!!m.is_me, isOwner:m.user_id === d.group.owner,
         posts:Number(m.posts) || 0, avg:m.avg_stars == null ? null : Number(m.avg_stars), votes:Number(m.votes) || 0,
-        bestScore:m.best_score == null ? null : Number(m.best_score), best:m.best || null, ratingsGiven:Number(m.ratings_given) || 0,
+        bestScore:m.best_score == null ? null : Number(m.best_score), best:m.best ? {...m.best, rave:m.best.rave || "ko26", songKey:m.best.song_key || ""} : null,
+        raves:Array.isArray(m.raves) ? m.raves : [], ratingsGiven:Number(m.ratings_given) || 0,
         social:{tiktok:m.tiktok || "", instagram:m.instagram || ""}}))};
   };
   KO.leaveGroup = id => grp("ko26_group_leave", {g:id});
@@ -515,8 +544,8 @@
   };
   KO.mySongRatings = async () => me ? impl.mySongRatings() : {};
   const mates = rs => (rs || []).map(r => ({userId:r.user_id, name:r.name || "Raver", stars:Number(r.stars), isMe:!!r.is_me}));
-  KO.songMates = async key => me ? mates(await grp("ko26_song_mates", {key})) : [];
-  KO.groupSongs = async id => ((await grp("ko26_group_songs", {g:id})) || []).map(x => ({songKey:x.song_key, act:x.act, song:x.song, avg:Number(x.avg), n:Number(x.n), ratings:mates(x.ratings)}));
+  KO.songMates = async key => me ? mates(await grp("ko26_song_mates", {key, rv:KO.rave})) : [];
+  KO.groupSongs = async (id, rave) => ((await grp("ko26_group_songs", {g:id, rv:rave || null})) || []).map(x => ({rave:x.rave || "ko26", songKey:x.song_key, act:x.act, song:x.song, avg:Number(x.avg), n:Number(x.n), ratings:mates(x.ratings)}));
   KO.groupAdmin = (id, action, o = {}) => grp("ko26_group_admin", {g:id, action, target:o.target || null, new_name:o.name || null});
 
   KO.saveProfile = async p => {

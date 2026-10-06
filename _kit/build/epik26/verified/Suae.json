@@ -1,0 +1,857 @@
+{
+ "sets": [
+  {
+   "event": "Suae @ The Arena, Knockout Outdoor Level Up, Sydney Showground, Australia",
+   "date": "2026-10-03",
+   "url": "https://www.youtube.com/watch?v=pnEWxR2Qo0o",
+   "tracks": [],
+   "video": {
+    "id": "pnEWxR2Qo0o",
+    "dur": "27:29"
+   },
+   "cues": null
+  },
+  {
+   "event": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia",
+   "date": "2026-08-08",
+   "url": "https://1001.tl/fp3qvxk",
+   "tracks": [
+    [
+     "01",
+     "Atmozfears & Audiotricz - Reawakening"
+    ],
+    [
+     "02",
+     "Headhunterz & Sub Zero Project - Our Church (Steve Hill Edit)"
+    ],
+    [
+     "03",
+     "Proppy & Heady vs. Wasted Penguinz - Summer Of Hardstyle x Melancholia (Wasted Penguinz Defqon.1 Mashup)"
+    ],
+    [
+     "04",
+     "Pitchers - Black Is Back (Pulsar (Hardstyle) Remix)"
+    ],
+    [
+     "05",
+     "Walt - Let The Music Play (D-Block & S-te-Fan Remix)"
+    ],
+    [
+     "06",
+     "Tatanka - Afrika"
+    ],
+    [
+     "07",
+     "Frontliner - Discorecord (Galactixx Remix)"
+    ],
+    [
+     "08",
+     "Wildstylez vs. Andrew Rayel - Timeless vs. One In A Million (Pulsar (Hardstyle) Mashup)"
+    ],
+    [
+     "09",
+     "Brennan Heart & Coone vs. Code Black & Toneshifterz - Let There Be Something For Outcasts (Steve Hill Mashup)"
+    ],
+    [
+     "10",
+     "Rosa Walton - I Really Want To Stay At Your House (Suae & Technikore Remix)"
+    ],
+    [
+     "11",
+     "Toneshifterz - Harder Styles United (Official Knockout Anthem 2025)"
+    ],
+    [
+     "12",
+     "Dabin & Kai Wachi & Lø Spirit - Hollow (Firelite & Technikore & Suae 2026 Remix)"
+    ],
+    [
+     "13",
+     "Manian - Hold Me Tonight (Toneshifterz & Suae & Pulsar Remix)"
+    ],
+    [
+     "14",
+     "Max Enforcer - Lost In Paradise (Hardwyre & Steve Hill Pre Midnight Edit)"
+    ],
+    [
+     "15",
+     "The Nasty Boyz - Angel (Technoboy Qlimax 2012 Edit)"
+    ],
+    [
+     "16",
+     "John Summit ft. HAYLA - Where You Are (D-Block & S-te-Fan Remix)"
+    ],
+    [
+     "17",
+     "Cosmic Gate - Exploration Of Space (DNA 2023 Remix)"
+    ],
+    [
+     "18",
+     "Headhunterz - Scrap Attack (Defqon.1 2009 Anthem)"
+    ],
+    [
+     "19",
+     "TNT & DJ Isaac x Derb - Seduction Realm (Steve Hill Edit)"
+    ],
+    [
+     "20",
+     "Bountyhunter x Nik Sitz - Woops To The Sound (Hardwyre & Steve Hill Edit)"
+    ],
+    [
+     "21",
+     "Code Black - Pandora (Overdrive Edit)"
+    ],
+    [
+     "w/",
+     "Code Black - Pandora (PSY Edit)"
+    ],
+    [
+     "w/",
+     "Code Black - Pandora (2K19 Edit)"
+    ],
+    [
+     "22",
+     "Walt & Feliz - Expansion (Pulsar Edit)"
+    ],
+    [
+     "23",
+     "David Guetta x Phuture Noize - Titanium Circles & Squares (Hardwyre & Steve Hill Edit)"
+    ],
+    [
+     "24",
+     "Kaskade ft. Neon Trees - Lessons In Love"
+    ],
+    [
+     "w/",
+     "Kaskade ft. Neon Trees - Lessons In Love (Headhunterz Remix)"
+    ],
+    [
+     "25",
+     "Suae & Pulsar ft. Amba Shepherd - Man On The Run (Update)"
+    ]
+   ],
+   "video": {
+    "id": "t5nPn9LfgwQ",
+    "dur": "57:53"
+   },
+   "cues": [
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    null,
+    2810,
+    null,
+    null,
+    null,
+    3290
+   ]
+  },
+  {
+   "event": "Suae & Steve Hill @ Klassics Stage, HTID, Sydney Showground, Australia",
+   "date": "2026-01-24",
+   "url": "https://1001.tl/11629ujk",
+   "tracks": [
+    [
+     "01",
+     "Proppy & Heady - Summer Of 2011 (The Prophet Refixx)"
+    ],
+    [
+     "02",
+     "Max Enforcer - Lost In Paradise"
+    ],
+    [
+     "03",
+     "Tatanka - Afrika"
+    ],
+    [
+     "04",
+     "Noisecontrollers - Gimme Love"
+    ],
+    [
+     "05",
+     "The Killers - Mr. Brightside (Suae 2018 Remix)"
+    ],
+    [
+     "06",
+     "Yeah Yeah Yeahs - Heads Will Roll"
+    ],
+    [
+     "07",
+     "TNT & DJ Isaac - Digital Nation"
+    ],
+    [
+     "08",
+     "ID - ID"
+    ],
+    [
+     "09",
+     "Styles & Breeze - You're My Angel (Suae Remix)"
+    ],
+    [
+     "10",
+     "Hard Dance Alliance - In My Mind (Steve Hill & Technikal Remix)"
+    ],
+    [
+     "11",
+     "Proppy & Heady - The B-Side"
+    ],
+    [
+     "12",
+     "The Prophet & E-Life - MF DJ"
+    ],
+    [
+     "13",
+     "Anyma & Argy & Son Of Son - Voices In My Head"
+    ],
+    [
+     "14",
+     "Showtek - FTS (Fuck The System)"
+    ],
+    [
+     "15",
+     "Frontliner - Discorecord"
+    ],
+    [
+     "16",
+     "Brennan Heart & Wildstylez - Lose My Mind"
+    ],
+    [
+     "17",
+     "Headhunterz - Rock Civilization"
+    ],
+    [
+     "18",
+     "Refuzion - Without You"
+    ],
+    [
+     "19",
+     "Audiofreq - Warcry"
+    ],
+    [
+     "20",
+     "Manian - Hold Me Tonight (Toneshifterz & Suae & Pulsar Remix)"
+    ]
+   ],
+   "video": null,
+   "cues": null
+  },
+  {
+   "event": "HSU Knockout Special Event, Metro Theatre Sydney, Australia",
+   "date": "2025-10-05",
+   "url": "https://1001.tl/ssx3u71",
+   "tracks": [
+    [
+     "01",
+     "ID - ID"
+    ],
+    [
+     "02",
+     "Builder - Her Voice (Headhunterz Remix)"
+    ],
+    [
+     "03",
+     "Firelite & Suae - You Give Love A Bad Name"
+    ],
+    [
+     "04",
+     "ID - ID"
+    ],
+    [
+     "w/",
+     "Hardik & Overdrive - Low"
+    ],
+    [
+     "05",
+     "Showtek - The Colour Of The Harder Styles (Defqon.1 Anthem 2006)"
+    ],
+    [
+     "06",
+     "Dabin & Kai Wachi & Lø Spirit - Hollow (Firelite & Suae Remix)"
+    ],
+    [
+     "07",
+     "Max Enforcer - Lost In Paradise"
+    ],
+    [
+     "w/",
+     "Zedd ft. Matthew Koma - Spectrum (Acappella)"
+    ],
+    [
+     "08",
+     "Bountyhunter X Far East Movement - Like A Woops (DanFX Mashup)"
+    ],
+    [
+     "09",
+     "Suae & Technikore - Infinity Castle Theme"
+    ],
+    [
+     "10",
+     "TNT - 2004"
+    ],
+    [
+     "11",
+     "Suae & Technikore - Red & Blue Theme"
+    ],
+    [
+     "12",
+     "HUNTR/X - What It Sounds Like X Golden (Suae & Technikore UKHC Remix)"
+    ],
+    [
+     "13",
+     "D-Sturb - Wanna Stay"
+    ],
+    [
+     "14",
+     "Darren Styles & TNT - Cornflakes"
+    ],
+    [
+     "15",
+     "Jayron & Gewoonraves - Knock Knock (Suae & Technikore Edit)"
+    ],
+    [
+     "16",
+     "SawanoHiroyuki[nZk]:XAI - DARK ARIA <LV2> (Suae & Technikore Euphoric Hardstyle Edit)"
+    ],
+    [
+     "17",
+     "D-Block & S-te-Fan & Sub Zero Project - Darkest Hour (The Clock)"
+    ],
+    [
+     "18",
+     "Suae & Technikore - Zankyou Sanka"
+    ],
+    [
+     "19",
+     "Marlon Hoffstadt aka DJ Daddy Trance - It's That Time (LANCE Re-Edit)"
+    ],
+    [
+     "20",
+     "Suae & Technikore - Set You Free (Vocal Mix)"
+    ],
+    [
+     "21",
+     "OneRepublic - Nobody (From Kaiju N°8) (Suae & Technikore Remix)"
+    ],
+    [
+     "22",
+     "Dimitri Vegas & Like Mike & Martin Garrix vs. Benny Benassi ft. Gary Go - Tremor x Cinema (Darren Styles & Gammer Edit)"
+    ],
+    [
+     "23",
+     "ILLENIUM ft. Teddy Swims - All That Really Matters (Suae & Technikore Edit)"
+    ],
+    [
+     "24",
+     "Darren Styles & TNT - Be Somebody"
+    ],
+    [
+     "25",
+     "Creepy Nuts - Otonoke (Suae & Technikore Euphoric Mix)"
+    ],
+    [
+     "26",
+     "League Of Legends ft. Against The Current - Legends Never Die (Wildstylez Bootleg)"
+    ],
+    [
+     "27",
+     "Hektic & Suae - Howl's Moving Castle"
+    ]
+   ],
+   "cues": [
+    null,
+    14,
+    178,
+    337,
+    349,
+    386,
+    423,
+    597,
+    598,
+    701,
+    774,
+    903,
+    1010,
+    1126,
+    1283,
+    1380,
+    1448,
+    1496,
+    1585,
+    1777,
+    1919,
+    2007,
+    2217,
+    2279,
+    2328,
+    2419,
+    2509,
+    2624,
+    2805
+   ],
+   "video": null
+  },
+  {
+   "event": "Steve Hill & Suae & DNA @ Masif 15th Birthday 2025 [FULL AUDIO SET]",
+   "date": "2025-09-06",
+   "url": "https://www.youtube.com/watch?v=6aPVthUbNDg",
+   "video": {
+    "id": "6aPVthUbNDg",
+    "dur": "44:40"
+   },
+   "tracks": [],
+   "cues": null
+  },
+  {
+   "event": "Suae vs. Pulsar vs. Steve Hill @ AR Gang Sydney 2025 [FULL AUDIO SET]",
+   "date": "2025-08-06",
+   "url": "https://www.youtube.com/watch?v=kw1Av0FyXRw",
+   "video": {
+    "id": "kw1Av0FyXRw",
+    "dur": "58:46"
+   },
+   "tracks": [],
+   "cues": null
+  }
+ ],
+ "released": [
+  {
+   "artist": "Manian",
+   "title": "Hold Me Tonight (Toneshifterz & Suae & Pulsar Remix)",
+   "plays": 2,
+   "sets": [
+    1,
+    2
+   ],
+   "spotify": "https://open.spotify.com/track/1pAnUSujVlgTNbmlmWHB91",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/547500232",
+   "yt": {
+    "id": "sxwhWcE4Dok",
+    "channel": "Manian - Topic",
+    "dur": 168
+   },
+   "sp": "1pAnUSujVlgTNbmlmWHB91",
+   "album": {
+    "id": "7DAUj1xZyZV5NjK4LSAZio",
+    "name": "Hold Me Tonight (Toneshifterz & Suae & Pulsar Remix)",
+    "type": "single"
+   },
+   "release_date": "2018-08-31",
+   "sp_title": "Manian, Toneshifterz, Suae, Pulsar - Hold Me Tonight - Toneshifterz & Suae & Pulsar Remix"
+  },
+  {
+   "artist": "Suae & Technikore",
+   "title": "Red & Blue Theme",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "spotify": "https://open.spotify.com/track/2EPfLUIw0a8rycrbSePNhm",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3277736691",
+   "yt": {
+    "id": "RLzPDW8oEG4",
+    "channel": "Suae - Topic",
+    "dur": 158
+   },
+   "sp": "2EPfLUIw0a8rycrbSePNhm",
+   "sp_title": "Suae, Technikore - Red & Blue Theme - Radio Edit",
+   "release_date": "2025-04-11",
+   "album": {
+    "id": "0fRtufGRDMHgjtbz2rHmtD",
+    "name": "Red & Blue Theme",
+    "type": "single"
+   }
+  },
+  {
+   "artist": "Suae & Technikore",
+   "title": "Zankyou Sanka",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "spotify": "https://open.spotify.com/track/66ZtnuYXRgnxBhwZqElvXZ",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3929628771",
+   "yt": {
+    "id": "LpfJndmGaZQ",
+    "channel": "Suae - Topic",
+    "dur": 146
+   },
+   "sp": "66ZtnuYXRgnxBhwZqElvXZ",
+   "sp_title": "Suae, Technikore - Zankyou Sanka - Radio Edit",
+   "release_date": "2026-04-10",
+   "album": {
+    "id": "2nflr8FSjmF0NPYTmEXyDD",
+    "name": "Zankyou Sanka",
+    "type": "single"
+   }
+  },
+  {
+   "artist": "Suae & Technikore",
+   "title": "Set You Free (Vocal Mix)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "spotify": "https://open.spotify.com/search/Suae%20Technikore%20Set%20You%20Free%20Vocal%20Mix",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3260150941",
+   "yt": {
+    "id": "GVfZvJqGVTc",
+    "channel": "Suae - Topic",
+    "dur": 185
+   },
+   "release_date": "2025-03-12",
+   "spotify_note": "Spotify's 'Set You Free Vocal Mixes' EP doesn't carry the plain Vocal Mix; plays via the YouTube upload"
+  },
+  {
+   "artist": "Hektic & Suae",
+   "title": "Howl's Moving Castle",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "spotify": "https://open.spotify.com/track/2wEnIBmNq1fWz53Dg0unG2",
+   "source": "deezer",
+   "proof": "https://www.deezer.com/track/3648342832",
+   "yt": {
+    "id": "p0Zxx7RxmNQ",
+    "channel": "Suae - Topic",
+    "dur": 180
+   },
+   "sp": "2wEnIBmNq1fWz53Dg0unG2",
+   "album": {
+    "id": "1j2smgEdkR53dXMj3nfLk3",
+    "name": "Howl's Moving Castle",
+    "type": "single"
+   },
+   "sp_title": "Suae, Hektic - Howl's Moving Castle - Extended Mix",
+   "release_date": "2025-11-14"
+  },
+  {
+   "artist": "Suae & Technikore",
+   "title": "in the pool",
+   "plays": 0,
+   "sets": [],
+   "sp": "7xZMhQO452IhWHkD2duuf4",
+   "spotify": "https://open.spotify.com/track/7xZMhQO452IhWHkD2duuf4",
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/7xZMhQO452IhWHkD2duuf4",
+   "release_date": "2026-05-08",
+   "album": {
+    "id": "73wQvA1spAQGPeS5IeB7qG",
+    "name": "in the pool",
+    "type": "single"
+   },
+   "sp_title": "Suae, Technikore - in the pool - Radio Edit",
+   "yt": null
+  },
+  {
+   "artist": "Suae & Technikore ft. Christina Rotondo",
+   "title": "What It Sounds Like",
+   "plays": 0,
+   "sets": [],
+   "source": "spotify",
+   "proof": "https://open.spotify.com/track/2BnRxou3R8bajQ3MzyLv2C",
+   "sp": "2BnRxou3R8bajQ3MzyLv2C",
+   "spotify": "https://open.spotify.com/track/2BnRxou3R8bajQ3MzyLv2C",
+   "sp_title": "Suae, Technikore, Christina Rotondo - What It Sounds Like - Radio Edit",
+   "release_date": "2026-02-06",
+   "album": {
+    "id": "76Z26Kib1Wh0vcmfRmYGBR",
+    "name": "What It Sounds Like",
+    "type": "single"
+   },
+   "yt": null
+  }
+ ],
+ "unreleased": [
+  {
+   "artist": "Rosa Walton",
+   "title": "I Really Want To Stay At Your House (Suae & Technikore Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/fp3qvxk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Dabin & Kai Wachi & Lø Spirit",
+   "title": "Hollow (Firelite & Technikore & Suae 2026 Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/fp3qvxk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Suae & Pulsar ft. Amba Shepherd",
+   "title": "Man On The Run (Update)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/fp3qvxk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "The Killers",
+   "title": "Mr. Brightside (Suae 2018 Remix)",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Suae & Steve Hill @ Klassics Stage, HTID, Sydney Showground, Australia (2026-01-24)",
+    "url": "https://1001.tl/11629ujk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Styles & Breeze",
+   "title": "You're My Angel (Suae Remix)",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "Suae & Steve Hill @ Klassics Stage, HTID, Sydney Showground, Australia (2026-01-24)",
+    "url": "https://1001.tl/11629ujk"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Firelite & Suae",
+   "title": "You Give Love A Bad Name",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Dabin & Kai Wachi & Lø Spirit",
+   "title": "Hollow (Firelite & Suae Remix)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "unreleased",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Suae & Technikore",
+   "title": "Infinity Castle Theme",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "HUNTR/X",
+   "title": "What It Sounds Like X Golden (Suae & Technikore UKHC Remix)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "mashup",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Jayron & Gewoonraves",
+   "title": "Knock Knock (Suae & Technikore Edit)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "SawanoHiroyuki[nZk]:XAI",
+   "title": "DARK ARIA <LV2> (Suae & Technikore Euphoric Hardstyle Edit)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "OneRepublic",
+   "title": "Nobody (From Kaiju N°8) (Suae & Technikore Remix)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "ILLENIUM ft. Teddy Swims",
+   "title": "All That Really Matters (Suae & Technikore Edit)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  },
+  {
+   "artist": "Creepy Nuts",
+   "title": "Otonoke (Suae & Technikore Euphoric Mix)",
+   "plays": 1,
+   "sets": [
+    3
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+    "url": "https://1001.tl/ssx3u71"
+   },
+   "checked": [
+    "spotify",
+    "soundcloud",
+    "youtube"
+   ],
+   "clip": null
+  }
+ ],
+ "unknown_ids": 0,
+ "own_note": "Lists only Suae's own productions, remixes and edits played in these sets. 3 unidentified ID track(s) were left out. The Knockout Outdoor 2026 set has a fan-filmed recording but no tracklist yet (1001Tracklists couldn't be reached)."
+}
