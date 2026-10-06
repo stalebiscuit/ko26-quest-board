@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
 <style>
-/* Kickroll Gallery: the quest board's trophy room. Same chrome as index.html (warm near-black, gold item-frame corners, the purple Knockout poster), but video-first: a wall of looping kickrolls, a Hall of Fame on the poster, and a full-screen viewer. */
+/* Kickroll Gallery: the quest board's trophy room. Same chrome as ko26.html (warm near-black, gold item-frame corners, the purple Knockout poster), but video-first: a wall of looping kickrolls, a Hall of Fame on the poster, and a full-screen viewer. */
 :root{
   color-scheme: dark;
   --bg:#0a0a0b;
@@ -73,10 +73,10 @@ body.lb-open{overflow:hidden}
 button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
 a{color:inherit}
 button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
-.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:14px 64px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:18px 64px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 
-/* gold pixel item-frame corners (from index.html) */
+/* gold pixel item-frame corners (from ko26.html) */
 .gframe{position:relative}
 .gframe::before{content:"";position:absolute;inset:5px;pointer-events:none;z-index:4;--gc:var(--gold);
   background:
@@ -490,38 +490,86 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
   .loading i{animation:shim 1.4s linear infinite}
   @keyframes shim{from{background-position:100% 0}to{background-position:0 0}}
 }
+
+/* header laid out exactly like leaderboard/groups/quest board (copied, scoped to .hdr) */
+.hdr .emblem{display:block;color:var(--fg)}
+.hdr .ic{width:1em;height:1em;flex:none;display:inline-block;vertical-align:-.12em}
+
+/* ---------- header / HUD ---------- */
+.hdr{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px 24px;padding:0 0 12px;position:relative}
+.hdr .brand{display:flex;align-items:center;gap:14px;min-width:0}
+.hdr .brand .emblem{width:118px;height:auto;flex:none}
+.hdr .brand .txt{min-width:0}
+.hdr .eyebrow{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--gold);text-transform:none}
+.hdr .eyebrow .sep{color:var(--dim)}
+.hdr .brand h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(32px,5.4vw,50px);line-height:1;margin:2px 0 0;letter-spacing:.01em;text-wrap:balance;color:var(--fg);
+  text-shadow:0 0 14px color-mix(in srgb,var(--gold) 30%,transparent)}
+.hdr .cd{display:inline-flex;align-items:center;gap:7px;margin-top:6px;font-family:var(--display);font-weight:500;font-size:14px;letter-spacing:.04em;color:var(--fg-2);font-variant-numeric:tabular-nums}
+.hdr .cd::before{content:"";width:8px;height:8px;background:var(--rel);box-shadow:0 0 8px var(--rel);flex:none}
+.hdr .cd.closed{color:var(--gold-hi)}
+.hdr .cd.closed::before{background:var(--gold-hi);box-shadow:0 0 8px var(--gold-hi)}
+.hdr .hud{display:flex;gap:6px}
+.hdr .hud .cell{min-width:68px;border:1px solid var(--line);background:var(--panel);padding:6px 10px 7px;text-align:center;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent)}
+.hdr .hud .cell b{display:block;font-family:var(--display);font-weight:700;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.hdr .hud .cell span{font-family:var(--rpg);font-weight:700;font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.hdr .hud .cell.kr b{color:var(--gold-hi)}
+.hdr .thorn{grid-column:1/-1}
+.hdr .sitenav{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin:0}
+.hdr .sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
+.hdr .sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
+@media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
+.hdr .acct{position:relative;display:flex;align-items:center;gap:6px;min-width:0;margin-left:auto}
+.hdr .acct .who{display:inline-flex;align-items:center;gap:7px;min-width:0;max-width:22ch;font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.hdr .acct .who span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hdr .acct .who i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.hdr .acct .btn{min-height:40px;padding:6px 14px;font-size:12.5px}
+.hdr .acct .me{display:inline-flex;align-items:center;gap:7px;min-height:40px;min-width:0;max-width:24ch;padding:0 10px 0 12px;border:1px solid color-mix(in srgb,var(--rel) 45%,var(--line));background:var(--panel);font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.04em;color:var(--fg-2)}
+.hdr .acct .me i{width:8px;height:8px;flex:none;background:var(--rel);box-shadow:0 0 6px var(--rel)}
+.hdr .acct .me span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hdr .acct .me::after{content:"";flex:none;width:6px;height:6px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-2px) rotate(45deg);margin-left:2px}
+.hdr .acct .me[aria-expanded="true"]{border-color:var(--gold)}
+.hdr .acct .me[aria-expanded="true"]::after{transform:translateY(1px) rotate(-135deg)}
+@media (max-width:760px){
+.wrap{padding-block-start:14px}
+.hdr{grid-template-columns:minmax(0,1fr);gap:12px}
+.hdr .brand .emblem{width:84px}
+.hdr .brand h1{font-size:34px}
+.hdr .hud .cell{flex:1;min-width:0}
+}
+@media (max-width:380px){
+.hdr .brand .emblem{width:70px}
+.hdr .brand h1{font-size:30px}
+}
+.hdr .cd b{font-weight:inherit;margin-left:-3px}
+.hdr .hud .cell span{text-transform:none}
+.hdr .sitenav{width:auto;max-width:none;background:none;border:0;padding:0}
+.hdr .sitenav a{flex:none;box-shadow:none}
+.hdr .lede{margin:6px 0 0}
+
 </style>
 </head>
 <body>
 
 <div class="wrap" id="page">
-  <div class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></div>
-  <div class="navrow">
-    <nav class="sitenav" aria-label="Site">
-      <a href="index.html">Quest board</a>
-      <a href="leaderboard.html">Leaderboard</a>
-      <a href="gallery.html" aria-current="page">Gallery</a>
-      <a href="groups.html">Groups</a>
-    </nav>
-    <div class="acct" id="acct" aria-live="polite"></div>
-  </div>
-
-  <header class="top">
-    <div>
-      <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Kickroll Hall</div>
-      <div class="title">
-        <svg class="crown px" viewBox="0 0 13 10" aria-hidden="true"><use href="#i-crown"/></svg>
+  <header class="top hdr">
+    <div class="brand">
+      <svg class="emblem logo" viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
+      <div class="txt">
+        <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Kickrolls</div>
         <h1>Kickroll Gallery</h1>
+        <div class="cd" id="clock" aria-live="polite"><span id="clockL">voting closes in</span><b id="clockV">…</b></div>
       </div>
-      <p class="lede">Every kickroll from Knockout Outdoor 2026. Rate the best ones; each song, artist, stage and the whole rave gets a winner. <a href="leaderboard.html">Post yours on the leaderboard</a>.</p>
     </div>
     <div class="hud" aria-live="polite">
       <div class="cell"><b id="hudN">0</b><span>kickrolls</span></div>
       <div class="cell"><b id="hudV">0</b><span>votes</span></div>
-      <div class="cell clock" id="clock"><span id="clockL">voting closes in</span> <b id="clockV">…</b></div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="ko26.html">Quest board</a><a href="leaderboard.html">Leaderboard</a><a href="gallery.html" aria-current="page">Gallery</a><a href="groups.html">Groups</a><span class="acct" id="acct" aria-live="polite"></span></nav>
   </header>
+  <p class="lede">Every kickroll from Knockout Outdoor 2026. Rate the best ones; each song, artist, stage and the whole rave gets a winner. <a href="leaderboard.html">Post yours on the leaderboard</a>.</p>
+  <div class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></div>
+
 
   <div class="modes">
     <div class="seg" role="tablist" aria-label="Gallery view" id="seg">
@@ -536,7 +584,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
     <div class="loading" aria-label="Loading kickrolls"><i></i><i></i><i></i><i></i></div>
   </main>
 
-  <p class="foot">Fan-made for the KO26 crowd. Ranking uses a weighted average, so one lucky 5-star vote can't beat a clip twenty people loved. Uploads and votes close 7 days after the rave; then the crowns are final. Spot something that shouldn't be here? Open it and tap Report. <a href="index.html">Back to the quest board</a>.</p>
+  <p class="foot">Fan-made for the KO26 crowd. Ranking uses a weighted average, so one lucky 5-star vote can't beat a clip twenty people loved. Uploads and votes close 7 days after the rave; then the crowns are final. Spot something that shouldn't be here? Open it and tap Report. <a href="ko26.html">Back to the quest board</a>.</p>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbName" hidden>
@@ -575,6 +623,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 <div class="toast" id="toast" role="status" hidden></div>
 
 <svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+<symbol id="logo1" viewBox="0 0 400 150"> <defs> <filter id="l1glow" x="-10%" y="-20%" width="120%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/> <feFlood flood-color="#C9A84C" flood-opacity="0.45" result="c"/> <feComposite in="c" in2="b" operator="in" result="g"/> <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge> </filter> <path id="l1fang" d="M92 12 C30 38 26 108 88 140 C58 112 56 52 92 12 Z M60 33 L34 27 L51 47 Z M45 65 L18 74 L45 83 Z M50 103 L32 122 L59 115 Z"/> </defs> <g filter="url(#l1glow)"> <g fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round"> <use href="#l1fang"/> <use href="#l1fang" transform="translate(400 0) scale(-1 1)"/> </g> <path d="M200 8 C202 22 204 26 216 30 C204 34 202 38 200 52 C198 38 196 34 184 30 C196 26 198 22 200 8 Z" fill="#C9A84C" stroke="#FFC85A" stroke-width="0.6" stroke-linejoin="round"/> <path d="M139.26 74.59Q138.3 74.59 137.53 75.55V102.05Q137.53 109.44 143.86 111.17Q147.13 111.94 151.64 111.94V114.72Q135.9 120 134.84 120Q131.96 120 128.98 115.92Q126.01 111.84 126.01 106.37V74.11Q126.01 73.44 137 69.36Q147.99 65.28 149.62 65.28Q150.2 65.28 150.97 68.06Q151.74 70.85 152.74 74.78Q153.75 78.72 154.86 80.59Q155.96 82.46 159.03 82.46V84.38Q156.92 85.34 151.88 87.79Q146.84 90.24 146.46 90.24Q145.02 90.24 142.81 82.42Q140.6 74.59 139.26 74.59ZM166.79 113.47V65.95Q166.79 63.36 165.93 62.26Q165.06 61.15 162.95 61.15V58.46Q175.43 51.94 185.22 46.18L186.76 49.25Q185.8 49.73 184.07 51.12Q182.34 52.51 181.19 53.95Q178.31 57.6 178.31 62.21V70.37Q188.2 65.28 189.83 65.28Q192.9 65.28 195.69 69.12Q198.47 72.96 198.47 77.57V105.79Q198.47 111.07 203.18 112.03V114.14L192.71 120Q190.6 119.14 188.78 117.17Q186.95 115.2 186.95 113.47V85.63Q186.95 76.22 183.5 74.98Q181.86 74.4 178.31 74.4V105.79Q178.31 111.65 182.25 112.42V114.53L172.55 120Q170.44 119.14 168.62 117.17Q166.79 115.2 166.79 113.47ZM233.59 65.28Q234.07 65.28 235.99 66.77Q237.91 68.26 239.83 70.9Q241.75 73.54 241.75 76.03V92.16Q241.75 93.89 236.66 96.38Q231.58 98.88 226.82 100.46Q222.07 102.05 221.69 102.05Q221.69 109.44 228.12 111.17Q231.29 111.94 235.7 111.94V114.72Q219.96 120 218.9 120Q216.02 120 213.05 115.92Q210.07 111.84 210.07 106.37V74.11Q210.07 73.44 221.02 69.36Q231.96 65.28 233.59 65.28ZM221.59 75.55V97.73Q230.23 95.33 230.23 87.36V80.54Q230.23 77.86 228.98 75.98Q227.74 74.11 225.82 74.11Q223.9 74.11 221.59 75.55ZM252.87 56.93Q252.87 55.1 262.66 50.64Q272.46 46.18 274.57 46.18Q275.34 46.18 275.82 46.9Q276.3 47.62 276.58 48.19L277.45 50.02Q278.12 51.26 278.79 52.42Q280.04 54.72 281.96 54.72V56.64Q280.42 57.31 277.83 58.75Q271.78 62.02 271.3 62.02Q269.86 62.02 268.66 57.79Q267.46 53.57 266.12 53.57Q264.39 53.57 264.39 56.45V70.56H274.18V72.86L269.38 75.26H264.39V105.79Q264.39 111.65 268.33 112.42V114.53L258.63 120Q256.52 119.14 254.7 117.17Q252.87 115.2 252.87 113.47V75.26H247.02V73.15L252.87 70.56Z" fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round" paint-order="stroke"/> <path d="M128 136 L272 136" stroke="#C9A84C" stroke-width="1.2"/> <path d="M200 130 L206 136 L200 142 L194 136 Z" fill="#C9A84C"/> </g></symbol>
 <symbol id="i-crown" viewBox="0 0 13 10"><path id="crownBody" fill="currentColor"/><path id="crownGems" fill="var(--gem,#ff2e6e)"/></symbol>
 <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.4l2.95 6.1 6.7.86-4.9 4.66 1.24 6.64L12 17.4l-5.99 3.26 1.24-6.64-4.9-4.66 6.7-.86z"/></symbol>
 <symbol id="i-dice" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18"/></g><g fill="currentColor"><rect x="6.5" y="6.5" width="3" height="3"/><rect x="14.5" y="14.5" width="3" height="3"/><rect x="10.5" y="10.5" width="3" height="3"/><rect x="14.5" y="6.5" width="3" height="3"/><rect x="6.5" y="14.5" width="3" height="3"/></g></symbol>
@@ -1247,7 +1296,7 @@ function toggleMenu(open){
     }catch(err){ if(!cancelled(err)){ msg.textContent = (err && err.message) || "couldn't save that"; } }
     finally{ save.disabled = false; }
   });
-  document.querySelector(".navrow").append(form);
+  document.querySelector(".hdr").append(form);
   menu = form;
   form.tiktok.focus();
 }

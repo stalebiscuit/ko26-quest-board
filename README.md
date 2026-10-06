@@ -6,7 +6,7 @@ Live site: https://stalebiscuit.github.io/ko26-quest-board/
 
 ## Updating
 
-Data lives in the script block with id ko-data near the end of index.html, as JSON with slots and artists. To swap the header logo, change const LOGO = 1 in the main script to 1, 2, 3 or 4. Each act's emblem is a symbol with id em-SLUG in the hidden SVG block.
+Data lives in the script block with id ko-data near the end of ko26.html (index.html is now the landing page that lists each rave from raves.json), as JSON with slots and artists. To swap the header logo, change const LOGO = 1 in the main script to 1, 2, 3 or 4. Each act's emblem is a symbol with id em-SLUG in the hidden SVG block.
 
 ## Credits
 
