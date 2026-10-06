@@ -1,0 +1,6202 @@
+{
+ "Project One": {
+  "sets": [
+   {
+    "event": "Aqua Color Fest Puebla, Mexico",
+    "date": "2026-08-08",
+    "url": "https://1001.tl/kd8shdt"
+   },
+   {
+    "event": "Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands",
+    "date": "2026-01-03",
+    "url": "https://1001.tl/2pbm2xgk"
+   },
+   {
+    "event": "Resurrection, Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands",
+    "date": "2026-01-03",
+    "url": "https://1001.tl/q000z41"
+   }
+  ],
+  "released": [
+   {
+    "artist": "Project One",
+    "title": "The Story Unfolds",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20The%20Story%20Unfolds"
+   },
+   {
+    "artist": "Project One",
+    "title": "Resurrection",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Resurrection"
+   },
+   {
+    "artist": "Project One",
+    "title": "Luminosity",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Luminosity"
+   },
+   {
+    "artist": "Project One",
+    "title": "Move Your Body",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Move%20Your%20Body"
+   },
+   {
+    "artist": "Project One",
+    "title": "Love Is Not Enough",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Love%20Is%20Not%20Enough"
+   },
+   {
+    "artist": "Project One",
+    "title": "Soul Searching",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Soul%20Searching"
+   },
+   {
+    "artist": "Project One",
+    "title": "The Upside Down",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20The%20Upside%20Down"
+   },
+   {
+    "artist": "Project One",
+    "title": "Million Miles",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Million%20Miles"
+   },
+   {
+    "artist": "Project One",
+    "title": "Rise & Fall",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Rise%20Fall"
+   },
+   {
+    "artist": "Project One",
+    "title": "Transforming",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Transforming"
+   },
+   {
+    "artist": "Project One",
+    "title": "Life Beyond Earth",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Life%20Beyond%20Earth"
+   },
+   {
+    "artist": "Project One",
+    "title": "Numbers (Wildstylez Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Numbers%20Wildstylez%20Remix"
+   },
+   {
+    "artist": "Project One",
+    "title": "Halfway There",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Halfway%20There"
+   },
+   {
+    "artist": "Project One",
+    "title": "It's An Edit",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20It%27s%20An%20Edit"
+   },
+   {
+    "artist": "Project One",
+    "title": "Rate Reducer (Headhunterz Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Rate%20Reducer%20Headhunterz%20Remix"
+   },
+   {
+    "artist": "Project One",
+    "title": "The World Is Yours",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20The%20World%20Is%20Yours"
+   },
+   {
+    "artist": "Headhunterz & Wildstylez",
+    "title": "Project 1 (Sound Rush Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Headhunterz%20Wildstylez%20Project%201%20Sound%20Rush%20Remix"
+   },
+   {
+    "artist": "Project One",
+    "title": "Maximum Force (Defqon.1 Anthem 2018)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Maximum%20Force"
+   },
+   {
+    "artist": "Project One",
+    "title": "Move With The One",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Move%20With%20The%20One"
+   },
+   {
+    "artist": "Project One",
+    "title": "Journey Of The Mind",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20Journey%20Of%20The%20Mind"
+   },
+   {
+    "artist": "Project One",
+    "title": "One Without A Second",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20One%20Without%20A%20Second"
+   },
+   {
+    "artist": "Project One",
+    "title": "The Creation Of Art",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20The%20Creation%20Of%20Art"
+   },
+   {
+    "artist": "Project One",
+    "title": "The Art Of Creation",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Project%20One%20The%20Art%20Of%20Creation"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Project One",
+    "title": "Move With The One (Intro Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "Rate Reducer (Headhunterz Remix) (Live Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "It's An Edit (2026 Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "Life Beyond Earth (2018 Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "The Art Of Creation (Defqon.1 2018 Live Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "The Zero Hour (Live Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Aqua Color Fest Puebla, Mexico (2026-08-08)",
+     "url": "https://1001.tl/kd8shdt"
+    }
+   },
+   {
+    "artist": "Project One",
+    "title": "Raiders Of The Sun (Headhunterz Edit) (Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands (2026-01-03)",
+     "url": "https://1001.tl/2pbm2xgk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Project One",
+    "title": "The Zero Hour (Qlimax 2016 Live Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Vroeger Was Alles Beter pres. Project One, Brabanthallen Den Bosch, Netherlands (2026-01-03)",
+     "url": "https://1001.tl/2pbm2xgk"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "Code Black": {
+  "sets": [
+   {
+    "event": "Code Black & Adrenalize @ Mainstage, Intents Festival, Netherlands",
+    "date": "2026-06-06",
+    "url": "https://1001.tl/2c3p0ggt"
+   },
+   {
+    "event": "Classics, Club De Ketelkamer, Karnaval Festival, Netherlands",
+    "date": "2026-02-14",
+    "url": "https://1001.tl/1nrrkbp1"
+   },
+   {
+    "event": "Code Black & Toneshifterz @ I AM HARDSTYLE Eternal, Autotron Rosmalen, Netherlands",
+    "date": "2025-11-22",
+    "url": "https://1001.tl/2wsrmkl1"
+   }
+  ],
+  "note": "Includes shared sets with Adrenalize and Toneshifterz.",
+  "released": [
+   {
+    "artist": "Audiofreq & Code Black",
+    "title": "Gravity",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Audiofreq%20Code%20Black%20Gravity"
+   },
+   {
+    "artist": "DJ Snake & Bipolar Sunshine",
+    "title": "Paradise (Code Black & Adrenalize Remix)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/DJ%20Snake%20Bipolar%20Sunshine%20Paradise%20Code%20Black%20Adrenalize%20Remix"
+   },
+   {
+    "artist": "Code Black",
+    "title": "You've Got the Love",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20You%27ve%20Got%20the%20Love"
+   },
+   {
+    "artist": "Code Black & Atmozfears",
+    "title": "Accelerate (Official Xxlerator Outdoor Anthem 2014)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Atmozfears%20Accelerate"
+   },
+   {
+    "artist": "Brennan Heart & Code Black",
+    "title": "Tonight Will Never Die",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20Code%20Black%20Tonight%20Will%20Never%20Die"
+   },
+   {
+    "artist": "Blademasterz",
+    "title": "One Blade",
+    "plays": 2,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Blademasterz%20One%20Blade"
+   },
+   {
+    "artist": "Code Black & Hixxy",
+    "title": "Wanting To Get High",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Hixxy%20Wanting%20To%20Get%20High"
+   },
+   {
+    "artist": "Code Black & Sub Zero Project",
+    "title": "We Own The Night",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Sub%20Zero%20Project%20We%20Own%20The%20Night"
+   },
+   {
+    "artist": "Code Black & MISH",
+    "title": "SUNRISE",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20MISH%20SUNRISE"
+   },
+   {
+    "artist": "Adrenalize",
+    "title": "Fire In Me",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Adrenalize%20Fire%20In%20Me"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "Stars (Take Me Higher) (Adrenalize Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/B-Front%20Phuture%20Noize%20Stars%20Adrenalize%20Remix"
+   },
+   {
+    "artist": "Code Black & Adrenalize",
+    "title": "Summer Nights",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Adrenalize%20Summer%20Nights"
+   },
+   {
+    "artist": "Adrenalize ft. ADN",
+    "title": "Get Up",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Adrenalize%20Get%20Up"
+   },
+   {
+    "artist": "Headhunterz",
+    "title": "Rock Civilization",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Headhunterz%20Rock%20Civilization"
+   },
+   {
+    "artist": "Adrenalize ft. Christian Carlucci",
+    "title": "Wherever The Light Ends",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Adrenalize%20Wherever%20The%20Light%20Ends"
+   },
+   {
+    "artist": "Adrenalize",
+    "title": "Missing Me",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Adrenalize%20Missing%20Me"
+   },
+   {
+    "artist": "Alesso & OneRepublic",
+    "title": "If I Lose Myself (Acappella)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Alesso%20OneRepublic%20If%20I%20Lose%20Myself"
+   },
+   {
+    "artist": "Bon Jovi",
+    "title": "Livin' On A Prayer",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Bon%20Jovi%20Livin%27%20On%20A%20Prayer"
+   },
+   {
+    "artist": "Ran-D & Digital Punk",
+    "title": "Born To Die",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Ran-D%20Digital%20Punk%20Born%20To%20Die"
+   },
+   {
+    "artist": "Eiffel 65",
+    "title": "Blue (Da Ba Dee) (Da Tweekaz & Code Black & Adrenalize Team Blue Mix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Eiffel%2065%20Blue%20Da%20Tweekaz%20Code%20Black%20Adrenalize%20Team%20Blue%20Mix"
+   },
+   {
+    "artist": "Headhunterz",
+    "title": "Scrap Attack (Defqon.1 2009 Anthem)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Headhunterz%20Scrap%20Attack"
+   },
+   {
+    "artist": "Code Black & NitrouZ",
+    "title": "Can't Hold Me Back",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20NitrouZ%20Can%27t%20Hold%20Me%20Back"
+   },
+   {
+    "artist": "Brennan Heart",
+    "title": "Till You Believe It",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20Till%20You%20Believe%20It"
+   },
+   {
+    "artist": "Brennan Heart & Toneshifterz",
+    "title": "Define Yourself (I AM HARDSTYLE 2018 Anthem)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20Toneshifterz%20Define%20Yourself"
+   },
+   {
+    "artist": "Code Black",
+    "title": "Pandora",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Pandora"
+   },
+   {
+    "artist": "Armin van Buuren",
+    "title": "Blah Blah Blah (Brennan Heart & Toneshifterz Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Armin%20van%20Buuren%20Blah%20Blah%20Blah%20Brennan%20Heart%20Toneshifterz%20Remix"
+   },
+   {
+    "artist": "3 Blokes & Colin Hennerz",
+    "title": "Off My Face",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/3%20Blokes%20Colin%20Hennerz%20Off%20My%20Face"
+   },
+   {
+    "artist": "Atmozfears & Toneshifterz",
+    "title": "You & Me",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Atmozfears%20Toneshifterz%20You%20Me"
+   },
+   {
+    "artist": "Toneshifterz & Code Black",
+    "title": "About The Music",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20Code%20Black%20About%20The%20Music"
+   },
+   {
+    "artist": "Brennan Heart",
+    "title": "F.I.F.O.",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20F.I.F.O."
+   },
+   {
+    "artist": "Brennan Heart",
+    "title": "One-Master-Blade",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20One-Master-Blade"
+   },
+   {
+    "artist": "Blademasterz",
+    "title": "Masterblade",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Blademasterz%20Masterblade"
+   },
+   {
+    "artist": "Code Black",
+    "title": "Brighter Day",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Brighter%20Day"
+   },
+   {
+    "artist": "Swedish House Mafia ft. John Martin",
+    "title": "Save The World",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Swedish%20House%20Mafia%20Save%20The%20World"
+   },
+   {
+    "artist": "Toneshifterz & Firelite",
+    "title": "Paradise",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20Firelite%20Paradise"
+   },
+   {
+    "artist": "Code Black & Atmozfears",
+    "title": "Starting Over",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Atmozfears%20Starting%20Over"
+   },
+   {
+    "artist": "Toneshifterz ft. Chris Madin",
+    "title": "Last Night",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20Last%20Night"
+   },
+   {
+    "artist": "Toneshifterz & TwinTigerz",
+    "title": "Body Move",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20TwinTigerz%20Body%20Move"
+   },
+   {
+    "artist": "Toneshifterz & TwinTigerz",
+    "title": "Touch My Body",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20TwinTigerz%20Touch%20My%20Body"
+   },
+   {
+    "artist": "Slim Shore & Code Black",
+    "title": "Time Of Your Lives (WiSH Outdoor Anthem 2012)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Slim%20Shore%20Code%20Black%20Time%20Of%20Your%20Lives"
+   },
+   {
+    "artist": "Code Black",
+    "title": "Kyoto",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Kyoto"
+   },
+   {
+    "artist": "Toneshifterz & ELI YAZ",
+    "title": "Scapenite",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20ELI%20YAZ%20Scapenite"
+   },
+   {
+    "artist": "Code Black & Darren Styles",
+    "title": "Sparks",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Code%20Black%20Darren%20Styles%20Sparks"
+   },
+   {
+    "artist": "Toneshifterz & Darren Styles",
+    "title": "Clarity",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20Darren%20Styles%20Clarity"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Code Black & Adrenalize",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Code Black & Adrenalize @ Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/2c3p0ggt"
+    }
+   },
+   {
+    "artist": "Code Black",
+    "title": "Pandora (Blackout Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Code Black & Adrenalize @ Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/2c3p0ggt"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Ran-D & Digital Punk vs. Bon Jovi",
+    "title": "Born To Die vs. Livin' On A Prayer (Code Black Mashup)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Classics, Club De Ketelkamer, Karnaval Festival, Netherlands (2026-02-14)",
+     "url": "https://1001.tl/1nrrkbp1"
+    }
+   },
+   {
+    "artist": "Max Enforcer",
+    "title": "Gold (24K Fix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Classics, Club De Ketelkamer, Karnaval Festival, Netherlands (2026-02-14)",
+     "url": "https://1001.tl/1nrrkbp1"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Potatoheadz",
+    "title": "Mix The Master (Blademasterz Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Code Black & Toneshifterz @ I AM HARDSTYLE Eternal, Autotron Rosmalen, Netherlands (2025-11-22)",
+     "url": "https://1001.tl/2wsrmkl1"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Toneshifterz",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Code Black & Toneshifterz @ I AM HARDSTYLE Eternal, Autotron Rosmalen, Netherlands (2025-11-22)",
+     "url": "https://1001.tl/2wsrmkl1"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "MISH": {
+  "sets": [
+   {
+    "event": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia",
+    "date": "2026-07-06",
+    "url": "https://1001.tl/2t2wzt89"
+   },
+   {
+    "event": "wasteLAND, EDC Las Vegas, United States",
+    "date": "2026-05-16",
+    "url": "https://1001.tl/2kn5uw31"
+   },
+   {
+    "event": "EPIK, Sydney Showground, Australia",
+    "date": "2025-12-13",
+    "url": "https://1001.tl/1kxxzd99"
+   }
+  ],
+  "released": [
+   {
+    "artist": "Sickmode & MISH",
+    "title": "THE MF SICKDROP",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Sickmode%20MISH%20THE%20MF%20SICKDROP"
+   },
+   {
+    "artist": "MISH & Carola",
+    "title": "HYPNOTISED",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20Carola%20HYPNOTISED"
+   },
+   {
+    "artist": "Sickmode & MISH & Bloodlust",
+    "title": "YEAHBOIII",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Sickmode%20MISH%20YEAHBOIII"
+   },
+   {
+    "artist": "Krowdexx & Sickmode & MISH",
+    "title": "HATE OR LOVE IT",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Krowdexx%20Sickmode%20HATE%20OR%20LOVE%20IT"
+   },
+   {
+    "artist": "MISH & Krowdexx",
+    "title": "FEELIN' HIGH",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20Krowdexx%20FEELIN%27%20HIGH"
+   },
+   {
+    "artist": "MISH",
+    "title": "IN MY HEAD",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20IN%20MY%20HEAD"
+   },
+   {
+    "artist": "MISH",
+    "title": "DETONATE",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20DETONATE"
+   },
+   {
+    "artist": "MISH",
+    "title": "TAKE ME 2 THE RAVE",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20TAKE%20ME%202%20THE%20RAVE"
+   },
+   {
+    "artist": "Rooler & Kronos",
+    "title": "FCK DOOM ZAAG!",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Rooler%20Kronos%20FCK%20DOOM%20ZAAG"
+   },
+   {
+    "artist": "TNT",
+    "title": "HEAR THIZ MF",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/TNT%20HEAR%20THIZ%20MF"
+   },
+   {
+    "artist": "Sickmode & Krowdexx",
+    "title": "YEAH",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Sickmode%20Krowdexx%20YEAH"
+   },
+   {
+    "artist": "MISH",
+    "title": "MOVIN' ON",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20MOVIN%27%20ON"
+   },
+   {
+    "artist": "MISH",
+    "title": "Just The Way You Are",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20Just%20The%20Way%20You%20Are"
+   },
+   {
+    "artist": "Restricted & Nik Sitz",
+    "title": "Tunnel Vision (Junkie Kid Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Restricted%20Nik%20Sitz%20Tunnel%20Vision%20Junkie%20Kid%20Remix"
+   },
+   {
+    "artist": "Mr. Polska & Natte Visstick & Vieze Asbak",
+    "title": "POLSKA JUMPSTYLE",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Mr.%20Polska%20Natte%20Visstick%20POLSKA%20JUMPSTYLE"
+   },
+   {
+    "artist": "Fantasm & The Straikerz",
+    "title": "Shake That Bunda",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Fantasm%20The%20Straikerz%20Shake%20That%20Bunda"
+   },
+   {
+    "artist": "The Bloody Beetroots ft. Steve Aoki",
+    "title": "Warp 1.9 (Creeds Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Bloody%20Beetroots%20Warp%201.9%20Creeds%20Remix"
+   },
+   {
+    "artist": "Sickmode & MISH",
+    "title": "LETS F IT UP! (LAMBO 2.5)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Sickmode%20MISH%20LETS%20F%20IT%20UP"
+   },
+   {
+    "artist": "Restricted & TOZA",
+    "title": "DON'T WANNA MISS THIS",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Restricted%20TOZA%20DON%27T%20WANNA%20MISS%20THIS"
+   },
+   {
+    "artist": "BLURREDMOVEMENT",
+    "title": "HEADS WILL ROLL",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/BLURREDMOVEMENT%20HEADS%20WILL%20ROLL"
+   },
+   {
+    "artist": "Ikkhi",
+    "title": "Hey Baby",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Ikkhi%20Hey%20Baby"
+   },
+   {
+    "artist": "Disco Lines & Tinashe",
+    "title": "No Broke Boys (MISH Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Disco%20Lines%20Tinashe%20No%20Broke%20Boys%20MISH%20Remix"
+   },
+   {
+    "artist": "Klofama",
+    "title": "F1 (BLURREDMOVEMENT Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Klofama%20F1%20BLURREDMOVEMENT%20Remix"
+   },
+   {
+    "artist": "Warface & MISH",
+    "title": "CAN'T STOP US NOW",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Warface%20MISH%20CAN%27T%20STOP%20US%20NOW"
+   },
+   {
+    "artist": "Sickmode & MISH",
+    "title": "RAVE LOVE",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Sickmode%20MISH%20RAVE%20LOVE"
+   },
+   {
+    "artist": "MISH",
+    "title": "RESCUE",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/MISH%20RESCUE"
+   },
+   {
+    "artist": "The Straikerz & MISH",
+    "title": "WE OWN THE NIGHT",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Straikerz%20MISH%20WE%20OWN%20THE%20NIGHT"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Anyma & Argy & Son Of Son",
+    "title": "Voices In My Head (MISH Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Sickmode & MISH",
+    "title": "RAVE LOVE (Rave Love Edit / MISH Live Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Cloonee & InntRaw & Young M.A",
+    "title": "Stephanie (MISH Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Sickmode & MISH",
+    "title": "One And Only (Uptempo Edit / Live Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Fallon",
+    "title": "Diet Coke (MISH Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Restricted & Junkie Kid",
+    "title": "Pump This Party (MISH Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Zombie Nation",
+    "title": "Kernkraft 400 (MJU 2k24 Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Sickmode & MISH",
+    "title": "Rave Damage (Rave Love Live Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Calvin Harris ft. Rihanna",
+    "title": "This Is What You Came For (MISH Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Showtek",
+    "title": "FTS (Fuck The System) (Colin Hennerz Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "MISH & Dead X",
+    "title": "ID",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "will.i.am & Britney Spears",
+    "title": "Scream & Shout (Junkie Kid Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "TNT",
+    "title": "OMG (MISH Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Builder",
+    "title": "Her Voice (Headhunterz Remix / MISH Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Sickmode",
+    "title": "BANGER AFTER BANGER AFTER BANGER AFTER BANGER AFTER BANGER AFTER BANGER AFTER BANGER AFTER BANGER (Dead X Edit / MISH Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    }
+   },
+   {
+    "artist": "CHRYSTAL",
+    "title": "The Days (NOTION Remix / MISH Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    }
+   },
+   {
+    "artist": "Sickmode & MISH",
+    "title": "One And Only (Rave Love Edit / MISH Live Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    }
+   },
+   {
+    "artist": "MISH",
+    "title": "RAVE IN PARADISE (Official Free Festival 2023 Anthem) (MISH Live Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    }
+   },
+   {
+    "artist": "Aversion & Dual Damage",
+    "title": "Pump It (BABIX Zaag Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "MISH",
+    "title": "ID (Hard & Raw)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Krowdexx & KENAI",
+    "title": "MOVE IT (Krowdexx SLOWTEMPO EDIT)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "David Guetta ft. Flo Rida & Nicki Minaj",
+    "title": "Where Them Girls At (MISH Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/2t2wzt89"
+    }
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "Hard Beat (Ikkhi Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Bountyhunter",
+    "title": "Woops (Anderex Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "AFROJACK ft. Eva Simons",
+    "title": "Take Over Control (MISH Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "wasteLAND, EDC Las Vegas, United States (2026-05-16)",
+     "url": "https://1001.tl/2kn5uw31"
+    }
+   },
+   {
+    "artist": "AC/DC",
+    "title": "Thunderstruck (MISH Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "EPIK, Sydney Showground, Australia (2025-12-13)",
+     "url": "https://1001.tl/1kxxzd99"
+    }
+   }
+  ],
+  "unknown_ids": 1
+ },
+ "Mutilator": {
+  "sets": [
+   {
+    "event": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands",
+    "date": "2026-09-26",
+    "url": "https://1001.tl/2htbr8h9"
+   },
+   {
+    "event": "The Gathering, Indigo Stage, Defqon.1, Netherlands",
+    "date": "2026-06-25",
+    "url": "https://1001.tl/19lw0hxt"
+   },
+   {
+    "event": "Harder Industries Rawzone Arena, Rosehill Gardens Racecourse, Australia",
+    "date": "2026-04-04",
+    "url": "https://1001.tl/1y21mt8t"
+   }
+  ],
+  "released": [
+   {
+    "artist": "Mutilator",
+    "title": "Bounce",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Bounce"
+   },
+   {
+    "artist": "Lana Del Rey",
+    "title": "Video Games",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Lana%20Del%20Rey%20Video%20Games"
+   },
+   {
+    "artist": "Linkin Park",
+    "title": "In The End",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Linkin%20Park%20In%20The%20End"
+   },
+   {
+    "artist": "The Prophet ft. Deepack",
+    "title": "Stampuhh!!",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Prophet%20Stampuhh"
+   },
+   {
+    "artist": "Zany & DJ Duro",
+    "title": "Our Power",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Zany%20DJ%20Duro%20Our%20Power"
+   },
+   {
+    "artist": "The Straikerz & Adjuzt",
+    "title": "INCOMING",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Straikerz%20Adjuzt%20INCOMING"
+   },
+   {
+    "artist": "BMBERJCK & Mutilator",
+    "title": "Pirates",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/BMBERJCK%20Mutilator%20Pirates"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "WILD MF",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20WILD%20MF"
+   },
+   {
+    "artist": "Mutilator & Sickmode",
+    "title": "PILLS, DRUGS AND MF KICKROLLS",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Sickmode%20PILLS%2C%20DRUGS%20AND%20MF%20KICKROLLS"
+   },
+   {
+    "artist": "Anderex & Mutilator ft. Disarray",
+    "title": "Twin Turbo (Official Gearbox Twin Turbo 2022 Anthem)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Anderex%20Mutilator%20Twin%20Turbo"
+   },
+   {
+    "artist": "Rebelion & Vertile",
+    "title": "SIMU FKN LATION",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Vertile%20SIMU%20FKN%20LATION"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "No Way Out (Claustrophobia)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20No%20Way%20Out"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Nightmare (Daemonophobia)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Nightmare"
+   },
+   {
+    "artist": "Mutilator & Fraw & So Juice",
+    "title": "STFU",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Fraw%20STFU"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Clowns (Coulrophobia)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Clowns"
+   },
+   {
+    "artist": "Mutilator & Audiofreq ft. MC Robs",
+    "title": "Suffocate",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Audiofreq%20Suffocate"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "HALO",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20HALO"
+   },
+   {
+    "artist": "The Straikerz & Adjuzt",
+    "title": "Viva La Fist",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Straikerz%20Adjuzt%20Viva%20La%20Fist"
+   },
+   {
+    "artist": "Mutilator & Fraw",
+    "title": "Give Us More!",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Fraw%20Give%20Us%20More"
+   },
+   {
+    "artist": "Adjuzt & Mutilator",
+    "title": "GET BACK",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Adjuzt%20Mutilator%20GET%20BACK"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Domination",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Domination"
+   },
+   {
+    "artist": "N-Vitral pres. BOMBSQUAD & Mutilator",
+    "title": "Going Wild",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/N-Vitral%20pres.%20BOMBSQUAD%20Mutilator%20Going%20Wild"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Warzone",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Warzone"
+   },
+   {
+    "artist": "Rebelion & Mutilator",
+    "title": "Don't FK With Us",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Mutilator%20Don%27t%20FK%20With%20Us"
+   },
+   {
+    "artist": "Mutilator ft. MC Robs",
+    "title": "Resurrection (Kinemortophobia)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Resurrection"
+   },
+   {
+    "artist": "Mutilator & Exproz",
+    "title": "Kickdrum Massacre",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Exproz%20Kickdrum%20Massacre"
+   },
+   {
+    "artist": "Mutilator & Collusion",
+    "title": "ECHOES OF DESTRUCTION",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20Collusion%20ECHOES%20OF%20DESTRUCTION"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Mutilator",
+    "title": "ID",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "F#ck The Haters (Live Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Psychedelics (Mutilator Live Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator & The Saints",
+    "title": "ID",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Bountyhunter",
+    "title": "Woops (Adjuzt & Mutilator Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Warface",
+    "title": "Mashup 5.0 (Mutilator Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "REVERZE TOOL",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Fraw & Dual Damage",
+    "title": "Digital Domination (Dejection Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Spiders (Arachnophobia) (2026 Live Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Onslaught (Live Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Infernal (2022 Live Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Mutilator & Thyron",
+    "title": "Break Your Neck (Uptempo Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Mutilator ft. Nolz",
+    "title": "Enter Elysium (Official Supremacy 2025 Anthem) (2026 Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Supremacy Tool 2026",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator & Cryex",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator & Damaxy & Detailed",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Mutilator & Fraw",
+    "title": "Are You Ready?! (Mutilator Live Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "BMBERJCK & Mutilator",
+    "title": "Pirates (Mutilator Live Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Rave Reactor, Supremacy, Brabanthallen Den Bosch, Netherlands (2026-09-26)",
+     "url": "https://1001.tl/2htbr8h9"
+    }
+   },
+   {
+    "artist": "Netherworld",
+    "title": "Atlantis (The Saints Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Massano",
+    "title": "The Feeling (The Saints Raw Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "To The Ground (Rebelion Re-Fuk)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Toxic Rave (2023 Live Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Indigo Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/19lw0hxt"
+    }
+   },
+   {
+    "artist": "Malice & D-Sturb",
+    "title": "Drop 'Em Down (So Juice Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Harder Industries Rawzone Arena, Rosehill Gardens Racecourse, Australia (2026-04-04)",
+     "url": "https://1001.tl/1y21mt8t"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Warface & Mutilator ft. Carola (NL) & MC Livid",
+    "title": "Hold Us Down (Mutilator Live Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Harder Industries Rawzone Arena, Rosehill Gardens Racecourse, Australia (2026-04-04)",
+     "url": "https://1001.tl/1y21mt8t"
+    }
+   },
+   {
+    "artist": "Mutilator ft. Sovereign King",
+    "title": "Fire (Pyrophobia) (2025 Live Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Harder Industries Rawzone Arena, Rosehill Gardens Racecourse, Australia (2026-04-04)",
+     "url": "https://1001.tl/1y21mt8t"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "Burn In Hell (2024 Live Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Harder Industries Rawzone Arena, Rosehill Gardens Racecourse, Australia (2026-04-04)",
+     "url": "https://1001.tl/1y21mt8t"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "Noxiouz": {
+  "sets": [
+   {
+    "event": "The Gathering, Black Stage, Defqon.1, Netherlands",
+    "date": "2026-06-25",
+    "url": "https://1001.tl/1nsq6j3t"
+   },
+   {
+    "event": "The Dark Horror & Noxiouz @ The Opening, Dynamite, Intents Festival, Netherlands",
+    "date": "2026-06-07",
+    "url": "https://1001.tl/2wufyl01"
+   },
+   {
+    "event": "Lekkerfaces & Noxiouz & Satirized & The Dark Horror @ Dynamite Live, Mainstage, Intents Festival, Netherlands",
+    "date": "2026-06-06",
+    "url": "https://1001.tl/2uydcyt1"
+   },
+   {
+    "event": "The Catalyst, Mainstage, REBiRTH Festival, Netherlands",
+    "date": "2026-04-12",
+    "url": "https://1001.tl/2uy3j6qk"
+   }
+  ],
+  "note": "Includes shared Dynamite sets. The REBiRTH set is his Catalyst show.",
+  "released": [
+   {
+    "artist": "Noxiouz & Lekkerfaces",
+    "title": "MOVE IT",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Lekkerfaces%20MOVE%20IT"
+   },
+   {
+    "artist": "The Saints & Noxiouz & Satirized ft. MC Livid",
+    "title": "Legacy",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Noxiouz%20Legacy"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "What You Gonna Do",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20What%20You%20Gonna%20Do"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "The Aftermath",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20The%20Aftermath"
+   },
+   {
+    "artist": "Noxiouz & MC Robs",
+    "title": "The Catalyst",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20MC%20Robs%20The%20Catalyst"
+   },
+   {
+    "artist": "Noxiouz & Satirized ft. MC Robs",
+    "title": "Dynamite (2025 OST)",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Satirized%20Dynamite",
+    "confidence": "guess"
+   },
+   {
+    "artist": "The Straikerz & Adjuzt",
+    "title": "INCOMING (Noxiouz & Satirized Remix)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Straikerz%20Adjuzt%20INCOMING%20Noxiouz%20Satirized%20Remix"
+   },
+   {
+    "artist": "The Dark Horror & Noxiouz ft. MC Robs",
+    "title": "Nightmares",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Noxiouz%20Nightmares"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Lose It All",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Lose%20It%20All"
+   },
+   {
+    "artist": "N-Vitral pres. BOMBSQUAD & Noxiouz",
+    "title": "Say My Name",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/N-Vitral%20pres.%20BOMBSQUAD%20Noxiouz%20Say%20My%20Name"
+   },
+   {
+    "artist": "Radical Redemption & Noxiouz",
+    "title": "Light The Fuse",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Radical%20Redemption%20Noxiouz%20Light%20The%20Fuse"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "The Last Infusion",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20The%20Last%20Infusion"
+   },
+   {
+    "artist": "The Dark Horror & RAYZEN",
+    "title": "SMOKE WEED EVERYDAY",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20RAYZEN%20SMOKE%20WEED%20EVERYDAY"
+   },
+   {
+    "artist": "Satirized",
+    "title": "Fight 2.0 (Noxiouz Remix)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Satirized%20Fight%202.0%20Noxiouz%20Remix"
+   },
+   {
+    "artist": "Radical Redemption & Noxiouz",
+    "title": "The Prophecy Of Chaos",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Radical%20Redemption%20Noxiouz%20The%20Prophecy%20Of%20Chaos"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Funk Faker",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Funk%20Faker"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Darkness",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Darkness"
+   },
+   {
+    "artist": "Yoshiko & Noxiouz",
+    "title": "Envy",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Yoshiko%20Noxiouz%20Envy"
+   },
+   {
+    "artist": "Irradiate & Noxiouz",
+    "title": "Dreaming",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Irradiate%20Noxiouz%20Dreaming"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Anxiety",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Anxiety"
+   },
+   {
+    "artist": "Dr. Peacock",
+    "title": "Trip To Valhalla (Noxiouz & Satirized Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Dr.%20Peacock%20Trip%20To%20Valhalla%20Noxiouz%20Satirized%20Remix"
+   },
+   {
+    "artist": "The Dark Horror & Noxiouz",
+    "title": "Intents Naar De Klote",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Noxiouz%20Intents%20Naar%20De%20Klote"
+   },
+   {
+    "artist": "The Dark Horror & KEMAL (NL)",
+    "title": "Bad Trip",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20KEMAL%20NL%20Bad%20Trip"
+   },
+   {
+    "artist": "The Dark Horror",
+    "title": "Get Stupid",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Get%20Stupid"
+   },
+   {
+    "artist": "The Dark Horror",
+    "title": "Massive Bass (Flinke Herrie Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Massive%20Bass%20Flinke%20Herrie%20Remix"
+   },
+   {
+    "artist": "Dual Damage & The Dark Horror",
+    "title": "Angel & Demon",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Dual%20Damage%20The%20Dark%20Horror%20Angel%20Demon"
+   },
+   {
+    "artist": "Lekkerfaces & Mind Compressor",
+    "title": "FA TI CO (Ohcazzothisisthe Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Lekkerfaces%20Mind%20Compressor%20FA%20TI%20CO%20Ohcazzothisisthe%20Remix"
+   },
+   {
+    "artist": "The Dark Horror & Jacksko",
+    "title": "NAAR DE RAVE",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Jacksko%20NAAR%20DE%20RAVE"
+   },
+   {
+    "artist": "Lekkerfaces",
+    "title": "OMG IT'S LEKKERFACES",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Lekkerfaces%20OMG%20IT%27S%20LEKKERFACES"
+   },
+   {
+    "artist": "Lekkerfaces",
+    "title": "BKJN",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Lekkerfaces%20BKJN"
+   },
+   {
+    "artist": "The Dark Horror & Lekkerfaces",
+    "title": "Psycho Mode",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Lekkerfaces%20Psycho%20Mode"
+   },
+   {
+    "artist": "N-Vitral pres. Bombsquad & Satirized",
+    "title": "RPG",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/N-Vitral%20pres.%20Bombsquad%20Satirized%20RPG"
+   },
+   {
+    "artist": "Satirized & Lekkerfaces",
+    "title": "The Heat",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Satirized%20Lekkerfaces%20The%20Heat"
+   },
+   {
+    "artist": "The Dark Horror & Tharken",
+    "title": "Run It Up",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Dark%20Horror%20Tharken%20Run%20It%20Up"
+   },
+   {
+    "artist": "Cryogenic",
+    "title": "Victimized (The Dark Horror Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Cryogenic%20Victimized%20The%20Dark%20Horror%20Remix"
+   },
+   {
+    "artist": "Lekkerfaces",
+    "title": "TSUNAMI",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Lekkerfaces%20TSUNAMI"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Wack",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Wack"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Dark Reality",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Dark%20Reality"
+   },
+   {
+    "artist": "Noxiouz & Kili & Complex",
+    "title": "The Fomo",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Kili%20The%20Fomo"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Bakery",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Bakery"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Failures",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Noxiouz%20Failures"
+   },
+   {
+    "artist": "Spitnoise & Noxiouz",
+    "title": "Give It To Me",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Spitnoise%20Noxiouz%20Give%20It%20To%20Me"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "The Dark Horror & Noxiouz & Villain",
+    "title": "Rise With Us (Dynamite Sunday 2026 OST)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "unreleased",
+    "ref": {
+     "label": "The Gathering, Black Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/1nsq6j3t"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "ID",
+    "plays": 3,
+    "sets": [
+     3
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "The Catalyst, Mainstage, REBiRTH Festival, Netherlands (2026-04-12)",
+     "url": "https://1001.tl/2uy3j6qk"
+    }
+   },
+   {
+    "artist": "Lekkerfaces & Noxiouz & Satirized & The Dark Horror",
+    "title": "Dynamite Live",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Dark Horror & Noxiouz @ The Opening, Dynamite, Intents Festival, Netherlands (2026-06-07)",
+     "url": "https://1001.tl/2wufyl01"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "The Dark Horror & Noxiouz ft. MC Robs",
+    "title": "Nightmares (The Dark Horror Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Dark Horror & Noxiouz @ The Opening, Dynamite, Intents Festival, Netherlands (2026-06-07)",
+     "url": "https://1001.tl/2wufyl01"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "MOH Tool",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "The Gathering, Black Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/1nsq6j3t"
+    }
+   },
+   {
+    "artist": "Radical Redemption",
+    "title": "Brutal 5.0 (Noxiouz Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Gathering, Black Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/1nsq6j3t"
+    }
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Defqon Tool",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "The Gathering, Black Stage, Defqon.1, Netherlands (2026-06-25)",
+     "url": "https://1001.tl/1nsq6j3t"
+    }
+   },
+   {
+    "artist": "The Dark Horror & Fragment",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "The Dark Horror & Noxiouz @ The Opening, Dynamite, Intents Festival, Netherlands (2026-06-07)",
+     "url": "https://1001.tl/2wufyl01"
+    }
+   },
+   {
+    "artist": "Satirized & Lekkerfaces ft. MC Flo",
+    "title": "Thunder (Dynamite Saturday 2026 OST)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "unreleased",
+    "ref": {
+     "label": "Lekkerfaces & Noxiouz & Satirized & The Dark Horror @ Dynamite Live, Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/2uydcyt1"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Satirized & Aalst",
+    "title": "Turbo Saté (HET POMPSTATION Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Lekkerfaces & Noxiouz & Satirized & The Dark Horror @ Dynamite Live, Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/2uydcyt1"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Masters Of Hardcore Tool",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "The Catalyst, Mainstage, REBiRTH Festival, Netherlands (2026-04-12)",
+     "url": "https://1001.tl/2uy3j6qk"
+    }
+   },
+   {
+    "artist": "Noxiouz",
+    "title": "Daydreaming (2026 Edit)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Catalyst, Mainstage, REBiRTH Festival, Netherlands (2026-04-12)",
+     "url": "https://1001.tl/2uy3j6qk"
+    }
+   },
+   {
+    "artist": "Noxiouz & Satirized",
+    "title": "The Funk (2026 Edit)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Catalyst, Mainstage, REBiRTH Festival, Netherlands (2026-04-12)",
+     "url": "https://1001.tl/2uy3j6qk"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "Phuture Noize": {
+  "sets": [
+   {
+    "event": "The Surge, Mainstage, Decibel Outdoor Festival, Netherlands",
+    "date": "2026-08-28",
+    "url": "https://1001.tl/1w7bh821"
+   },
+   {
+    "event": "Journey, Mainstage, Intents Festival, Netherlands",
+    "date": "2026-06-06",
+    "url": "https://1001.tl/1326g02t"
+   },
+   {
+    "event": "Reverze, Sportpaleis Antwerp, Belgium",
+    "date": "2026-02-28",
+    "url": "https://1001.tl/2uxqsxj1"
+   }
+  ],
+  "released": [
+   {
+    "artist": "Frequencerz & Phuture Noize",
+    "title": "Starlight",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Frequencerz%20Phuture%20Noize%20Starlight"
+   },
+   {
+    "artist": "Dual Damage & Phuture Noize",
+    "title": "When Sound Meets Sound (Official REBiRTH Festival 2026 Anthem)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Dual%20Damage%20Phuture%20Noize%20When%20Sound%20Meets%20Sound",
+    "confidence": "guess"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "My Beautiful Fantasy",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/B-Front%20Phuture%20Noize%20My%20Beautiful%20Fantasy"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Masquerade",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Masquerade"
+   },
+   {
+    "artist": "D-Block & S-te-Fan & Phuture Noize",
+    "title": "Arcadia",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/D-Block%20S-te-Fan%20Arcadia"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Fire (Defqon.1 2K23 Version)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Fire"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Until You're Gone",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Until%20You%27re%20Gone"
+   },
+   {
+    "artist": "Phuture Noize ft. Drean",
+    "title": "Stop The Bleeding",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Stop%20The%20Bleeding"
+   },
+   {
+    "artist": "Phuture Noize & Devin Wild",
+    "title": "Burn The Evidence",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Devin%20Wild%20Burn%20The%20Evidence"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "Frozen Tears",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/B-Front%20Phuture%20Noize%20Frozen%20Tears"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "Polestar",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/B-Front%20Phuture%20Noize%20Polestar"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Alone",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Alone"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Drift Away",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Drift%20Away"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "The Aftershock",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20The%20Aftershock"
+   },
+   {
+    "artist": "Sub Zero Project & Phuture Noize",
+    "title": "We Are The Fallen",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Sub%20Zero%20Project%20Phuture%20Noize%20We%20Are%20The%20Fallen"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Break The Glass",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Break%20The%20Glass"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "365",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20365"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Silver Bullet",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Silver%20Bullet"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Problem Child",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Problem%20Child"
+   },
+   {
+    "artist": "Phuture Noize & DEEZL",
+    "title": "My Misery",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20DEEZL%20My%20Misery"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Recover Me",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Recover%20Me"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Masquerade (Devin Wild Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Masquerade%20Devin%20Wild%20Remix"
+   },
+   {
+    "artist": "Devin Wild ft. Nathalie Blue",
+    "title": "Into Deep",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Devin%20Wild%20Into%20Deep"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "My Salvation",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/B-Front%20Phuture%20Noize%20My%20Salvation"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "My Beautiful Fantasy (Kronos Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/B-Front%20Phuture%20Noize%20My%20Beautiful%20Fantasy%20Kronos%20Remix"
+   },
+   {
+    "artist": "Phuture Noize & Aversion",
+    "title": "Mess Of My Creation",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Aversion%20Mess%20Of%20My%20Creation"
+   },
+   {
+    "artist": "Phuture Noize & Devin Wild",
+    "title": "Hearts of Steel",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Phuture%20Noize%20Devin%20Wild%20Hearts%20of%20Steel"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Phuture Noize",
+    "title": "Edge Of Glory (Devin Wild Kick Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Surge, Mainstage, Decibel Outdoor Festival, Netherlands (2026-08-28)",
+     "url": "https://1001.tl/1w7bh821"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Phuture Noize & Devin Wild",
+    "title": "Waves (2025 Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Journey, Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/1326g02t"
+    }
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "Circles And Squares (Silver Bullet Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Journey, Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/1326g02t"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Phuture Noize",
+    "title": "The Four Elements (Official Decibel Outdoor 2026 Friday OST)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "unreleased",
+    "ref": {
+     "label": "The Surge, Mainstage, Decibel Outdoor Festival, Netherlands (2026-08-28)",
+     "url": "https://1001.tl/1w7bh821"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "B-Front & Phuture Noize",
+    "title": "The Solution (Defqon.1 Answers Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Journey, Mainstage, Intents Festival, Netherlands (2026-06-06)",
+     "url": "https://1001.tl/1326g02t"
+    },
+    "confidence": "guess"
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "Rebelion": {
+  "sets": [
+   {
+    "event": "The Arena, Knockout Outdoor Level Up, Sydney Showground, Australia",
+    "date": "2026-10-03",
+    "url": "https://1001.tl/22s4bjvk"
+   },
+   {
+    "event": "Mainstage, Decibel Outdoor Festival, Netherlands",
+    "date": "2026-08-29",
+    "url": "https://1001.tl/uqfy9b9"
+   },
+   {
+    "event": "Blue Stage, Defqon.1 Encore set, Netherlands",
+    "date": "2026-07-28",
+    "url": "https://1001.tl/2u0t3321"
+   },
+   {
+    "event": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia",
+    "date": "2026-07-06",
+    "url": "https://1001.tl/1tfn2859"
+   }
+  ],
+  "released": [
+   {
+    "artist": "Rebelion",
+    "title": "City Lights",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20City%20Lights"
+   },
+   {
+    "artist": "Rebelion & Vertile",
+    "title": "Numb Very Numb",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Vertile%20Numb%20Very%20Numb"
+   },
+   {
+    "artist": "Rebelion & Dual Damage",
+    "title": "Wickedest Bassline",
+    "plays": 3,
+    "sets": [
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Dual%20Damage%20Wickedest%20Bassline"
+   },
+   {
+    "artist": "Rebelion & The Dark Horror",
+    "title": "SLEEPLESS",
+    "plays": 3,
+    "sets": [
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20The%20Dark%20Horror%20SLEEPLESS"
+   },
+   {
+    "artist": "Rebelion ft. Micah Martin",
+    "title": "We Own The Night",
+    "plays": 3,
+    "sets": [
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20We%20Own%20The%20Night"
+   },
+   {
+    "artist": "Calvin Harris & Disciples ft. Ina Wroldsen",
+    "title": "How Deep Is Your Love (Acappella)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Calvin%20Harris%20Disciples%20How%20Deep%20Is%20Your%20Love"
+   },
+   {
+    "artist": "Rebelion & Vertile",
+    "title": "Numb",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Vertile%20Numb"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Aliens On Acid",
+    "plays": 2,
+    "sets": [
+     0,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Aliens%20On%20Acid"
+   },
+   {
+    "artist": "Rebelion ft. Micah Martin",
+    "title": "The Loudest City (Official Decibel Outdoor 2026 Anthem)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20The%20Loudest%20City"
+   },
+   {
+    "artist": "Brennan Heart & Jonathan Mendelsohn",
+    "title": "Imaginary (Rebelion Remix)",
+    "plays": 2,
+    "sets": [
+     1,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20Jonathan%20Mendelsohn%20Imaginary%20Rebelion%20Remix"
+   },
+   {
+    "artist": "Rebelion & Warface",
+    "title": "Filthy Rave",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Warface%20Filthy%20Rave"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Lights Off",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Lights%20Off"
+   },
+   {
+    "artist": "Rebelion & Warface ft. Superior",
+    "title": "Beyond The Beyond",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Warface%20Beyond%20The%20Beyond"
+   },
+   {
+    "artist": "Rebelion & Nolz",
+    "title": "Raw Resurgence (Official Supremacy 2023 Anthem)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Nolz%20Raw%20Resurgence"
+   },
+   {
+    "artist": "Sub Zero Project & Rebelion",
+    "title": "ZAAGTRAIN",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Sub%20Zero%20Project%20Rebelion%20ZAAGTRAIN"
+   },
+   {
+    "artist": "Rebelion & Vertile",
+    "title": "SIMU FKN LATION",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Vertile%20SIMU%20FKN%20LATION"
+   },
+   {
+    "artist": "Rebelion & Vertile",
+    "title": "Simulation",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Vertile%20Simulation"
+   },
+   {
+    "artist": "Rebelion & TOZA",
+    "title": "ZAAG 'N' NIGHT",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20TOZA%20ZAAG%20%27N%27%20NIGHT"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Vendetta (X-Qlusive OST)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Vendetta"
+   },
+   {
+    "artist": "D-Block & S-te-Fan & Rebelion",
+    "title": "Save The Day",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/D-Block%20S-te-Fan%20Save%20The%20Day"
+   },
+   {
+    "artist": "2 Unlimited",
+    "title": "No Limit",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/2%20Unlimited%20No%20Limit"
+   },
+   {
+    "artist": "Darren Styles",
+    "title": "Save Me (Rebelion Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Save%20Me%20Rebelion%20Remix"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Never Let U Go (Resensed Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Never%20Let%20U%20Go%20Resensed%20Remix"
+   },
+   {
+    "artist": "Sub Sonik & Rebelion ft. LXCPR",
+    "title": "Bring It On",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Sub%20Sonik%20Rebelion%20Bring%20It%20On"
+   },
+   {
+    "artist": "Rebelion & Sub Sonik ft. LXCPR",
+    "title": "Alternative Rush",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Sub%20Sonik%20Alternative%20Rush"
+   },
+   {
+    "artist": "Rebelion & The Saints ft. Sarah Anglionin",
+    "title": "Never Coming Down",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20The%20Saints%20Never%20Coming%20Down"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Bassline Junkie",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Bassline%20Junkie"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Salvation (Delete Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Salvation%20Delete%20Remix"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "A-Bomb",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20A-Bomb"
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Lucid Dreams",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20Lucid%20Dreams"
+   },
+   {
+    "artist": "Scooter",
+    "title": "One (Always Hardcore)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Scooter%20One"
+   },
+   {
+    "artist": "Mutilator",
+    "title": "To The Ground (Rebelion Re-Fuk)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Mutilator%20To%20The%20Ground",
+    "confidence": "guess"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Rebelion",
+    "title": "Bonkerz (The Straikerz Remix / Bad Dose Edit)",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Arena, Knockout Outdoor Level Up, Sydney Showground, Australia (2026-10-03)",
+     "url": "https://1001.tl/22s4bjvk"
+    }
+   },
+   {
+    "artist": "Sub Zero Project & Rebelion",
+    "title": "Save Me (Rebelion Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Arena, Knockout Outdoor Level Up, Sydney Showground, Australia (2026-10-03)",
+     "url": "https://1001.tl/22s4bjvk"
+    }
+   },
+   {
+    "artist": "David Guetta ft. Sia",
+    "title": "Titanium(Co-Prod. by AFROJACK) (Rebelion Bootleg)",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "The Arena, Knockout Outdoor Level Up, Sydney Showground, Australia (2026-10-03)",
+     "url": "https://1001.tl/22s4bjvk"
+    }
+   },
+   {
+    "artist": "Rebelion",
+    "title": "ID",
+    "plays": 2,
+    "sets": [
+     1
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Mainstage, Decibel Outdoor Festival, Netherlands (2026-08-29)",
+     "url": "https://1001.tl/uqfy9b9"
+    }
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Aliens On Acid (Encore Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Mainstage, Decibel Outdoor Festival, Netherlands (2026-08-29)",
+     "url": "https://1001.tl/uqfy9b9"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Sub Zero Project & Rebelion",
+    "title": "Live Fast Die Young (2024 Edit / Zaag Edit)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Rebelion & Aversion",
+    "title": "ZAAG IN PARIS (FAAH Edit)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Endymion",
+    "title": "Die Gladiator (Rebelion pres. Overdose Bounce Beach Edit)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Dual Damage",
+    "title": "Burning Down (Rebelion Edit)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Rebelion & Warface",
+    "title": "Filthy Rave (Rebelion Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Mainstage, Decibel Outdoor Festival, Netherlands (2026-08-29)",
+     "url": "https://1001.tl/uqfy9b9"
+    }
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Defqon Overdose Tool",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Rebelion & Warface",
+    "title": "Switchblades (Rebelion pres. Overdose The Second Dose Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Rebelion",
+    "title": "Das Ist Kein Techno (Vertile Edit / Rebelion Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Delete & Deetox ft. MC Livid",
+    "title": "Do Or Die (Rebelion Remix / The Final Dose Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Sub Zero Project ft. MC Stretch",
+    "title": "LFG Psycho (Sub Zero Project & Rebelion Bad Dose Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    }
+   },
+   {
+    "artist": "Rebelion ft. Micah Martin",
+    "title": "Never Back Down (Encore Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Blue Stage, Defqon.1 Encore set, Netherlands (2026-07-28)",
+     "url": "https://1001.tl/2u0t3321"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Eurythmics",
+    "title": "Sweet Dreams (Are Made of This) (Rebelion Edit)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/1tfn2859"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "The Saints": {
+  "sets": [
+   {
+    "event": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia",
+    "date": "2026-07-06",
+    "url": "https://1001.tl/108yv9xk"
+   },
+   {
+    "event": "Holy Dreams, Mainstage, Intents Festival, Netherlands",
+    "date": "2026-06-06",
+    "url": "https://1001.tl/116kjrl9"
+   },
+   {
+    "event": "Midnight Mafia The Empire State, Sydney Showground, Australia",
+    "date": "2026-05-02",
+    "url": "https://1001.tl/1x4f2uc9"
+   }
+  ],
+  "released": [
+   {
+    "artist": "The Saints",
+    "title": "One (Your Name)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20One"
+   },
+   {
+    "artist": "Rebelion & The Saints ft. Sarah Anglionin",
+    "title": "Never Coming Down",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Rebelion%20The%20Saints%20Never%20Coming%20Down"
+   },
+   {
+    "artist": "The Saints",
+    "title": "Home",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Home"
+   },
+   {
+    "artist": "The Saints & Noxiouz & Satirized ft. MC Livid",
+    "title": "Legacy",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Noxiouz%20Legacy"
+   },
+   {
+    "artist": "The Saints",
+    "title": "All The Way",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20All%20The%20Way"
+   },
+   {
+    "artist": "Don Omar ft. Lucenzo",
+    "title": "Danza Kuduro",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Don%20Omar%20Danza%20Kuduro"
+   },
+   {
+    "artist": "Justin Bieber ft. Nicki Minaj",
+    "title": "Beauty And A Beat",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Justin%20Bieber%20Beauty%20And%20A%20Beat"
+   },
+   {
+    "artist": "Maddix & The Rocketman",
+    "title": "90's Bitch",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Maddix%20The%20Rocketman%2090%27s%20Bitch"
+   },
+   {
+    "artist": "Macklemore & Ryan Lewis ft. Ray Dalton",
+    "title": "Can't Hold Us",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Macklemore%20Ryan%20Lewis%20Can%27t%20Hold%20Us"
+   },
+   {
+    "artist": "Blademasterz",
+    "title": "Masterblade",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Blademasterz%20Masterblade"
+   },
+   {
+    "artist": "Highlander",
+    "title": "Hold Me Now (Bass-D & King Matthew Remix)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Highlander%20Hold%20Me%20Now%20Bass-D%20King%20Matthew%20Remix"
+   },
+   {
+    "artist": "Vertile & The Saints",
+    "title": "Awake Me (Official Intents Festival 2026 Anthem)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Vertile%20The%20Saints%20Awake%20Me",
+    "confidence": "guess"
+   },
+   {
+    "artist": "The Saints",
+    "title": "Empire State",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Empire%20State"
+   },
+   {
+    "artist": "The Saints & WINSON",
+    "title": "Let You Down",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20WINSON%20Let%20You%20Down"
+   },
+   {
+    "artist": "Ran-D",
+    "title": "Hurricane",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Ran-D%20Hurricane"
+   },
+   {
+    "artist": "The Saints",
+    "title": "On The Move",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20On%20The%20Move"
+   },
+   {
+    "artist": "Rooler & Kronos",
+    "title": "FCK DOOM ZAAG!",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Rooler%20Kronos%20FCK%20DOOM%20ZAAG"
+   },
+   {
+    "artist": "The Saints",
+    "title": "What Is Love",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20What%20Is%20Love"
+   },
+   {
+    "artist": "John Summit ft. HAYLA",
+    "title": "Where You Are",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/John%20Summit%20Where%20You%20Are"
+   },
+   {
+    "artist": "Justice vs. Simian",
+    "title": "We Are Your Friends (Acappella)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Justice%20Simian%20We%20Are%20Your%20Friends"
+   },
+   {
+    "artist": "O-Zone",
+    "title": "Mai Ai Hee (Dragostea Din Tei) (The Saints Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/O-Zone%20Mai%20Ai%20Hee%20The%20Saints%20Remix"
+   },
+   {
+    "artist": "The Saints",
+    "title": "Turn Down For Zaag",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Turn%20Down%20For%20Zaag"
+   },
+   {
+    "artist": "The Saints",
+    "title": "Dare To Dream",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Dare%20To%20Dream"
+   },
+   {
+    "artist": "The Saints",
+    "title": "Danza Kuduro (Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Danza%20Kuduro%20Remix",
+    "confidence": "guess"
+   },
+   {
+    "artist": "The Purge & The Saints",
+    "title": "OG RAVER",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Purge%20The%20Saints%20OG%20RAVER"
+   },
+   {
+    "artist": "The Saints & Lekkerfaces",
+    "title": "V.I.P",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Lekkerfaces%20V.I.P"
+   },
+   {
+    "artist": "The Saints",
+    "title": "Walking On A Holy Dream",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Saints%20Walking%20On%20A%20Holy%20Dream"
+   },
+   {
+    "artist": "Invector & The Saints",
+    "title": "TUTUTU",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Invector%20The%20Saints%20TUTUTU"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "The Saints",
+    "title": "Holy Madness (Nightmare Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "The Saints",
+    "title": "Be My Lover (2026 Live Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "The Saints",
+    "title": "Feel It (Nightmare Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "The Saints",
+    "title": "The Alarm (2025 Live Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Netherworld",
+    "title": "Atlantis (The Saints Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Mutilator & The Saints",
+    "title": "ID",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Justin Bieber & Nicki Minaj vs. Don Omar & Lucenzo",
+    "title": "Beauty And A Beat vs. Danza Kuduro (The Saints Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "John Newman",
+    "title": "Love Me Again (The Saints Bootleg)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Alex Warren",
+    "title": "Ordinary (The Saints Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Dee-Block & S-te-Pack",
+    "title": "Blade Me Now (The Saints Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Massano",
+    "title": "The Feeling (The Saints Raw Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "The Purge & The Saints",
+    "title": "OG RAVER (The Saints Kick Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "The Saints",
+    "title": "Say My Name (2025 Live Edit)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "The Saints",
+    "title": "Outro",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "kind": "tool",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Mutilator",
+    "title": "To The Ground (Live Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Bountyhunter",
+    "title": "Woops (Anderex Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "DJ Ötzi",
+    "title": "Sweet Caroline (The Schnitzelboys Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Kevin de Vries & Mau P",
+    "title": "Metro (The Saints Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "Henk",
+    "title": "Meet Her At The Loveparade (The Saints Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    }
+   },
+   {
+    "artist": "SLVL",
+    "title": "The Last Airbender (VIP)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Dirty Works 20 Years Tour, Dropzone Festival, Club Papaya Zrće, Croatia (2026-07-06)",
+     "url": "https://1001.tl/108yv9xk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Lucas & Steve",
+    "title": "Up Till Dawn (On The Move) (The Saints Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Midnight Mafia The Empire State, Sydney Showground, Australia (2026-05-02)",
+     "url": "https://1001.tl/1x4f2uc9"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "Weaver": {
+  "sets": [
+   {
+    "event": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia",
+    "date": "2026-08-08",
+    "url": "https://1001.tl/2gv72ys9"
+   },
+   {
+    "event": "Weaver & JTS & Technikore @ Midnight Mafia The Empire State, Sydney Showground, Australia",
+    "date": "2026-05-02",
+    "url": "https://1001.tl/2dz1khz1"
+   },
+   {
+    "event": "Masif pres. Noiseflow & Schlot, Australia",
+    "date": "2026-03-20",
+    "url": "https://1001.tl/2vvp7jhk"
+   },
+   {
+    "event": "Mainstage, HTID, Sydney Showground, Australia",
+    "date": "2026-01-24",
+    "url": "https://1001.tl/n4k1dxk"
+   }
+  ],
+  "note": "Includes shared b2b sets with Technikore & JTS.",
+  "released": [
+   {
+    "artist": "Joey Riot & Weaver",
+    "title": "Run",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Joey%20Riot%20Weaver%20Run"
+   },
+   {
+    "artist": "Weaver & Jakka-B",
+    "title": "Broken Heart",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Weaver%20Jakka-B%20Broken%20Heart"
+   },
+   {
+    "artist": "TAZI",
+    "title": "Rhythm (Weaver Remix)",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/TAZI%20Rhythm%20Weaver%20Remix"
+   },
+   {
+    "artist": "Restricted & Nik Sitz",
+    "title": "Tunnel Vision",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Restricted%20Nik%20Sitz%20Tunnel%20Vision"
+   },
+   {
+    "artist": "Stonebank & Weaver",
+    "title": "Feel The Fire",
+    "plays": 3,
+    "sets": [
+     1,
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Stonebank%20Weaver%20Feel%20The%20Fire"
+   },
+   {
+    "artist": "Mike Reverie & Joey Riot & Haly0n",
+    "title": "Higher",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Mike%20Reverie%20Joey%20Riot%20Higher"
+   },
+   {
+    "artist": "Technikore & Steve Hill",
+    "title": "Letting Go",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20Steve%20Hill%20Letting%20Go"
+   },
+   {
+    "artist": "Kristine Blond",
+    "title": "Love Shy (Technikore Remix)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Kristine%20Blond%20Love%20Shy%20Technikore%20Remix"
+   },
+   {
+    "artist": "Stonebank",
+    "title": "Keep Holding On",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Stonebank%20Keep%20Holding%20On"
+   },
+   {
+    "artist": "Restricted",
+    "title": "Crowd Operator",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Restricted%20Crowd%20Operator"
+   },
+   {
+    "artist": "Ephesis & Axiver",
+    "title": "Never Back",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Ephesis%20Axiver%20Never%20Back"
+   },
+   {
+    "artist": "Vortek's",
+    "title": "The Untested",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Vortek%27s%20The%20Untested"
+   },
+   {
+    "artist": "Jakka-B & Macks Wolf ft. Jennifer Rene",
+    "title": "New Life",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Jakka-B%20Macks%20Wolf%20New%20Life"
+   },
+   {
+    "artist": "Technikore & JTS",
+    "title": "With No Heart",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20JTS%20With%20No%20Heart"
+   },
+   {
+    "artist": "Ultravibes",
+    "title": "The World Goes Down",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Ultravibes%20The%20World%20Goes%20Down"
+   },
+   {
+    "artist": "Cosmic Gate",
+    "title": "Fire Wire (Technikore Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Cosmic%20Gate%20Fire%20Wire%20Technikore%20Remix"
+   },
+   {
+    "artist": "Klubfiller & JTS",
+    "title": "Cry For You",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Klubfiller%20JTS%20Cry%20For%20You"
+   },
+   {
+    "artist": "Mike Enemy",
+    "title": "Legacy of Arcadia",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Mike%20Enemy%20Legacy%20of%20Arcadia"
+   },
+   {
+    "artist": "JTS & Klubfiller",
+    "title": "Something",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20Klubfiller%20Something"
+   },
+   {
+    "artist": "Technikore",
+    "title": "I Want To Be A Hippy",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20I%20Want%20To%20Be%20A%20Hippy"
+   },
+   {
+    "artist": "Cascada",
+    "title": "Everytime We Touch",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Cascada%20Everytime%20We%20Touch"
+   },
+   {
+    "artist": "Darude",
+    "title": "Sandstorm (Overdrive & LANCE Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Darude%20Sandstorm%20Overdrive%20LANCE%20Remix"
+   },
+   {
+    "artist": "Quickdrop & Tatsunoshin",
+    "title": "Sandstorm",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Quickdrop%20Tatsunoshin%20Sandstorm"
+   },
+   {
+    "artist": "Edward Maya & Vika Jigulina",
+    "title": "Stereo Love (JTS Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Edward%20Maya%20Vika%20Jigulina%20Stereo%20Love%20JTS%20Remix"
+   },
+   {
+    "artist": "JTS & NextJen",
+    "title": "Miracle",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20NextJen%20Miracle"
+   },
+   {
+    "artist": "Technikore & Steve Hill",
+    "title": "Blow Ya Mind",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20Steve%20Hill%20Blow%20Ya%20Mind"
+   },
+   {
+    "artist": "JTS",
+    "title": "We Came 2 Rave",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20We%20Came%202%20Rave"
+   },
+   {
+    "artist": "Stonebank",
+    "title": "Lights Go Down",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Stonebank%20Lights%20Go%20Down"
+   },
+   {
+    "artist": "Guru Josh",
+    "title": "Infinity (Stonebank Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Guru%20Josh%20Infinity%20Stonebank%20Remix"
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "Be Somebody",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20TNT%20Be%20Somebody"
+   },
+   {
+    "artist": "Dimatik & Weaver",
+    "title": "Rise of the Phoenix",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Dimatik%20Weaver%20Rise%20of%20the%20Phoenix"
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "Cornflakes",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20TNT%20Cornflakes"
+   },
+   {
+    "artist": "Malaa (Alter Ego) & Vortek's",
+    "title": "Ghetto",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Malaa%20Alter%20Ego%20Vortek%27s%20Ghetto"
+   },
+   {
+    "artist": "Toneshifterz & Darren Styles",
+    "title": "Clarity",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20Darren%20Styles%20Clarity"
+   },
+   {
+    "artist": "Motorcycle",
+    "title": "As The Rush Comes (Acappella)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Motorcycle%20As%20The%20Rush%20Comes"
+   },
+   {
+    "artist": "Mauro Picotto",
+    "title": "Lizard (Darren Styles & Stonebank Remix)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Mauro%20Picotto%20Lizard%20Darren%20Styles%20Stonebank%20Remix"
+   },
+   {
+    "artist": "Calvin Harris & Disciples ft. Ina Wroldsen",
+    "title": "How Deep Is Your Love (Acappella)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Calvin%20Harris%20Disciples%20How%20Deep%20Is%20Your%20Love"
+   },
+   {
+    "artist": "Darren Styles",
+    "title": "Switch",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Switch"
+   },
+   {
+    "artist": "DNMO & Wolfy Lights",
+    "title": "Bombalaya (Blooom Remix)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "spotify": "https://open.spotify.com/search/DNMO%20Wolfy%20Lights%20Bombalaya%20Blooom%20Remix"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Corona",
+    "title": "The Rhythm Of The Night (Weaver Edit)",
+    "plays": 4,
+    "sets": [
+     0,
+     1,
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    }
+   },
+   {
+    "artist": "John Summit ft. HAYLA",
+    "title": "Where You Are (GRVITY Remix / Weaver Edit)",
+    "plays": 3,
+    "sets": [
+     0,
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    }
+   },
+   {
+    "artist": "Dougal & Gammer",
+    "title": "Every Time I Hear Your Name (Festival VIP)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Mauro Picotto vs. Darren Styles & Stonebank",
+    "title": "As The Lizard Comes (Weaver Exclusive Mashup)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Masif pres. Noiseflow & Schlot, Australia (2026-03-20)",
+     "url": "https://1001.tl/2vvp7jhk"
+    }
+   },
+   {
+    "artist": "The Prodigy",
+    "title": "Voodoo People (Weaver Edit)",
+    "plays": 2,
+    "sets": [
+     2,
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Masif pres. Noiseflow & Schlot, Australia (2026-03-20)",
+     "url": "https://1001.tl/2vvp7jhk"
+    }
+   },
+   {
+    "artist": "Bountyhunter",
+    "title": "Woops (JTS Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "JTS & Mike Reverie",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    }
+   },
+   {
+    "artist": "4 Strings & CJ Stone",
+    "title": "I Can't Help Myself (JTS Rework)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Cascada",
+    "title": "Everytime We Touch (Tatsunoshin Festival Mix / Technikore Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/2gv72ys9"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Delerium ft. Sarah McLachlan",
+    "title": "Silence (JTS Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Weaver & JTS & Technikore @ Midnight Mafia The Empire State, Sydney Showground, Australia (2026-05-02)",
+     "url": "https://1001.tl/2dz1khz1"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Push vs. C'hantal",
+    "title": "Universal Realm (Weaver Exclusive Mashup)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Masif pres. Noiseflow & Schlot, Australia (2026-03-20)",
+     "url": "https://1001.tl/2vvp7jhk"
+    }
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "DLMD (Weaver Edit)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Mainstage, HTID, Sydney Showground, Australia (2026-01-24)",
+     "url": "https://1001.tl/n4k1dxk"
+    }
+   },
+   {
+    "artist": "Darren Styles vs. Calvin Harris",
+    "title": "How Deep Is Your Switch (Weaver Mashup Edit)",
+    "plays": 1,
+    "sets": [
+     3
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Mainstage, HTID, Sydney Showground, Australia (2026-01-24)",
+     "url": "https://1001.tl/n4k1dxk"
+    }
+   }
+  ],
+  "unknown_ids": 0
+ },
+ "JTS": {
+  "sets": [
+   {
+    "event": "Technikore & JTS @ The Oasis, Knockout Outdoor Level Up, Sydney Showground, Australia",
+    "date": "2026-10-03",
+    "url": "https://1001.tl/1lxhx391"
+   },
+   {
+    "event": "Hardcore Evolution, Australia",
+    "date": "2026-09-26",
+    "url": "https://1001.tl/1ch21331"
+   },
+   {
+    "event": "Klubfiller & JTS - Ravelife Radio 015",
+    "date": "2026-06-26",
+    "url": "https://1001.tl/1dd92fjk"
+   }
+  ],
+  "note": "Hardcore Evolution is a solo set. The other two are shared with Technikore (Knockout Outdoor) and Klubfiller (Ravelife Radio).",
+  "released": [
+   {
+    "artist": "Darren Styles & Dougal",
+    "title": "Sweetheart",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Dougal%20Sweetheart"
+   },
+   {
+    "artist": "Technikore & JTS ft. Nikki Man",
+    "title": "Always",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20JTS%20Always"
+   },
+   {
+    "artist": "Klubfiller & JTS",
+    "title": "Cry For You",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Klubfiller%20JTS%20Cry%20For%20You"
+   },
+   {
+    "artist": "Kristine Blond",
+    "title": "Love Shy (Technikore Remix)",
+    "plays": 2,
+    "sets": [
+     0,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Kristine%20Blond%20Love%20Shy%20Technikore%20Remix"
+   },
+   {
+    "artist": "Edward Maya & Vika Jigulina",
+    "title": "Stereo Love (JTS Remix)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Edward%20Maya%20Vika%20Jigulina%20Stereo%20Love%20JTS%20Remix"
+   },
+   {
+    "artist": "JTS & NextJen",
+    "title": "Miracle",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20NextJen%20Miracle"
+   },
+   {
+    "artist": "Technikore & JTS",
+    "title": "Meet Her At The Love Parade",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20JTS%20Meet%20Her%20At%20The%20Love%20Parade"
+   },
+   {
+    "artist": "Darren Styles ft. MERYLL",
+    "title": "Miss You",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Miss%20You"
+   },
+   {
+    "artist": "Arkiida",
+    "title": "Repeat",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Arkiida%20Repeat"
+   },
+   {
+    "artist": "Technikore & JTS",
+    "title": "With No Heart",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20JTS%20With%20No%20Heart"
+   },
+   {
+    "artist": "Technikore & Steve Hill",
+    "title": "Letting Go",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20Steve%20Hill%20Letting%20Go"
+   },
+   {
+    "artist": "N-Force vs. Ultrabeat",
+    "title": "Right By Your Side (Technikore Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/N-Force%20Ultrabeat%20Right%20By%20Your%20Side%20Technikore%20Remix",
+    "confidence": "guess"
+   },
+   {
+    "artist": "Dreadhed",
+    "title": "On Fire (Sam Laxton Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Dreadhed%20On%20Fire%20Sam%20Laxton%20Remix"
+   },
+   {
+    "artist": "Darren Styles & Re-Con",
+    "title": "Sure Feels Good (Stonebank Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Re-Con%20Sure%20Feels%20Good%20Stonebank%20Remix"
+   },
+   {
+    "artist": "Technikore",
+    "title": "Waste Your Life",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20Waste%20Your%20Life"
+   },
+   {
+    "artist": "MaRLo & MatricK & Sendr & NOHC",
+    "title": "This Way (Suae & Technikore Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/MaRLo%20MatricK%20This%20Way%20Suae%20Technikore%20Remix"
+   },
+   {
+    "artist": "Darren Styles & Steve Aoki & Dougal",
+    "title": "Tainted Love",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Steve%20Aoki%20Tainted%20Love"
+   },
+   {
+    "artist": "Technikore",
+    "title": "I Wanna Be A Hippy",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20I%20Wanna%20Be%20A%20Hippy"
+   },
+   {
+    "artist": "Mike Reverie & JTS",
+    "title": "Ecstacy (3AM)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Mike%20Reverie%20JTS%20Ecstacy"
+   },
+   {
+    "artist": "Technikore",
+    "title": "4AM",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%204AM"
+   },
+   {
+    "artist": "Darren Styles ft. Jelle Van Dael",
+    "title": "Need To Feel Loved",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20Need%20To%20Feel%20Loved"
+   },
+   {
+    "artist": "Dean Lewis",
+    "title": "Half A Man (Stonebank Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Dean%20Lewis%20Half%20A%20Man%20Stonebank%20Remix"
+   },
+   {
+    "artist": "Ben Nicky & Technikore & JTS",
+    "title": "YEET 2.0",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Ben%20Nicky%20Technikore%20YEET%202.0"
+   },
+   {
+    "artist": "Technikore & JTS vs. Michael Mansion",
+    "title": "Light Show",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Technikore%20JTS%20Light%20Show",
+    "confidence": "guess"
+   },
+   {
+    "artist": "Asa & S1",
+    "title": "Reach Out",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Asa%20S1%20Reach%20Out"
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "You Were Never Mine",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20TNT%20You%20Were%20Never%20Mine"
+   },
+   {
+    "artist": "System F ft. Saskia Lie-Atjam",
+    "title": "Cry",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/System%20F%20Cry"
+   },
+   {
+    "artist": "Dreadhed",
+    "title": "On Fire (Hixxy Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Dreadhed%20On%20Fire%20Hixxy%20Remix"
+   },
+   {
+    "artist": "4 Strings ft. Susanne Teutenberg",
+    "title": "Take Me Away (Into The Night)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/4%20Strings%20Take%20Me%20Away"
+   },
+   {
+    "artist": "Mike Reverie & Joey Riot & Haly0n",
+    "title": "Higher",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Mike%20Reverie%20Joey%20Riot%20Higher"
+   },
+   {
+    "artist": "KRS-One",
+    "title": "Sound Of Da Police",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/KRS-One%20Sound%20Of%20Da%20Police"
+   },
+   {
+    "artist": "2 Sick Puppiez",
+    "title": "See Ya Later G",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/2%20Sick%20Puppiez%20See%20Ya%20Later%20G"
+   },
+   {
+    "artist": "Klubfiller",
+    "title": "Make Believe In",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Klubfiller%20Make%20Believe%20In"
+   },
+   {
+    "artist": "Blitz 1",
+    "title": "Over Me",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Blitz%201%20Over%20Me"
+   },
+   {
+    "artist": "JDS",
+    "title": "Higher Love",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/JDS%20Higher%20Love"
+   },
+   {
+    "artist": "Aerosmith",
+    "title": "I Don't Want To Miss A Thing (Klubfiller Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Aerosmith%20I%20Don%27t%20Want%20To%20Miss%20A%20Thing%20Klubfiller%20Remix"
+   },
+   {
+    "artist": "Klubfiller",
+    "title": "Magic",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Klubfiller%20Magic"
+   },
+   {
+    "artist": "JTS",
+    "title": "Aura",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20Aura"
+   },
+   {
+    "artist": "Styles & Breeze",
+    "title": "Electric (Technikore & Danomate Bonkers Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Styles%20Breeze%20Electric%20Technikore%20Danomate%20Bonkers%20Remix"
+   },
+   {
+    "artist": "JTS",
+    "title": "We Came 2 Rave",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20We%20Came%202%20Rave"
+   },
+   {
+    "artist": "Mike Reverie & Geos Crew ft. Zara",
+    "title": "Tru3 Lov3",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Mike%20Reverie%20Geos%20Crew%20Tru3%20Lov3"
+   },
+   {
+    "artist": "JTS",
+    "title": "Only A Dream",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/JTS%20Only%20A%20Dream"
+   },
+   {
+    "artist": "Ultravibes",
+    "title": "Rise Again",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Ultravibes%20Rise%20Again"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Hypaton & David Guetta ft. La Bouche",
+    "title": "Be My Lover (JTS Edit)",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Hardcore Evolution, Australia (2026-09-26)",
+     "url": "https://1001.tl/1ch21331"
+    }
+   },
+   {
+    "artist": "1991 ft. Alex Hosking",
+    "title": "Jungle (GRVITY X Technikore X Jakka-B Flip)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Technikore & JTS @ The Oasis, Knockout Outdoor Level Up, Sydney Showground, Australia (2026-10-03)",
+     "url": "https://1001.tl/1lxhx391"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Delerium ft. Sarah McLachlan",
+    "title": "Silence (JTS Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Hardcore Evolution, Australia (2026-09-26)",
+     "url": "https://1001.tl/1ch21331"
+    }
+   },
+   {
+    "artist": "Hixxy & Re-Con",
+    "title": "Love Comes (Olly P Flip)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Hardcore Evolution, Australia (2026-09-26)",
+     "url": "https://1001.tl/1ch21331"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Darren Styles",
+    "title": "Cutting Deep (Knockout Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Hardcore Evolution, Australia (2026-09-26)",
+     "url": "https://1001.tl/1ch21331"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Bountyhunter",
+    "title": "Woops (JTS Edit)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Hardcore Evolution, Australia (2026-09-26)",
+     "url": "https://1001.tl/1ch21331"
+    }
+   },
+   {
+    "artist": "Klubfiller",
+    "title": "ID",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "ID",
+    "ref": {
+     "label": "Klubfiller & JTS - Ravelife Radio 015 (2026-06-26)",
+     "url": "https://1001.tl/1dd92fjk"
+    }
+   }
+  ],
+  "unknown_ids": 6
+ },
+ "Suae": {
+  "sets": [
+   {
+    "event": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia",
+    "date": "2026-08-08",
+    "url": "https://1001.tl/fp3qvxk"
+   },
+   {
+    "event": "Suae & Steve Hill @ Klassics Stage, HTID, Sydney Showground, Australia",
+    "date": "2026-01-24",
+    "url": "https://1001.tl/11629ujk"
+   },
+   {
+    "event": "HSU Knockout Special Event, Metro Theatre Sydney, Australia",
+    "date": "2025-10-05",
+    "url": "https://1001.tl/ssx3u71"
+   }
+  ],
+  "released": [
+   {
+    "artist": "Tatanka",
+    "title": "Afrika",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Tatanka%20Afrika"
+   },
+   {
+    "artist": "Manian",
+    "title": "Hold Me Tonight (Toneshifterz & Suae & Pulsar Remix)",
+    "plays": 2,
+    "sets": [
+     0,
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Manian%20Hold%20Me%20Tonight%20Toneshifterz%20Suae%20Pulsar%20Remix"
+   },
+   {
+    "artist": "Max Enforcer",
+    "title": "Lost In Paradise",
+    "plays": 2,
+    "sets": [
+     1,
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Max%20Enforcer%20Lost%20In%20Paradise"
+   },
+   {
+    "artist": "Atmozfears & Audiotricz",
+    "title": "Reawakening",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Atmozfears%20Audiotricz%20Reawakening"
+   },
+   {
+    "artist": "Pitchers",
+    "title": "Black Is Back (Pulsar (Hardstyle) Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Pitchers%20Black%20Is%20Back%20Pulsar%20Remix"
+   },
+   {
+    "artist": "Walt",
+    "title": "Let The Music Play (D-Block & S-te-Fan Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Walt%20Let%20The%20Music%20Play%20D-Block%20S-te-Fan%20Remix"
+   },
+   {
+    "artist": "Frontliner",
+    "title": "Discorecord (Galactixx Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Frontliner%20Discorecord%20Galactixx%20Remix"
+   },
+   {
+    "artist": "Rosa Walton",
+    "title": "I Really Want To Stay At Your House (Suae & Technikore Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Rosa%20Walton%20I%20Really%20Want%20To%20Stay%20At%20Your%20House%20Suae%20Technikore%20Remix",
+    "confidence": "guess"
+   },
+   {
+    "artist": "Toneshifterz",
+    "title": "Harder Styles United (Official Knockout Anthem 2025)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Toneshifterz%20Harder%20Styles%20United"
+   },
+   {
+    "artist": "Dabin & Kai Wachi & Lø Spirit",
+    "title": "Hollow (Firelite & Technikore & Suae 2026 Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Dabin%20Kai%20Wachi%20Hollow%20Firelite%20Technikore%20Suae%202026%20Remix"
+   },
+   {
+    "artist": "John Summit ft. HAYLA",
+    "title": "Where You Are (D-Block & S-te-Fan Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/John%20Summit%20Where%20You%20Are%20D-Block%20S-te-Fan%20Remix"
+   },
+   {
+    "artist": "Cosmic Gate",
+    "title": "Exploration Of Space (DNA 2023 Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Cosmic%20Gate%20Exploration%20Of%20Space%20DNA%202023%20Remix"
+   },
+   {
+    "artist": "Headhunterz",
+    "title": "Scrap Attack (Defqon.1 2009 Anthem)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Headhunterz%20Scrap%20Attack"
+   },
+   {
+    "artist": "Kaskade ft. Neon Trees",
+    "title": "Lessons In Love",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Kaskade%20Lessons%20In%20Love"
+   },
+   {
+    "artist": "Kaskade ft. Neon Trees",
+    "title": "Lessons In Love (Headhunterz Remix)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "spotify": "https://open.spotify.com/search/Kaskade%20Lessons%20In%20Love%20Headhunterz%20Remix"
+   },
+   {
+    "artist": "Proppy & Heady",
+    "title": "Summer Of 2011 (The Prophet Refixx)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Proppy%20Heady%20Summer%20Of%202011",
+    "confidence": "guess"
+   },
+   {
+    "artist": "Noisecontrollers",
+    "title": "Gimme Love",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Noisecontrollers%20Gimme%20Love"
+   },
+   {
+    "artist": "The Killers",
+    "title": "Mr. Brightside (Suae 2018 Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Killers%20Mr.%20Brightside%20Suae%202018%20Remix"
+   },
+   {
+    "artist": "Yeah Yeah Yeahs",
+    "title": "Heads Will Roll",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Yeah%20Yeah%20Yeahs%20Heads%20Will%20Roll"
+   },
+   {
+    "artist": "TNT & DJ Isaac",
+    "title": "Digital Nation",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/TNT%20DJ%20Isaac%20Digital%20Nation"
+   },
+   {
+    "artist": "Styles & Breeze",
+    "title": "You're My Angel (Suae Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Styles%20Breeze%20You%27re%20My%20Angel%20Suae%20Remix"
+   },
+   {
+    "artist": "Hard Dance Alliance",
+    "title": "In My Mind (Steve Hill & Technikal Remix)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Hard%20Dance%20Alliance%20In%20My%20Mind%20Steve%20Hill%20Technikal%20Remix"
+   },
+   {
+    "artist": "Proppy & Heady",
+    "title": "The B-Side",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Proppy%20Heady%20The%20B-Side"
+   },
+   {
+    "artist": "The Prophet & E-Life",
+    "title": "MF DJ",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/The%20Prophet%20E-Life%20MF%20DJ"
+   },
+   {
+    "artist": "Anyma & Argy & Son Of Son",
+    "title": "Voices In My Head",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Anyma%20Argy%20Voices%20In%20My%20Head"
+   },
+   {
+    "artist": "Showtek",
+    "title": "FTS (Fuck The System)",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Showtek%20FTS"
+   },
+   {
+    "artist": "Frontliner",
+    "title": "Discorecord",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Frontliner%20Discorecord"
+   },
+   {
+    "artist": "Brennan Heart & Wildstylez",
+    "title": "Lose My Mind",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Brennan%20Heart%20Wildstylez%20Lose%20My%20Mind"
+   },
+   {
+    "artist": "Headhunterz",
+    "title": "Rock Civilization",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Headhunterz%20Rock%20Civilization"
+   },
+   {
+    "artist": "Refuzion",
+    "title": "Without You",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Refuzion%20Without%20You"
+   },
+   {
+    "artist": "Audiofreq",
+    "title": "Warcry",
+    "plays": 1,
+    "sets": [
+     1
+    ],
+    "spotify": "https://open.spotify.com/search/Audiofreq%20Warcry"
+   },
+   {
+    "artist": "Builder",
+    "title": "Her Voice (Headhunterz Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Builder%20Her%20Voice%20Headhunterz%20Remix"
+   },
+   {
+    "artist": "Firelite & Suae",
+    "title": "You Give Love A Bad Name",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Firelite%20Suae%20You%20Give%20Love%20A%20Bad%20Name"
+   },
+   {
+    "artist": "Hardik & Overdrive",
+    "title": "Low",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Hardik%20Overdrive%20Low"
+   },
+   {
+    "artist": "Showtek",
+    "title": "The Colour Of The Harder Styles (Defqon.1 Anthem 2006)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Showtek%20The%20Colour%20Of%20The%20Harder%20Styles"
+   },
+   {
+    "artist": "Dabin & Kai Wachi & Lø Spirit",
+    "title": "Hollow (Firelite & Suae Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Dabin%20Kai%20Wachi%20Hollow%20Firelite%20Suae%20Remix"
+   },
+   {
+    "artist": "Zedd ft. Matthew Koma",
+    "title": "Spectrum (Acappella)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Zedd%20Spectrum"
+   },
+   {
+    "artist": "TNT",
+    "title": "2004",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/TNT%202004",
+    "confidence": "guess"
+   },
+   {
+    "artist": "D-Sturb",
+    "title": "Wanna Stay",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/D-Sturb%20Wanna%20Stay"
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "Cornflakes",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20TNT%20Cornflakes"
+   },
+   {
+    "artist": "D-Block & S-te-Fan & Sub Zero Project",
+    "title": "Darkest Hour (The Clock)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/D-Block%20S-te-Fan%20Darkest%20Hour"
+   },
+   {
+    "artist": "Suae & Technikore",
+    "title": "Set You Free (Vocal Mix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Suae%20Technikore%20Set%20You%20Free%20Vocal%20Mix",
+    "confidence": "guess"
+   },
+   {
+    "artist": "Darren Styles & TNT",
+    "title": "Be Somebody",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Darren%20Styles%20TNT%20Be%20Somebody"
+   },
+   {
+    "artist": "Hektic & Suae",
+    "title": "Howl's Moving Castle",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "spotify": "https://open.spotify.com/search/Hektic%20Suae%20Howl%27s%20Moving%20Castle"
+   }
+  ],
+  "unreleased": [
+   {
+    "artist": "Headhunterz & Sub Zero Project",
+    "title": "Our Church (Steve Hill Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Proppy & Heady vs. Wasted Penguinz",
+    "title": "Summer Of Hardstyle x Melancholia (Wasted Penguinz Defqon.1 Mashup)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    }
+   },
+   {
+    "artist": "Wildstylez vs. Andrew Rayel",
+    "title": "Timeless vs. One In A Million (Pulsar (Hardstyle) Mashup)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    }
+   },
+   {
+    "artist": "Brennan Heart & Coone vs. Code Black & Toneshifterz",
+    "title": "Let There Be Something For Outcasts (Steve Hill Mashup)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    }
+   },
+   {
+    "artist": "Max Enforcer",
+    "title": "Lost In Paradise (Hardwyre & Steve Hill Pre Midnight Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "The Nasty Boyz",
+    "title": "Angel (Technoboy Qlimax 2012 Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "TNT & DJ Isaac x Derb",
+    "title": "Seduction Realm (Steve Hill Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Bountyhunter x Nik Sitz",
+    "title": "Woops To The Sound (Hardwyre & Steve Hill Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Code Black",
+    "title": "Pandora (Overdrive Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Code Black",
+    "title": "Pandora (PSY Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Code Black",
+    "title": "Pandora (2K19 Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Walt & Feliz",
+    "title": "Expansion (Pulsar Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "David Guetta x Phuture Noize",
+    "title": "Titanium Circles & Squares (Hardwyre & Steve Hill Edit)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Suae & Pulsar ft. Amba Shepherd",
+    "title": "Man On The Run (Update)",
+    "plays": 1,
+    "sets": [
+     0
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "Steve Hill & Pulsar (Hardstyle) & Suae @ HSU Darren Styles LMTLSS, Sydney Showground, Australia (2026-08-08)",
+     "url": "https://1001.tl/fp3qvxk"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Bountyhunter X Far East Movement",
+    "title": "Like A Woops (DanFX Mashup)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    }
+   },
+   {
+    "artist": "Suae & Technikore",
+    "title": "Infinity Castle Theme",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Suae & Technikore",
+    "title": "Red & Blue Theme",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "HUNTR/X",
+    "title": "What It Sounds Like X Golden (Suae & Technikore UKHC Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Jayron & Gewoonraves",
+    "title": "Knock Knock (Suae & Technikore Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    }
+   },
+   {
+    "artist": "SawanoHiroyuki[nZk]:XAI",
+    "title": "DARK ARIA <LV2> (Suae & Technikore Euphoric Hardstyle Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    }
+   },
+   {
+    "artist": "Suae & Technikore",
+    "title": "Zankyou Sanka",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Marlon Hoffstadt aka DJ Daddy Trance",
+    "title": "It's That Time (LANCE Re-Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "OneRepublic",
+    "title": "Nobody (From Kaiju N°8) (Suae & Technikore Remix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "Dimitri Vegas & Like Mike & Martin Garrix vs. Benny Benassi ft. Gary Go",
+    "title": "Tremor x Cinema (Darren Styles & Gammer Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "mashup",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "ILLENIUM ft. Teddy Swims",
+    "title": "All That Really Matters (Suae & Technikore Edit)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    }
+   },
+   {
+    "artist": "Creepy Nuts",
+    "title": "Otonoke (Suae & Technikore Euphoric Mix)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    },
+    "confidence": "guess"
+   },
+   {
+    "artist": "League Of Legends ft. Against The Current",
+    "title": "Legends Never Die (Wildstylez Bootleg)",
+    "plays": 1,
+    "sets": [
+     2
+    ],
+    "kind": "edit",
+    "ref": {
+     "label": "HSU Knockout Special Event, Metro Theatre Sydney, Australia (2025-10-05)",
+     "url": "https://1001.tl/ssx3u71"
+    }
+   }
+  ],
+  "unknown_ids": 3
+ },
+ "Kid Finley": {
+  "sets": [],
+  "note": "Couldn't find recent Kid Finley tracklists on 1001Tracklists. Add the songs you're hoping for below.",
+  "released": [],
+  "unreleased": [],
+  "unknown_ids": 0
+ },
+ "Villain": {
+  "sets": [],
+  "note": "Villain's hosting EPIK. In the last 12 months he's only been on the mic for group sets, so there are no DJ tracklists to pull from. Add the songs you're hoping for below.",
+  "released": [],
+  "unreleased": [],
+  "unknown_ids": 0
+ }
+}

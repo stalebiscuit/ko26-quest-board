@@ -1,0 +1,150 @@
+{
+ "_readme": "mode switch. \"lineup\" = no set times yet: the board is the lineup poster built from slots[].row (head | alpha | battle | host; battles pair up via vs). \"timetable\" = the KO26-style set-times poster: fill stages{} (key: {name, word, short, sub, host, color}), give every act slot stage + start + end (\"h:mm\", pm assumed), add ceremony slots with special:true, then set mode to \"timetable\". Picks and KR songs carry over (matched by artist name). Leave mode out and it flips by itself once any slot has start/end. poster: when set, the lineup board is HSU's own lineup poster (src, w, h in px) with a clickable block over each act at slots[].box = [x, y, w, h] in poster pixels. Remove poster to fall back to the built tiles.",
+ "mode": "lineup",
+ "stages": {},
+ "slots": [
+  {
+   "artist": "Project One",
+   "row": "head",
+   "box": [
+    460,
+    438,
+    1582,
+    372
+   ]
+  },
+  {
+   "artist": "Code Black",
+   "row": "alpha",
+   "box": [
+    205,
+    1040,
+    550,
+    285
+   ]
+  },
+  {
+   "artist": "MISH",
+   "row": "alpha",
+   "box": [
+    895,
+    1015,
+    375,
+    370
+   ]
+  },
+  {
+   "artist": "Mutilator",
+   "row": "alpha",
+   "tag": "Rave Reactor Live",
+   "box": [
+    1350,
+    1075,
+    935,
+    255
+   ]
+  },
+  {
+   "artist": "Noxiouz",
+   "row": "alpha",
+   "tag": "The Catalyst Live",
+   "box": [
+    205,
+    1386,
+    805,
+    208
+   ]
+  },
+  {
+   "artist": "Phuture Noize",
+   "row": "alpha",
+   "box": [
+    1130,
+    1378,
+    1160,
+    217
+   ]
+  },
+  {
+   "artist": "Rebelion",
+   "row": "alpha",
+   "tag": "MWI · Exclusive World Premiere",
+   "box": [
+    205,
+    1600,
+    1010,
+    310
+   ]
+  },
+  {
+   "artist": "The Saints",
+   "row": "alpha",
+   "box": [
+    1290,
+    1698,
+    1000,
+    178
+   ]
+  },
+  {
+   "artist": "Suae",
+   "row": "battle",
+   "vs": "Kid Finley",
+   "box": [
+    208,
+    2018,
+    404,
+    118
+   ]
+  },
+  {
+   "artist": "Kid Finley",
+   "row": "battle",
+   "vs": "Suae",
+   "box": [
+    672,
+    2018,
+    570,
+    118
+   ]
+  },
+  {
+   "artist": "Weaver",
+   "row": "battle",
+   "vs": "JTS",
+   "box": [
+    1284,
+    2018,
+    576,
+    118
+   ]
+  },
+  {
+   "artist": "JTS",
+   "row": "battle",
+   "vs": "Weaver",
+   "box": [
+    1922,
+    2018,
+    366,
+    118
+   ]
+  },
+  {
+   "artist": "Villain",
+   "row": "host",
+   "box": [
+    1026,
+    2318,
+    446,
+    245
+   ]
+  }
+ ],
+ "poster": {
+  "src": "../assets/epik26-lineup.jpg",
+  "w": 2500,
+  "h": 3125,
+  "alt": "HSU Events' EPIK 2026 full lineup poster"
+ }
+}

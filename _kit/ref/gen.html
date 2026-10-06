@@ -1,0 +1,154 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>event key art</title>
+<style>
+@font-face{font-family:Oswald;font-weight:500;src:url(node_modules/@fontsource/oswald/files/oswald-latin-500-normal.woff2)}
+@font-face{font-family:Oswald;font-weight:700;src:url(node_modules/@fontsource/oswald/files/oswald-latin-700-normal.woff2)}
+@font-face{font-family:Cinzel;font-weight:700;src:url(node_modules/@fontsource/cinzel/files/cinzel-latin-700-normal.woff2)}
+@font-face{font-family:Silkscreen;font-weight:400;src:url(node_modules/@fontsource/silkscreen/files/silkscreen-latin-400-normal.woff2)}
+@font-face{font-family:Michroma;font-weight:400;src:url(node_modules/@fontsource/michroma/files/michroma-latin-400-normal.woff2)}
+@font-face{font-family:"Press Start 2P";font-weight:400;src:url(node_modules/@fontsource/press-start-2p/files/press-start-2p-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}
+.art{position:relative;width:1920px;height:1080px;overflow:hidden}
+.layer{position:absolute;inset:0}
+svg.field{position:absolute;inset:0;width:100%;height:100%}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+
+/* ============ KNOCKOUT · Level Up (quest board palette) ============ */
+.ko{background:#120a24}
+.ko .bg{background:
+  radial-gradient(ellipse 60% 55% at 50% 46%, #5524a0 0%, #4a1f8a 28%, #2a1150 58%, #120a24 100%)}
+.ko .pix{background-image:
+  linear-gradient(rgba(231,220,255,.045) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(231,220,255,.045) 1px,transparent 1px);
+  background-size:24px 24px;
+  -webkit-mask-image:radial-gradient(ellipse 75% 70% at 50% 50%, transparent 25%, #000 85%)}
+.ko .vig{background:radial-gradient(ellipse 85% 80% at 50% 50%, transparent 55%, rgba(6,3,14,.75) 100%)}
+.ko .frame{position:absolute;inset:34px;border:2px solid #a855f7;box-shadow:0 0 18px rgba(168,85,247,.55), inset 0 0 18px rgba(168,85,247,.35)}
+.ko .frame::after{content:"";position:absolute;left:50%;top:-4px;width:340px;height:6px;transform:translateX(-50%);background:#e7dcff;border-radius:3px;box-shadow:0 0 14px #a855f7}
+.ko .frame::before{content:"";position:absolute;left:50%;bottom:-4px;width:340px;height:6px;transform:translateX(-50%);background:#e7dcff;border-radius:3px;box-shadow:0 0 14px #a855f7}
+.gc{position:absolute;width:44px;height:44px}
+.gc i{position:absolute;background:#c9a84c}
+.ko .eyebrow{font-family:"Silkscreen";font-size:30px;letter-spacing:.32em;color:#e7dcff;margin-right:-.32em;margin-bottom:10px;text-shadow:0 0 12px rgba(168,85,247,.8)}
+.ko .eyebrow b{color:#ffc85a;font-weight:400}
+.ko .word{position:relative;font-family:Oswald;font-weight:700;font-size:330px;line-height:.86;letter-spacing:.015em;color:#fff;
+  text-shadow:
+    8px 8px 0 #ff4f6e, 16px 16px 0 #3fd2ff,
+    0 0 40px rgba(168,85,247,.85), 0 0 120px rgba(168,85,247,.6)}
+.ko .xp{display:flex;align-items:center;gap:22px;margin-top:62px}
+.ko .lvl{font-family:"Press Start 2P";font-size:24px;color:#ffc85a;text-shadow:0 0 10px rgba(255,200,90,.6)}
+.ko .bar{display:flex;gap:6px;padding:7px;border:3px solid #e7dcff;box-shadow:0 0 14px rgba(168,85,247,.7)}
+.ko .bar span{width:30px;height:30px}
+.ko .tag{font-family:"Press Start 2P";font-size:22px;color:#fff;letter-spacing:.08em}
+.ko .meta{margin-top:40px;font-family:Oswald;font-weight:500;font-size:34px;letter-spacing:.2em;margin-right:-.2em;color:#fff}
+.ko .meta i{font-style:normal;color:#ffa94d;padding:0 .35em}
+
+/* ============ EPIK · 12.12.26 (crimson smoke, white type) ============ */
+.ep{background:#14040a}
+.ep .bg{background:
+  radial-gradient(ellipse 55% 48% at 50% 44%, #c4161f 0%, #8e0d16 30%, #4d070d 62%, #14040a 100%)}
+.ep .smoke{mix-blend-mode:overlay;opacity:.75}
+.ep .vig{background:
+  radial-gradient(ellipse 90% 85% at 50% 50%, transparent 50%, rgba(8,1,3,.85) 100%),
+  linear-gradient(180deg, rgba(8,1,3,.35), transparent 22%, transparent 70%, rgba(8,1,3,.55))}
+.ep .brk{position:absolute;width:56px;height:56px;border-color:rgba(255,255,255,.85);border-style:solid;border-width:0}
+.ep .ring{width:250px;height:250px;margin-bottom:34px}
+.ep .word{font-family:Michroma;font-size:250px;line-height:1;letter-spacing:.32em;margin-right:-.32em;color:#fff;
+  text-shadow:0 0 30px rgba(255,90,90,.55), 0 0 90px rgba(255,40,50,.45)}
+.ep .rule{width:1180px;height:2px;background:linear-gradient(90deg,transparent,#fff 12%,#fff 88%,transparent);margin:46px 0 30px;opacity:.9}
+.ep .date{font-family:Michroma;font-size:70px;letter-spacing:.24em;margin-right:-.24em;color:#fff}
+.ep .meta{margin-top:24px;font-family:Oswald;font-weight:500;font-size:30px;letter-spacing:.34em;margin-right:-.34em;color:rgba(255,255,255,.86)}
+.ep .meta i{font-style:normal;color:#ff6b6b;padding:0 .4em}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs id="syms"></defs></svg>
+<div id="root"></div>
+<script>
+const KO_SYMS = `__KO_SYMS__`;
+const EP_SYMS = `__EP_SYMS__`;
+document.getElementById('syms').innerHTML = KO_SYMS + EP_SYMS;
+const theme = new URLSearchParams(location.search).get('t') || 'knockout';
+
+// seeded random so renders are repeatable
+let seed = theme === 'knockout' ? 26 : 1212;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// emblem field: staggered grid, each act's emblem as a faint watermark (like the quest board blocks),
+// pushed away from the centre so the word stays clean
+function field(ids, opt){
+  const W=1920,H=1080, cols=opt.cols, rows=opt.rows, cw=W/cols, rh=H/rows;
+  let out='', k=0;
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const x=cw*(c+.5)+(r%2?cw/2:0)-cw/4+(rnd()-.5)*cw*.25, y=rh*(r+.5)+(rnd()-.5)*rh*.25;
+    const dx=(x-W/2)/(W*.36), dy=(y-H*.48)/(H*.34), d=Math.sqrt(dx*dx+dy*dy);
+    if(d<opt.hole) continue;
+    const s=opt.size*(0.8+rnd()*0.45), rot=(rnd()-.5)*opt.rot;
+    const a=Math.min(1,(d-opt.hole)/0.55)*opt.alpha;
+    const id=ids[k++%ids.length];
+    out+=`<use href="#em-${id}" x="${-s/2}" y="${-s/2}" width="${s}" height="${s}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})" style="color:${opt.col};--acc:${opt.acc};--sw:${opt.sw};opacity:${a.toFixed(3)}"/>`;
+  }
+  return `<svg class="field" viewBox="0 0 1920 1080">${out}</svg>`;
+}
+
+function goldCorners(inset){
+  // stepped gold item-frame corners from the quest board .gframe
+  const pos=[['left','top'],['right','top'],['left','bottom'],['right','bottom']];
+  return pos.map(([h,v])=>`<div class="gc" style="${h}:${inset}px;${v}:${inset}px">
+    <i style="${h}:0;${v}:0;width:44px;height:6px"></i><i style="${h}:0;${v}:0;width:6px;height:44px"></i>
+    <i style="${h}:14px;${v}:14px;width:14px;height:6px"></i><i style="${h}:14px;${v}:14px;width:6px;height:14px"></i></div>`).join('');
+}
+
+function stars(n, col){
+  let o=''; for(let i=0;i<n;i++){const x=rnd()*1920,y=rnd()*1080,r=rnd()<.15?2.4:1.2;
+    o+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r}" fill="${col}" opacity="${(.35+rnd()*.5).toFixed(2)}"/>`}
+  return `<svg class="field" viewBox="0 0 1920 1080">${o}</svg>`;
+}
+
+const root=document.getElementById('root');
+if(theme==='knockout'){
+  const ko=['suae','weaver','hixxy','sickmode','rebelion','tnt','da-tweekaz','ran-d','headhunterz','d-block-s-te-fan','dimitri-k',
+    'aversion','kruelty','dual-damage','big-k','radical-redemption','warface','lekkerfaces','toza','the-straikerz','noisemakers','slaughterhouse','greazy-texas-fuckerz',
+    'technikore-jts','frontliner','wildstylez','gammer','tha-playah','satirized','yoshiko','major-conspiracy','noxiouz','the-dope-doctor','da-mouth-of-madness'];
+  const xp=['#3fd2ff','#3fd2ff','#3fd2ff','#ff4f6e','#ff4f6e','#ff4f6e','#ffa94d','#ffa94d','#ffa94d','rgba(231,220,255,.18)'];
+  root.innerHTML=`<div class="art ko">
+    <div class="layer bg"></div><div class="layer pix"></div>
+    ${stars(110,'#ffc85a')}
+    ${field(ko,{cols:9,rows:5,size:150,rot:24,alpha:.22,hole:.92,col:'#d9c8ff',acc:'#ffc85a',sw:2.2})}
+    <div class="layer vig"></div>
+    <div class="frame"></div>${goldCorners(16)}
+    <div class="center">
+      <div class="eyebrow">OUTDOOR <b>·</b> 2026</div>
+      <div class="word">KNOCKOUT</div>
+      <div class="xp"><span class="lvl">LVL 26</span><div class="bar">${xp.map(c=>`<span style="background:${c}"></span>`).join('')}</div><span class="tag">LEVEL UP</span></div>
+      <div class="meta">SAT 03.10.26<i>·</i>ENGIE STADIUM<i>·</i>SYDNEY SHOWGROUND</div>
+    </div></div>`;
+} else {
+  const ep=['project-one','code-black','mish','mutilator','noxiouz','phuture-noize','the-saints','rebelion','suae','kid-finley','weaver','technikore-jts'];
+  // laser fan from above the word, white and pale red, like EPIK's laser rig
+  let las=''; const ox=960, oy=-140;
+  for(let i=0;i<46;i++){const t=i/45, ang=(-62+124*t)*Math.PI/180, L=1700;
+    const x=ox+Math.sin(ang)*L, y=oy+Math.cos(ang)*L, w=i%5===0?2.2:1.1;
+    las+=`<line x1="${ox}" y1="${oy}" x2="${x.toFixed(0)}" y2="${y.toFixed(0)}" stroke="${i%3?'#ffffff':'#ff8a8a'}" stroke-width="${w}" opacity="${i%5===0?.22:.10}"/>`;}
+  las+=`<line x1="0" y1="742" x2="1920" y2="742" stroke="#fff" stroke-width="1.4" opacity=".18"/>`;
+  root.innerHTML=`<div class="art ep">
+    <div class="layer bg"></div>
+    <svg class="layer smoke" viewBox="0 0 1920 1080"><filter id="sm" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".0016 .0034" numOctaves="5" seed="12"/>
+      <feColorMatrix values="0 0 0 0 1  0 0 0 0 .55  0 0 0 0 .55  0 0 0 1.6 -.35"/></filter>
+      <rect width="1920" height="1080" filter="url(#sm)"/></svg>
+    <svg class="field" viewBox="0 0 1920 1080" style="mix-blend-mode:screen;-webkit-mask-image:radial-gradient(ellipse 36% 30% at 50% 50%, rgba(0,0,0,.25), #000 100%)">${las}</svg>
+    ${field(ep,{cols:8,rows:5,size:160,rot:16,alpha:.16,hole:1.0,col:'#ffffff',acc:'#ff8a8a',sw:1.8})}
+    <div class="layer vig"></div>
+    <div class="brk" style="left:44px;top:44px;border-left-width:3px;border-top-width:3px"></div>
+    <div class="brk" style="right:44px;top:44px;border-right-width:3px;border-top-width:3px"></div>
+    <div class="brk" style="left:44px;bottom:44px;border-left-width:3px;border-bottom-width:3px"></div>
+    <div class="brk" style="right:44px;bottom:44px;border-right-width:3px;border-bottom-width:3px"></div>
+    <div class="center">
+      <div class="word">EPIK</div>
+      <div class="rule"></div>
+      <div class="date">12.12.26</div>
+      <div class="meta">SYDNEY SHOWGROUND<i>·</i>THE FINALE</div>
+    </div></div>`;
+}
+document.fonts.ready.then(()=>document.body.dataset.ready=1);
+</script>
+</body></html>

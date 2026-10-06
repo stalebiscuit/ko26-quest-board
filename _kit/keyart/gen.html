@@ -1,0 +1,154 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>event key art</title>
+<style>
+@font-face{font-family:Oswald;font-weight:500;src:url(node_modules/@fontsource/oswald/files/oswald-latin-500-normal.woff2)}
+@font-face{font-family:Oswald;font-weight:700;src:url(node_modules/@fontsource/oswald/files/oswald-latin-700-normal.woff2)}
+@font-face{font-family:Cinzel;font-weight:700;src:url(node_modules/@fontsource/cinzel/files/cinzel-latin-700-normal.woff2)}
+@font-face{font-family:Silkscreen;font-weight:400;src:url(node_modules/@fontsource/silkscreen/files/silkscreen-latin-400-normal.woff2)}
+@font-face{font-family:Michroma;font-weight:400;src:url(node_modules/@fontsource/michroma/files/michroma-latin-400-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:800;src:url(node_modules/@fontsource/montserrat/files/montserrat-latin-800-normal.woff2)}
+@font-face{font-family:Montserrat;font-weight:900;src:url(node_modules/@fontsource/montserrat/files/montserrat-latin-900-normal.woff2)}
+@font-face{font-family:Orbitron;font-weight:800;src:url(node_modules/@fontsource/orbitron/files/orbitron-latin-800-normal.woff2)}
+@font-face{font-family:"Press Start 2P";font-weight:400;src:url(node_modules/@fontsource/press-start-2p/files/press-start-2p-latin-400-normal.woff2)}
+html,body{margin:0;background:#000}
+.art{position:relative;width:1920px;height:1080px;overflow:hidden}
+.layer{position:absolute;inset:0}
+svg.field{position:absolute;inset:0;width:100%;height:100%}
+.center{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+
+/* ============ KNOCKOUT OUTDOOR 2026 · LEVEL UP · HSU's own KO26 style: near-black, violet haze, a cold light from above, drifting particles, white KO26 wordmark, boxed date ============ */
+.ko{background:#040208}
+.ko .haze{opacity:.95}
+.ko .glow{background:
+  radial-gradient(ellipse 22% 16% at 50% 0%, rgba(232,214,255,.55), rgba(170,120,255,.22) 45%, transparent 75%),
+  radial-gradient(ellipse 46% 44% at 50% 46%, rgba(124,58,255,.42) 0%, rgba(90,30,200,.2) 45%, transparent 75%),
+  radial-gradient(ellipse 80% 40% at 50% 100%, rgba(80,20,170,.28), transparent 70%)}
+.ko .vig{background:
+  radial-gradient(ellipse 82% 80% at 50% 48%, transparent 45%, rgba(2,1,5,.92) 100%),
+  linear-gradient(180deg, rgba(2,1,5,.35), transparent 20%, transparent 76%, rgba(2,1,5,.75))}
+.ko .grain{mix-blend-mode:overlay;opacity:.5}
+.ko .stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:10px}
+.ko .wm{width:1040px;height:auto;display:block;filter:drop-shadow(0 0 10px rgba(190,150,255,.85)) drop-shadow(0 0 46px rgba(124,58,255,.75)) drop-shadow(0 0 120px rgba(124,58,255,.45))}
+.ko .box{margin-top:62px;border:3px solid #fff;padding:14px 38px 12px;color:#fff;font-family:Orbitron;font-weight:800;font-size:38px;letter-spacing:.14em;margin-right:-.14em;text-transform:uppercase;
+  box-shadow:0 0 22px rgba(124,58,255,.55), inset 0 0 18px rgba(124,58,255,.35);text-shadow:0 0 14px rgba(170,120,255,.7)}
+.ko .box i{font-style:normal;color:#b98cff;padding:0 .4em}
+
+/* ============ EPIK 2026 · HSU's own style: near-black, grainy red smoke, glowing red circle-e mark, white EPIK, white boxed date ============ */
+.ep{background:#040102}
+.ep .smoke{opacity:.95}
+.ep .glow{background:
+  radial-gradient(ellipse 34% 40% at 50% 37%, rgba(255,24,24,.55) 0%, rgba(200,10,16,.28) 40%, transparent 72%),
+  radial-gradient(ellipse 70% 60% at 50% 45%, rgba(120,0,6,.35), transparent 75%)}
+.ep .vig{background:
+  radial-gradient(ellipse 80% 78% at 50% 46%, transparent 45%, rgba(2,0,1,.92) 100%),
+  linear-gradient(180deg, rgba(2,0,1,.55), transparent 18%, transparent 78%, rgba(2,0,1,.7))}
+.ep .grain{mix-blend-mode:overlay;opacity:.55}
+.ep .stack{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;padding-top:92px}
+.ep .mark{position:relative;width:500px;height:497px;filter:drop-shadow(0 0 10px rgba(255,30,30,.75)) drop-shadow(0 0 70px rgba(255,0,10,.5))}
+.ep .mark .fill{position:absolute;inset:0;
+  background:radial-gradient(circle at 46% 42%, #ff3b30 0%, #e3101a 40%, #a8000c 78%, #6e0008 100%);
+  -webkit-mask:url(epik-mark.png) center/contain no-repeat;mask:url(epik-mark.png) center/contain no-repeat}
+.ep .mark .dots{position:absolute;inset:0;opacity:.75;
+  -webkit-mask:url(epik-mark.png) center/contain no-repeat;mask:url(epik-mark.png) center/contain no-repeat}
+.ep .word{margin-top:46px;font-family:Michroma;font-size:112px;line-height:1;letter-spacing:.3em;margin-right:-.3em;color:#fff;-webkit-text-stroke:3px #fff;
+  text-shadow:0 0 18px rgba(255,60,60,.45)}
+.ep .box{margin-top:44px;border:4px solid #fff;padding:12px 34px 10px;text-align:center;color:#fff;font-family:Montserrat;font-weight:900;text-transform:uppercase;line-height:1.08}
+.ep .box .l1{font-size:40px;letter-spacing:.02em}
+.ep .box .l1 sup{font-size:.5em;vertical-align:.85em;margin-left:1px}
+.ep .box .l2{font-size:40px;letter-spacing:.03em}
+</style></head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs id="syms"></defs></svg>
+<div id="root"></div>
+<script>
+const KO_SYMS = `__KO_SYMS__`;
+const EP_SYMS = `__EP_SYMS__`;
+document.getElementById('syms').innerHTML = KO_SYMS + EP_SYMS;
+const theme = new URLSearchParams(location.search).get('t') || 'knockout';
+
+// seeded random so renders are repeatable
+let seed = theme === 'knockout' ? 26 : 1212;
+const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+
+// emblem field: staggered grid, each act's emblem as a faint watermark (like the quest board blocks),
+// pushed away from the centre so the word stays clean
+function field(ids, opt){
+  const W=1920,H=1080, cols=opt.cols, rows=opt.rows, cw=W/cols, rh=H/rows;
+  let out='', k=0;
+  for(let r=0;r<rows;r++) for(let c=0;c<cols;c++){
+    const x=cw*(c+.5)+(r%2?cw/2:0)-cw/4+(rnd()-.5)*cw*.25, y=rh*(r+.5)+(rnd()-.5)*rh*.25;
+    const dx=(x-W/2)/(W*.36), dy=(y-H*.48)/(H*.34), d=Math.sqrt(dx*dx+dy*dy);
+    if(d<opt.hole) continue;
+    const s=opt.size*(0.8+rnd()*0.45), rot=(rnd()-.5)*opt.rot;
+    const a=Math.min(1,(d-opt.hole)/0.55)*opt.alpha;
+    const id=ids[k++%ids.length];
+    out+=`<use href="#em-${id}" x="${-s/2}" y="${-s/2}" width="${s}" height="${s}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) rotate(${rot.toFixed(1)})" style="color:${opt.col};--acc:${opt.acc};--sw:${opt.sw};opacity:${a.toFixed(3)}"/>`;
+  }
+  return `<svg class="field" viewBox="0 0 1920 1080">${out}</svg>`;
+}
+
+function goldCorners(inset){
+  // stepped gold item-frame corners from the quest board .gframe
+  const pos=[['left','top'],['right','top'],['left','bottom'],['right','bottom']];
+  return pos.map(([h,v])=>`<div class="gc" style="${h}:${inset}px;${v}:${inset}px">
+    <i style="${h}:0;${v}:0;width:44px;height:6px"></i><i style="${h}:0;${v}:0;width:6px;height:44px"></i>
+    <i style="${h}:14px;${v}:14px;width:14px;height:6px"></i><i style="${h}:14px;${v}:14px;width:6px;height:14px"></i></div>`).join('');
+}
+
+function stars(n, col){
+  let o=''; for(let i=0;i<n;i++){const x=rnd()*1920,y=rnd()*1080,r=rnd()<.15?2.4:1.2;
+    o+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r}" fill="${col}" opacity="${(.35+rnd()*.5).toFixed(2)}"/>`}
+  return `<svg class="field" viewBox="0 0 1920 1080">${o}</svg>`;
+}
+
+const root=document.getElementById('root');
+if(theme==='knockout'){
+  // drifting particles, like the purple bokeh on HSU's KO26 backgrounds
+  let pts=''; for(let i=0;i<150;i++){const x=rnd()*1920, y=rnd()*1080, big=rnd()<.12, r=big?(5+rnd()*9):(1+rnd()*2.6);
+    const c=rnd()<.35?'#e07bff':(rnd()<.5?'#a46bff':'#7c4dff');
+    pts+=`<circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="${r.toFixed(1)}" fill="${c}" opacity="${(big?.12+rnd()*.18:.25+rnd()*.5).toFixed(2)}" ${big?'filter="url(#bk)"':''}/>`;}
+  // faint beams from the light above (thin, violet, behind the haze)
+  let bm=''; for(let i=0;i<18;i++){const t=i/17, ang=(-48+96*t)*Math.PI/180, L=1500;
+    bm+=`<line x1="960" y1="-40" x2="${(960+Math.sin(ang)*L).toFixed(0)}" y2="${(-40+Math.cos(ang)*L).toFixed(0)}" stroke="#c9a8ff" stroke-width="${i%4?1:1.8}" opacity="${i%4?.06:.11}"/>`;}
+  root.innerHTML=`<div class="art ko">
+    <svg class="layer" viewBox="0 0 1920 1080" style="mix-blend-mode:screen">${bm}</svg>
+    <svg class="layer haze" viewBox="0 0 1920 1080" preserveAspectRatio="none"><defs>
+      <filter id="hz" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency=".0024 .0046" numOctaves="6" seed="26"/>
+        <feColorMatrix values="0 0 0 0 .36  0 0 0 0 .16  0 0 0 0 .78  1.6 0 0 0 -.6"/></filter>
+      <radialGradient id="hzm" cx="50%" cy="46%" r="62%"><stop offset="0" stop-color="#fff"/><stop offset=".75" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".2"/></radialGradient>
+      <mask id="hzk"><rect width="1920" height="1080" fill="url(#hzm)"/></mask></defs>
+      <rect width="1920" height="1080" filter="url(#hz)" mask="url(#hzk)"/></svg>
+    <div class="layer glow"></div>
+    <svg class="layer" viewBox="0 0 1920 1080" style="mix-blend-mode:screen"><filter id="bk"><feGaussianBlur stdDeviation="4"/></filter>${pts}</svg>
+    <div class="layer vig"></div>
+    <div class="stack">
+      <img class="wm" src="ko26-wordmark.png" alt="">
+      <div class="box">Oct 3 2026<i>·</i>ENGIE Stadium</div>
+    </div>
+    <svg class="layer grain" viewBox="0 0 1920 1080" preserveAspectRatio="none"><filter id="gk"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="5" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1920" height="1080" filter="url(#gk)"/></svg>
+  </div>`;
+} else {
+  root.innerHTML=`<div class="art ep">
+    <svg class="layer smoke" viewBox="0 0 1920 1080" preserveAspectRatio="none"><defs>
+      <filter id="sm" x="0" y="0" width="100%" height="100%">
+        <feTurbulence type="fractalNoise" baseFrequency=".0022 .0042" numOctaves="6" seed="7"/>
+        <feColorMatrix values="0 0 0 0 .62  0 0 0 0 .02  0 0 0 0 .05  1.7 0 0 0 -.62"/></filter>
+      <radialGradient id="smm" cx="50%" cy="44%" r="62%"><stop offset="0" stop-color="#fff"/><stop offset=".75" stop-color="#fff" stop-opacity=".55"/><stop offset="1" stop-color="#fff" stop-opacity=".25"/></radialGradient>
+      <mask id="smk"><rect width="1920" height="1080" fill="url(#smm)"/></mask></defs>
+      <rect width="1920" height="1080" filter="url(#sm)" mask="url(#smk)"/></svg>
+    <div class="layer glow"></div>
+    <div class="layer vig"></div>
+    <div class="stack">
+      <div class="mark"><div class="fill"></div>
+        <svg class="dots" viewBox="0 0 500 497" preserveAspectRatio="none"><filter id="dt"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="1" seed="3"/><feColorMatrix values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 -4 2.15"/></filter><rect width="500" height="497" filter="url(#dt)"/></svg>
+      </div>
+      <div class="word">EPIK</div>
+      <div class="box"><div class="l1">December 12<sup>th</sup> 2026</div><div class="l2">Sydney Showground</div></div>
+    </div>
+    <svg class="layer grain" viewBox="0 0 1920 1080" preserveAspectRatio="none"><filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="2" seed="9" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter><rect width="1920" height="1080" filter="url(#gr)"/></svg>
+  </div>`;
+}
+document.fonts.ready.then(()=>document.body.dataset.ready=1);
+</script>
+</body></html>

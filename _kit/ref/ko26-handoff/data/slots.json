@@ -1,0 +1,263 @@
+[
+{
+"stage": "arena",
+"artist": "Ambient music",
+"start": "2:00",
+"end": "3:00",
+"special": true
+},
+{
+"stage": "arena",
+"artist": "Suae",
+"start": "3:00",
+"end": "3:30"
+},
+{
+"stage": "arena",
+"artist": "Weaver",
+"start": "3:30",
+"end": "4:15"
+},
+{
+"stage": "arena",
+"artist": "Hixxy",
+"start": "4:15",
+"end": "5:00"
+},
+{
+"stage": "arena",
+"artist": "Sickmode",
+"start": "5:00",
+"end": "5:45"
+},
+{
+"stage": "arena",
+"artist": "Rebelion",
+"start": "5:45",
+"end": "6:30"
+},
+{
+"stage": "arena",
+"artist": "Laser ceremony",
+"start": "6:30",
+"end": "6:40",
+"special": true
+},
+{
+"stage": "arena",
+"artist": "TNT",
+"start": "6:40",
+"end": "7:20"
+},
+{
+"stage": "arena",
+"artist": "Da Tweekaz",
+"start": "7:20",
+"end": "8:00"
+},
+{
+"stage": "arena",
+"artist": "Ran-D",
+"start": "8:00",
+"end": "8:40",
+"tag": "Resonance"
+},
+{
+"stage": "arena",
+"artist": "Headhunterz",
+"start": "8:40",
+"end": "9:20"
+},
+{
+"stage": "arena",
+"artist": "D-Block & S-te-Fan",
+"start": "9:20",
+"end": "10:00"
+},
+{
+"stage": "arena",
+"artist": "Dimitri K",
+"start": "10:00",
+"end": "10:40",
+"tag": "ft. MC Robs"
+},
+{
+"stage": "arena",
+"artist": "Closing show",
+"start": "10:40",
+"end": "11:00",
+"special": true
+},
+{
+"stage": "pit",
+"artist": "Ambient music",
+"start": "2:00",
+"end": "3:00",
+"special": true
+},
+{
+"stage": "pit",
+"artist": "Aversion",
+"start": "3:00",
+"end": "3:30",
+"tag": "Live \u00b7 Get Wrecked hosting"
+},
+{
+"stage": "pit",
+"artist": "Kruelty",
+"start": "3:30",
+"end": "4:00",
+"tag": "Live \u00b7 Get Wrecked hosting"
+},
+{
+"stage": "pit",
+"artist": "Dual Damage",
+"start": "4:00",
+"end": "4:45",
+"tag": "Live \u00b7 Get Wrecked hosting"
+},
+{
+"stage": "pit",
+"artist": "Big K",
+"start": "4:45",
+"end": "5:15"
+},
+{
+"stage": "pit",
+"artist": "Radical Redemption",
+"start": "5:15",
+"end": "5:45",
+"tag": "Live"
+},
+{
+"stage": "pit",
+"artist": "Warface",
+"start": "5:45",
+"end": "6:45",
+"tag": "The Journey"
+},
+{
+"stage": "pit",
+"artist": "Lekkerfaces",
+"start": "6:45",
+"end": "7:15",
+"tag": "Hyper Live"
+},
+{
+"stage": "pit",
+"artist": "Toza",
+"start": "7:15",
+"end": "8:15",
+"tag": "ft. MC Pez"
+},
+{
+"stage": "pit",
+"artist": "The Straikerz",
+"start": "8:15",
+"end": "8:45",
+"tag": "???"
+},
+{
+"stage": "pit",
+"artist": "Noisemakers",
+"start": "8:45",
+"end": "9:15",
+"tag": "Live"
+},
+{
+"stage": "pit",
+"artist": "Slaughterhouse",
+"start": "9:15",
+"end": "10:00"
+},
+{
+"stage": "pit",
+"artist": "Greazy Texas Fuckerz",
+"start": "10:00",
+"end": "11:00",
+"tag": "GPF vs Lil Texas"
+},
+{
+"stage": "oasis",
+"artist": "Ambient music",
+"start": "2:00",
+"end": "3:00",
+"special": true
+},
+{
+"stage": "oasis",
+"artist": "Technikore & JTS",
+"start": "3:00",
+"end": "3:45"
+},
+{
+"stage": "oasis",
+"artist": "Frontliner",
+"start": "3:45",
+"end": "4:30",
+"tag": "The Melodyman Live"
+},
+{
+"stage": "oasis",
+"artist": "Wildstylez",
+"start": "4:30",
+"end": "5:30",
+"tag": "The Journey"
+},
+{
+"stage": "oasis",
+"artist": "Gammer",
+"start": "5:30",
+"end": "6:30",
+"tag": "The Journey"
+},
+{
+"stage": "oasis",
+"artist": "Tha Playah",
+"start": "6:30",
+"end": "7:30",
+"tag": "The Journey"
+},
+{
+"stage": "oasis",
+"artist": "Satirized",
+"start": "7:30",
+"end": "8:00",
+"tag": "Neon Funfair Live \u00b7 BKJN take-over"
+},
+{
+"stage": "oasis",
+"artist": "Yoshiko",
+"start": "8:00",
+"end": "8:30",
+"tag": "Insolent Live \u00b7 BKJN take-over"
+},
+{
+"stage": "oasis",
+"artist": "Major Conspiracy",
+"start": "8:30",
+"end": "9:00",
+"tag": "Vol Gas! 2nd Gear Live \u00b7 BKJN take-over"
+},
+{
+"stage": "oasis",
+"artist": "Noxiouz",
+"start": "9:00",
+"end": "9:30",
+"tag": "The Catalyst Live \u00b7 BKJN take-over"
+},
+{
+"stage": "oasis",
+"artist": "The Dope Doctor",
+"start": "9:30",
+"end": "10:00",
+"tag": "Ghost Mode Live \u00b7 BKJN take-over"
+},
+{
+"stage": "oasis",
+"artist": "Da Mouth of Madness",
+"start": "10:00",
+"end": "11:00",
+"tag": "Tribute to Dr. Peacock \u00b7 BKJN take-over"
+}
+]

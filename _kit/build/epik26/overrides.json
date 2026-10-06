@@ -1,0 +1,10 @@
+{
+  "_readme": "hand review of the automatic classification. key: act (or * for every act) -> 'Artist - Title' -> [\"released\", conf] or [\"unreleased\", kind, conf]; conf null or \"guess\".",
+  "The Saints": {
+    "Justice vs. Simian - We Are Your Friends (Acappella)": ["released", null],
+    "The Saints - Danza Kuduro (Remix)": ["released", "guess"]
+  },
+  "JTS": {
+    "Technikore & JTS vs. Michael Mansion - Light Show": ["released", "guess"]
+  }
+}

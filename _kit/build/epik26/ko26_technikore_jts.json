@@ -1,0 +1,552 @@
+{
+ "sets": [
+  {
+   "event": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia",
+   "date": "2026-08-08",
+   "url": "https://1001.tl/2gv72ys9"
+  },
+  {
+   "event": "OneSeventy: Underground, Australia",
+   "date": "2026-05-30",
+   "url": "https://1001.tl/1f9xxwd1"
+  },
+  {
+   "event": "Weaver & JTS & Technikore @ Midnight Mafia The Empire State, Sydney Showground, Australia",
+   "date": "2026-05-02",
+   "url": "https://1001.tl/2dz1khz1"
+  }
+ ],
+ "note": "Includes shared b2b sets with Weaver.",
+ "released": [
+  {
+   "artist": "Kristine Blond",
+   "title": "Love Shy (Technikore Remix)",
+   "plays": 3,
+   "sets": [
+    0,
+    1,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Kristine%20Blond%20Love%20Shy%20Technikore%20Remix"
+  },
+  {
+   "artist": "Mike Reverie & Joey Riot & Haly0n",
+   "title": "Higher",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Mike%20Reverie%20Joey%20Riot%20Higher"
+  },
+  {
+   "artist": "Technikore & Steve Hill",
+   "title": "Letting Go",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20Steve%20Hill%20Letting%20Go"
+  },
+  {
+   "artist": "Joey Riot & Weaver",
+   "title": "Run",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Joey%20Riot%20Weaver%20Run"
+  },
+  {
+   "artist": "Technikore",
+   "title": "I Want To Be A Hippy",
+   "plays": 2,
+   "sets": [
+    0,
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20I%20Want%20To%20Be%20A%20Hippy"
+  },
+  {
+   "artist": "Weaver & Jakka-B",
+   "title": "Broken Heart",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Weaver%20Jakka-B%20Broken%20Heart"
+  },
+  {
+   "artist": "JTS",
+   "title": "We Came 2 Rave",
+   "plays": 2,
+   "sets": [
+    1,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/JTS%20We%20Came%202%20Rave"
+  },
+  {
+   "artist": "Edward Maya & Vika Jigulina",
+   "title": "Stereo Love (JTS Remix)",
+   "plays": 2,
+   "sets": [
+    1,
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Edward%20Maya%20Vika%20Jigulina%20Stereo%20Love%20JTS%20Remix"
+  },
+  {
+   "artist": "Jakka-B & Macks Wolf ft. Jennifer Rene",
+   "title": "New Life",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Jakka-B%20Macks%20Wolf%20New%20Life"
+  },
+  {
+   "artist": "Technikore & JTS",
+   "title": "With No Heart",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20JTS%20With%20No%20Heart"
+  },
+  {
+   "artist": "Ultravibes",
+   "title": "The World Goes Down",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Ultravibes%20The%20World%20Goes%20Down"
+  },
+  {
+   "artist": "Cosmic Gate",
+   "title": "Fire Wire (Technikore Remix)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Cosmic%20Gate%20Fire%20Wire%20Technikore%20Remix"
+  },
+  {
+   "artist": "TAZI",
+   "title": "Rhythm (Weaver Remix)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/TAZI%20Rhythm%20Weaver%20Remix"
+  },
+  {
+   "artist": "Klubfiller & JTS",
+   "title": "Cry For You",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Klubfiller%20JTS%20Cry%20For%20You"
+  },
+  {
+   "artist": "Mike Enemy",
+   "title": "Legacy of Arcadia",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Mike%20Enemy%20Legacy%20of%20Arcadia"
+  },
+  {
+   "artist": "JTS & Klubfiller",
+   "title": "Something",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/JTS%20Klubfiller%20Something"
+  },
+  {
+   "artist": "Restricted & Nik Sitz",
+   "title": "Tunnel Vision",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Restricted%20Nik%20Sitz%20Tunnel%20Vision"
+  },
+  {
+   "artist": "Stonebank",
+   "title": "Keep Holding On",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Stonebank%20Keep%20Holding%20On"
+  },
+  {
+   "artist": "Cascada",
+   "title": "Everytime We Touch",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Cascada%20Everytime%20We%20Touch"
+  },
+  {
+   "artist": "Darude",
+   "title": "Sandstorm (Overdrive & LANCE Remix)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Darude%20Sandstorm%20Overdrive%20LANCE%20Remix"
+  },
+  {
+   "artist": "Quickdrop & Tatsunoshin",
+   "title": "Sandstorm",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "spotify": "https://open.spotify.com/search/Quickdrop%20Tatsunoshin%20Sandstorm"
+  },
+  {
+   "artist": "Mike Reverie & Geos Crew ft. Zara",
+   "title": "Tru3 Lov3",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Mike%20Reverie%20Geos%20Crew%20Tru3%20Lov3"
+  },
+  {
+   "artist": "Gammer",
+   "title": "Sun Will Rise Again",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Gammer%20Sun%20Will%20Rise%20Again"
+  },
+  {
+   "artist": "Dougal & Tatsunoshin",
+   "title": "Just Be Good To Me",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Dougal%20Tatsunoshin%20Just%20Be%20Good%20To%20Me"
+  },
+  {
+   "artist": "Technikore",
+   "title": "Waste Your Life",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20Waste%20Your%20Life"
+  },
+  {
+   "artist": "Styles & Breeze",
+   "title": "Electric (Technikore & Danomate Bonkers Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Styles%20Breeze%20Electric%20Technikore%20Danomate%20Bonkers%20Remix"
+  },
+  {
+   "artist": "Ben Nicky & Technikore & JTS",
+   "title": "YEET 2.0",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Ben%20Nicky%20Technikore%20YEET%202.0"
+  },
+  {
+   "artist": "Jakka-B",
+   "title": "Right Here Right Now",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Jakka-B%20Right%20Here%20Right%20Now"
+  },
+  {
+   "artist": "Technikore & JTS vs. Michael Mansion",
+   "title": "Light Show (DnB Mix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20JTS%20Light%20Show%20DnB%20Mix"
+  },
+  {
+   "artist": "Ben Nicky ft. Stunt",
+   "title": "Raindrops (Technikore Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Ben%20Nicky%20Raindrops%20Technikore%20Remix"
+  },
+  {
+   "artist": "N-Force vs. Ultrabeat",
+   "title": "Right By Your Side (Technikore Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/N-Force%20Ultrabeat%20Right%20By%20Your%20Side%20Technikore%20Remix"
+  },
+  {
+   "artist": "Darren Styles ft. MERYLL",
+   "title": "Miss You",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Darren%20Styles%20Miss%20You"
+  },
+  {
+   "artist": "Technikore",
+   "title": "4AM",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%204AM"
+  },
+  {
+   "artist": "D:Code ft. Emma",
+   "title": "Who Are You (Technikore Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/D%3ACode%20Who%20Are%20You%20Technikore%20Remix"
+  },
+  {
+   "artist": "Darren Styles & Dougal",
+   "title": "Sweetheart",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Darren%20Styles%20Dougal%20Sweetheart"
+  },
+  {
+   "artist": "Technikore",
+   "title": "Tick Tock",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20Tick%20Tock"
+  },
+  {
+   "artist": "Technikore & JTS",
+   "title": "Meet Her At The Love Parade",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20JTS%20Meet%20Her%20At%20The%20Love%20Parade"
+  },
+  {
+   "artist": "Darren Styles",
+   "title": "Getting Better (Gammer Remix)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "spotify": "https://open.spotify.com/search/Darren%20Styles%20Getting%20Better%20Gammer%20Remix"
+  },
+  {
+   "artist": "JTS & NextJen",
+   "title": "Miracle",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/JTS%20NextJen%20Miracle"
+  },
+  {
+   "artist": "Stonebank & Weaver",
+   "title": "Feel The Fire",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Stonebank%20Weaver%20Feel%20The%20Fire"
+  },
+  {
+   "artist": "Technikore & Steve Hill",
+   "title": "Blow Ya Mind",
+   "plays": 1,
+   "sets": [
+    2
+   ],
+   "spotify": "https://open.spotify.com/search/Technikore%20Steve%20Hill%20Blow%20Ya%20Mind"
+  }
+ ],
+ "unreleased": [
+  {
+   "artist": "Dougal & Gammer",
+   "title": "Every Time I Hear Your Name (Festival VIP)",
+   "plays": 3,
+   "sets": [
+    0,
+    1,
+    2
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   },
+   "confidence": "guess"
+  },
+  {
+   "artist": "Corona",
+   "title": "The Rhythm Of The Night (Weaver Edit)",
+   "plays": 2,
+   "sets": [
+    0,
+    2
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   }
+  },
+  {
+   "artist": "Delerium ft. Sarah McLachlan",
+   "title": "Silence (JTS Edit)",
+   "plays": 2,
+   "sets": [
+    1,
+    2
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "OneSeventy: Underground, Australia (2026-05-30)",
+    "url": "https://1001.tl/1f9xxwd1"
+   }
+  },
+  {
+   "artist": "Bountyhunter",
+   "title": "Woops (JTS Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   }
+  },
+  {
+   "artist": "John Summit ft. HAYLA",
+   "title": "Where You Are (GRVITY Remix / Weaver Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   }
+  },
+  {
+   "artist": "JTS & Mike Reverie",
+   "title": "ID",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "ID",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   }
+  },
+  {
+   "artist": "4 Strings & CJ Stone",
+   "title": "I Can't Help Myself (JTS Rework)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   }
+  },
+  {
+   "artist": "Cascada",
+   "title": "Everytime We Touch (Tatsunoshin Festival Mix / Technikore Edit)",
+   "plays": 1,
+   "sets": [
+    0
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "Technikore & JTS & Weaver @ Darren Styles LMTLSS, HSU, Sydney Showground, Australia (2026-08-08)",
+    "url": "https://1001.tl/2gv72ys9"
+   }
+  },
+  {
+   "artist": "Darren Styles",
+   "title": "Set Me Free X Come Running (Technikore Mashup)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "mashup",
+   "ref": {
+    "label": "OneSeventy: Underground, Australia (2026-05-30)",
+    "url": "https://1001.tl/1f9xxwd1"
+   }
+  },
+  {
+   "artist": "Hypaton & David Guetta ft. La Bouche",
+   "title": "Be My Lover (JTS Edit)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "OneSeventy: Underground, Australia (2026-05-30)",
+    "url": "https://1001.tl/1f9xxwd1"
+   }
+  },
+  {
+   "artist": "Darren Styles",
+   "title": "Cutting Deep (Knockout Edit)",
+   "plays": 1,
+   "sets": [
+    1
+   ],
+   "kind": "edit",
+   "ref": {
+    "label": "OneSeventy: Underground, Australia (2026-05-30)",
+    "url": "https://1001.tl/1f9xxwd1"
+   },
+   "confidence": "guess"
+  }
+ ],
+ "unknown_ids": 0
+}

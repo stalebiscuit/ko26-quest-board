@@ -1,0 +1,855 @@
+<title>Chef's KO26 Quest Board</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
+<style>
+/* Layout: an RPG quest board. Warm near-black chrome with gold item-frame corners around a purple set-times poster (one poster column at a time on phones), artist sheet over the top, player card as the loot screen. Single deliberate dark theme: Chef's colours framing the Knockout "Level Up" purple. */
+:root{
+  color-scheme: dark;
+  /* chrome */
+  --bg:#0a0a0b;
+  --panel:#16110a;
+  --panel-2:#1a1206;
+  --line:#3a2e1a;
+  --fg:#f4ecd8;
+  --fg-2:#e8d7a9;
+  --muted:#9a8f74;
+  --dim:#6b6250;
+  --gold:#c9a84c;
+  --gold-hi:#ffc85a;
+  --blood:#a3271a;
+  --blood-dk:#7c1f14;
+  --violet:#7b2cff;
+  --pink:#ff2e6e;
+  --silver-1:#f5f7fa;
+  --silver-2:#9aa1ab;
+  --silver-3:#cfd4da;
+  /* stage identity */
+  --arena:#3fd2ff;
+  --pit:#ff4f6e;
+  --oasis:#ffa94d;
+  /* states */
+  --kick:#ffc85a;
+  --kick-ink:#1a1206;
+  --warn:#ff6a3d;
+  --scrim:rgba(6,5,3,.78);
+  /* type */
+  --blackletter:"Pirata One", "UnifrakturCook", "Old English Text MT", Georgia, serif;
+  --rpg:"Cinzel", "Trajan Pro", Georgia, serif;
+  --display:"Oswald", "Arial Narrow", system-ui, sans-serif;
+  --poster:"Oswald", "Arial Narrow", "Impact", sans-serif;
+  --pixel:"Silkscreen", "Courier New", ui-monospace, monospace;
+  --body:"IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"Oswald", "Arial Narrow", system-ui, sans-serif;
+  /* poster palette (Knockout purple) */
+  --p-bg:#120a24;
+  --p-block:#4a1f8a;
+  --p-block-2:#5524a0;
+  --p-picked:#6a2fc8;
+  --p-ink:#ffffff;
+  --p-soft:#d9c8ff;
+  --p-frame:#e7dcff;
+  --p-violet:#a855f7;
+  --p-magenta:#e94fd6;
+  --p-cyan:#22d3ee;
+  --p-amber:#fbbf24;
+  --p-star:rgba(255,200,90,.8);
+  --tap:44px;
+}
+[hidden]{display:none!important}
+*{box-sizing:border-box}
+html{background-color:var(--bg)}
+body{
+  background-color:var(--bg);
+  background-image:
+    radial-gradient(ellipse 70% 260px at 50% 0, color-mix(in srgb,var(--violet) 14%,transparent), transparent 80%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb,var(--blood-dk) 18%,transparent), transparent 80%);
+  background-repeat:no-repeat;background-attachment:scroll;
+  color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45;margin:0;
+  -webkit-tap-highlight-color:transparent;
+}
+button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--gold-hi);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:16px;padding-block:18px 64px}
+
+/* gold pixel item-frame corners (stepped) */
+.gframe{position:relative}
+.gframe::before{content:"";position:absolute;inset:5px;pointer-events:none;z-index:2;--gc:var(--gold);
+  background:
+    linear-gradient(var(--gc),var(--gc)) left top/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px top 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px top 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right top/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px top 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px top 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px bottom 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) left 6px bottom 6px/3px 6px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/18px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right bottom/3px 18px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px bottom 6px/6px 3px no-repeat,
+    linear-gradient(var(--gc),var(--gc)) right 6px bottom 6px/3px 6px no-repeat}
+/* thorn divider: gold rule with a dagger-point diamond in the middle */
+.thorn{position:relative;height:12px;margin:0;border:0}
+.thorn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
+.thorn::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:8px;transform:translate(-50%,-50%);background:var(--gold);clip-path:polygon(0 50%,40% 0,50% 50%,60% 0,100% 50%,60% 100%,50% 50%,40% 100%)}
+/* reflective strip */
+.sheen{height:4px;background:linear-gradient(100deg,var(--silver-2),var(--silver-1) 18%,var(--silver-2) 32%,var(--silver-3) 52%,var(--silver-1) 64%,var(--silver-2) 80%,var(--silver-3))}
+.emblem{display:block;color:var(--fg);filter:drop-shadow(0 0 6px color-mix(in srgb,var(--gold) 45%,transparent))}
+
+/* ---------- header / HUD ---------- */
+.top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px 24px;padding-bottom:12px}
+.brand{display:flex;align-items:center;gap:14px;min-width:0}
+.brand .emblem{width:118px;height:auto;flex:none}
+.brand .txt{min-width:0}
+.eyebrow{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.14em;color:var(--gold)}
+.eyebrow .sep{color:var(--dim)}
+.brand h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(32px,5.4vw,50px);line-height:1;margin:2px 0 0;letter-spacing:.01em;text-wrap:balance;color:var(--fg);
+  text-shadow:0 0 14px color-mix(in srgb,var(--gold) 30%,transparent)}
+.brand .cred{font-size:12.5px;color:var(--muted);margin-top:4px}
+.brand .cred b{color:var(--fg-2);font-weight:600}
+.hud{display:flex;gap:6px}
+.hud .cell{min-width:68px;border:1px solid var(--line);background:var(--panel);padding:6px 10px 7px;text-align:center;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 12%,transparent)}
+.hud .cell b{display:block;font-family:var(--display);font-weight:700;font-size:26px;line-height:1;font-variant-numeric:tabular-nums}
+.hud .cell span{font-family:var(--rpg);font-weight:700;font-size:10px;letter-spacing:.1em;color:var(--muted)}
+.hud .cell.kr b{color:var(--gold-hi)}
+.hud .cell.bad{border-color:var(--warn)}
+.hud .cell.bad b{color:var(--warn)}
+.top .thorn{grid-column:1/-1}
+
+.tabs{grid-column:1/-1;display:flex;gap:4px;background:var(--panel);padding:4px;border:1px solid var(--line);justify-self:start}
+.tab{white-space:nowrap;border:0;background:transparent;min-height:40px;padding:8px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.1em;font-size:14px;color:var(--muted);display:flex;gap:8px;align-items:center;justify-content:center}
+.tab[aria-selected="true"]{background:var(--panel-2);color:var(--fg);box-shadow:inset 0 -2px 0 var(--gold)}
+.count{font-family:var(--pixel);font-size:10px;background:var(--gold-hi);color:var(--kick-ink);padding:1px 6px}
+.count.zero{background:var(--line);color:var(--muted)}
+
+.hint{display:flex;flex-wrap:wrap;gap:6px 18px;color:var(--muted);font-size:13px;margin:14px 0 12px}
+.hint b{color:var(--fg);font-weight:600}
+.hint .k{font-family:var(--pixel);font-size:10px;background:var(--kick);color:var(--kick-ink);padding:0 5px}
+
+/* ---------- stage switcher (phones) ---------- */
+.switch{display:none}
+.switch button{position:relative;border:1px solid var(--line);background:var(--panel);min-height:56px;padding:7px 8px;text-align:left;display:flex;flex-direction:column;justify-content:center;gap:2px;min-width:0}
+.switch .nm{font-family:var(--display);font-weight:700;font-size:16px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.switch .sb{font-family:var(--rpg);font-weight:700;font-size:9.5px;letter-spacing:.06em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.switch button[data-view="arena"]{--c:var(--arena)}
+.switch button[data-view="pit"]{--c:var(--pit)}
+.switch button[data-view="oasis"]{--c:var(--oasis)}
+.switch button[data-view="all"]{--c:var(--fg);align-items:center;text-align:center}
+.switch button .nm{color:var(--c)}
+.switch button[aria-pressed="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 12%,var(--panel));box-shadow:inset 0 -3px 0 var(--c)}
+.switch .pk{position:absolute;top:-6px;right:-4px;min-width:20px;height:20px;background:var(--c);color:var(--bg);font-family:var(--pixel);font-size:10px;display:flex;align-items:center;justify-content:center;padding:0 5px}
+
+/* ---------- timetable: set-times poster ---------- */
+.tt-scroll{overflow-x:auto;overscroll-behavior-x:contain;padding:10px 8px 12px}
+.tt{
+  position:relative;display:grid;grid-template-columns:56px repeat(3,minmax(0,1fr)) 56px;column-gap:8px;
+  padding:22px 10px 18px;color:var(--p-ink);
+  background-color:var(--p-bg);
+  background-image:
+    radial-gradient(ellipse 40% 26% at 12% 8%, color-mix(in srgb,var(--p-magenta) 26%,transparent), transparent 70%),
+    radial-gradient(ellipse 45% 30% at 92% 46%, color-mix(in srgb,var(--p-violet) 30%,transparent), transparent 70%),
+    radial-gradient(ellipse 50% 24% at 30% 96%, color-mix(in srgb,var(--p-magenta) 18%,transparent), transparent 70%),
+    radial-gradient(circle at 20% 30%, var(--p-star) 0 1px, transparent 1.6px),
+    radial-gradient(circle at 70% 80%, var(--p-star) 0 .8px, transparent 1.4px),
+    radial-gradient(circle at 45% 55%, color-mix(in srgb,var(--p-star) 60%,transparent) 0 .7px, transparent 1.3px);
+  background-size:100% 100%,100% 100%,100% 100%,173px 211px,251px 157px,97px 131px;
+  border:1px solid var(--p-frame);
+  box-shadow:0 0 0 1px color-mix(in srgb,var(--p-violet) 35%,transparent),0 0 22px color-mix(in srgb,var(--p-violet) 55%,transparent),inset 0 0 28px color-mix(in srgb,var(--p-violet) 25%,transparent);
+}
+/* HUD corner brackets */
+.tt::before{content:"";position:absolute;inset:-7px;pointer-events:none;--b:var(--p-frame);
+  background:
+    linear-gradient(var(--b),var(--b)) left top/28px 3px no-repeat,
+    linear-gradient(var(--b),var(--b)) left top/3px 28px no-repeat,
+    linear-gradient(var(--b),var(--b)) right top/28px 3px no-repeat,
+    linear-gradient(var(--b),var(--b)) right top/3px 28px no-repeat,
+    linear-gradient(var(--b),var(--b)) left bottom/28px 3px no-repeat,
+    linear-gradient(var(--b),var(--b)) left bottom/3px 28px no-repeat,
+    linear-gradient(var(--b),var(--b)) right bottom/28px 3px no-repeat,
+    linear-gradient(var(--b),var(--b)) right bottom/3px 28px no-repeat;
+  filter:drop-shadow(0 0 4px var(--p-violet))}
+/* angled notches, top and bottom centre */
+.tt::after,.tt .notch-b{content:"";position:absolute;left:50%;width:min(36%,320px);height:6px;transform:translateX(-50%);background:var(--p-frame);pointer-events:none;box-shadow:0 0 10px var(--p-violet)}
+.tt::after{top:-1px;clip-path:polygon(0 0,100% 0,calc(100% - 8px) 100%,8px 100%)}
+.tt .notch-b{bottom:-1px;clip-path:polygon(8px 0,calc(100% - 8px) 0,100% 100%,0 100%)}
+
+.p-title{grid-column:1/-1;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px;margin-bottom:20px}
+.p-title .emblem{width:min(400px,82%);height:auto}
+.p-title .st{font-family:var(--rpg);font-weight:700;font-size:clamp(18px,2.6vw,26px);letter-spacing:.3em;text-transform:uppercase;padding:4px 0 4px .3em;border-block:1px solid var(--gold);color:var(--fg);min-width:min(260px,70%)}
+
+.tt-head{text-align:center;padding:0 2px 10px;display:flex;flex-direction:column;align-items:center}
+.tt-head .the{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.34em;padding:1px 0 1px .34em;border-block:1px solid var(--p-ink);min-width:62px}
+.tt-head h2{margin:4px 0 0;font-family:var(--poster);font-weight:700;font-size:clamp(34px,4.6vw,54px);line-height:.92;text-transform:uppercase;letter-spacing:.01em;color:var(--p-ink)}
+.tt-head .sub{font-family:var(--display);font-weight:600;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--p-soft);margin-top:6px}
+.pre{background:var(--p-ink);color:var(--p-bg);font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;text-align:center;padding:3px 4px;margin-bottom:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pre:empty{visibility:hidden}
+
+.axis{position:relative}
+.axis span{position:absolute;font-family:var(--display);font-weight:700;font-size:20px;line-height:1;color:var(--p-ink);transform:translateY(-50%);font-variant-numeric:tabular-nums;white-space:nowrap}
+.axis span.half{font-size:12.5px;font-weight:500;color:var(--p-soft)}
+.axis.l span{right:4px}
+.axis.r span{left:4px}
+.lane{position:relative}
+.nowline{position:absolute;left:-4px;right:-4px;height:0;border-top:2px solid var(--kick);z-index:6;pointer-events:none;box-shadow:0 0 8px var(--kick)}
+.nowline::before{content:"now";position:absolute;left:4px;top:-9px;font-family:var(--pixel);font-size:9px;background:var(--kick);color:var(--kick-ink);padding:1px 4px}
+
+.blk{position:absolute;left:0;right:0;background:var(--p-block);z-index:1}
+.blk.alt{background:var(--p-block-2)}
+.blk .open{position:absolute;inset:0;border:0;background:transparent;padding:4px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;text-align:center;color:var(--p-ink)}
+.blk.g-first .open{padding-top:18px}
+.blk .nm{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.05;text-transform:uppercase;letter-spacing:.02em;max-width:100%;overflow-wrap:break-word;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.blk .nm sup{font-size:10px;font-weight:600;letter-spacing:.06em;margin-left:4px;vertical-align:6px;line-height:0}
+.blk .tg{font-family:var(--display);font-weight:500;font-style:italic;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--p-soft);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk .tm{font-family:var(--display);font-weight:700;font-size:13.5px;letter-spacing:.04em;font-variant-numeric:tabular-nums}
+.blk .vs{font-family:var(--mono);font-size:10.5px;color:var(--warn);max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.blk.short .tg,.blk.short .vs{display:none}
+.blk.short .nm{display:block;white-space:nowrap;text-overflow:ellipsis}
+.blk.short .open{gap:0}
+.blk.tiny .tm{display:none}
+@media (hover:hover){.blk:not(.picked) .open:hover{background:color-mix(in srgb,var(--p-ink) 8%,transparent)}}
+.blk .badges{position:absolute;left:5px;top:5px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;pointer-events:none;z-index:2}
+.blk.g-first .badges{top:22px}
+.blk .badges .chip{margin:0}
+.blk .add{position:absolute;right:0;top:0;width:40px;height:40px;border:0;background:transparent;padding:0;display:flex;align-items:center;justify-content:center;z-index:2}
+.blk.g-first .add{top:16px}
+.blk .add i{font-style:normal;width:26px;height:26px;display:flex;align-items:center;justify-content:center;border:1.5px solid color-mix(in srgb,var(--p-ink) 70%,transparent);font-family:var(--display);font-weight:700;font-size:18px;line-height:1;color:var(--p-ink);background:color-mix(in srgb,var(--p-bg) 35%,transparent)}
+@media (hover:hover){.blk:not(.picked) .add:hover i{background:var(--p-ink);color:var(--p-bg)}}
+.blk.picked{z-index:3;background:var(--p-picked);box-shadow:0 0 0 2px var(--p-ink),0 0 0 4px color-mix(in srgb,var(--p-violet) 60%,transparent),0 0 22px color-mix(in srgb,var(--p-violet) 90%,transparent)}
+.blk.picked .add i{background:var(--p-ink);color:var(--p-block);border-color:var(--p-ink);font-size:16px}
+.blk.clash{box-shadow:0 0 0 2px var(--warn),0 0 0 4px color-mix(in srgb,var(--warn) 40%,transparent),0 0 20px color-mix(in srgb,var(--warn) 70%,transparent)}
+.chip{display:inline-block;font-family:var(--pixel);font-size:9.5px;padding:0 5px;margin-left:6px;line-height:1.7}
+.chip.kr{background:var(--kick);color:var(--kick-ink)}
+.chip.cl{background:var(--warn);color:var(--kick-ink)}
+
+.strip{position:absolute;left:0;right:0;background:var(--p-cyan);color:var(--p-bg);font-family:var(--display);font-weight:700;font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;z-index:2;white-space:nowrap;overflow:hidden;box-shadow:0 0 12px color-mix(in srgb,var(--p-cyan) 55%,transparent)}
+.grp{position:absolute;left:-3px;right:-3px;border:1.5px solid var(--g);z-index:4;pointer-events:none;box-shadow:0 0 10px color-mix(in srgb,var(--g) 50%,transparent)}
+.grp.gw{--g:var(--p-amber)}
+.grp.bkjn{--g:var(--p-magenta)}
+.grp .bn{position:absolute;left:0;right:0;top:0;height:16px;background:var(--g);color:var(--p-bg);font-family:var(--display);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden}
+
+.host{text-align:center;padding-top:14px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.host small{font-family:var(--display);font-weight:500;font-size:11px;letter-spacing:.3em;color:var(--p-soft)}
+.host b{font-family:var(--poster);font-weight:700;font-size:24px;letter-spacing:.04em;line-height:1}
+.p-foot{grid-column:1/-1;text-align:center;font-family:var(--poster);font-weight:700;font-size:clamp(18px,2.8vw,30px);letter-spacing:.06em;line-height:1.15;text-transform:uppercase;margin-top:22px;padding-top:14px;border-top:1px solid color-mix(in srgb,var(--p-frame) 45%,transparent);text-wrap:balance}
+.p-foot .dot{color:var(--gold)}
+
+/* single-stage poster column on phones */
+.tt[data-view="arena"],.tt[data-view="pit"],.tt[data-view="oasis"]{grid-template-columns:40px minmax(0,1fr) 40px;column-gap:6px;padding-inline:6px}
+.tt[data-view="arena"] > [data-stage]:not([data-stage="arena"]),
+.tt[data-view="pit"] > [data-stage]:not([data-stage="pit"]),
+.tt[data-view="oasis"] > [data-stage]:not([data-stage="oasis"]){display:none}
+.tt[data-view="all"].phone{min-width:940px}
+.tt:not([data-view="all"]) .axis span{font-size:16px}
+.tt:not([data-view="all"]) .axis span.half{font-size:11px}
+.tt:not([data-view="all"]) .blk .add{width:44px;height:44px}
+.tt:not([data-view="all"]) .blk.g-first .add{top:16px}
+.tt:not([data-view="all"]) .blk .open{padding-inline:44px}
+
+/* ---------- artist sheet ---------- */
+.scrim{position:fixed;inset:0;background:var(--scrim);z-index:20}
+.sheet{position:fixed;z-index:21;top:0;right:0;bottom:0;width:min(580px,100%);background:var(--bg);border-left:1px solid var(--line);display:flex;flex-direction:column;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+.sheet-head{--c:var(--fg);padding:18px 20px 0;border-bottom:1px solid var(--line);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--panel)),var(--panel-2));flex:none}
+.sheet-head::before{inset:6px}
+.pcard .thorn{margin:0 22px}
+.sheet-head[data-stage="arena"]{--c:var(--arena)}
+.sheet-head[data-stage="pit"]{--c:var(--pit)}
+.sheet-head[data-stage="oasis"]{--c:var(--oasis)}
+.sh-top{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 12px;align-items:start}
+.sheet-head .stage{font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.1em;color:var(--c)}
+.sheet-head h3{margin:2px 0 0;font-family:var(--blackletter);font-weight:400;font-size:40px;line-height:1;text-wrap:balance;overflow-wrap:anywhere;color:var(--fg)}
+.sheet-head .when{font-family:var(--mono);font-size:12px;color:var(--muted);margin-top:5px}
+.sheet-head .when .vs{color:var(--warn)}
+.x{border:1px solid var(--line);background:var(--bg);width:var(--tap);height:var(--tap);font-size:22px;line-height:1;display:flex;align-items:center;justify-content:center}
+.sh-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--panel);min-height:var(--tap);padding:8px 16px;font-family:var(--rpg);font-weight:700;font-size:14px;letter-spacing:.08em}
+.btn.primary{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}
+.btn.picked{background:color-mix(in srgb,var(--gold) 14%,var(--panel));border-color:var(--gold);color:var(--gold-hi)}
+.btn.grow{flex:1}
+.seg{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;margin:14px -20px 0;border-top:1px solid var(--line)}
+.seg button{border:0;background:transparent;min-height:var(--tap);font-family:var(--rpg);font-weight:700;font-size:13px;letter-spacing:.08em;color:var(--muted);border-bottom:3px solid transparent;padding:6px 4px}
+.seg button[aria-pressed="true"]{color:var(--fg);border-bottom-color:var(--c)}
+.seg button[data-mode="kr"][aria-pressed="true"]{border-bottom-color:var(--kick)}
+.seg .n{font-family:var(--pixel);font-size:10px;color:var(--kick)}
+.sheet-body{overflow-y:auto;padding:12px 16px 40px;flex:1;overscroll-behavior:contain}
+.search{width:100%;background:var(--panel);border:1px solid var(--line);min-height:var(--tap);padding:8px 12px;color:var(--fg);font:inherit;font-size:16px}
+.search::placeholder,.addown input::placeholder{color:var(--dim)}
+.tip{font-size:12.5px;color:var(--muted);margin:10px 2px 0}
+.set{border:1px solid var(--line);margin-top:12px;background:var(--panel);overflow:hidden}
+.set-head{padding:10px 12px;border-bottom:1px solid var(--line)}
+.set-head .ev{font-family:var(--rpg);font-weight:700;font-size:14px;letter-spacing:.03em;line-height:1.3;color:var(--fg-2)}
+.set-head .sm{font-family:var(--mono);font-size:11px;color:var(--muted);display:flex;gap:4px 12px;flex-wrap:wrap;margin-top:3px}
+.set-head a{color:var(--muted)}
+ol.tracks{list-style:none;margin:0;padding:0}
+ol.tracks > li + li{border-top:1px solid color-mix(in srgb,var(--line) 70%,transparent)}
+.trk{width:100%;display:grid;grid-template-columns:30px minmax(0,1fr) auto;gap:10px;align-items:center;padding:8px 12px;min-height:52px;border:0;background:transparent;text-align:left}
+.trk .no{font-family:var(--mono);font-size:11px;color:var(--dim);font-variant-numeric:tabular-nums}
+.trk .t{min-width:0;display:flex;flex-direction:column;gap:1px}
+.trk .ti{font-weight:500;overflow-wrap:anywhere;line-height:1.3}
+.trk .a{color:var(--muted);font-size:13px;overflow-wrap:anywhere;line-height:1.3}
+.trk .rep{font-family:var(--pixel);font-size:9.5px;color:var(--gold);margin-left:6px;white-space:nowrap}
+.trk .kb{font-family:var(--pixel);font-size:11px;border:1.5px solid var(--line);min-width:48px;height:34px;display:flex;align-items:center;justify-content:center;color:var(--muted)}
+@media (hover:hover){button.trk[aria-pressed="false"]:hover .kb{border-color:var(--kick);color:var(--kick)}}
+.trk[aria-pressed="true"]{background:color-mix(in srgb,var(--kick) 9%,transparent)}
+.trk[aria-pressed="true"] .kb{background:var(--kick);border-color:var(--kick);color:var(--kick-ink)}
+.trk[aria-pressed="true"] .no{color:var(--kick)}
+.trk.id{cursor:default}
+.trk.id .ti{color:var(--dim);font-style:italic;font-weight:400}
+.mine{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center}
+.mine .del{border:0;background:transparent;color:var(--dim);width:var(--tap);height:var(--tap);font-size:18px;margin-right:4px}
+.mine .del:hover{color:var(--warn)}
+.empty{color:var(--muted);padding:16px 4px;line-height:1.6;margin:0}
+.empty b{color:var(--fg)}
+.set .empty{padding:12px}
+.addown{display:flex;gap:8px;padding:10px 12px 12px;border-top:1px solid var(--line)}
+.addown input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);min-height:var(--tap);padding:8px 12px;color:var(--fg);font:inherit;font-size:16px}
+
+/* ---------- player card ---------- */
+.card-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:16px;max-width:760px}
+.pcard{border:1px solid var(--line);background:var(--panel);overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 14%,transparent)}
+.pcard-head{padding:22px 22px 18px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:flex-end;
+  background:radial-gradient(ellipse 60% 120% at 0 0,color-mix(in srgb,var(--violet) 22%,transparent),transparent 70%),radial-gradient(ellipse 50% 120% at 100% 100%,color-mix(in srgb,var(--blood) 22%,transparent),transparent 70%),var(--panel-2)}
+.pcard-head h2{margin:4px 0 0;font-family:var(--blackletter);font-weight:400;font-size:46px;line-height:1;color:var(--fg)}
+.star{display:inline-flex;align-items:center;gap:4px;font-family:var(--pixel);font-size:10px;background:var(--gold);color:var(--kick-ink);padding:1px 6px;vertical-align:2px}
+.pcard-head .sub{font-size:13px;color:var(--muted);margin-top:4px}
+.stats{display:flex;gap:18px}
+.stat{text-align:right}
+.stat b{display:block;font-family:var(--display);font-size:28px;line-height:1;font-variant-numeric:tabular-nums}
+.stat.kr b{color:var(--gold-hi)}
+.stat.bad b{color:var(--warn)}
+.stat span{font-family:var(--rpg);font-weight:700;font-size:10.5px;letter-spacing:.1em;color:var(--muted)}
+.run{list-style:none;margin:0;padding:0}
+.run > li{--c:var(--line);display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;padding:14px 18px 14px 16px;border-top:1px solid var(--line);box-shadow:inset 4px 0 0 var(--c)}
+.run > li:first-child{border-top:0}
+.run > li.arena{--c:var(--arena)} .run > li.pit{--c:var(--pit)} .run > li.oasis{--c:var(--oasis)}
+.run > li.gap{display:block;padding:7px 18px;font-family:var(--mono);font-size:11px;color:var(--dim);box-shadow:none;background:var(--bg)}
+.run > li.gap b{color:var(--muted);font-weight:600}
+.run .time{font-family:var(--mono);font-size:13px;color:var(--fg);font-variant-numeric:tabular-nums;padding-top:4px}
+.run .time small{display:block;color:var(--muted);font-size:11px}
+.run .who{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+.run .who button{border:0;background:none;padding:0;font-family:var(--display);font-weight:700;font-size:21px;text-align:left;text-transform:uppercase;line-height:1.1;text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--c) 60%,transparent);text-underline-offset:4px;text-decoration-thickness:1.5px}
+.run .who .st{font-family:var(--rpg);font-weight:700;font-size:11px;letter-spacing:.08em;color:var(--c)}
+.live{font-family:var(--pixel);font-size:9.5px;background:var(--blood);color:var(--fg);padding:1px 5px}
+.clashnote{font-family:var(--mono);font-size:11.5px;color:var(--warn);margin-top:5px}
+.krlist{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+.krlist li{display:grid;grid-template-columns:auto minmax(0,1fr);gap:8px;align-items:baseline;overflow-wrap:anywhere;line-height:1.35}
+.krlist li::before{content:"KR";font-family:var(--pixel);font-size:9.5px;background:var(--kick);color:var(--kick-ink);padding:1px 4px;position:relative;top:-1px}
+.krlist .none{color:var(--dim);font-style:italic;display:block}
+.krlist .none::before{display:none}
+.card-tools{display:flex;flex-wrap:wrap;gap:8px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--panel-2);color:var(--gold-hi);border:1px solid var(--gold);padding:10px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.06em;z-index:40;max-width:calc(100% - 32px);text-align:center;box-shadow:0 6px 24px var(--scrim)}
+.copybox{width:100%;min-height:200px;background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:10px;font-family:ui-monospace,Menlo,monospace;font-size:12px}
+.foot{margin-top:28px;color:var(--dim);font-size:12.5px;line-height:1.6;max-width:70ch}
+.foot b{color:var(--muted)}
+
+/* ---------- phones ---------- */
+@media (max-width:760px){
+  .wrap{padding-block:14px 104px}
+  .top{grid-template-columns:minmax(0,1fr);gap:12px}
+  .brand .emblem{width:84px}
+  .brand h1{font-size:32px}
+  .brand .cred{font-size:12px}
+  .hud .cell{flex:1;min-width:0}
+  .tabs{justify-self:stretch;position:fixed;left:0;right:0;bottom:0;z-index:15;border-radius:0;border:0;border-top:1px solid var(--line);padding:6px 10px calc(6px + env(safe-area-inset-bottom,0px));gap:6px;background:color-mix(in srgb,var(--panel) 94%,transparent);backdrop-filter:blur(8px)}
+  .tab{flex:1;min-height:var(--tap)}
+  .switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 52px;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding-block:8px;margin-inline:-16px;padding-inline:16px}
+  .hint .wide{display:none}
+  .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
+  .run > li{grid-template-columns:1fr;gap:4px;padding:14px 16px}
+  .run .time{padding-top:0}
+  .run .time small{display:inline;margin-left:8px}
+  .stats{width:100%;justify-content:space-between}
+  .stat{text-align:left}
+  .sheet{border-left:0}
+  .sheet-head h3{font-size:34px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .sheet{animation:slidein .2s cubic-bezier(.2,.8,.2,1)}
+  @keyframes slidein{from{transform:translateX(32px);opacity:.4}to{transform:none;opacity:1}}
+  .trk[aria-pressed="true"] .kb{animation:pop .22s ease-out}
+  @keyframes pop{0%{transform:scale(.8)}60%{transform:scale(1.12)}100%{transform:scale(1)}}
+}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="brand">
+      <svg class="emblem" viewBox="0 0 400 150" role="img" aria-label="chef emblem"><use href="#chefEmblem"/></svg>
+      <div class="txt">
+        <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Sat 3 Oct 2026</div>
+        <h1>Chef's Quest Board</h1>
+        <div class="cred"><b>@danielhdmn</b> · kickroll merchant · with Hound</div>
+      </div>
+    </div>
+    <div class="hud" aria-live="polite">
+      <div class="cell"><b id="hudSets">0</b><span>sets</span></div>
+      <div class="cell kr"><b id="hudKr">0</b><span>KR songs</span></div>
+      <div class="cell" id="hudClashCell"><b id="hudClash">0</b><span>clashes</span></div>
+    </div>
+    <div class="thorn" aria-hidden="true"></div>
+    <div class="tabs" role="tablist" aria-label="Views">
+      <button class="tab" role="tab" id="tab-tt" aria-selected="true" aria-controls="view-tt">Quest board</button>
+      <button class="tab" role="tab" id="tab-card" aria-selected="false" aria-controls="view-card">Player card <span class="count zero" id="krCount">0</span></button>
+    </div>
+  </header>
+
+  <section id="view-tt" role="tabpanel" aria-labelledby="tab-tt">
+    <div class="hint">
+      <span><b>tap a set</b> for its tracks</span>
+      <span><b>+</b> locks it into your run</span>
+      <span class="wide"><span class="k">KR</span> = a song you'll kick roll to</span>
+      <span>all times pm</span>
+    </div>
+    <div class="switch" id="switch" role="group" aria-label="Stage"></div>
+    <div class="tt-scroll"><div class="tt" id="tt"></div></div>
+  </section>
+
+  <section id="view-card" role="tabpanel" aria-labelledby="tab-card" hidden>
+    <div class="card-wrap" id="cardWrap"></div>
+  </section>
+
+  <p class="foot">set times from the official KO26 timetable. tracklists from 1001Tracklists: each artist's festival and club sets from the last 12 months, as IDed by the community. some tracks are unidentified (ID) and a KO set may differ. picks are saved in this browser only, so hit <b>Copy card</b> to keep a backup.</p>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="sheet" id="sheet" hidden aria-modal="true" role="dialog" aria-labelledby="sheetTitle"></aside>
+<div class="toast" id="toast" role="status" hidden></div>
+<svg width="0" height="0" style="position:absolute;overflow:hidden" aria-hidden="true" focusable="false">
+  <defs>
+    <path id="chefFang" d="M92 12 C30 38 26 108 88 140 C58 112 56 52 92 12 Z M60 33 L34 27 L51 47 Z M45 65 L18 74 L45 83 Z M50 103 L32 122 L59 115 Z"/>
+  </defs>
+  <symbol id="chefEmblem" viewBox="0 0 400 150">
+    <use href="#chefFang" style="fill:currentColor;stroke:var(--gold);stroke-width:1.2"/>
+    <use href="#chefFang" transform="translate(400 0) scale(-1 1)" style="fill:currentColor;stroke:var(--gold);stroke-width:1.2"/>
+    <path d="M200 2 C208 12 210 26 207 38 L193 38 C192 24 194 12 200 2 Z" style="fill:currentColor;stroke:var(--gold);stroke-width:1"/>
+    <rect x="189" y="38" width="22" height="3.5" style="fill:var(--gold)"/>
+    <rect x="196" y="41.5" width="8" height="10" rx="1.5" style="fill:var(--gold)"/>
+    <text x="200" y="120" text-anchor="middle" style="font-family:'Pirata One','UnifrakturCook','Old English Text MT',Georgia,serif;font-size:96px;fill:currentColor;stroke:var(--gold);stroke-width:1.4;paint-order:stroke;letter-spacing:2px">chef</text>
+    <path d="M128 136 L272 136" style="stroke:var(--gold);stroke-width:1.2"/>
+    <path d="M200 130 L206 136 L200 142 L194 136 Z" style="fill:var(--gold)"/>
+  </symbol>
+</svg>
+
+<script>
+const DATA = /*DATA*/null;
+
+const STAGES = {
+  arena:{name:"The Arena", word:"Arena", short:"Arena", sub:"Main Stage", host:"Villain"},
+  pit:{name:"The Megapit", word:"Megapit", short:"Megapit", sub:"Raw + Core", host:"MC D"},
+  oasis:{name:"The Oasis", word:"Oasis", short:"Oasis", sub:"Happy + Hard", host:"Losty"}
+};
+const DAY = "2026-10-03";
+
+// ---------- state ----------
+const store = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; }catch(e){ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
+};
+let picks = new Set(store.get("ko26.picks", []));
+let kr = store.get("ko26.kr", {});          // { artist: [trackText,...] }
+let custom = store.get("ko26.custom", {});  // { artist: [trackText,...] } songs added by hand
+let view = store.get("ko26.view", "arena"); // phone lane: arena | pit | oasis | all
+if(!["arena","pit","oasis","all"].includes(view)) view = "arena";
+const save = () => { store.set("ko26.picks",[...picks]); store.set("ko26.kr",kr); store.set("ko26.custom",custom); };
+
+const toMin = t => { const [h,m] = t.split(":").map(Number); return (h < 12 ? h+12 : h)*60 + m; };
+const fmt = m => { const h = Math.floor(m/60), mm = m%60; const hh = h>12 ? h-12 : h; return hh + ":" + String(mm).padStart(2,"0"); };
+const slotId = s => s.stage + ":" + s.artist;
+const slots = ((DATA && DATA.slots) || []).map(s => ({...s, s:toMin(s.start), e:toMin(s.end)}));
+const acts = slots.filter(s => !s.special);
+// poster scale: from the first hour with a real set to the last finish
+const START = acts.length ? Math.floor(Math.min(...acts.map(s=>s.s))/60)*60 : 15*60;
+const END = slots.length ? Math.ceil(Math.max(...slots.map(s=>s.e))/60)*60 : 23*60;
+const ARTISTS = (DATA && DATA.artists) || {};
+const narrow = window.matchMedia("(max-width:760px)");
+
+const krFor = a => kr[a] || [];
+const isKr = (a,t) => krFor(a).includes(t);
+function toggleKr(a,t){
+  const list = krFor(a).slice(); const i = list.indexOf(t);
+  if(i>=0) list.splice(i,1); else list.push(t);
+  if(list.length) kr[a] = list; else delete kr[a];
+  save(); renderHud();
+}
+const chosenSlots = () => acts.filter(s => picks.has(slotId(s))).sort((a,b)=>a.s-b.s || a.stage.localeCompare(b.stage));
+function clashes(){
+  const chosen = chosenSlots();
+  const bad = new Map();
+  for(const a of chosen) for(const b of chosen){
+    if(a===b) continue;
+    if(a.s < b.e && b.s < a.e){ if(!bad.has(slotId(a))) bad.set(slotId(a), []); bad.get(slotId(a)).push(b); }
+  }
+  return bad;
+}
+// picked sets on other stages that overlap a slot
+const overlapsPick = s => chosenSlots().filter(p => p.stage!==s.stage && p.s < s.e && s.s < p.e);
+const totalKr = () => chosenSlots().reduce((n,s)=>n+krFor(s.artist).length,0);
+const isId = t => /^ID\s*-\s*ID/i.test(t) || /^ID$/i.test(t.trim());
+function splitTrack(t){ const i = t.indexOf(" - "); return i>0 ? [t.slice(0,i), t.slice(i+3)] : ["", t]; }
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c])); }
+
+// Sydney clock, only on festival day. window.KO_NOW (minutes after midnight) overrides for testing.
+function nowMin(){
+  if(typeof window.KO_NOW === "number") return window.KO_NOW;
+  try{
+    const p = Object.fromEntries(new Intl.DateTimeFormat("en-CA",{timeZone:"Australia/Sydney",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23"}).formatToParts(new Date()).map(x=>[x.type,x.value]));
+    if(`${p.year}-${p.month}-${p.day}` !== DAY) return null;
+    return Number(p.hour)*60 + Number(p.minute);
+  }catch(e){ return null; }
+}
+
+// ---------- HUD ----------
+function renderHud(){
+  const n = chosenSlots().length, k = totalKr(), c = clashes().size;
+  document.getElementById("hudSets").textContent = n;
+  document.getElementById("hudKr").textContent = k;
+  document.getElementById("hudClash").textContent = c;
+  document.getElementById("hudClashCell").classList.toggle("bad", c>0);
+  const el = document.getElementById("krCount"); el.textContent = k; el.classList.toggle("zero", !k);
+}
+
+// ---------- stage switcher (phones) ----------
+function renderSwitch(){
+  const chosen = chosenSlots();
+  let h = "";
+  for(const k of Object.keys(STAGES)){
+    const n = chosen.filter(s=>s.stage===k).length;
+    h += `<button data-view="${k}" aria-pressed="${view===k}"><span class="nm">${STAGES[k].short}</span><span class="sb">${STAGES[k].sub}</span>${n?`<span class="pk" aria-label="${n} picked">${n}</span>`:""}</button>`;
+  }
+  h += `<button data-view="all" aria-pressed="${view==="all"}" aria-label="All stages side by side"><span class="nm">All</span></button>`;
+  document.getElementById("switch").innerHTML = h;
+}
+
+// ---------- timetable: set-times poster ----------
+function parseTag(tag){
+  const out = {group:null, sups:[], sub:""}; const subs = [];
+  for(const p of String(tag||"").split(/\s*·\s*/).filter(Boolean)){
+    if(/get wrecked/i.test(p)) out.group = {key:"gw", label:p};
+    else if(/bkjn/i.test(p)) out.group = {key:"bkjn", label:p};
+    else if(/^live$/i.test(p)) out.sups.push("Live");
+    else if(/^ft\.?\s/i.test(p)) out.sups.push(p);
+    else subs.push(p.replace(/\s+live$/i, " · Live"));
+  }
+  out.sub = subs.join(" · ");
+  return out;
+}
+const dash = (a,b) => `${a} - ${b}`;
+function renderTT(){
+  const tt = document.getElementById("tt");
+  const single = narrow.matches && view !== "all";
+  tt.dataset.view = narrow.matches ? view : "all";
+  tt.classList.toggle("phone", narrow.matches);
+  const px = (single ? 140 : 120) / 60, OFF = 12;
+  const H = (END-START)*px + OFF*2;
+  const bad = clashes();
+  const now = nowMin();
+  const Y = m => (m-START)*px + OFF;
+  const K = Object.keys(STAGES);
+  let h = `<div class="p-title"><svg class="emblem" viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#chefEmblem"/></svg><div class="st">Set times</div></div>`;
+  h += `<div class="corner"></div>`;
+  for(const k of K) h += `<div class="tt-head" data-stage="${k}"><div class="the">The</div><h2>${STAGES[k].word}</h2><div class="sub">${STAGES[k].sub}</div></div>`;
+  h += `<div class="corner"></div><div class="corner"></div>`;
+  for(const k of K){
+    const pre = slots.filter(x => x.stage===k && x.special && x.e <= START);
+    h += `<div class="pre" data-stage="${k}">${pre.map(x=>`${esc(x.artist)} ${dash(x.start,x.end)}`).join(" · ")}</div>`;
+  }
+  h += `<div class="corner"></div>`;
+  const axis = side => {
+    let a = `<div class="axis ${side}" style="height:${H}px" aria-hidden="true">`;
+    for(let m=START; m<=END; m+=30) a += `<span class="${m%60?"half":""}" style="top:${Y(m)}px">${fmt(m)}</span>`;
+    return a + `</div>`;
+  };
+  h += axis("l");
+  for(const k of K){
+    h += `<div class="lane" data-stage="${k}" style="height:${H}px">`;
+    if(now!==null && now>=START && now<=END) h += `<div class="nowline" style="top:${Y(now)}px"></div>`;
+    const lane = slots.filter(x => x.stage===k && x.e > START).sort((a,b)=>a.s-b.s);
+    // banner groups from tags
+    const groups = []; let cur = null;
+    for(const s of lane){
+      const g = s.special ? null : parseTag(s.tag).group;
+      if(g && cur && cur.key===g.key && s.s <= cur.e){ cur.e = s.e; cur.items.push(s); }
+      else if(g){ cur = {key:g.key, label:g.label, s:s.s, e:s.e, items:[s]}; groups.push(cur); }
+      else cur = null;
+    }
+    const firsts = new Set(groups.map(g => g.items[0]));
+    let i = 0;
+    for(const s of lane){
+      const top = Y(Math.max(s.s,START)), ht = (s.e-Math.max(s.s,START))*px - 2;
+      if(s.special){ h += `<div class="strip" style="top:${top}px;height:${ht}px">${esc(s.artist)} ${dash(s.start,s.end)}</div>`; continue; }
+      const id = slotId(s), on = picks.has(id), n = krFor(s.artist).length, cl = bad.has(id);
+      const t = parseTag(s.tag), gf = firsts.has(s);
+      const room = ht - (gf ? 18 : 0);
+      let vs = "";
+      if(single && !on){ const o = overlapsPick(s); if(o.length) vs = `<span class="vs">Overlaps ${esc(o.map(x=>x.artist).join(", "))}</span>`; }
+      const cls = ["blk", i++%2?"alt":"", on?"picked":"", cl?"clash":"", gf?"g-first":"", room<64?"short":"", room<34?"tiny":""].join(" ");
+      h += `<div class="${cls}" style="top:${top}px;height:${ht}px">
+        <button class="open" data-open="${esc(id)}" aria-label="${esc(s.artist)}, ${s.start} to ${s.end}. Show tracks">
+          <span class="nm">${esc(s.artist)}${t.sups.map(x=>`<sup>${esc(x)}</sup>`).join("")}</span>
+          ${t.sub?`<span class="tg">${esc(t.sub)}</span>`:""}
+          <span class="tm">${dash(s.start,s.end)}</span>${vs}
+        </button>
+        ${n||cl?`<span class="badges">${n?`<span class="chip kr">${n} KR</span>`:""}${cl?`<span class="chip cl">Clash</span>`:""}</span>`:""}
+        <button class="add" data-pick="${esc(id)}" aria-pressed="${on}" aria-label="${on?"Remove":"Add"} ${esc(s.artist)} ${on?"from":"to"} my run"><i aria-hidden="true">${on?"✓":"+"}</i></button>
+      </div>`;
+    }
+    for(const g of groups) h += `<div class="grp ${g.key}" style="top:${Y(g.s)-1}px;height:${(g.e-g.s)*px}px"><div class="bn">${esc(g.label)}</div></div>`;
+    h += `</div>`;
+  }
+  h += axis("r");
+  h += `<div class="corner"></div>`;
+  for(const k of K) h += `<div class="host" data-stage="${k}"><small>HOSTED BY</small><b>${esc(STAGES[k].host)}</b></div>`;
+  h += `<div class="corner"></div>`;
+  h += `<div class="p-foot">Oct 3rd 2026 <span class="dot">·</span> ENGIE Stadium <span class="dot">·</span> Sydney Showground</div><span class="notch-b"></span>`;
+  tt.innerHTML = h;
+}
+
+// ---------- artist sheet ----------
+let sheetState = { id:null, mode:"sets", q:"", opener:null };
+const curSlot = () => slots.find(x => slotId(x)===sheetState.id);
+function openSheet(id, opener){
+  sheetState = { id, mode:"sets", q:"", opener: opener || null };
+  const s = curSlot();
+  const info = ARTISTS[s.artist];
+  if(!info || !info.sets || !info.sets.length) sheetState.mode = krFor(s.artist).length ? "kr" : "sets";
+  renderSheet();
+  document.getElementById("scrim").hidden = false;
+  document.getElementById("sheet").hidden = false;
+  document.body.style.overflow = "hidden";
+  const x = document.getElementById("closeSheet"); if(x) x.focus({preventScroll:true});
+}
+function closeSheet(){
+  document.getElementById("scrim").hidden = true;
+  document.getElementById("sheet").hidden = true;
+  document.body.style.overflow = "";
+  const op = sheetState.opener;
+  sheetState.id = null;
+  renderMain();
+  if(op && op.dataset && op.dataset.open){
+    const again = [...document.querySelectorAll("[data-open]")].find(b => b.dataset.open === op.dataset.open);
+    if(again) again.focus({preventScroll:true});
+  }
+}
+// unique tracks across an artist's sets, with how many sets played them
+function topTracks(a){
+  const map = new Map();
+  (a.sets||[]).forEach((set, si) => set.tracks.forEach(([n,t], ti) => {
+    if(!t || isId(t)) return;
+    const key = t.trim();
+    if(!map.has(key)) map.set(key, {t:key, sets:new Set(), first:si*1000+ti});
+    map.get(key).sets.add(si);
+  }));
+  return [...map.values()].sort((x,y)=> y.sets.size - x.sets.size || x.first - y.first);
+}
+function playCounts(a){
+  const m = new Map(); for(const x of topTracks(a)) m.set(x.t, x.sets.size); return m;
+}
+function trackBtn(artist, t, no, rep){
+  const k = isKr(artist,t);
+  const [ar, ti] = splitTrack(t);
+  return `<button class="trk" data-kr="${esc(t)}" aria-pressed="${k}" aria-label="${esc(t)}. Kick roll">
+    <span class="no">${esc(no||"·")}</span>
+    <span class="t"><span class="ti">${esc(ti)}${rep>1?`<span class="rep">×${rep} sets</span>`:""}</span>${ar?`<span class="a">${esc(ar)}</span>`:""}</span>
+    <span class="kb" aria-hidden="true">${k?"KR ✓":"KR"}</span></button>`;
+}
+function renderSheet(){
+  const s = curSlot(); if(!s) return;
+  const on = picks.has(sheetState.id);
+  const o = overlapsPick(s);
+  const nKr = krFor(s.artist).length;
+  const a = ARTISTS[s.artist] || {sets:[]};
+  const hasSets = a.sets && a.sets.length;
+  const h = `<div class="sheet-head gframe" data-stage="${s.stage}">
+    <div class="sh-top"><div><div class="stage">${STAGES[s.stage].name} · ${STAGES[s.stage].sub}</div>
+      <h3 id="sheetTitle">${esc(s.artist)}</h3>
+      <div class="when">${s.start}–${s.end} pm${s.tag?" · "+esc(s.tag):""}${o.length?` · <span class="vs">${on?"Clashes with":"Overlaps"} ${esc(o.map(x=>x.artist).join(", "))}</span>`:""}</div></div>
+      <button class="x" id="closeSheet" aria-label="Close">×</button></div>
+    <div class="sh-row"><button class="btn grow ${on?"picked":"primary"}" data-pick="${esc(sheetState.id)}" aria-pressed="${on}">${on?"✓ in my run · remove":"+ add to my run"}</button></div>
+    <div class="seg" role="group" aria-label="Track view">
+      <button data-mode="sets" aria-pressed="${sheetState.mode==="sets"}">by set</button>
+      <button data-mode="top" aria-pressed="${sheetState.mode==="top"}"${hasSets?"":" disabled"}>top tracks</button>
+      <button data-mode="kr" aria-pressed="${sheetState.mode==="kr"}">my KR <span class="n" id="segKr">${nKr}</span></button>
+    </div>
+  </div>
+  <div class="sheet-body" id="sheetBody">
+    ${hasSets?`<input id="trackSearch" class="search" type="search" placeholder="Search tracks" value="${esc(sheetState.q)}" aria-label="Search tracks" autocomplete="off">`:""}
+    <div id="sheetList"></div>
+  </div>`;
+  document.getElementById("sheet").innerHTML = h;
+  renderSheetList();
+}
+function renderSheetList(){
+  const s = curSlot(); if(!s) return;
+  const a = ARTISTS[s.artist] || {sets:[]};
+  const sets = a.sets || [];
+  const q = sheetState.q.trim().toLowerCase();
+  const match = t => !q || t.toLowerCase().includes(q);
+  const counts = playCounts(a);
+  const mine = custom[s.artist] || [];
+  let h = "";
+  if(a.note) h += `<p class="empty">${esc(a.note)}</p>`;
+
+  if(sheetState.mode === "kr"){
+    const list = krFor(s.artist).filter(match);
+    h += `<div class="set"><div class="set-head"><div class="ev">songs you'll kick roll to</div><div class="sm"><span>tap a song to drop it</span></div></div>
+      <ol class="tracks">${list.map((t,i)=>`<li>${trackBtn(s.artist,t,String(i+1).padStart(2,"0"),counts.get(t)||0)}</li>`).join("") || `<li class="empty">none yet. open <b>by set</b> or <b>top tracks</b> and tap a song.</li>`}</ol></div>`;
+  } else if(sheetState.mode === "top" && sets.length){
+    const list = topTracks(a).filter(x => match(x.t));
+    h += `<p class="tip">every identified track from ${sets.length} recent set${sets.length>1?"s":""}, most played first.</p>`;
+    h += `<div class="set"><ol class="tracks">${list.map((x,i)=>`<li>${trackBtn(s.artist,x.t,String(i+1).padStart(2,"0"),x.sets.size)}</li>`).join("") || `<li class="empty">No matching tracks.</li>`}</ol></div>`;
+  } else if(sets.length){
+    if(!q) h += `<p class="tip">tap a song to mark it KR. it lands on your player card.</p>`;
+    for(const set of sets){
+      let rows = "", shown = 0;
+      set.tracks.forEach(([n,t]) => {
+        if(!t) return;
+        if(isId(t)){
+          if(q) return;
+          rows += `<li><div class="trk id"><span class="no">${esc(n||"·")}</span><span class="t"><span class="ti">Unidentified track (ID)</span></span><span></span></div></li>`;
+          return;
+        }
+        if(!match(t)) return;
+        shown++;
+        rows += `<li>${trackBtn(s.artist, t, n, counts.get(t.trim())||0)}</li>`;
+      });
+      if(q && !shown) continue;
+      h += `<div class="set"><div class="set-head"><div class="ev">${esc(set.event)}</div>
+        <div class="sm"><span>${esc(set.date)}</span><span>${set.tracks.length} tracks</span>${set.url?`<a href="${esc(set.url)}" target="_blank" rel="noopener">1001Tracklists ↗</a>`:""}</div></div>
+        <ol class="tracks">${rows || `<li class="empty">No tracks listed.</li>`}</ol></div>`;
+    }
+    if(q && !h.includes('class="set"')) h += `<p class="empty">No tracks match “${esc(sheetState.q)}”.</p>`;
+  } else if(!a.note){
+    h += `<p class="empty"><b>no tracklists from the last 12 months</b> on 1001Tracklists for ${esc(s.artist)}. add the songs you're hoping for below.</p>`;
+  }
+
+  if(sheetState.mode !== "kr"){
+    const ml = mine.filter(match);
+    h += `<div class="set"><div class="set-head"><div class="ev">songs you added</div><div class="sm"><span>tracks you reckon they'll drop. tap to mark KR.</span></div></div>
+      <ol class="tracks">${ml.map(t => `<li class="mine">${trackBtn(s.artist,t,"+",0)}<button class="del" data-del="${esc(t)}" aria-label="Remove ${esc(t)}">×</button></li>`).join("") || (q?"":`<li class="empty">none yet.</li>`)}</ol>
+      <form class="addown" id="addOwn"><input id="ownTrack" placeholder="Artist - Track title" aria-label="Add a track" autocomplete="off" enterkeyhint="done"><button class="btn" type="submit">Add</button></form></div>`;
+  }
+  document.getElementById("sheetList").innerHTML = h;
+}
+// update KR state in place so the list doesn't jump
+function syncKr(){
+  const s = curSlot(); if(!s) return;
+  document.querySelectorAll("#sheet [data-kr]").forEach(b => {
+    const k = isKr(s.artist, b.dataset.kr);
+    b.setAttribute("aria-pressed", k);
+    b.querySelector(".kb").textContent = k ? "KR ✓" : "KR";
+  });
+  const n = document.getElementById("segKr"); if(n) n.textContent = krFor(s.artist).length;
+}
+
+// ---------- player card ----------
+function cardText(){
+  const chosen = chosenSlots(); const bad = clashes();
+  let out = "CHEF'S KO26 PLAYER CARD · Level Up · Sat 3 Oct 2026\n";
+  out += `${chosen.length} sets · ${totalKr()} kick rolls\n`;
+  for(const s of chosen){
+    out += `\n${s.start}-${s.end}  ${s.artist} (${STAGES[s.stage].name})\n`;
+    const c = bad.get(slotId(s)); if(c) out += `   ! clashes with ${c.map(x=>x.artist).join(", ")}\n`;
+    for(const t of krFor(s.artist)) out += `   KR  ${t}\n`;
+  }
+  return out;
+}
+function renderCard(){
+  const chosen = chosenSlots();
+  const bad = clashes();
+  const now = nowMin();
+  const nextIdx = now===null ? -1 : chosen.findIndex(s => s.s > now);
+  let h = `<div class="pcard gframe"><div class="sheen" aria-hidden="true"></div><div class="pcard-head"><div><div class="eyebrow"><span class="star">★ P1</span> Player card <span class="sep">·</span> Level Up</div><h2>chef's run</h2><div class="sub">KO26 · Sat 3 Oct 2026 · ENGIE Stadium</div></div>
+    <div class="stats"><div class="stat"><b>${chosen.length}</b><span>sets</span></div><div class="stat kr"><b>${totalKr()}</b><span>kick rolls</span></div><div class="stat ${bad.size?"bad":""}"><b>${bad.size}</b><span>clashes</span></div></div></div><div class="thorn" aria-hidden="true"></div>`;
+  if(!chosen.length){
+    h += `<p class="empty" style="padding:20px 22px">nothing cooking yet. on the <b>quest board</b>, hit <b>+</b> on the sets you want, then tap each artist and KR the songs you'll kick roll to.</p>`;
+  } else {
+    h += `<ol class="run">`;
+    chosen.forEach((s, i) => {
+      const prev = chosen[i-1];
+      if(prev && !bad.has(slotId(s))){
+        const gap = s.s - prev.e;
+        if(gap >= 15) h += `<li class="gap" aria-hidden="true"><b>${gap} min</b> free · ${fmt(prev.e)}–${s.start}</li>`;
+        else if(prev.stage !== s.stage && gap >= 0) h += `<li class="gap" aria-hidden="true">Move to <b>${STAGES[s.stage].name}</b>${gap?` · ${gap} min`:" · no gap"}</li>`;
+      }
+      const ks = krFor(s.artist);
+      const c = bad.get(slotId(s));
+      const live = now!==null && s.s <= now && now < s.e ? `<span class="live">on now</span>` : (i===nextIdx ? `<span class="live">up next</span>` : "");
+      h += `<li class="${s.stage}"><div class="time">${s.start}–${s.end}<small>${s.e-s.s} min</small></div><div>
+        <div class="who"><button data-open="${esc(slotId(s))}">${esc(s.artist)}</button><span class="st">${STAGES[s.stage].name}</span>${live}</div>
+        ${c?`<div class="clashnote">Clashes with ${c.map(x=>esc(x.artist)).join(", ")}</div>`:""}
+        <ul class="krlist">${ks.length ? ks.map(t=>`<li>${esc(t)}</li>`).join("") : `<li class="none">no KR songs yet. tap the name to pick some.</li>`}</ul>
+      </div></li>`;
+    });
+    h += `</ol>`;
+  }
+  h += `</div><div class="card-tools"><button class="btn primary" id="copyCard">Copy card</button><button class="btn" id="clearAll">reset everything</button></div><div id="copyFallback"></div>`;
+  document.getElementById("cardWrap").innerHTML = h;
+}
+function toast(msg){ const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(()=>t.hidden=true, 1800); }
+
+// ---------- events ----------
+let confirmReset = false;
+function setTab(card){
+  document.getElementById("tab-tt").setAttribute("aria-selected", !card);
+  document.getElementById("tab-card").setAttribute("aria-selected", card);
+  document.getElementById("view-tt").hidden = card; document.getElementById("view-card").hidden = !card;
+  document.body.classList.toggle("on-card", card);
+  renderMain();
+  window.scrollTo(0,0);
+}
+document.addEventListener("click", e => {
+  const pick = e.target.closest("[data-pick]");
+  if(pick){ const id = pick.dataset.pick; picks.has(id) ? picks.delete(id) : picks.add(id); save(); renderHud(); if(sheetState.id) renderSheet(); else renderMain(); toast(picks.has(id) ? "locked in" : "dropped from your run"); return; }
+  const open = e.target.closest("[data-open]");
+  if(open){ openSheet(open.dataset.open, open); return; }
+  const k = e.target.closest("[data-kr]");
+  if(k){
+    const s = curSlot(); const t = k.dataset.kr;
+    toggleKr(s.artist, t);
+    if(isKr(s.artist,t) && !picks.has(sheetState.id)){ picks.add(sheetState.id); save(); renderHud(); renderSheet(); toast("KR saved. set locked in"); return; }
+    if(sheetState.mode === "kr") renderSheetList(); else syncKr();
+    return; }
+  const del = e.target.closest("[data-del]");
+  if(del){ const s = curSlot(); const t = del.dataset.del;
+    custom[s.artist] = (custom[s.artist]||[]).filter(x => x!==t); if(!custom[s.artist].length) delete custom[s.artist];
+    if(isKr(s.artist,t)) toggleKr(s.artist,t);
+    save(); renderSheet(); return; }
+  const mode = e.target.closest("[data-mode]");
+  if(mode){ sheetState.mode = mode.dataset.mode; renderSheet(); document.getElementById("sheetBody").scrollTop = 0; return; }
+  const sw = e.target.closest("[data-view]");
+  if(sw){ view = sw.dataset.view; store.set("ko26.view", view); renderSwitch(); renderTT(); return; }
+  if(e.target.closest("#closeSheet") || e.target.id==="scrim"){ closeSheet(); return; }
+  const tab = e.target.closest(".tab");
+  if(tab){ setTab(tab.id==="tab-card"); return; }
+  if(e.target.id==="copyCard"){
+    const txt = cardText();
+    const fb = () => { document.getElementById("copyFallback").innerHTML = `<textarea class="copybox" id="copyBox" readonly aria-label="Card text"></textarea>`; const b=document.getElementById("copyBox"); b.value = txt; b.focus(); b.select(); toast("copy blocked here. text is selected, copy it manually"); };
+    try{ navigator.clipboard.writeText(txt).then(()=>toast("card copied"), fb); }catch(err){ fb(); }
+    return; }
+  if(e.target.id==="clearAll"){
+    if(!confirmReset){ confirmReset = true; e.target.textContent = "tap again to wipe it"; setTimeout(()=>{confirmReset=false; const b=document.getElementById("clearAll"); if(b) b.textContent="reset everything";}, 3000); return; }
+    picks = new Set(); kr = {}; custom = {}; save(); confirmReset=false; renderAll(); toast("wiped clean"); return; }
+});
+document.addEventListener("input", e => { if(e.target.id==="trackSearch"){ sheetState.q = e.target.value; renderSheetList(); } });
+document.addEventListener("submit", e => {
+  if(e.target.id!=="addOwn") return; e.preventDefault();
+  const v = document.getElementById("ownTrack").value.trim(); if(!v) return;
+  const s = curSlot();
+  if(!(custom[s.artist]||[]).includes(v)) custom[s.artist] = [...(custom[s.artist]||[]), v];
+  save(); sheetState.q = ""; renderSheet(); toast("song added. tap it to KR");
+});
+document.addEventListener("keydown", e => { if(e.key==="Escape" && sheetState.id) closeSheet(); });
+const onNarrow = () => renderTT();
+if(narrow.addEventListener) narrow.addEventListener("change", onNarrow); else if(narrow.addListener) narrow.addListener(onNarrow);
+setInterval(() => { if(nowMin()!==null && !sheetState.id) renderMain(); }, 60000);
+
+function renderMain(){
+  if(!document.getElementById("view-tt").hidden){ renderSwitch(); renderTT(); }
+  if(!document.getElementById("view-card").hidden) renderCard();
+}
+function renderAll(){ renderSwitch(); renderTT(); renderCard(); renderHud(); }
+renderAll();
+</script>

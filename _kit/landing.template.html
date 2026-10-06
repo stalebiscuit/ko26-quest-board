@@ -2,13 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>
-// Old share links pointed at the board when it lived here: …/#c=<code> and …/index.html#c=<code>.
-// Send them on to the KO26 board before anything renders.
-(function(){ var h = location.hash || ""; if(/^#c=/.test(h)) location.replace("ko26.html" + location.search + h); })();
-</script>
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0a0a0b">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Chef's Quest Boards</title>
 <meta name="description" content="Chef's rave planners: set times, artist sheets and kick roll picks for each HSU rave.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,16 +44,9 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
 .intro b{color:var(--fg-2);font-weight:600}
 
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr));gap:22px}
-.card{position:relative;display:block;background:var(--panel);border:1px solid var(--line);
+.card{position:relative;display:block;text-decoration:none;background:var(--panel);border:1px solid var(--line);
   box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 10%,transparent);transition:border-color .15s,transform .15s}
 .card:hover{border-color:var(--gold)}
-.card .hit{position:absolute;inset:0;z-index:1}
-.card .hit:focus-visible{outline:2px solid var(--gold-hi);outline-offset:-2px}
-.card .art{position:relative}
-.date{position:absolute;top:14px;left:14px;z-index:3;font-family:var(--pixel);font-size:11px;letter-spacing:.06em;padding:5px 9px 4px;background:color-mix(in srgb,var(--bg) 78%,transparent);border:1px solid var(--gold);color:var(--gold-hi);pointer-events:none}
-.quick{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0;padding:0;list-style:none;position:relative;z-index:2}
-.quick a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--bg);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.06em;text-decoration:none}
-@media (hover:hover){.quick a:hover{color:var(--gold-hi);border-color:var(--gold)}}
 @media (hover:hover){.card:hover{transform:translateY(-2px)}}
 .card img{display:block;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;border-bottom:1px solid var(--line);background:#120a24}
 .body{padding:14px 16px 16px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 14px;align-items:end}
@@ -81,14 +68,11 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
   .top svg{width:84px}
   .body{grid-template-columns:1fr}
   .go{grid-column:1;grid-row:auto;justify-self:stretch;text-align:center;margin-top:6px}
-  .quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
-  .quick li{display:flex}
-  .quick a{flex:1;justify-content:center;padding:0 6px}
 }
 </style>
 </head>
 <body>
-<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><filter id="l1glow" x="-10%" y="-20%" width="120%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/> <feFlood flood-color="#C9A84C" flood-opacity="0.45" result="c"/> <feComposite in="c" in2="b" operator="in" result="g"/> <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge> </filter> <symbol id="logo1" viewBox="0 0 400 150"><defs> <filter id="l1glow" x="-10%" y="-20%" width="120%" height="140%"> <feGaussianBlur in="SourceAlpha" stdDeviation="3" result="b"/> <feFlood flood-color="#C9A84C" flood-opacity="0.45" result="c"/> <feComposite in="c" in2="b" operator="in" result="g"/> <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge> </filter> <path id="l1fang" d="M92 12 C30 38 26 108 88 140 C58 112 56 52 92 12 Z M60 33 L34 27 L51 47 Z M45 65 L18 74 L45 83 Z M50 103 L32 122 L59 115 Z"/> </defs> <g filter="url(#l1glow)"> <g fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.2" stroke-linejoin="round"> <use href="#l1fang"/> <use href="#l1fang" transform="translate(400 0) scale(-1 1)"/> </g> <path d="M200 8 C202 22 204 26 216 30 C204 34 202 38 200 52 C198 38 196 34 184 30 C196 26 198 22 200 8 Z" fill="#C9A84C" stroke="#FFC85A" stroke-width="0.6" stroke-linejoin="round"/> <path d="M139.26 74.59Q138.3 74.59 137.53 75.55V102.05Q137.53 109.44 143.86 111.17Q147.13 111.94 151.64 111.94V114.72Q135.9 120 134.84 120Q131.96 120 128.98 115.92Q126.01 111.84 126.01 106.37V74.11Q126.01 73.44 137 69.36Q147.99 65.28 149.62 65.28Q150.2 65.28 150.97 68.06Q151.74 70.85 152.74 74.78Q153.75 78.72 154.86 80.59Q155.96 82.46 159.03 82.46V84.38Q156.92 85.34 151.88 87.79Q146.84 90.24 146.46 90.24Q145.02 90.24 142.81 82.42Q140.6 74.59 139.26 74.59ZM166.79 113.47V65.95Q166.79 63.36 165.93 62.26Q165.06 61.15 162.95 61.15V58.46Q175.43 51.94 185.22 46.18L186.76 49.25Q185.8 49.73 184.07 51.12Q182.34 52.51 181.19 53.95Q178.31 57.6 178.31 62.21V70.37Q188.2 65.28 189.83 65.28Q192.9 65.28 195.69 69.12Q198.47 72.96 198.47 77.57V105.79Q198.47 111.07 203.18 112.03V114.14L192.71 120Q190.6 119.14 188.78 117.17Q186.95 115.2 186.95 113.47V85.63Q186.95 76.22 183.5 74.98Q181.86 74.4 178.31 74.4V105.79Q178.31 111.65 182.25 112.42V114.53L172.55 120Q170.44 119.14 168.62 117.17Q166.79 115.2 166.79 113.47ZM233.59 65.28Q234.07 65.28 235.99 66.77Q237.91 68.26 239.83 70.9Q241.75 73.54 241.75 76.03V92.16Q241.75 93.89 236.66 96.38Q231.58 98.88 226.82 100.46Q222.07 102.05 221.69 102.05Q221.69 109.44 228.12 111.17Q231.29 111.94 235.7 111.94V114.72Q219.96 120 218.9 120Q216.02 120 213.05 115.92Q210.07 111.84 210.07 106.37V74.11Q210.07 73.44 221.02 69.36Q231.96 65.28 233.59 65.28ZM221.59 75.55V97.73Q230.23 95.33 230.23 87.36V80.54Q230.23 77.86 228.98 75.98Q227.74 74.11 225.82 74.11Q223.9 74.11 221.59 75.55ZM252.87 56.93Q252.87 55.1 262.66 50.64Q272.46 46.18 274.57 46.18Q275.34 46.18 275.82 46.9Q276.3 47.62 276.58 48.19L277.45 50.02Q278.12 51.26 278.79 52.42Q280.04 54.72 281.96 54.72V56.64Q280.42 57.31 277.83 58.75Q271.78 62.02 271.3 62.02Q269.86 62.02 268.66 57.79Q267.46 53.57 266.12 53.57Q264.39 53.57 264.39 56.45V70.56H274.18V72.86L269.38 75.26H264.39V105.79Q264.39 111.65 268.33 112.42V114.53L258.63 120Q256.52 119.14 254.7 117.17Q252.87 115.2 252.87 113.47V75.26H247.02V73.15L252.87 70.56Z" fill="#F4ECD8" stroke="#C9A84C" stroke-width="1.4" stroke-linejoin="round" paint-order="stroke"/> <path d="M128 136 L272 136" stroke="#C9A84C" stroke-width="1.2"/> <path d="M200 130 L206 136 L200 142 L194 136 Z" fill="#C9A84C"/> </g></symbol></defs></svg>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>__GLOW__ __LOGO__</defs></svg>
 <div class="wrap">
   <header class="top">
     <svg viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
@@ -101,31 +85,25 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
   <div class="thorn"></div>
   <p class="intro">one board per rave. tap an act for their recent sets, mark the songs you'll <b>kick roll</b> to, and build your run. picks are saved per rave in this browser.</p>
   <div class="grid" id="eds"></div>
-  <p class="foot">set times and lineups from HSU Events' official posts. event logos and lineup posters belong to HSU Events. tracklists from 1001Tracklists. previews via Deezer. made by <b>@danielhdmn</b>.</p>
+  <p class="foot">set times and lineups from HSU Events' official posts. tracklists from 1001Tracklists. previews via Deezer. emblems and key art are original artwork, not official logos.</p>
 </div>
 <script>
 /* One entry per rave, newest first. To add a rave: build its folder (see PLAYBOOK.md), drop its key art in assets/, add a line here. */
 const EDITIONS = [
   {path:"epik26/", art:"assets/epik-26.png", name:"EPIK 2026", sub:"Sat 12 Dec 2026 · Sydney Showground", status:"lineup out · set times tba", live:true},
-  {path:"ko26.html", art:"assets/knockout-26.png", name:"Knockout Outdoor 2026", sub:"Sat 3 Oct 2026 · ENGIE Stadium, Sydney Showground", status:"kickroll voting open till 10 Oct", live:false,
-   links:[["Leaderboard","leaderboard.html"],["Gallery","gallery.html"],["Groups","groups.html"]]},
+  {path:"ko26/",   art:"assets/knockout-26.png", name:"Knockout Outdoor 2026", sub:"Sat 3 Oct 2026 · ENGIE Stadium, Sydney Showground", status:"set times · done", live:false},
 ];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("eds").innerHTML = EDITIONS.map(e => `
-  <div class="card">
-    <a class="hit" href="${esc(e.path)}" aria-label="Open the ${esc(e.name)} board"></a>
-    <div class="art"><img src="${esc(e.art)}" alt="${esc(e.name)} key art" width="1920" height="1080" loading="lazy">
-      <span class="date">${esc(e.sub.split(" · ")[0])}</span></div>
+  <a class="card" href="${esc(e.path)}">
+    <img src="${esc(e.art)}" alt="${esc(e.name)} key art" width="1920" height="1080" loading="lazy">
     <div class="body">
       <div class="name">${esc(e.name)}</div>
       <div class="sub">${esc(e.sub)}</div>
       <span class="chip${e.live ? " live" : ""}">${esc(e.status)}</span>
       <span class="go">open board &rarr;</span>
-      ${e.links ? `<ul class="quick" aria-label="${esc(e.name)} pages">${e.links.map(([t, h]) => `<li><a href="${esc(h)}">${esc(t)}</a></li>`).join("")}</ul>` : ""}
     </div>
-  </div>`).join("");
+  </a>`).join("");
 </script>
-<script src="ko-config.js"></script>
-<script src="ko-track.js" defer></script>
 </body>
 </html>
