@@ -6,11 +6,29 @@
 -- passwords as bcrypt hashes; this site never sees or stores them. Browsing needs no account.
 -- New uploads wait in a review queue (status 'pending') until approved in the /login/ dashboard; people who've
 -- had a video approved are trusted and their next uploads go live straight away.
--- Voting and uploads close 7 days after the rave: 10 Oct 2026, 23:59 Sydney time.
--- To change it, edit ko26_deadline() below and KO_CONFIG.deadline in ko-config.js.
+-- Every rave has its own kickroll leaderboard (kickrolls.rave = 'ko26', 'epik26', ...). Voting and uploads for a rave
+-- close 7 days after it: KO26 on 10 Oct 2026 and EPIK26 on 19 Dec 2026, 23:59 Sydney time.
+-- To add a rave or change a deadline, edit the public.raves rows below and `raves` in ko-config.js.
 
+create table if not exists public.raves (
+  id       text primary key check (id ~ '^[a-z0-9]{2,16}$'),
+  name     text not null,
+  deadline timestamptz not null
+);
+insert into public.raves (id, name, deadline) values
+  ('ko26',   'Knockout Outdoor 2026', timestamptz '2026-10-10 23:59:59+11'),
+  ('epik26', 'EPIK 2026',             timestamptz '2026-12-19 23:59:59+11')
+on conflict (id) do update set name = excluded.name, deadline = excluded.deadline;
+alter table public.raves enable row level security;
+drop policy if exists "read raves" on public.raves;
+create policy "read raves" on public.raves for select to anon, authenticated using (true);
+
+-- a rave's deadline (null for a rave that isn't listed, so nothing can be posted to it)
+create or replace function public.ko26_rave_deadline(r text) returns timestamptz
+language sql stable security definer set search_path = public as $fn$ select deadline from public.raves where id = r $fn$;
+-- kept for anything still calling the old single-rave name: KO26's deadline
 create or replace function public.ko26_deadline() returns timestamptz
-language sql immutable as $fn$ select timestamptz '2026-10-10 23:59:59+11' $fn$;
+language sql stable security definer set search_path = public as $fn$ select public.ko26_rave_deadline('ko26') $fn$;
 
 -- a signed-in, non-anonymous account (anonymous sign-ins, if ever switched on, can't post or vote)
 create or replace function public.ko26_is_member() returns boolean
@@ -56,8 +74,18 @@ alter table public.kickrolls add constraint kickrolls_no_links check (
 create index if not exists kickrolls_song_idx on public.kickrolls (song_key);
 create index if not exists kickrolls_act_idx on public.kickrolls (act);
 create index if not exists kickrolls_status_idx on public.kickrolls (status);
--- one video per person per song (delete yours to post a better take)
-create unique index if not exists kickrolls_one_per_song on public.kickrolls (owner, song_key);
+-- which rave's leaderboard a kickroll is on (every row from before multi-rave is KO26)
+alter table public.kickrolls add column if not exists rave text not null default 'ko26';
+alter table public.kickrolls drop constraint if exists kickrolls_rave_check;
+alter table public.kickrolls add constraint kickrolls_rave_check check (rave ~ '^[a-z0-9]{2,16}$');
+create index if not exists kickrolls_rave_idx on public.kickrolls (rave);
+-- one video per person per song per rave (delete yours to post a better take)
+do $fn$ begin
+  if not exists (select 1 from pg_indexes where schemaname = 'public' and indexname = 'kickrolls_one_per_song' and indexdef like '%(owner, rave, song_key)%') then
+    drop index if exists public.kickrolls_one_per_song;
+    create unique index kickrolls_one_per_song on public.kickrolls (owner, rave, song_key);
+  end if;
+end $fn$;
 
 -- ---------- linked posts: a TikTok / Instagram post instead of an upload ----------
 alter table public.kickrolls add column if not exists source text not null default 'upload';
@@ -116,7 +144,7 @@ create table if not exists public.reports (
 -- ---------- scores (what the public pages read): approved, not hidden, under 3 reports ----------
 drop view if exists public.kickroll_scores;
 create view public.kickroll_scores with (security_invoker = on) as
-select k.id, k.created_at, k.owner, k.act, k.song_key, k.song, k.name, k.caption, k.path, k.mime, k.size_bytes,
+select k.id, k.created_at, k.owner, k.rave, k.act, k.song_key, k.song, k.name, k.caption, k.path, k.mime, k.size_bytes,
        k.source, k.external_url, k.external_id, k.handle, k.thumb_url, pr.tiktok as owner_tiktok, pr.instagram as owner_instagram,
        coalesce(round(avg(r.stars)::numeric, 2), 0) as avg_stars,
        count(r.stars)::int as votes,
@@ -138,7 +166,7 @@ create policy "read videos" on public.kickrolls for select to anon, authenticate
   using ((status = 'approved' and not hidden) or owner = auth.uid() or public.ko26_is_admin());
 drop policy if exists "upload own video before deadline" on public.kickrolls;
 create policy "upload own video before deadline" on public.kickrolls for insert to authenticated
-  with check (public.ko26_is_member() and owner = auth.uid() and now() < public.ko26_deadline() and hidden = false
+  with check (public.ko26_is_member() and owner = auth.uid() and now() < public.ko26_rave_deadline(rave) and hidden = false
               and ((source = 'upload' and path like auth.uid()::text || '/%') or (source <> 'upload' and path is null)));
 drop policy if exists "delete own video" on public.kickrolls;
 create policy "delete own video" on public.kickrolls for delete to authenticated using (owner = auth.uid() or public.ko26_is_admin());
@@ -147,11 +175,13 @@ drop policy if exists "read ratings" on public.ratings;
 create policy "read ratings" on public.ratings for select to anon, authenticated using (true);
 drop policy if exists "rate before deadline, not your own" on public.ratings;
 create policy "rate before deadline, not your own" on public.ratings for insert to authenticated
-  with check (public.ko26_is_member() and rater = auth.uid() and now() < public.ko26_deadline()
-              and exists (select 1 from public.kickrolls k where k.id = kickroll_id and k.owner <> auth.uid() and k.status = 'approved'));
+  with check (public.ko26_is_member() and rater = auth.uid()
+              and exists (select 1 from public.kickrolls k where k.id = kickroll_id and k.owner <> auth.uid() and k.status = 'approved'
+                          and now() < public.ko26_rave_deadline(k.rave)));
 drop policy if exists "change own rating before deadline" on public.ratings;
 create policy "change own rating before deadline" on public.ratings for update to authenticated
-  using (rater = auth.uid()) with check (public.ko26_is_member() and rater = auth.uid() and now() < public.ko26_deadline());
+  using (rater = auth.uid()) with check (public.ko26_is_member() and rater = auth.uid()
+              and exists (select 1 from public.kickrolls k where k.id = kickroll_id and now() < public.ko26_rave_deadline(k.rave)));
 
 drop policy if exists "read reports" on public.reports;
 create policy "read reports" on public.reports for select to anon, authenticated using (true);
@@ -161,6 +191,9 @@ create policy "report once" on public.reports for insert to authenticated with c
 -- spam limits + review status, set by the server whatever the browser sends
 create or replace function public.ko26_upload_limit() returns trigger language plpgsql security definer set search_path = public as $fn$
 begin
+  if coalesce(now() >= public.ko26_rave_deadline(new.rave), true) then
+    raise exception 'uploads and voting for this rave are closed';
+  end if;
   if (select count(*) from public.kickrolls where owner = new.owner and created_at > now() - interval '1 day') >= 5 then
     raise exception 'upload limit reached (5 a day). try again tomorrow';
   end if;
@@ -204,13 +237,15 @@ grant execute on function public.ko26_set_link(uuid, text, text, text, text) to 
 grant execute on function public.ko26_moderate(uuid, boolean, text) to authenticated;
 
 -- ---------- video storage: public bucket, 50 MB per file, video only ----------
+-- files go in <user id>/<rave>/<file>; older ones (and old cached pages) use <user id>/<file>, which counts as KO26
 insert into storage.buckets (id, name, public, file_size_limit, allowed_mime_types)
 values ('kickrolls', 'kickrolls', true, 52428800, array['video/mp4', 'video/quicktime', 'video/webm', 'video/x-m4v'])
 on conflict (id) do update set public = true, file_size_limit = excluded.file_size_limit, allowed_mime_types = excluded.allowed_mime_types;
 
 drop policy if exists "kickrolls upload into own folder" on storage.objects;
 create policy "kickrolls upload into own folder" on storage.objects for insert to authenticated
-  with check (bucket_id = 'kickrolls' and public.ko26_is_member() and (storage.foldername(name))[1] = auth.uid()::text and now() < public.ko26_deadline());
+  with check (bucket_id = 'kickrolls' and public.ko26_is_member() and (storage.foldername(name))[1] = auth.uid()::text
+              and now() < public.ko26_rave_deadline(case when cardinality(storage.foldername(name)) >= 2 then (storage.foldername(name))[2] else 'ko26' end));
 drop policy if exists "kickrolls delete own" on storage.objects;
 create policy "kickrolls delete own" on storage.objects for delete to authenticated
   using (bucket_id = 'kickrolls' and (storage.foldername(name))[1] = auth.uid()::text);
@@ -277,8 +312,10 @@ language sql stable security definer set search_path = public as $fn$
     where m.user_id = auth.uid()) x
 $fn$;
 
--- the group leaderboard: per member, approved kickrolls, stars received, votes, best kickroll (Bayesian, same as the site)
-create or replace function public.ko26_group_board(g uuid) returns json
+-- the group leaderboard: per member, approved kickrolls, stars received, votes, best kickroll (Bayesian, same as the site).
+-- Groups are global: every rave counts, or just one when rv is given ('ko26', 'epik26', ...).
+drop function if exists public.ko26_group_board(uuid);
+create or replace function public.ko26_group_board(g uuid, rv text default null) returns json
 language plpgsql stable security definer set search_path = public as $fn$
 begin
   if not public.ko26_in_group(g) then raise exception 'you are not in that group'; end if;
@@ -288,14 +325,18 @@ begin
       select m.user_id, m.joined_at, (m.user_id = auth.uid()) as is_me,
              coalesce(nullif(u.raw_user_meta_data ->> 'name', ''), (select k.name from public.kickrolls k where k.owner = m.user_id order by k.created_at desc limit 1), 'Raver') as name,
              pr.tiktok, pr.instagram,
-             (select count(*) from public.kickroll_scores s where s.owner = m.user_id) as posts,
-             (select round(avg(r.stars)::numeric, 2) from public.ratings r join public.kickroll_scores s on s.id = r.kickroll_id where s.owner = m.user_id) as avg_stars,
-             (select coalesce(sum(s.votes), 0) from public.kickroll_scores s where s.owner = m.user_id) as votes,
-             (select max((3.5 * 3 + s.avg_stars * s.votes) / (3 + s.votes)) from public.kickroll_scores s where s.owner = m.user_id and s.votes > 0) as best_score,
-             (select json_build_object('id', s.id, 'song', s.song, 'act', s.act, 'avg', s.avg_stars, 'votes', s.votes)
-                from public.kickroll_scores s where s.owner = m.user_id and s.votes > 0
+             (select count(*) from public.kickroll_scores s where s.owner = m.user_id and (rv is null or s.rave = rv)) as posts,
+             (select round(avg(r.stars)::numeric, 2) from public.ratings r join public.kickroll_scores s on s.id = r.kickroll_id
+               where s.owner = m.user_id and (rv is null or s.rave = rv)) as avg_stars,
+             (select coalesce(sum(s.votes), 0) from public.kickroll_scores s where s.owner = m.user_id and (rv is null or s.rave = rv)) as votes,
+             (select max((3.5 * 3 + s.avg_stars * s.votes) / (3 + s.votes)) from public.kickroll_scores s
+               where s.owner = m.user_id and s.votes > 0 and (rv is null or s.rave = rv)) as best_score,
+             (select json_build_object('id', s.id, 'rave', s.rave, 'song', s.song, 'song_key', s.song_key, 'act', s.act, 'avg', s.avg_stars, 'votes', s.votes)
+                from public.kickroll_scores s where s.owner = m.user_id and s.votes > 0 and (rv is null or s.rave = rv)
                order by (3.5 * 3 + s.avg_stars * s.votes) / (3 + s.votes) desc limit 1) as best,
-             (select count(*) from public.ratings r where r.rater = m.user_id) as ratings_given
+             (select coalesce(json_agg(distinct s.rave), '[]') from public.kickroll_scores s where s.owner = m.user_id) as raves,
+             (select count(*) from public.ratings r join public.kickrolls k on k.id = r.kickroll_id
+               where r.rater = m.user_id and (rv is null or k.rave = rv)) as ratings_given
       from public.ko_group_members m
       join auth.users u on u.id = m.user_id
       left join public.profiles pr on pr.user_id = m.user_id
@@ -332,9 +373,9 @@ begin
   return '{}'::json;
 end $fn$;
 
-revoke all on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid),
+revoke all on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid, text),
   public.ko26_group_leave(uuid), public.ko26_group_admin(uuid, text, uuid, text) from public, anon;
-grant execute on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid),
+grant execute on function public.ko26_group_create(text), public.ko26_group_join(text), public.ko26_my_groups(), public.ko26_group_board(uuid, text),
   public.ko26_group_leave(uuid), public.ko26_group_admin(uuid, text, uuid, text) to authenticated;
 
 -- ---------- song ratings: rate the tracks themselves; your groups see each other's ----------
@@ -348,6 +389,16 @@ create table if not exists public.song_ratings (
   primary key (song_key, user_id)
 );
 create index if not exists song_ratings_user_idx on public.song_ratings (user_id);
+-- song keys are act/title, and acts play more than one rave, so a song rating belongs to one rave
+alter table public.song_ratings add column if not exists rave text not null default 'ko26';
+alter table public.song_ratings drop constraint if exists song_ratings_rave_check;
+alter table public.song_ratings add constraint song_ratings_rave_check check (rave ~ '^[a-z0-9]{2,16}$');
+do $fn$ begin
+  if not exists (select 1 from pg_indexes where schemaname = 'public' and indexname = 'song_ratings_pkey' and indexdef like '%(rave, song_key, user_id)%') then
+    alter table public.song_ratings drop constraint if exists song_ratings_pkey;
+    alter table public.song_ratings add constraint song_ratings_pkey primary key (rave, song_key, user_id);
+  end if;
+end $fn$;
 alter table public.song_ratings enable row level security;
 create or replace function public.ko26_shares_group(other uuid) returns boolean
 language sql stable security definer set search_path = public as $fn$
@@ -363,32 +414,36 @@ create policy "change own song ratings" on public.song_ratings for update to aut
 drop policy if exists "remove own song ratings" on public.song_ratings;
 create policy "remove own song ratings" on public.song_ratings for delete to authenticated using (user_id = auth.uid());
 
--- every song a group's members rated: group average + each member's stars
-create or replace function public.ko26_group_songs(g uuid) returns json
+-- every song a group's members rated (every rave, or just rave rv): group average + each member's stars
+drop function if exists public.ko26_group_songs(uuid);
+create or replace function public.ko26_group_songs(g uuid, rv text default null) returns json
 language plpgsql stable security definer set search_path = public as $fn$
 begin
   if not public.ko26_in_group(g) then raise exception 'you are not in that group'; end if;
   return (select coalesce(json_agg(x order by x.avg desc, x.n desc, x.song), '[]') from (
-    select sr.song_key, max(sr.act) as act, max(sr.song) as song, round(avg(sr.stars)::numeric, 2) as avg, count(*) as n,
+    select sr.rave, sr.song_key, max(sr.act) as act, max(sr.song) as song, round(avg(sr.stars)::numeric, 2) as avg, count(*) as n,
            json_agg(json_build_object('user_id', sr.user_id, 'stars', sr.stars,
              'name', coalesce(nullif(u.raw_user_meta_data ->> 'name', ''), 'Raver'), 'is_me', sr.user_id = auth.uid()) order by sr.stars desc) as ratings
     from public.song_ratings sr
     join public.ko_group_members m on m.user_id = sr.user_id and m.group_id = g
     join auth.users u on u.id = sr.user_id
-    group by sr.song_key) x);
+    where rv is null or sr.rave = rv
+    group by sr.rave, sr.song_key) x);
 end $fn$;
--- one song: your rating and your group mates' (with names), for the leaderboard's song view
-create or replace function public.ko26_song_mates(key text) returns json
+-- one song on one rave: your rating and your group mates' (with names), for the leaderboard's song view
+drop function if exists public.ko26_song_mates(text);
+create or replace function public.ko26_song_mates(key text, rv text default 'ko26') returns json
 language sql stable security definer set search_path = public as $fn$
-  select coalesce(json_agg(json_build_object('user_id', sr.user_id, 'stars', sr.stars, 'is_me', sr.user_id = auth.uid(),
+  select coalesce(json_agg(json_build_object('user_id', sr.user_id, 'rave', sr.rave, 'stars', sr.stars, 'is_me', sr.user_id = auth.uid(),
            'name', coalesce(nullif(u.raw_user_meta_data ->> 'name', ''), 'Raver')) order by (sr.user_id = auth.uid()) desc, sr.stars desc), '[]')
   from public.song_ratings sr join auth.users u on u.id = sr.user_id
-  where sr.song_key = key and public.ko26_shares_group(sr.user_id)
+  where sr.song_key = key and sr.rave = coalesce(rv, 'ko26') and public.ko26_shares_group(sr.user_id)
 $fn$;
-revoke all on function public.ko26_group_songs(uuid), public.ko26_song_mates(text) from public, anon;
-grant execute on function public.ko26_group_songs(uuid), public.ko26_song_mates(text) to authenticated;
+revoke all on function public.ko26_group_songs(uuid, text), public.ko26_song_mates(text, text) from public, anon;
+grant execute on function public.ko26_group_songs(uuid, text), public.ko26_song_mates(text, text) to authenticated;
 
 -- ---------- moderation by hand ----------
+-- see one rave:     select * from public.kickrolls where rave = 'epik26' order by created_at desc;
 -- hide a video:     update public.kickrolls set hidden = true where id = '...';
 -- see reported:     select k.*, count(*) from public.reports p join public.kickrolls k on k.id = p.kickroll_id group by k.id order by 2 desc;
 
@@ -453,7 +508,8 @@ begin
     'kickrolls', (select json_build_object(
         'videos', (select count(*) from kickrolls), 'ratings', (select count(*) from ratings),
         'uploaders', (select count(distinct owner) from kickrolls), 'reported', (select count(distinct kickroll_id) from reports),
-        'pending', (select count(*) from kickrolls where status = 'pending'), 'members', (select count(*) from auth.users where not coalesce(is_anonymous, false))))
+        'pending', (select count(*) from kickrolls where status = 'pending'), 'members', (select count(*) from auth.users where not coalesce(is_anonymous, false)),
+        'by_rave', (select coalesce(json_object_agg(rave, n), '{}') from (select rave, count(*) as n from kickrolls group by rave) x)))
   );
 end $fn$;
 revoke all on function public.ko26_stats(integer) from public, anon;
