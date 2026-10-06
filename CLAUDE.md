@@ -28,6 +28,7 @@ For every act on a board:
 - Tools from the KO26 pass are in `tools/data/` (Spotify search, YouTube set search, id verifier). WebFetch can usually read 1001Tracklists. curl can reach YouTube and Spotify's web endpoints.
 
 ## Workflow
+- **Who does what:** Claude Code (the cloud session on this repo) implements everything: code, data, builds, PRs and merges. Anything the cloud session can't reach (sites that block it, like 1001Tracklists; anything that needs a real browser, a login or Scott's computer) goes to **Claude Cowork** as a handoff file in the repo root, named `HANDOFF_COWORK*.md`. The handoff says exactly what to collect and the exact JSON to return. Scott brings the result back and Claude Code puts it into the site. Cowork never edits the repo.
 - Develop on the session's `claude/...` branch, open a PR and merge it to `main` so the site updates (Scott's usual flow).
 - Never push a handoff folder wholesale over the repo. Merge its changes in, because the repo has features (leaderboard, gallery, groups, accounts, dashboard) that older copies don't.
 - Never put passwords, tokens or keys in the repo or chat. The moderator login only lives in the cloud environment variables `KO26_MOD_EMAIL` / `KO26_MOD_PASSWORD`. The Supabase anon key is public by design.
