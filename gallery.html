@@ -3,9 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="KO26 kickroll gallery: every kickroll from Knockout Outdoor 2026, the Hall of Fame, top rated and newest.">
+<meta name="description" content="Kickroll gallery: every kickroll from the rave, the Hall of Fame, top rated and newest.">
 <meta name="theme-color" content="#0a0a0b">
 <title>KO26 Kickroll Gallery</title>
+<script src="ko-config.js"></script>
+<script>
+// which rave this page shows (?rave=, default ko26): sets the theme before first paint; ko-supa.js does the rest
+(function(){ var C = window.KO_CONFIG || {}, R = C.raves || {}, q = (new URLSearchParams(location.search).get("rave") || "").toLowerCase();
+  var id = R[q] ? q : (C.defaultRave || "ko26"), r = R[id] || {};
+  document.documentElement.dataset.rave = id; document.documentElement.dataset.theme = r.theme || "ko";
+  document.title = (r.short || id.toUpperCase()) + " Kickroll Gallery"; })();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Pirata+One&family=Cinzel:wght@500;700&family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=Silkscreen&display=swap">
@@ -55,7 +63,16 @@
   --p-violet:#a855f7;
   --p-magenta:#e94fd6;
   --p-star:rgba(255,200,90,.8);
+  --main:#ffc85a;
   --tap:44px;
+}
+/* EPIK edition: crimson-black (same palette as epik26/index.html); layout identical */
+html[data-theme="epik"]{
+  --bg:#0d0507; --panel:#180a0d; --panel-2:#1f0b0f; --line:#3f1b21;
+  --fg:#f7eeea; --fg-2:#f0d9d2; --muted:#ab8d8d; --dim:#735458;
+  --violet:#c4161f; --pink:#ff6b6b; --warn:#ff9a3d; --scrim:rgba(8,2,4,.8); --main:#ff8a8a;
+  --p-bg:#14040a; --p-block:#4a0810; --p-block-2:#560a13;
+  --p-soft:#ffcfcf; --p-frame:#ffffff; --p-violet:#c4161f; --p-magenta:#ff6b6b; --p-star:rgba(255,138,138,.55);
 }
 [hidden]{display:none!important}
 *{box-sizing:border-box}
@@ -555,7 +572,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
     <div class="brand">
       <svg class="emblem logo" viewBox="0 0 400 150" role="img" aria-label="chef"><use href="#logo1"/></svg>
       <div class="txt">
-        <div class="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Kickrolls</div>
+        <div class="eyebrow" id="eyebrow">KO26 <span class="sep">·</span> Level Up <span class="sep">·</span> Kickrolls</div>
         <h1>Kickroll Gallery</h1>
         <div class="cd" id="clock" aria-live="polite"><span id="clockL">voting closes in</span><b id="clockV">…</b></div>
       </div>
@@ -565,9 +582,9 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
       <div class="cell"><b id="hudV">0</b><span>votes</span></div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
-    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="ko26.html">Quest board</a><a href="leaderboard.html">Leaderboard</a><a href="gallery.html" aria-current="page">Gallery</a><a href="groups.html">Groups</a><span class="acct" id="acct" aria-live="polite"></span></nav>
+    <nav class="sitenav" aria-label="Pages"><a href="index.html">All raves</a><a href="ko26.html" data-nav="board">Quest board</a><a href="leaderboard.html?rave=ko26" data-nav="leaderboard.html">Leaderboard</a><a href="gallery.html?rave=ko26" data-nav="gallery.html" aria-current="page">Gallery</a><span class="acct" id="acct" aria-live="polite"></span></nav>
   </header>
-  <p class="lede">Every kickroll from Knockout Outdoor 2026. Rate the best ones; each song, artist, stage and the whole rave gets a winner. <a href="leaderboard.html">Post yours on the leaderboard</a>.</p>
+  <p class="lede">Every kickroll from <span class="rv-name">Knockout Outdoor 2026</span>. Rate the best ones; each song, artist<span class="rv-stage">, stage</span> and the whole rave gets a winner. <a href="leaderboard.html?rave=ko26" data-nav="leaderboard.html">Post yours on the leaderboard</a>.</p>
   <div class="demo" id="demo" hidden><b>DEMO</b><span>Demo mode: videos and ratings stay on this device until the leaderboard is connected.</span></div>
 
 
@@ -584,7 +601,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
     <div class="loading" aria-label="Loading kickrolls"><i></i><i></i><i></i><i></i></div>
   </main>
 
-  <p class="foot">Fan-made for the KO26 crowd. Ranking uses a weighted average, so one lucky 5-star vote can't beat a clip twenty people loved. Uploads and votes close 7 days after the rave; then the crowns are final. Spot something that shouldn't be here? Open it and tap Report. <a href="ko26.html">Back to the quest board</a>.</p>
+  <p class="foot">Fan-made for the <span class="rv-short">KO26</span> crowd. Ranking uses a weighted average, so one lucky 5-star vote can't beat a clip twenty people loved. Uploads and votes close 7 days after the rave; then the crowns are final. Spot something that shouldn't be here? Open it and tap Report. <a href="ko26.html" data-nav="board">Back to the quest board</a>.</p>
 </div>
 
 <div class="lb" id="lb" role="dialog" aria-modal="true" aria-labelledby="lbName" hidden>
@@ -610,7 +627,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
     </div>
     <div class="lb-acts">
       <a class="btn" id="lbOut" href="#" target="_blank" rel="noopener noreferrer" hidden><svg class="ico"><use href="#i-out"/></svg><span>Open on TikTok</span></a>
-      <a class="btn" id="lbLink" href="leaderboard.html"><svg class="ico"><use href="#i-out"/></svg>See this song on the leaderboard</a>
+      <a class="btn" id="lbLink" href="leaderboard.html?rave=ko26" data-nav="leaderboard.html"><svg class="ico"><use href="#i-out"/></svg>See this song on the leaderboard</a>
     </div>
     <div class="lb-meta">
       <span id="lbWhen"></span>
@@ -675,7 +692,6 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 <symbol id="em-yoshiko" viewBox="0 0 64 64"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" style="stroke-width:var(--sw,2.5)"><path d="M32 6C44 6 52 24 52 38C52 50 43 58 32 58C21 58 12 50 12 38C12 24 20 6 32 6Z"/><path d="M13 38L19 34L24 39L30 33L36 39L42 33L51 38"/><circle class="a" style="color:var(--acc,#FFC85A)" cx="25" cy="22" r="4" fill="currentColor" stroke="none"/><circle class="a" style="color:var(--acc,#FFC85A)" cx="39" cy="24" r="3" fill="currentColor" stroke="none"/><circle class="a" style="color:var(--acc,#FFC85A)" cx="27" cy="49" r="3.5" fill="currentColor" stroke="none"/><circle class="a" style="color:var(--acc,#FFC85A)" cx="40" cy="47" r="3" fill="currentColor" stroke="none"/></g></symbol>
 </svg>
 
-<script src="ko-config.js"></script>
 <script src="ko-supa.js"></script>
 <script>
 (function(){
@@ -692,7 +708,8 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(38px,6vw,64px)
 const $ = id => document.getElementById(id);
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const MODES = ["random", "winners", "top", "new"];
-const STAGE_ORDER = ["arena", "pit", "oasis"];
+let STAGE_ORDER = ["arena", "pit", "oasis"];   // set from the rave's json once KO.ready() has loaded it
+const RAVE = KO.raveInfo, RS = RAVE.short, LB = KO.raveHref("leaderboard.html");
 const SVGNS = "http://www.w3.org/2000/svg";
 
 // DOM builder: every string goes in as a text node or attribute, never as HTML
@@ -719,7 +736,7 @@ function icon(id, cls, vb){
 const crown = cls => icon("i-crown", "px " + (cls || ""), "0 0 13 10");
 function emblem(act, cls){
   const id = "em-" + KO.slug(act);
-  if(!document.getElementById(id)) return null;
+  if(RAVE.actIcons === false || !document.getElementById(id)) return null;
   const s = icon(id, cls, "0 0 64 64"); s.classList.remove("ico"); return s;
 }
 
@@ -753,7 +770,7 @@ function ago(iso){
 const safeUrl = u => /^(https?:|blob:)/i.test(String(u || "")) ? String(u) : "";
 // a fragment start time makes iOS paint a poster frame for remote files
 const posterUrl = u => /^https?:/i.test(u) && !u.includes("#") ? u + "#t=0.1" : u;
-const lbHref = k => `leaderboard.html#act=${encodeURIComponent(k.act)}&song=${encodeURIComponent(k.songKey)}`;
+const lbHref = k => `${LB}#act=${encodeURIComponent(k.act)}&song=${encodeURIComponent(k.songKey)}`;
 function meter(avg){
   const m = h("span", {class: "meter", "aria-hidden": "true"}, "★★★★★");
   m.append(h("i", {style: `width:${Math.max(0, Math.min(5, avg)) / 5 * 100}%`}, "★★★★★"));
@@ -923,7 +940,7 @@ function renderTop(m){
 function renderNew(m){
   const list = S.all.slice().sort((a, b) => String(b.createdAt).localeCompare(String(a.createdAt)));
   S.seq = list;
-  m.append(barEl([h("b", {text: "Freshest first."}), " The newest kickrolls need votes most."], h("a", {class: "btn primary", href: "leaderboard.html"}, "Post yours")));
+  m.append(barEl([h("b", {text: "Freshest first."}), " The newest kickrolls need votes most."], h("a", {class: "btn primary", href: LB}, "Post yours")));
   m.append(wall(list, () => ({ago: true})));
 }
 
@@ -946,7 +963,7 @@ function renderWinners(m){
     const vid = h("div", {class: "champ-vid"}, isLink(o) ? embedBox(o) : card(o, {crowned: true}));
     const info = h("div", {class: "champ-info"},
       crown("crown"),
-      h("p", {class: "champ-k", text: "KO26 Kickroll Champion"}),
+      h("p", {class: "champ-k", text: RS + " Kickroll Champion"}),
       h("span", {class: "status" + (closed ? " final" : "")}, h("b", {text: closed ? "FINAL" : "LIVE"}), closed ? "Winner · final results" : "Current leader · " + clockText()),
       h("div", {class: "champ-name-row"}, h("h2", {class: "champ-name", text: o.name}), socials(o, true)),
       o.caption ? h("p", {class: "champ-cap", text: "“" + o.caption + "”"}) : null,
@@ -961,24 +978,25 @@ function renderWinners(m){
   } else {
     m.append(h("section", {class: "poster unclaimed"}, h("span", {class: "brackets", "aria-hidden": "true"}), h("span", {class: "notch", "aria-hidden": "true"}),
       crown("crown"), h("p", {class: "champ-k", text: "The crown is unclaimed"}),
-      h("p", {text: closed ? "Voting closed without a single star. No champion this year." : "No one has rated a kickroll yet. Rate a few and the KO26 Kickroll Champion appears here. " + clockText() + "."}),
+      h("p", {text: closed ? "Voting closed without a single star. No champion this year." : "No one has rated a kickroll yet. Rate a few and the " + RS + " Kickroll Champion appears here. " + clockText() + "."}),
       closed ? null : h("a", {class: "btn primary", href: "#mode=random"}, "Start rating")));
   }
 
-  // stage champions
+  // stage champions (multi-stage raves only; on a single stage the overall champion is the stage champion)
   const sec2 = h("section", {class: "sec"}, secHead("Stage champions", closed ? "final results" : "current leaders · " + clockText()));
   const ul = h("ul", {class: "stages"});
-  for(const st of STAGE_ORDER){
+  for(const st of STAGE_ORDER.length > 1 ? STAGE_ORDER : []){
     const k = W.byStage[st];
     if(k){ push(k); ul.append(h("li", null, card(k, {ribbon: `${stageName(st).replace(/^The /, "")} ${closed ? "champion" : "leader"}`, crowned: true, emblem: true}))); }
     else ul.append(h("li", null, h("div", {class: "slot", style: `--sc:${scVar(st)}`}, crown("crown"), h("b", {text: stageName(st)}), h("span", {text: closed ? "No rated kickrolls here." : "No rated kickrolls yet. Yours could take it."}))));
   }
-  sec2.append(ul); m.append(sec2);
+  if(STAGE_ORDER.length > 1){ sec2.append(ul); m.append(sec2); }
 
   // artist winners, by stage then set time
+  const actOrder = Object.keys(KO.sets);
   const acts = Object.keys(W.byAct).sort((a, b) => {
     const A = KO.sets[a] || {}, B = KO.sets[b] || {};
-    return STAGE_ORDER.indexOf(A.stage) - STAGE_ORDER.indexOf(B.stage) || timeVal(A.start) - timeVal(B.start) || a.localeCompare(b);
+    return STAGE_ORDER.indexOf(A.stage) - STAGE_ORDER.indexOf(B.stage) || timeVal(A.start) - timeVal(B.start) || actOrder.indexOf(a) - actOrder.indexOf(b) || a.localeCompare(b);
   });
   if(acts.length){
     const sec3 = h("section", {class: "sec"}, secHead("Artist winners", `${acts.length} of ${Object.keys(KO.sets).length} acts crowned · ${closed ? "final" : "current leaders"}`));
@@ -1027,7 +1045,7 @@ function renderEmpty(m){
     h("h2", {text: "Be the first to post a kickroll"}),
     h("p", {text: KO.closed() ? "Uploads closed and the wall stayed empty. See you at the next one." : "The wall is empty and every crown is up for grabs. Pick the song you kick rolled to, upload the clip, and the KO26 crowd rates it."}),
     KO.closed() ? null : h("ol", {class: "steps"}, h("li", null, h("b", {text: "1"}), "Find your act"), h("li", null, h("b", {text: "2"}), "Pick the song"), h("li", null, h("b", {text: "3"}), "Upload the clip")),
-    h("a", {class: "btn primary", href: "leaderboard.html"}, KO.closed() ? "See the leaderboard" : "Post a kickroll on the leaderboard")));
+    h("a", {class: "btn primary", href: LB}, KO.closed() ? "See the leaderboard" : "Post a kickroll on the leaderboard")));
 }
 
 function render(){
@@ -1076,8 +1094,8 @@ function fill(){
   // kicker: leader / winner tags
   const W = KO.winners(S.all), tags = [];
   const L = closed ? "winner" : "leader";
-  if(W.overall && W.overall.id === k.id) tags.push(`KO26 champion${closed ? "" : " (leader)"}`);
-  if(st && W.byStage[st] && W.byStage[st].id === k.id) tags.push(`${stageName(st)} ${L}`);
+  if(W.overall && W.overall.id === k.id) tags.push(`${RS} champion${closed ? "" : " (leader)"}`);
+  if(st && STAGE_ORDER.length > 1 && W.byStage[st] && W.byStage[st].id === k.id) tags.push(`${stageName(st)} ${L}`);
   if(W.byAct[k.act] && W.byAct[k.act].id === k.id) tags.push(`${k.act} ${L}`);
   else if(W.bySong[k.songKey] && W.bySong[k.songKey].id === k.id) tags.push(`song ${L}`);
   const kick = $("lbKicker"); kick.replaceChildren();
@@ -1318,10 +1336,22 @@ async function onAuthChange(){
   await refreshData();
 }
 
+// ---------- this rave's name, nav and links (the theme was set in <head>) ----------
+(function raveChrome(){
+  const eb = $("eyebrow"); eb.replaceChildren();
+  [RS, RAVE.tagline, "Kickrolls"].filter(Boolean).forEach((t, i) => { if(i) eb.append(" ", h("span", {class: "sep", text: "·"}), " "); eb.append(t); });
+  for(const a of document.querySelectorAll("[data-nav]")) a.href = a.dataset.nav === "board" ? (RAVE.board || "index.html") : KO.raveHref(a.dataset.nav);
+  for(const el of document.querySelectorAll(".rv-short")) el.textContent = RS;
+  for(const el of document.querySelectorAll(".rv-name")) el.textContent = RAVE.name || RS;
+  const md = document.querySelector('meta[name="description"]'); if(md) md.content = RS + " " + md.content;
+})();
+
 // ---------- boot ----------
 (async () => {
   try{
     const r = await KO.ready();
+    STAGE_ORDER = Object.keys(KO.STAGES);
+    for(const el of document.querySelectorAll(".rv-stage")) el.hidden = STAGE_ORDER.length < 2;
     $("demo").hidden = r.mode !== "demo";
     renderAcct(); KO.onAuth(onAuthChange);
     tick(); setInterval(tick, 30000);

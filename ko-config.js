@@ -9,12 +9,13 @@ window.KO_CONFIG = {
   maxUploadMB: 50,
   // Every rave gets its own Leaderboard and Gallery: leaderboard.html?rave=<id>, gallery.html?rave=<id> (no ?rave= means ko26).
   // Its songs come from <id>.json. Uploads and voting close 7 days after the rave; keep each deadline in step with
-  // the public.raves rows in supabase/setup.sql. theme: "ko" (Knockout purple) or "epik" (EPIK red).
+  // the public.raves rows in supabase/setup.sql. theme: "ko" (Knockout purple) or "epik" (EPIK red); actIcons: false
+  // shows letters instead of the drawn act icons (EPIK has no act icons).
   defaultRave: "ko26",
   raves: {
     ko26: {name: "Knockout Outdoor 2026", short: "KO26", tagline: "Level Up", date: "2026-10-03",
            board: "ko26.html", theme: "ko", deadline: "2026-10-10T23:59:59+11:00"},
     epik26: {name: "EPIK 2026", short: "EPIK26", tagline: "Sydney Showground", date: "2026-12-12",
-             board: "epik26/", theme: "epik", deadline: "2026-12-19T23:59:59+11:00"}
+             board: "epik26/", theme: "epik", actIcons: false, deadline: "2026-12-19T23:59:59+11:00"}
   }
 };

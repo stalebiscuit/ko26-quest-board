@@ -16,6 +16,9 @@
     let page = (segs.pop() || "index.html").replace(/\.html$/, "") || "index";
     const dir = segs.join("/") + "/", root = SRC ? new URL(".", SRC).pathname : "/";
     if(page === "index" && dir !== root && dir.startsWith(root)) page = segs[segs.length - 1] || page;
+    // another rave's leaderboard / gallery counts as its own page (leaderboard-epik26); KO26 keeps the plain name
+    const rv = (new URLSearchParams(location.search).get("rave") || "").toLowerCase();
+    if(/^[a-z0-9]{2,16}$/.test(rv) && rv !== "ko26" && /^(leaderboard|gallery)$/.test(page)) page += "-" + rv;
     const k = "ko26.seen." + page, last = Number(sessionStorage.getItem(k) || localStorage.getItem(k) || 0);
     if(Date.now() - last < 30 * 60 * 1000) return;
     localStorage.setItem(k, String(Date.now()));

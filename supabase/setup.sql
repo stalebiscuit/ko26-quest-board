@@ -1,4 +1,4 @@
--- KO26 Kickroll Leaderboard: run this once in Supabase → SQL Editor → New query → paste ALL of it → Run
+-- Kickroll Leaderboards (every rave: KO26, EPIK26, ...): run this in Supabase → SQL Editor → New query → paste ALL of it → Run
 -- (with nothing highlighted: if any text is selected, Supabase runs only the selection).
 -- Safe to run again after changes: it updates what's already there.
 --

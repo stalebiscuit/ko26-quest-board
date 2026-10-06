@@ -46,6 +46,11 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
 .thorn{position:relative;height:12px;margin:4px 0 22px}
 .thorn::before{content:"";position:absolute;left:0;right:0;top:50%;height:1px;background:linear-gradient(90deg,transparent,var(--gold) 18%,var(--gold) 82%,transparent)}
 .thorn::after{content:"";position:absolute;left:50%;top:50%;width:26px;height:8px;transform:translate(-50%,-50%);background:var(--gold);clip-path:polygon(0 50%,40% 0,50% 50%,60% 0,100% 50%,60% 100%,50% 50%,40% 100%)}
+.sitenav{display:flex;flex-wrap:wrap;gap:6px;margin:-8px 0 20px}
+.sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
+.sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
+@media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
+.sitenav small{align-self:center;margin-left:4px;font-size:12.5px;color:var(--dim)}
 .intro{color:var(--muted);max-width:60ch;margin:0 0 22px}
 .intro b{color:var(--fg-2);font-weight:600}
 
@@ -81,7 +86,8 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
   .top svg{width:84px}
   .body{grid-template-columns:1fr}
   .go{grid-column:1;grid-row:auto;justify-self:stretch;text-align:center;margin-top:6px}
-  .quick{display:grid;grid-template-columns:repeat(3,minmax(0,1fr))}
+  .sitenav small{display:none}
+  .quick{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(0,1fr)}
   .quick li{display:flex}
   .quick a{flex:1;justify-content:center;padding:0 6px}
 }
@@ -99,6 +105,7 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
     </div>
   </header>
   <div class="thorn"></div>
+  <nav class="sitenav" aria-label="Pages"><a href="index.html" aria-current="page">All raves</a><a href="groups.html">Groups</a><small>your crew's kickroll leaderboard, across every rave</small></nav>
   <p class="intro">one board per rave. tap an act for their recent sets, mark the songs you'll <b>kick roll</b> to, and build your run. picks are saved per rave in this browser.</p>
   <div class="grid" id="eds"></div>
   <p class="foot">set times and lineups from HSU Events' official posts. event logos and lineup posters belong to HSU Events. tracklists from 1001Tracklists. previews via Deezer. made by <b>@danielhdmn</b>.</p>
@@ -106,9 +113,10 @@ h1{font-family:var(--blackletter);font-weight:400;font-size:clamp(34px,5.4vw,54p
 <script>
 /* One entry per rave, newest first. To add a rave: build its folder (see PLAYBOOK.md), drop its key art in assets/, add a line here. */
 const EDITIONS = [
-  {path:"epik26/", art:"assets/epik-26.png", name:"EPIK 2026", sub:"Sat 12 Dec 2026 · Sydney Showground", status:"lineup out · set times tba", live:true},
+  {path:"epik26/", art:"assets/epik-26.png", name:"EPIK 2026", sub:"Sat 12 Dec 2026 · Sydney Showground", status:"lineup out · set times tba", live:true,
+   links:[["Leaderboard","leaderboard.html?rave=epik26"],["Gallery","gallery.html?rave=epik26"]]},
   {path:"ko26.html", art:"assets/knockout-26.png", name:"Knockout Outdoor 2026", sub:"Sat 3 Oct 2026 · ENGIE Stadium, Sydney Showground", status:"kickroll voting open till 10 Oct", live:false,
-   links:[["Leaderboard","leaderboard.html"],["Gallery","gallery.html"],["Groups","groups.html"]]},
+   links:[["Leaderboard","leaderboard.html?rave=ko26"],["Gallery","gallery.html?rave=ko26"]]},
 ];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 document.getElementById("eds").innerHTML = EDITIONS.map(e => `
