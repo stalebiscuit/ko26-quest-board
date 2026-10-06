@@ -24,7 +24,7 @@ def load_act(n):
             if isinstance(a, dict) and isinstance(a.get('artists'), dict) and n in a['artists']:
                 a = a['artists'][n]  # tolerate {"artists": {Act: {...}}}
             assert isinstance(a, dict) and all(isinstance(a.get(k, []), list) for k in ('sets', 'released', 'unreleased'))
-            src[n] = 'verified/' + fn
+            src[n] = p if os.environ.get('EPIK26_VERIFIED') else 'verified/' + fn
             return a
         except Exception as e:
             print(f'  WARNING: {p} unreadable ({e}); using artists.json for {n}')

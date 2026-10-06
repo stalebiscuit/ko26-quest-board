@@ -40,6 +40,8 @@
   --kick:#ffc85a;
   --kick-ink:#1a1206;
   --warn:#ff9a3d;
+  --rel:#72e6ad;
+  --unrel:#ffb3b3;
   --scrim:rgba(8,2,4,.8);
   /* type */
   --blackletter:"Pirata One", "UnifrakturCook", "Old English Text MT", Georgia, serif;
@@ -111,13 +113,6 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 /* reflective strip */
 .sheen{height:4px;background:linear-gradient(100deg,var(--silver-2),var(--silver-1) 18%,var(--silver-2) 32%,var(--silver-3) 52%,var(--silver-1) 64%,var(--silver-2) 80%,var(--silver-3))}
 .emblem{display:block;color:var(--fg)}
-
-/* ---------- edition hero + back link ---------- */
-.back{display:inline-flex;align-items:center;gap:6px;min-height:36px;font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.12em;color:var(--muted);text-decoration:none;margin-bottom:8px}
-@media (hover:hover){.back:hover{color:var(--gold-hi)}}
-.hero{position:relative;margin:0 0 16px;border:1px solid var(--line);background:var(--p-bg);overflow:hidden}
-.hero img{display:block;width:100%;height:auto;aspect-ratio:2/1;object-fit:cover;object-position:50% 30%}
-.hero::after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 14%,transparent),inset 0 -40px 40px -20px color-mix(in srgb,var(--bg) 70%,transparent)}
 
 /* ---------- header / HUD ---------- */
 .top{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:center;gap:14px 24px;padding-bottom:12px}
@@ -286,7 +281,7 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .blk.short .nm{display:block;white-space:nowrap;text-overflow:ellipsis}
 .blk.short .open{gap:0}
 .blk.tiny .tm{display:none}
-@media (hover:hover){.blk:not(.picked) .open:hover{background:color-mix(in srgb,var(--p-ink) 8%,transparent)}}
+@media (hover:hover){.blk:not(.picked) button.open:hover{background:color-mix(in srgb,var(--p-ink) 8%,transparent)}}
 .blk .badges{position:absolute;left:5px;top:5px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;pointer-events:none;z-index:2}
 .blk.g-first .badges{top:22px}
 .blk .badges .chip{margin:0}
@@ -336,6 +331,9 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .sheet-head{--c:var(--gold);padding:20px 20px 0;border-bottom:1px solid var(--line);background:linear-gradient(180deg,color-mix(in srgb,var(--c) 9%,var(--panel)),var(--panel-2));flex:none}
 .sheet-head::before{inset:6px}
 .pcard .thorn{margin:0 22px}
+.sheet-head[data-stage="arena"]{--c:var(--arena)}
+.sheet-head[data-stage="pit"]{--c:var(--pit)}
+.sheet-head[data-stage="oasis"]{--c:var(--oasis)}
 .sh-top{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center}
 .sh-em{width:88px;height:88px;flex:none;display:grid;place-items:center;color:var(--p-soft);--acc:var(--gold-hi);--sw:2.4;
   background:radial-gradient(circle at 50% 40%,var(--p-block-2),var(--p-bg) 95%);border:1px solid var(--gold);
@@ -369,9 +367,9 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .kronly[aria-pressed="true"] .k{background:var(--kick);color:var(--kick-ink);border-color:var(--kick)}
 .note{margin:0 0 14px;padding:12px 14px;border-left:3px solid var(--gold);background:var(--panel);color:var(--fg-2);font-size:14px;line-height:1.5}
 .cap{font-size:12.5px;color:var(--dim);margin:16px 2px 0;line-height:1.5}
-.dz-off .cap .dz{display:none}
-.cap .dz-alt{display:none}
-.dz-off .cap .dz-alt{display:inline}
+.cap [class^="c-"]{display:none}
+body:not(.yt-off):not(.dz-off) .cap .c-ok,body.yt-off:not(.dz-off) .cap .c-yt,body.dz-off:not(.yt-off) .cap .c-dz,body.yt-off.dz-off .cap .c-no{display:inline}
+.cap.own{margin-top:12px}
 .list{list-style:none;margin:10px 0 0;padding:0}
 .row{padding:16px 6px 16px 12px;border-top:1px solid var(--line);position:relative}
 .row:first-child{border-top:0}
@@ -399,19 +397,68 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .act.playing svg{color:var(--kick-ink)}
 .act.busy{opacity:.75;cursor:progress}
 .act:disabled{opacity:.5;cursor:default}
-.dz-off .pv{display:none}
+.act.paused{border-color:var(--gold);color:var(--gold-hi)}
+.act .dur{font-family:var(--display);font-weight:500;font-size:12.5px;letter-spacing:.03em;color:var(--muted);font-variant-numeric:tabular-nums}
+.act.playing .dur{color:var(--kick-ink)}
+.act .lc{text-transform:none}
+.dz-off .pv:not(.ft){display:none}
 .heard{flex-basis:100%;font-size:13.5px;color:var(--muted);line-height:1.45}
 .heard a{color:var(--fg-2);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--gold) 60%,transparent);text-underline-offset:3px;overflow-wrap:anywhere}
-.more{margin:4px 0 0;padding:14px 12px;border-top:1px dashed var(--line);color:var(--muted);font-size:14px}
-.more b{color:var(--fg-2)}
 .empty{color:var(--muted);padding:16px 4px;line-height:1.6;margin:0}
 .empty b{color:var(--fg)}
 .lnk{border:0;background:none;padding:0;color:var(--gold-hi);text-decoration:underline;text-underline-offset:3px;font:inherit;min-height:32px}
 .sets{list-style:none;margin:0;padding:0;display:grid;gap:10px}
-.sets li{border:1px solid var(--line);background:var(--panel);padding:14px 14px 12px}
-.sets .ev{font-weight:600;font-size:15.5px;line-height:1.35;color:var(--fg)}
-.sets .dt{font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--muted);margin-top:3px}
-.sets a{margin-top:10px}
+.set{border:1px solid var(--line);background:var(--panel)}
+.set.open{border-color:color-mix(in srgb,var(--gold) 55%,var(--line));background:var(--panel-2)}
+.set-h{width:100%;border:0;background:transparent;text-align:left;padding:13px 12px 8px 14px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;align-items:center;color:var(--fg)}
+.set-dt{font-family:var(--display);font-weight:700;font-size:18px;line-height:1.15;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-hi);font-variant-numeric:tabular-nums}
+.set-ev{grid-column:1;font-weight:600;font-size:15px;line-height:1.35;overflow-wrap:anywhere}
+.set-meta{grid-column:1;display:flex;flex-wrap:wrap;gap:0 10px;font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--muted)}
+.set-meta .vid{display:inline-flex;align-items:center;gap:5px;color:var(--fg-2)}
+.set-meta svg{width:13px;height:13px;color:var(--gold)}
+.chev{grid-column:2;grid-row:1/span 3;width:34px;height:34px;border:1px solid var(--line);display:grid;place-items:center;background:var(--bg)}
+.chev::before{content:"";width:8px;height:8px;border-right:2px solid var(--gold);border-bottom:2px solid var(--gold);transform:translateY(-2px) rotate(45deg)}
+.set.open .chev::before{transform:translateY(2px) rotate(-135deg)}
+@media (hover:hover){.set-h:hover .chev{border-color:var(--gold)}}
+.set-f{padding:0 14px 12px;font-size:13px}
+.set-f a,.novid a,.src{color:var(--fg-2);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--gold) 60%,transparent);text-underline-offset:3px}
+.set-b{border-top:1px solid var(--line)}
+.yt{position:sticky;top:-16px;z-index:3;background:var(--bg);padding:0;aspect-ratio:16/9;width:100%}
+.yt iframe{display:block;width:100%;height:100%;border:0;background:#000}
+.yt-cap{margin:0;padding:8px 14px;font-size:12.5px;color:var(--dim);border-bottom:1px solid var(--line)}
+.novid{margin:0;padding:12px 14px;color:var(--muted);font-size:14px;border-bottom:1px solid var(--line)}
+.tl{list-style:none;margin:0;padding:0}
+.tr{display:grid;grid-template-columns:46px minmax(0,1fr) auto;gap:4px 10px;padding:11px 10px 11px 12px;border-top:1px solid var(--line);align-items:start}
+.tl .tr:first-child{border-top:0}
+.tr .no{font-family:var(--display);font-weight:700;font-size:14px;line-height:1.3;color:var(--fg-2);font-variant-numeric:tabular-nums;padding-top:1px}
+.tr .no small{display:block;font-weight:500;font-size:11.5px;letter-spacing:.02em;color:var(--muted)}
+.tr.w{margin-left:16px;padding-left:10px;border-top-style:dashed;box-shadow:inset 2px 0 0 color-mix(in srgb,var(--gold) 40%,transparent)}
+.tr.w .no{color:var(--gold)}
+.tr .tx{min-width:0}
+.tr .ti{display:block;font-weight:600;font-size:15px;line-height:1.3;overflow-wrap:anywhere}
+.tr .ti.unid{font-style:italic;font-weight:500;color:var(--dim)}
+.tr .ar{display:block;color:var(--muted);font-size:13.5px;line-height:1.35;margin-top:2px;overflow-wrap:anywhere}
+.tr .ts{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:7px}
+.tr .ts:empty{display:none}
+.tr .krb{min-width:52px;height:40px}
+.tr.on{background:linear-gradient(90deg,color-mix(in srgb,var(--kick) 10%,transparent),transparent 70%);box-shadow:inset 3px 0 0 var(--kick)}
+.tr[aria-current="true"]{background:linear-gradient(90deg,color-mix(in srgb,var(--p-violet) 22%,transparent),transparent 80%);box-shadow:inset 3px 0 0 var(--p-violet)}
+.tr[aria-current="true"] .no small{color:var(--fg)}
+.rchip{display:inline-flex;align-items:center;gap:5px;min-height:28px;padding:0 7px;border:1px solid currentColor;font-family:var(--display);font-weight:600;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;text-decoration:none;line-height:1}
+.rchip.rel{color:var(--rel);background:color-mix(in srgb,var(--rel) 8%,transparent)}
+.rchip.rel span{color:var(--fg-2);text-transform:none;letter-spacing:.02em;font-weight:500}
+.rchip.un{color:var(--unrel);background:color-mix(in srgb,var(--unrel) 8%,transparent)}
+@media (hover:hover){a.rchip:hover{background:color-mix(in srgb,var(--rel) 20%,transparent)}}
+.watch{display:inline-flex;align-items:center;gap:6px;min-height:36px;padding:0 10px;border:1px solid var(--line);background:var(--bg);color:var(--fg);font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.07em;text-transform:uppercase;white-space:nowrap}
+.watch svg{width:14px;height:14px;flex:none;color:var(--gold)}
+@media (hover:hover){.watch:hover{border-color:var(--gold);color:var(--gold-hi)}}
+.r-sub .watch{min-height:38px}
+.tr .rc{display:flex;flex-direction:column;gap:6px}
+.tr .rc .mini{width:auto;height:34px}
+.brk{flex-basis:100%;height:0}
+.dz-off .tr .rc .mini:not(.ft){display:none}
+.src{font-size:13.5px;white-space:nowrap}
+.chk{flex-basis:100%;font-size:12px;color:var(--dim);letter-spacing:.01em}
 .box{border:1px solid var(--line);background:var(--panel);margin-top:22px}
 .box-h{padding:12px 14px;border-bottom:1px solid var(--line)}
 .box-h b{display:block;font-family:var(--rpg);font-weight:700;font-size:13.5px;letter-spacing:.06em;color:var(--fg-2)}
@@ -437,9 +484,24 @@ button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(-
 .np-stop svg{width:14px;height:14px}
 .np-bar{height:3px;background:var(--line)}
 .np-bar i{display:block;height:100%;width:0;background:var(--gold-hi)}
-body.playing .sheet-body{padding-bottom:120px}
+/* full tracks: YouTube mini player in the same bar */
+.np.full .np-in{grid-template-columns:160px minmax(0,1fr) auto;padding:8px;gap:12px}
+.np-v{position:relative;width:160px;aspect-ratio:16/9;background:#000;overflow:hidden}
+.np-v iframe{position:absolute;left:0;top:0;width:100%;height:auto;aspect-ratio:16/9;border:0;display:block}
+.np-t .np-time{font-family:var(--display);font-size:12.5px;letter-spacing:.03em;color:var(--fg-2);font-variant-numeric:tabular-nums;margin-top:3px}
+.np-t .np-time span{display:inline}
+.np-t .np-time.hint{font-family:var(--body);letter-spacing:0;color:var(--gold-hi)}
+.np-ctl{display:flex;gap:6px;align-items:center}
+.np-btn{width:40px;height:40px;border:1px solid var(--line);background:var(--bg);display:inline-flex;align-items:center;justify-content:center;color:var(--fg);padding:0;text-decoration:none;flex:none}
+.np-btn svg{width:14px;height:14px}
+@media (hover:hover){.np-btn:hover,.np-stop:hover{border-color:var(--gold);color:var(--gold-hi)}}
+.np-fold{display:none}
+.np-fold svg{transition:none}
+.np.folded .np-fold svg{transform:rotate(180deg)}
+.np.src .np-bar,.np.src #npToggle{display:none}
+body.playing .sheet-body{padding-bottom:calc(var(--np-h,64px) + 48px)}
 @media (min-width:761px){body.sheet-open .np{left:auto;right:max(0px,calc((min(600px,100%) - min(560px,calc(100% - 24px))) / 2));transform:none}}
-body.playing .wrap{padding-bottom:150px}
+body.playing .wrap{padding-bottom:calc(var(--np-h,64px) + 80px)}
 /* ---------- player card ---------- */
 .card-wrap{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;margin-top:16px;max-width:760px}
 .pcard{border:1px solid var(--line);background:var(--panel);overflow:hidden;position:relative;box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--gold) 14%,transparent)}
@@ -457,6 +519,7 @@ body.playing .wrap{padding-bottom:150px}
 .run{list-style:none;margin:0;padding:0}
 .run > li{--c:var(--line);display:grid;grid-template-columns:86px minmax(0,1fr);gap:14px;padding:14px 18px 14px 16px;border-top:1px solid var(--line);box-shadow:inset 4px 0 0 var(--c)}
 .run > li:first-child{border-top:0}
+.run > li.arena{--c:var(--arena)} .run > li.pit{--c:var(--pit)} .run > li.oasis{--c:var(--oasis)}
 .run > li.gap{display:block;padding:7px 18px;font-family:var(--mono);font-size:11px;color:var(--dim);box-shadow:none;background:var(--bg)}
 .run > li.gap b{color:var(--muted);font-weight:600}
 .run .time{font-family:var(--mono);font-size:13px;color:var(--fg);font-variant-numeric:tabular-nums;padding-top:4px}
@@ -478,19 +541,67 @@ body.playing .wrap{padding-bottom:150px}
 .mini.playing{background:var(--gold);color:var(--kick-ink);border-color:var(--gold-hi)}
 .mini:disabled{opacity:.4;cursor:default}
 .card-tools{display:flex;flex-wrap:wrap;gap:8px}
+.sitenav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.sitenav a{display:inline-flex;align-items:center;min-height:36px;padding:0 12px;border:1px solid var(--line);background:var(--panel);color:var(--muted);font-family:var(--rpg);font-weight:700;font-size:12.5px;letter-spacing:.06em;text-decoration:none}
+.sitenav a[aria-current="page"]{color:var(--gold-hi);border-color:var(--gold)}
+@media (hover:hover){.sitenav a:hover{color:var(--gold-hi);border-color:var(--gold)}}
+.np.sp{padding:0;background:#121212}
+.np-sp{display:flex;align-items:stretch}
+.np-sp iframe{flex:1;min-width:0;height:80px;border:0;display:block}
+.np.sp.tall .np-sp iframe{height:152px}
+.np-sp .np-btn{flex:none;align-self:stretch;height:auto;border:0;border-left:1px solid var(--line);border-radius:0}
+.act.spb.playing,.mini.spb.playing{color:var(--kick-ink)}
+.act.spb.playing svg,.mini.playing svg{color:var(--kick-ink)}
+.pill.new{color:var(--kick-ink);background:var(--rel);border-color:var(--rel)}
+.grpbar{display:flex;justify-content:flex-end;margin:0 0 10px}
+.tgl{border:1px solid var(--line);background:var(--panel);min-height:38px;padding:0 12px;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.tgl[aria-pressed="true"]{border-color:var(--gold);color:var(--gold-hi)}
+.relgrp{margin:0 0 16px}
+.grp-h{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 12px;border:1px solid var(--line);border-bottom:0;background:var(--panel-2)}
+.grp-h b{display:block;font-family:var(--display);font-size:16px;text-transform:uppercase;letter-spacing:.02em}
+.grp-h span{font-size:12px;color:var(--muted)}
+.clipbox{margin-top:10px;position:relative;aspect-ratio:16/9;background:#000;border:1px solid var(--line)}
+.clipbox.tall{aspect-ratio:9/16;max-height:70vh;max-width:min(100%,400px)}
+.clipbox.sc{aspect-ratio:auto;height:166px}
+.clipbox iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.card-tools.subtle .btn{font-size:12.5px;color:var(--muted)}
+.namebox{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;font-family:var(--rpg);font-weight:700;font-size:12px;letter-spacing:.1em;color:var(--muted)}
+.namebox input,.pasterow input{flex:1;min-width:0;min-height:var(--tap);background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:8px 12px;font:16px var(--body);letter-spacing:0}
+.namebox input{max-width:280px}
+.viewing{border:1px solid var(--gold);background:color-mix(in srgb,var(--gold) 8%,var(--panel));padding:14px 16px;display:grid;gap:10px}
+.viewing p{margin:0;line-height:1.5}
+.viewing b{color:var(--gold-hi)}
+.loadbox{border:1px dashed var(--line);padding:14px 16px;display:grid;gap:10px;margin:0}
+.loadbox p{margin:0;color:var(--muted);font-size:14px}
+.loadbox .file{position:relative;display:inline-flex;align-items:center;justify-self:start}
+.loadbox .file input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.loadbox .file:focus-within{outline:2px solid var(--gold-hi);outline-offset:2px}
+.pasterow{display:flex;gap:8px}
+.crew ul{list-style:none;margin:8px 0 0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.crew li{display:flex;border:1px solid var(--line);background:var(--panel)}
+.crew-open{border:0;background:none;padding:8px 12px;min-height:var(--tap);display:grid;text-align:left;line-height:1.25}
+.crew-open b{font-family:var(--display);font-size:17px;text-transform:uppercase}
+.crew-open span{font-size:12px;color:var(--muted)}
+.crew-x{border:0;border-left:1px solid var(--line);background:none;width:var(--tap);display:grid;place-items:center;color:var(--muted)}
+.crew-x svg{width:12px;height:12px}
+.with{font-family:var(--mono);font-size:11.5px;color:var(--gold-hi);border:1px solid color-mix(in srgb,var(--gold) 50%,transparent);padding:0 6px}
+.krlist li.both::before{background:var(--rel)}
+.krlist li em{font-style:normal;font-family:var(--mono);font-size:11px;color:var(--rel);margin-left:4px}
 .toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--panel-2);color:var(--gold-hi);border:1px solid var(--gold);padding:10px 18px;font-family:var(--rpg);font-weight:700;letter-spacing:.06em;z-index:40;max-width:calc(100% - 32px);text-align:center;box-shadow:0 6px 24px var(--scrim)}
-body.playing .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
+body.playing .toast{bottom:calc(var(--np-h,64px) + 28px + env(safe-area-inset-bottom,0px))}
 .copybox{width:100%;min-height:200px;background:var(--panel);color:var(--fg);border:1px solid var(--line);padding:10px;font-family:ui-monospace,Menlo,monospace;font-size:12px}
 .foot{margin-top:28px;color:var(--dim);font-size:12.5px;line-height:1.6;max-width:70ch}
 .foot b{color:var(--muted)}
 
+.more{margin:4px 0 0;padding:14px 12px;border-top:1px dashed var(--line);color:var(--muted);font-size:14px}
+.more b{color:var(--fg-2)}
+
 /* ---------- phones ---------- */
 @media (max-width:760px){
   .wrap{padding-block:14px 104px}
-  body.playing .wrap{padding-bottom:180px}
+  body.playing .wrap{padding-bottom:calc(var(--np-h,64px) + 120px)}
   .top{grid-template-columns:minmax(0,1fr);gap:12px}
   .brand .emblem{width:96px}
-  .hero img{aspect-ratio:16/9}
   .lu{padding:24px 12px 20px;gap:16px}
   .lu-row{gap:10px}
   .lu .blk{flex-basis:calc((100% - 10px) / 2);--h:96px}
@@ -514,11 +625,17 @@ body.playing .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
   .switch{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) 52px;gap:6px;position:sticky;top:env(safe-area-inset-top,0px);z-index:10;background:var(--bg);padding-block:8px;margin-inline:-16px;padding-inline:16px}
   .hint .wide{display:none}
   .toast{bottom:calc(76px + env(safe-area-inset-bottom,0px))}
-  body.playing .toast{bottom:calc(150px + env(safe-area-inset-bottom,0px))}
+  body.playing .toast{bottom:calc(var(--np-h,64px) + 78px + env(safe-area-inset-bottom,0px))}
   .np{bottom:calc(66px + env(safe-area-inset-bottom,0px))}
   body.sheet-open .np{bottom:calc(10px + env(safe-area-inset-bottom,0px))}
   body.sheet-open .toast{bottom:calc(20px + env(safe-area-inset-bottom,0px))}
-  body.sheet-open.playing .toast{bottom:calc(96px + env(safe-area-inset-bottom,0px))}
+  body.sheet-open.playing .toast{bottom:calc(var(--np-h,64px) + 22px + env(safe-area-inset-bottom,0px))}
+  .np.full .np-in{grid-template-columns:minmax(0,1fr) auto;padding:0;gap:0}
+  .np.full .np-v{grid-column:1/-1;width:100%}
+  .np.full.folded .np-v{aspect-ratio:auto;height:0}
+  .np.full .np-t{padding:8px 8px 8px 12px}
+  .np.full .np-ctl{padding:8px 8px 8px 0}
+  .np-fold{display:inline-flex}
   .run > li{grid-template-columns:1fr;gap:4px;padding:14px 16px}
   .run .time{padding-top:0}
   .run .time small{display:inline;margin-left:8px}
@@ -532,6 +649,7 @@ body.playing .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
   .sh-em svg{width:52px;height:52px}
   .sheet-head h3{font-size:32px}
   .sheet-body{padding:14px 14px 48px}
+  .yt{top:-14px}
   .kronly .lbl{display:none}
 }
 @media (max-width:360px){ .seg button{font-size:12.5px;letter-spacing:.04em} }
@@ -544,14 +662,13 @@ body.playing .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
   .np-eq i:nth-child(2){animation-delay:-.3s}.np-eq i:nth-child(3){animation-delay:-.6s}
   @keyframes eq{from{height:25%}to{height:100%}}
   .np-bar i{transition:width .25s linear}
+  .np-fold svg{transition:transform .2s ease}
 }
 </style>
 </head>
 <body>
 
 <div class="wrap">
-  <a class="back" href="../">&larr; all raves</a>
-  <figure class="hero"><img src="../assets/epik-26.png" width="1920" height="1080" alt="EPIK, December 12th 2026, Sydney Showground" decoding="async"></figure>
   <header class="top">
     <div class="brand">
       <svg class="emblem logo" viewBox="0 0 400 150" role="img" aria-label="chef"><use data-logo href="#logo1"/></svg>
@@ -562,11 +679,12 @@ body.playing .toast{bottom:calc(104px + env(safe-area-inset-bottom,0px))}
       </div>
     </div>
     <div class="hud" aria-live="polite">
-      <div class="cell"><b id="hudSets">0</b><span>sets</span></div>
+      <div class="cell"><b id="hudSets">0</b><span id="hudSetsLbl">acts</span></div>
       <div class="cell kr"><b id="hudKr">0</b><span>KR songs</span></div>
       <div class="cell" id="hudClashCell"><b id="hudClash">0</b><span id="hudClashLbl">clashes</span></div>
     </div>
     <div class="thorn" aria-hidden="true"></div>
+    <nav class="sitenav" aria-label="Pages"><a href="../index.html">All raves</a><a href="./" aria-current="page">Quest board</a><a href="../leaderboard.html?rave=epik26">Leaderboard</a><a href="../gallery.html?rave=epik26">Gallery</a></nav>
     <div class="tabs" role="tablist" aria-label="Views">
       <button class="tab" role="tab" id="tab-tt" aria-selected="true" aria-controls="view-tt">Quest board</button>
       <button class="tab" role="tab" id="tab-card" aria-selected="false" aria-controls="view-card">Player card <span class="count zero" id="krCount">0</span></button>
@@ -661,12 +779,16 @@ const TIMED = MODE === "timetable";
 const slots = rawSlots.map((s, i) => ({...s, i, s: s.start ? toMin(s.start) : null, e: s.end ? toMin(s.end) : null}))
   .filter(s => TIMED ? (s.s !== null && s.e !== null && STAGES[s.stage]) : !s.special);
 const slotId = s => TIMED ? s.stage + ":" + s.artist : s.artist;
+// Single-stage raves (and the lineup before set times): no lock-in, the player card is every act on the lineup.
+// Only a multi-stage timetable keeps picks and clash checks.
+const PICKS = TIMED && Object.keys(STAGES).length > 1;
 const ARTISTS = (DATA && DATA.artists) || {};
 const hasData = a => !!(a && a.sets && a.sets.length);
-// a lineup tile opens a sheet unless it's the host with no tracklists
 // poster board: lineup mode with HSU's poster and a box on every slot
 const POSTER = (DATA && DATA.poster && DATA.poster.src && rawSlots.length && rawSlots.every(s => Array.isArray(s.box) && s.box.length === 4)) ? DATA.poster : null;
-const isFlat = s => !TIMED && (s.flat || (!POSTER && s.row === "host" && !hasData(ARTISTS[s.artist])));
+// MCs and hosts (row "host" or host:true) aren't clickable, have no song sheet and aren't on the player card
+const isHost = s => s.row === "host" || !!s.host;
+const isFlat = s => !TIMED && (!!s.flat || isHost(s));
 const acts = slots.filter(s => !s.special && !isFlat(s));
 // poster scale: from the first hour with a real set to the last finish
 const START = TIMED && acts.length ? Math.floor(Math.min(...acts.map(s=>s.s))/60)*60 : 15*60;
@@ -694,11 +816,11 @@ function toggleKr(a,t){
   if(list.length) kr[a] = list; else delete kr[a];
   save(); renderHud();
 }
-const chosenSlots = () => acts.filter(s => picks.has(slotId(s))).sort((a,b) => TIMED ? (a.s-b.s || a.stage.localeCompare(b.stage)) : a.i-b.i);
+const chosenSlots = () => acts.filter(s => !PICKS || picks.has(slotId(s))).sort((a,b) => TIMED ? (a.s-b.s || a.stage.localeCompare(b.stage)) : a.i-b.i);
 // clash logic only runs in timetable mode
 function clashes(){
   const bad = new Map();
-  if(!TIMED) return bad;
+  if(!PICKS) return bad;
   const chosen = chosenSlots();
   for(const a of chosen) for(const b of chosen){
     if(a===b) continue;
@@ -707,7 +829,7 @@ function clashes(){
   return bad;
 }
 // picked sets on other stages that overlap a slot
-const overlapsPick = s => TIMED ? chosenSlots().filter(p => p.stage!==s.stage && p.s < s.e && s.s < p.e) : [];
+const overlapsPick = s => PICKS ? chosenSlots().filter(p => p.stage!==s.stage && p.s < s.e && s.s < p.e) : [];
 const totalKr = () => chosenSlots().reduce((n,s)=>n+krFor(s.artist).length,0);
 const isId = t => /^ID\s*-\s*ID/i.test(t) || /^ID$/i.test(t.trim());
 function splitTrack(t){ const i = t.indexOf(" - "); return i>0 ? [t.slice(0,i), t.slice(i+3)] : ["", t]; }
@@ -728,14 +850,15 @@ function nowMin(){
 // ---------- static copy that depends on the mode ----------
 function renderChrome(){
   document.getElementById("hint").innerHTML = TIMED
-    ? `<span><b>tap a set</b> for its tracks</span><span><b>+</b> locks it into your run</span><span class="wide"><span class="k">KR</span> = a song you'll kick roll to</span><span>all times pm</span>`
-    : `<span><b>tap an act</b> for its tracks</span><span><b>+</b> locks it into your run</span><span class="wide"><span class="k">KR</span> = a song you'll kick roll to</span><span>set times not out yet</span>`;
+    ? `<span><b>tap a set</b> for its tracks</span>${PICKS ? `<span><b>+</b> locks it into your run</span>` : ""}<span class="wide"><span class="k">KR</span> = a song you'll kick roll to</span><span>all times pm</span>`
+    : `<span><b>tap an act</b> for its tracks</span><span class="wide"><span class="k">KR</span> = a song you'll kick roll to</span><span>set times not out yet</span>`;
   document.getElementById("ttScroll").hidden = !TIMED;
   document.getElementById("lu").hidden = TIMED;
   document.getElementById("switch").hidden = !TIMED;
-  document.getElementById("hudClashLbl").textContent = TIMED ? "clashes" : "set times";
+  document.getElementById("hudClashLbl").textContent = PICKS ? "clashes" : TIMED ? "stage" : "set times";
+  document.getElementById("hudSetsLbl").textContent = PICKS ? "sets" : "acts";
   document.getElementById("foot").innerHTML = (TIMED ? `set times from HSU Events' official ${esc(EDITION.name)} timetable. ` : `lineup from HSU Events' official ${esc(EDITION.name)} 2026 poster. set times aren't out yet, so the board shows the lineup for now. `)
-    + `tracklists from 1001Tracklists: each act's sets from the last 12 months, as IDed by the community, so an ${esc(EDITION.name)} set may differ. previews via Deezer. ${POSTER ? "lineup poster and artist logos belong to HSU Events and the artists; sheet emblems are original artwork." : "emblems are original artwork, not official artist logos."} picks are saved in this browser only, so hit <b>Copy card</b> to keep a backup.`;
+    + `tracklists from 1001Tracklists: each act's sets from the last 12 months, as IDed by the community, so an ${esc(EDITION.name)} set may differ. full tracks play from Spotify and the official YouTube uploads, with 30s Deezer previews where there isn't one. set videos are the recordings linked on 1001Tracklists, and cue times are community-added, so they can be a little out. ${POSTER ? "lineup poster and artist logos belong to HSU Events and the artists; sheet emblems are original artwork." : "emblems are original artwork, not official artist logos."} KR songs are saved in this browser only, so hit <b>Copy card</b> to keep a backup.`;
 }
 
 // ---------- HUD ----------
@@ -743,7 +866,7 @@ function renderHud(){
   const n = chosenSlots().length, k = totalKr(), c = clashes().size;
   document.getElementById("hudSets").textContent = n;
   document.getElementById("hudKr").textContent = k;
-  document.getElementById("hudClash").textContent = TIMED ? c : "TBA";
+  document.getElementById("hudClash").textContent = PICKS ? c : TIMED ? Object.keys(STAGES).length : "TBA";
   document.getElementById("hudClashCell").classList.toggle("bad", c>0);
   const el = document.getElementById("krCount"); el.textContent = k; el.classList.toggle("zero", !k);
 }
@@ -765,7 +888,7 @@ function renderSwitch(){
 }
 
 // ---------- shared poster bits ----------
-// compact edition title (the hero above already carries the big key art)
+// compact edition title (the key art lives on the landing card)
 function edTitle(label){
   return `<div class="ed-title"><div class="ed-word">${esc(EDITION.name)}</div><hr class="rule"><div class="ed-sub">${esc(label)}<i>·</i>${esc(EDITION.dateShort)}</div></div>`;
 }
@@ -788,13 +911,12 @@ function renderPoster(){
   const lu = document.getElementById("lu"), P = POSTER;
   lu.classList.add("lu-poster");
   const pct = (v, of) => (v / of * 100).toFixed(3) + "%";
-  const boxes = slots.filter(s => !s.special).map(s => {
-    const [x, y, w, h] = s.box, id = slotId(s), on = picks.has(id), n = krFor(s.artist).length;
+  const boxes = slots.filter(s => !s.special && !isFlat(s)).map(s => {
+    const [x, y, w, h] = s.box, id = slotId(s), n = krFor(s.artist).length;
     const label = `${s.artist}${s.tag ? ", " + s.tag : ""}${s.vs ? ", battle versus " + s.vs : ""}`;
-    return `<div class="hs${on ? " picked" : ""}" style="left:${pct(x, P.w)};top:${pct(y, P.h)};width:${pct(w, P.w)};height:${pct(h, P.h)}">
+    return `<div class="hs" style="left:${pct(x, P.w)};top:${pct(y, P.h)};width:${pct(w, P.w)};height:${pct(h, P.h)}">
       <button class="open" data-open="${esc(id)}" aria-label="${esc(label)}. Show tracks"></button>
       ${n ? `<span class="badges"><span class="chip kr">${n} KR</span></span>` : ""}
-      <button class="add" data-pick="${esc(id)}" aria-pressed="${on}" aria-label="${on ? "Remove" : "Add"} ${esc(s.artist)} ${on ? "from" : "to"} my run"><i aria-hidden="true">${on ? "✓" : "+"}</i></button>
     </div>`;
   }).join("");
   lu.innerHTML = `<div class="pz"><img src="${esc(P.src)}" alt="${esc(P.alt || EDITION.name + " lineup")}" width="${P.w}" height="${P.h}">${boxes}</div>
@@ -802,7 +924,7 @@ function renderPoster(){
 }
 // ---------- lineup board (mode "lineup") ----------
 function tile(s, cls){
-  const id = slotId(s), on = picks.has(id), n = krFor(s.artist).length, t = parseTag(s.tag);
+  const id = slotId(s), on = PICKS && picks.has(id), n = krFor(s.artist).length, t = parseTag(s.tag);
   const flat = isFlat(s);
   const name = `<span class="nm">${emSvg(s.artist, "ic")}${esc(s.artist)}${t.sups.map(x=>`<sup>${esc(x)}</sup>`).join("")}</span>${t.sub?`<span class="tg">${esc(t.sub)}</span>`:""}`;
   const lvl = s.row === "head" ? `<span class="lvl">headliner</span>` : "";
@@ -810,7 +932,6 @@ function tile(s, cls){
     ${hasEm(s.artist) ? `<span class="wm" aria-hidden="true">${emSvg(s.artist, "")}</span>` : ""}
     ${flat ? `<div class="open">${name}</div>` : `<button class="open" data-open="${esc(id)}" aria-label="${esc(s.artist)}${s.tag ? ", " + esc(s.tag) : ""}. Show tracks">${lvl}${name}</button>`}
     ${n?`<span class="badges"><span class="chip kr">${n} KR</span></span>`:""}
-    ${flat ? "" : `<button class="add" data-pick="${esc(id)}" aria-pressed="${on}" aria-label="${on?"Remove":"Add"} ${esc(s.artist)} ${on?"from":"to"} my run"><i aria-hidden="true">${on?"✓":"+"}</i></button>`}
   </div>`;
 }
 function renderLineup(){
@@ -888,7 +1009,7 @@ function renderTT(){
     for(const s of lane){
       const top = Y(Math.max(s.s,START)), ht = (s.e-Math.max(s.s,START))*px - 2;
       if(s.special){ h += `<div class="strip" style="top:${top}px;height:${ht}px">${esc(s.artist)} ${dash(s.start,s.end)}</div>`; continue; }
-      const id = slotId(s), on = picks.has(id), n = krFor(s.artist).length, cl = bad.has(id);
+      const id = slotId(s), on = PICKS && picks.has(id), n = krFor(s.artist).length, cl = bad.has(id);
       const t = parseTag(s.tag), gf = firsts.has(s);
       const room = ht - (gf ? 18 : 0);
       let vs = "";
@@ -902,7 +1023,7 @@ function renderTT(){
           <span class="tm">${dash(s.start,s.end)}</span>${vs}
         </button>
         ${n||cl?`<span class="badges">${n?`<span class="chip kr">${n} KR</span>`:""}${cl?`<span class="chip cl">Clash</span>`:""}</span>`:""}
-        <button class="add" data-pick="${esc(id)}" aria-pressed="${on}" aria-label="${on?"Remove":"Add"} ${esc(s.artist)} ${on?"from":"to"} my run"><i aria-hidden="true">${on?"✓":"+"}</i></button>
+        ${PICKS ? `<button class="add" data-pick="${esc(id)}" aria-pressed="${on}" aria-label="${on?"Remove":"Add"} ${esc(s.artist)} ${on?"from":"to"} my run"><i aria-hidden="true">${on?"✓":"+"}</i></button>` : ""}
       </div>`;
     }
     for(const g of groups) h += `<div class="grp ${g.key}" style="top:${Y(g.s)-1}px;height:${(g.e-g.s)*px}px"><div class="bn">${esc(g.label)}</div></div>`;
@@ -924,10 +1045,14 @@ const emSvg = (n, cls) => hasEm(n) ? `<svg class="${cls}" viewBox="0 0 64 64" ar
 // ---------- icons ----------
 const IC = {
   play:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 2.5v11l9.5-5.5z" fill="currentColor"/></svg>`,
+  pause:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="3" width="3.2" height="10" fill="currentColor"/><rect x="9.3" y="3" width="3.2" height="10" fill="currentColor"/></svg>`,
+  x:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M4 4l8 8M12 4l-8 8" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>`,
+  fold:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3.5 6l4.5 4.5L12.5 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
   stop:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="3.5" y="3.5" width="9" height="9" fill="currentColor"/></svg>`,
   wait:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="3.5" cy="8" r="1.5" fill="currentColor"/><circle cx="8" cy="8" r="1.5" fill="currentColor"/><circle cx="12.5" cy="8" r="1.5" fill="currentColor"/></svg>`,
   sp:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M4.4 6.1c2.5-.8 5.1-.6 7.3.6M4.9 8.4c2-.6 4-.4 5.8.5M5.4 10.6c1.5-.4 3-.3 4.3.4" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`,
-  ext:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3L7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`
+  ext:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M6 3H3v10h10v-3M9 3h4v4M13 3L7 9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  vid:`<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><rect x="1.5" y="3.25" width="13" height="9.5" rx="1.5" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 5.75v4.5L10.4 8z" fill="currentColor"/></svg>`
 };
 
 // ---------- tracks ----------
@@ -935,9 +1060,366 @@ const keyOf = it => `${it.artist} - ${it.title}`;
 const RELEASED = new Map(); // "Artist - Title" -> released item, across every act
 for(const a of Object.values(ARTISTS)) for(const it of (a.released || [])){ const k = keyOf(it); if(!RELEASED.has(k)) RELEASED.set(k, it); }
 const plural = (n, w) => `${n} ${w}${n === 1 ? "" : "s"}`;
-function fmtDate(d){
+
+const MON = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+// "2025-12-13" -> "Sat 13 Dec 2025"
+function fmtDay(d){
   const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(d || ""); if(!m) return d || "";
-  return `${Number(m[3])} ${["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][Number(m[2]) - 1]} ${m[1]}`;
+  const wd = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][new Date(Date.UTC(+m[1], +m[2] - 1, +m[3])).getUTCDay()];
+  return `${wd} ${Number(m[3])} ${MON[Number(m[2]) - 1]} ${m[1]}`;
+}
+// seconds -> m:ss or h:mm:ss
+function fmtCue(sec){
+  sec = Math.max(0, Math.floor(sec)); const h = Math.floor(sec / 3600), m = Math.floor(sec % 3600 / 60), x = String(sec % 60).padStart(2, "0");
+  return h ? `${h}:${String(m).padStart(2, "0")}:${x}` : `${m}:${x}`;
+}
+const SRC = {deezer:"Deezer", soundcloud:"SoundCloud", youtube:"YouTube"};
+const srcName = k => SRC[k] || k;
+// a null first cue means the song starts the recording
+function cueAt(st, ri){
+  if(!st || !st.cues) return null;
+  const c = st.cues[ri];
+  return typeof c === "number" ? c : (ri === 0 ? 0 : null);
+}
+const setOrder = a => (a.sets || []).map((_, i) => i).sort((x, y) => String(a.sets[y].date || "").localeCompare(String(a.sets[x].date || "")) || x - y);
+// per act: look a set row up in its released / unreleased lists, and find the newest set video for each song
+const IDX = new Map();
+function actIndex(name){
+  if(IDX.has(name)) return IDX.get(name);
+  const a = ARTISTS[name] || {};
+  const by = new Map();
+  const put = (it, rel) => { const k = keyOf(it); for(const x of [k, k.toLowerCase()]) if(!by.has(x) || rel) by.set(x, {key:k, it, rel}); };
+  for(const it of (a.unreleased || [])) put(it, false);
+  for(const it of (a.released || [])) put(it, true);
+  const find = t => by.get(t) || by.get(String(t).toLowerCase()) || null;
+  const watch = new Map(); // key -> {si, ri, cue}
+  for(const si of setOrder(a)){
+    const st = a.sets[si]; if(!st.video || !st.tracks) continue;
+    st.tracks.forEach(([, t], ri) => {
+      if(isId(t)) return;
+      const c = cueAt(st, ri); if(c === null) return;
+      const f = find(t), k = f ? f.key : t;
+      if(!watch.has(k)) watch.set(k, {si, ri, cue:c});
+    });
+  }
+  const out = {find, watch};
+  IDX.set(name, out);
+  return out;
+}
+
+// ---------- set videos: YouTube embed, IFrame API when it loads, plain src reload when it doesn't ----------
+const yt = { api:null, frame:null, player:null, ready:false, si:null, timer:0 };
+const calm = window.matchMedia("(prefers-reduced-motion: reduce)");
+function ytSrc(id, start){
+  let u = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(id)}?enablejsapi=1&playsinline=1&rel=0`;
+  if(/^https?:$/.test(location.protocol)) u += "&origin=" + encodeURIComponent(location.origin);
+  if(start !== null && start !== undefined) u += `&start=${Math.floor(start)}&autoplay=1`;
+  return u;
+}
+function loadYtApi(){
+  if(yt.api) return;
+  if(window.YT && window.YT.Player){ yt.api = "ok"; return; }
+  yt.api = "loading";
+  const prev = window.onYouTubeIframeAPIReady;
+  window.onYouTubeIframeAPIReady = function(){
+    yt.api = "ok";
+    if(typeof prev === "function"){ try{ prev(); }catch(e){} }
+    bindYt(); bindFull();
+  };
+  const sc = document.createElement("script");
+  sc.src = "https://www.youtube.com/iframe_api"; sc.async = true;
+  sc.onerror = () => { yt.api = "fail"; if(fp.frame && !fp.player) fullSrcMode(); };
+  document.head.appendChild(sc);
+}
+function bindYt(){
+  const f = yt.frame;
+  if(yt.api !== "ok" || !f || yt.player || !f.isConnected) return;
+  try{
+    yt.player = new window.YT.Player(f, { events:{
+      onReady: () => { if(yt.frame === f) yt.ready = true; },
+      onStateChange: e => {
+        if(yt.frame !== f) return;
+        if(e && e.data === 1){ if(dz.cur || dz.want) stopAudio(); fullPause(); trackTimer(); }
+      }
+    }});
+  }catch(e){ yt.player = null; }
+}
+function mountYt(si, start){
+  const box = document.getElementById("ytBox"); const s = curSlot();
+  const st = s && (artistOf().sets || [])[si];
+  if(!box || !st || !st.video) return;
+  const f = document.createElement("iframe");
+  f.title = `${s.artist} at ${st.event}, ${fmtDay(st.date)}: video`;
+  f.src = ytSrc(st.video.id, start);
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  f.referrerPolicy = "strict-origin-when-cross-origin";
+  f.id = "ytFrame";
+  box.appendChild(f);
+  Object.assign(yt, {frame:f, player:null, ready:false, si});
+  if(start !== null && start !== undefined){ if(dz.cur || dz.want) stopAudio(); fullPause(); }
+  if(npEl.dataset.kind === "full" && setVidOnPhone()) setFold(true);
+  loadYtApi(); bindYt();
+}
+function killYt(){
+  clearInterval(yt.timer);
+  const f = yt.frame;
+  Object.assign(yt, {frame:null, player:null, ready:false, si:null});
+  if(f) f.remove();
+}
+function ytPause(){
+  if(!yt.frame) return;
+  try{ if(yt.player && yt.ready && yt.player.pauseVideo){ yt.player.pauseVideo(); return; } }catch(e){}
+  try{ yt.frame.contentWindow.postMessage(JSON.stringify({event:"command", func:"pauseVideo", args:[]}), "*"); }catch(e){}
+}
+function markNow(ri){
+  document.querySelectorAll("#sheetList .tr[aria-current]").forEach(r => { if(Number(r.dataset.ri) !== ri) r.removeAttribute("aria-current"); });
+  const r = document.querySelector(`#sheetList .tr[data-ri="${ri}"]`);
+  if(r) r.setAttribute("aria-current", "true");
+}
+// follow the video: light up the song that's playing
+function trackTimer(){
+  clearInterval(yt.timer);
+  yt.timer = setInterval(() => {
+    if(!yt.player || !yt.ready || !yt.frame || !yt.frame.isConnected){ clearInterval(yt.timer); return; }
+    let t; try{ t = yt.player.getCurrentTime(); }catch(e){ return; }
+    if(typeof t !== "number") return;
+    const st = (artistOf().sets || [])[yt.si]; if(!st || !st.tracks) return;
+    let best = -1;
+    st.tracks.forEach((_, i) => { const c = cueAt(st, i); if(c !== null && c <= t + 1) best = i; });
+    if(best >= 0) markNow(best);
+  }, 1500);
+}
+function seekRow(ri){
+  const r = document.querySelector(`#sheetList .tr[data-ri="${ri}"]`);
+  if(r) r.scrollIntoView({block:"center", behavior: calm.matches ? "auto" : "smooth"});
+}
+// jump the set video to a song; opens the set card first if needed
+function watchAt(si, ri){
+  const a = artistOf(), st = (a.sets || [])[si];
+  const cue = cueAt(st, ri); if(!st || !st.video || cue === null) return;
+  if(dz.cur || dz.want) stopAudio();
+  fullPause();
+  if(sheetState.mode !== "sets" || sheetState.openSet !== si || !yt.frame || !yt.frame.isConnected || yt.si !== si){
+    sheetState.cue = {si, ri};
+    if(sheetState.mode !== "sets"){ sheetState.mode = "sets"; sheetState.openSet = si; renderSheet(); }
+    else { sheetState.openSet = si; renderSheetList(); }
+    return;
+  }
+  markNow(ri);
+  if(yt.player && yt.ready){
+    try{ yt.player.seekTo(cue, true); yt.player.playVideo(); return; }catch(e){}
+  }
+  yt.frame.src = ytSrc(st.video.id, cue);
+}
+
+// ---------- full tracks: the official YouTube upload in a mini player (now-playing bar) ----------
+// API when it loads; plain autoplay embed when it doesn't; Deezer preview when frames are blocked or the video won't embed
+const fp = { key:null, it:null, frame:null, player:null, ready:false, mode:null, state:null, tick:0, wait:0, endT:0, bad:new Set(), blocked:false, folded:!!store.get("npfold", false) };
+const hasFull = it => !!(it && it.yt && it.yt.id) && !fp.blocked && !fp.bad.has(keyOf(it));
+const npEl = document.getElementById("np");
+const setNpH = () => document.documentElement.style.setProperty("--np-h", (npEl.hidden ? 0 : npEl.offsetHeight) + "px");
+try{ new ResizeObserver(setNpH).observe(npEl); }catch(e){}
+function hideNp(){
+  npEl.hidden = true; npEl.innerHTML = ""; npEl.className = "np"; delete npEl.dataset.kind;
+  document.body.classList.remove("playing"); setNpH();
+}
+// phones: fold the mini player's video while a set video is on screen, so the tracklist keeps some room
+const setVidOnPhone = () => narrow.matches && !!(yt.frame && yt.frame.isConnected);
+function setFold(on){
+  npEl.classList.toggle("folded", on);
+  const b = document.getElementById("npFold");
+  if(b){ b.setAttribute("aria-expanded", !on); b.setAttribute("aria-label", (on ? "Show" : "Hide") + " video"); }
+  setNpH();
+}
+function showFull(it){
+  npEl.dataset.kind = "full";
+  const folded = fp.folded || setVidOnPhone();
+  npEl.className = "np full" + (folded ? " folded" : "");
+  npEl.setAttribute("aria-label", "Now playing, full track");
+  const dur = it.yt.dur ? fmtCue(it.yt.dur) : "";
+  npEl.innerHTML = `<div class="np-in"><div class="np-v" id="npVid"></div>
+    <div class="np-t"><b>${esc(it.title)}</b><span>${esc(it.artist)}</span><span class="np-time" id="npTime"><span id="npCur">0:00</span>${dur ? ` / <span id="npDur">${dur}</span>` : ""}</span></div>
+    <div class="np-ctl">
+      <button class="np-btn" id="npToggle" aria-label="Pause">${IC.pause}</button>
+      <button class="np-btn np-fold" id="npFold" aria-controls="npVid" aria-expanded="${!folded}" aria-label="${folded ? "Show" : "Hide"} video">${IC.fold}</button>
+      <a class="np-btn" id="npYt" href="https://www.youtube.com/watch?v=${encodeURIComponent(it.yt.id)}" target="_blank" rel="noopener" aria-label="Open ${esc(it.title)} on YouTube">${IC.ext}</a>
+      <button class="np-btn" id="npStop" aria-label="Close player">${IC.x}</button>
+    </div></div>
+    <div class="np-bar" role="progressbar" aria-label="Track progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="npFill"></i></div>`;
+  npEl.hidden = false;
+  document.body.classList.add("playing");
+  setNpH();
+}
+function renderFullCtl(){
+  if(npEl.dataset.kind !== "full") return;
+  npEl.classList.toggle("src", fp.mode === "src");
+  const b = document.getElementById("npToggle"); if(!b) return;
+  const on = fp.state === "playing" || fp.state === "loading";
+  b.innerHTML = on ? IC.pause : IC.play;
+  b.setAttribute("aria-label", on ? "Pause" : "Play");
+}
+function playFull(key, it){
+  if(fp.key === key && fp.frame){
+    if(fp.mode !== "api") killFull();
+    else if(fp.state === "playing" || fp.state === "loading") fullPause();
+    else fullResume();
+    return;
+  }
+  if(dz.cur || dz.want) stopAudio();
+  ytPause();
+  killFull();
+  if(sp.cur) closeSp();
+  Object.assign(fp, {key, it, state:"loading", mode:null, ready:false, player:null});
+  showFull(it);
+  const f = document.createElement("iframe");
+  f.id = "npFrame";
+  f.title = `${it.title} by ${it.artist}: YouTube player`;
+  f.allow = "autoplay; encrypted-media; picture-in-picture; fullscreen";
+  f.referrerPolicy = "strict-origin-when-cross-origin";
+  f.src = ytSrc(it.yt.id, null) + "&autoplay=1";
+  document.getElementById("npVid").appendChild(f);
+  fp.frame = f;
+  loadYtApi();
+  if(yt.api === "fail") fullSrcMode(); else bindFull();
+  fp.wait = setTimeout(() => {
+    if(fp.frame !== f || fp.ready) return;
+    if(yt.api === "ok") fullFallback("the player didn't load. 30s preview instead");
+    else if(fp.mode !== "src") fullSrcMode();
+  }, 12000);
+  renderFullCtl(); syncPlay();
+}
+function bindFull(){
+  const f = fp.frame;
+  if(yt.api !== "ok" || !f || fp.player || !f.isConnected || fp.mode === "src") return;
+  fp.mode = "api";
+  try{
+    fp.player = new window.YT.Player(f, { events:{
+      onReady: e => {
+        if(fp.frame !== f) return;
+        fp.ready = true;
+        const p = (e && e.target) || fp.player;
+        try{ p.playVideo(); }catch(x){}
+        fullTicker();
+        // autoplay can be refused (iOS): say how to start it
+        setTimeout(() => { if(fp.frame === f && fp.state === "loading"){ fp.state = "paused"; const t = document.getElementById("npTime"); if(t){ t.classList.add("hint"); t.textContent = "tap the video to start"; } renderFullCtl(); syncPlay(); } }, 4000);
+      },
+      onStateChange: e => {
+        if(fp.frame !== f) return;
+        const s = e && e.data;
+        if(s === 1){
+          fp.state = "playing";
+          if(dz.cur || dz.want) stopAudio();
+          ytPause();
+          const t = document.getElementById("npTime");
+          if(t && t.classList.contains("hint")){ t.classList.remove("hint"); t.innerHTML = `<span id="npCur">0:00</span>${fp.it.yt.dur ? ` / <span id="npDur">${fmtCue(fp.it.yt.dur)}</span>` : ""}`; }
+        } else if(s === 2) fp.state = "paused";
+        else if(s === 0){
+          fp.state = "paused";
+          const fill = document.getElementById("npFill"); if(fill) fill.style.width = "100%";
+          const k = fp.key; clearTimeout(fp.endT);
+          fp.endT = setTimeout(() => { if(fp.key === k && fp.state !== "playing") killFull(); }, 1500);
+        }
+        renderFullCtl(); syncPlay();
+      },
+      onError: () => { if(fp.frame === f) fullFallback("this one won't play here. 30s preview instead"); }
+    }});
+  }catch(e){ fp.player = null; fullSrcMode(); }
+}
+// no API: the embed autoplays on its own; no progress, no pause button
+function fullSrcMode(){
+  if(!fp.frame) return;
+  fp.mode = "src"; fp.state = "playing"; fp.player = null;
+  const t = document.getElementById("npTime");
+  if(t && fp.it.yt.dur){ t.classList.remove("hint"); t.textContent = fmtCue(fp.it.yt.dur); }
+  renderFullCtl(); syncPlay();
+}
+function fullTicker(){
+  clearInterval(fp.tick);
+  fp.tick = setInterval(() => {
+    const p = fp.player;
+    if(!p || !fp.ready || !fp.frame || !fp.frame.isConnected){ clearInterval(fp.tick); return; }
+    let t = 0, d = 0;
+    try{ t = p.getCurrentTime(); }catch(e){ return; }
+    try{ d = typeof p.getDuration === "function" ? p.getDuration() : 0; }catch(e){}
+    if(!(d > 0)) d = fp.it.yt.dur || 0;
+    if(typeof t !== "number" || !d) return;
+    const c = document.getElementById("npCur"); if(c) c.textContent = fmtCue(t);
+    const dd = document.getElementById("npDur"); if(dd) dd.textContent = fmtCue(d);
+    const pc = Math.max(0, Math.min(100, Math.round(t / d * 100)));
+    const fill = document.getElementById("npFill"); if(fill){ fill.style.width = pc + "%"; fill.parentNode.setAttribute("aria-valuenow", pc); }
+  }, 500);
+}
+function fullPause(){
+  if(!fp.frame) return;
+  try{ if(fp.player && fp.ready && fp.player.pauseVideo){ fp.player.pauseVideo(); return; } }catch(e){}
+  try{ fp.frame.contentWindow.postMessage(JSON.stringify({event:"command", func:"pauseVideo", args:[]}), "*"); }catch(e){}
+}
+function fullResume(){
+  if(!fp.player || !fp.ready) return;
+  if(dz.cur || dz.want) stopAudio();
+  ytPause();
+  try{ fp.player.playVideo(); }catch(e){}
+}
+function killFull(){
+  clearInterval(fp.tick); clearTimeout(fp.wait); clearTimeout(fp.endT);
+  const f = fp.frame, had = !!fp.key;
+  Object.assign(fp, {key:null, it:null, frame:null, player:null, ready:false, mode:null, state:null});
+  if(f) f.remove();
+  if(npEl.dataset.kind === "full") hideNp();
+  if(had) syncPlay();
+}
+function fullFallback(msg){
+  const k = fp.key; if(!k) return;
+  fp.bad.add(k); killFull();
+  if(dz.off){ toast("can't play this one here. try Spotify"); return; }
+  toast(msg); playPreview(k);
+}
+// frames from YouTube blocked by the page's security policy (e.g. inside a Claude artifact)
+document.addEventListener("securitypolicyviolation", e => {
+  const u = String(e.blockedURI || ""), d = String(e.effectiveDirective || e.violatedDirective || "");
+  if(!/youtube/i.test(u) || !/frame|child/i.test(d) || fp.blocked) return;
+  fp.blocked = true; document.body.classList.add("yt-off");
+  if(fp.key){ const k = fp.key; killFull(); if(!dz.off){ toast("full tracks can't play here. 30s preview instead"); playPreview(k); } }
+  else syncPlay();
+}, true);
+
+// ---------- Spotify embed in the now-playing bar: full songs when you're signed in to Spotify in this browser, 30s otherwise ----------
+const sp = { cur:null };
+const spUrl = it => it && it.sp ? `https://open.spotify.com/track/${it.sp}` : (it && it.spotify) || "";
+function playSpotify(kind, id, label, key){
+  if(sp.cur === key && npEl.dataset.kind === "sp"){ closeSp(); return; }
+  if(fp.key) killFull();
+  if(dz.cur || dz.want) stopAudio();
+  ytPause();
+  sp.cur = key;
+  npEl.dataset.kind = "sp";
+  npEl.className = "np sp" + (kind === "track" ? "" : " tall");
+  npEl.setAttribute("aria-label", "Spotify player");
+  npEl.innerHTML = `<div class="np-sp"><iframe id="spFrame" title="${esc(label)} on Spotify" src="https://open.spotify.com/embed/${kind}/${encodeURIComponent(id)}?utm_source=generator&theme=0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <button class="np-btn" id="npStop" aria-label="Close Spotify player">${IC.x}</button></div>`;
+  npEl.hidden = false;
+  document.body.classList.add("playing");
+  setNpH(); syncSp();
+}
+function closeSp(){ sp.cur = null; if(npEl.dataset.kind === "sp") hideNp(); syncSp(); }
+function syncSp(){ document.querySelectorAll("[data-sp],[data-spa]").forEach(b => { const on = sp.cur === (b.dataset.sp || "album:" + b.dataset.spa); b.classList.toggle("playing", on); b.setAttribute("aria-pressed", on); }); }
+
+// ---------- clips of unreleased IDs: embedded under the row ----------
+function clipEmbed(c){
+  if(!c) return null;
+  const u = String(c.url || "");
+  const ytId = c.yt_id || (/(?:youtu\.be\/|[?&]v=|\/shorts\/|\/embed\/)([\w-]{11})/.exec(u) || [])[1];
+  if(ytId) return { src: `https://www.youtube-nocookie.com/embed/${ytId}?rel=0&playsinline=1&autoplay=1${c.t ? "&start=" + Math.floor(c.t) : ""}`, tall: /shorts/.test(u) };
+  if(/soundcloud\.com\//.test(u)) return { src: `https://w.soundcloud.com/player/?url=${encodeURIComponent(u)}&color=%23c9a84c&auto_play=true&visual=false`, sc: true };
+  let m = /tiktok\.com\/.*\/video\/(\d+)/.exec(u); if(m) return { src: `https://www.tiktok.com/embed/v2/${m[1]}`, tall: true };
+  m = /instagram\.com\/(?:[\w.]+\/)?(p|reel|reels)\/([\w-]+)/.exec(u); if(m) return { src: `https://www.instagram.com/${m[1] === "p" ? "p" : "reel"}/${m[2]}/embed`, tall: true };
+  return null;
+}
+const clipOpen = new Set();
+function clipHtml(k, c){
+  const e = clipEmbed(c);
+  if(!e) return "";
+  return `<div class="clipbox${e.tall ? " tall" : ""}${e.sc ? " sc" : ""}"><iframe src="${esc(e.src)}" title="Clip of ${esc(k)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe></div>`;
 }
 
 // ---------- previews: Deezer public search, JSONP, 30s clips ----------
@@ -964,7 +1446,13 @@ function dzOff(){
   document.body.classList.add("dz-off");
   syncPlay();
 }
-async function playTrack(key){
+// every play button: full track when there's an official upload, otherwise the 30s preview
+function playTrack(key){
+  const it = RELEASED.get(key); if(!it) return;
+  if(fp.key === key || hasFull(it)){ playFull(key, it); return; }
+  playPreview(key);
+}
+async function playPreview(key){
   if(dz.off) return;
   const it = RELEASED.get(key); if(!it) return;
   if(dz.cur === key){ stopAudio(); return; }
@@ -983,6 +1471,9 @@ async function playTrack(key){
 }
 function startAudio(key, it, url){
   clearTimeout(dz.endT);
+  ytPause();
+  if(fp.key) killFull();
+  if(sp.cur) closeSp();
   dz.cur = key;
   try{ audio.src = url; }catch(e){}
   showNp(it);
@@ -1000,18 +1491,21 @@ function stopAudio(){
   clearTimeout(dz.endT);
   dz.cur = null; dz.want = null;
   try{ audio.pause(); audio.removeAttribute("src"); audio.load(); }catch(e){}
-  const np = document.getElementById("np"); np.hidden = true; np.innerHTML = "";
-  document.body.classList.remove("playing");
+  if(npEl.dataset.kind === "pv") hideNp();
   syncPlay();
 }
+function closeNp(){ if(npEl.dataset.kind === "full") killFull(); else if(npEl.dataset.kind === "sp") closeSp(); else stopAudio(); }
 function showNp(it){
-  const np = document.getElementById("np");
-  np.innerHTML = `<div class="np-in"><span class="np-eq" aria-hidden="true"><i></i><i></i><i></i></span>
+  npEl.dataset.kind = "pv";
+  npEl.className = "np";
+  npEl.setAttribute("aria-label", "Now playing, 30s preview");
+  npEl.innerHTML = `<div class="np-in"><span class="np-eq" aria-hidden="true"><i></i><i></i><i></i></span>
     <div class="np-t"><b>${esc(it.title)}</b><span>${esc(it.artist)} · 30s preview</span></div>
     <button class="np-stop" id="npStop" aria-label="Stop preview">${IC.stop}</button></div>
     <div class="np-bar" role="progressbar" aria-label="Preview progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="npFill"></i></div>`;
-  np.hidden = false;
+  npEl.hidden = false;
   document.body.classList.add("playing");
+  setNpH();
 }
 audio.addEventListener("timeupdate", () => {
   const f = document.getElementById("npFill"); if(!f || !dz.cur) return;
@@ -1025,8 +1519,11 @@ audio.addEventListener("ended", () => {
   const k = dz.cur;
   dz.endT = setTimeout(() => { if(dz.cur === k) stopAudio(); }, 1500);
 });
-// paint every play button (sheet rows and player card) from the cache
+// paint every play button (sheet rows, set rows and player card)
 function playState(key){
+  const it = RELEASED.get(key);
+  if(fp.key === key) return fp.mode === "src" ? "fsrc" : fp.state === "playing" ? "fplaying" : fp.state === "loading" ? "fbusy" : "fpaused";
+  if(hasFull(it)) return "fidle";
   if(dz.cur === key) return "playing";
   const c = dz.cache.get(key);
   if(c && c.s === "busy") return "busy";
@@ -1034,29 +1531,41 @@ function playState(key){
   return "idle";
 }
 function playInner(key, mini){
-  const st = playState(key);
-  const icon = st === "playing" ? IC.stop : st === "busy" ? IC.wait : IC.play;
+  const st = playState(key), it = RELEASED.get(key);
+  const icon = st === "playing" || st === "fsrc" ? IC.stop : st === "fplaying" ? IC.pause : st === "busy" || st === "fbusy" ? IC.wait : IC.play;
   if(mini) return icon;
-  return icon + (st === "playing" ? "Stop" : st === "busy" ? "Loading" : st === "none" ? "no preview" : "Play");
+  if(st[0] === "f"){
+    const w = {fplaying:"pause", fbusy:"loading", fsrc:"stop"}[st] || "play";
+    return icon + `<span>${w}</span>` + (it && it.yt && it.yt.dur ? `<span class="dur">${fmtCue(it.yt.dur)}</span>` : "");
+  }
+  return icon + (st === "playing" ? "stop" : st === "busy" ? "loading" : st === "none" ? "no preview" : `<span><span class="lc">30s</span> preview</span>`);
+}
+function playLabel(key, st){
+  const it = RELEASED.get(key), d = it && it.yt && it.yt.dur ? `, ${fmtCue(it.yt.dur)}` : "";
+  return ({fplaying:"Pause ", fsrc:"Stop ", fbusy:"Loading ", fpaused:"Play ", fidle:"Play full track: ", playing:"Stop preview of ", busy:"Loading preview of ", none:"No preview for "}[st] || "Play 30 second preview of ") + key + (st[0] === "f" ? d : "");
 }
 function syncPlay(){
   document.querySelectorAll("[data-play]").forEach(b => {
     const key = b.dataset.play, st = playState(key), mini = b.classList.contains("mini");
     b.innerHTML = playInner(key, mini);
     b.disabled = st === "none";
-    b.classList.toggle("playing", st === "playing");
-    b.classList.toggle("busy", st === "busy");
+    b.classList.toggle("ft", st[0] === "f");
+    b.classList.toggle("playing", st === "playing" || st === "fplaying" || st === "fsrc");
+    b.classList.toggle("paused", st === "fpaused");
+    b.classList.toggle("busy", st === "busy" || st === "fbusy");
     b.classList.toggle("nopv", st === "none");
-    b.setAttribute("aria-label", (st === "playing" ? "Stop preview of " : st === "none" ? "No preview for " : "Play preview of ") + key);
+    b.setAttribute("aria-label", playLabel(key, st));
   });
 }
 
 // ---------- artist sheet ----------
-let sheetState = { id:null, mode:"rel", q:"", opener:null };
+let sheetState = { id:null, mode:"rel", q:"", opener:null, openSet:null, cue:null };
 let krOnly = false;
+let groupRel = !!store.get("group", false); // Released tab: group by single / EP / album
 const curSlot = () => slots.find(x => slotId(x) === sheetState.id);
 function openSheet(id, opener){
-  sheetState = { id, mode:"rel", q:"", opener: opener || null };
+  killYt();
+  sheetState = { id, mode:"rel", q:"", opener: opener || null, openSet:null, cue:null };
   renderSheet();
   document.getElementById("scrim").hidden = false;
   document.getElementById("sheet").hidden = false;
@@ -1065,6 +1574,7 @@ function openSheet(id, opener){
   const x = document.getElementById("closeSheet"); if(x) x.focus({preventScroll:true});
 }
 function closeSheet(){
+  killYt();
   document.getElementById("scrim").hidden = true;
   document.getElementById("sheet").hidden = true;
   document.body.style.overflow = "";
@@ -1078,15 +1588,13 @@ function closeSheet(){
   }
 }
 const artistOf = () => { const s = curSlot(); return ARTISTS[s.artist] || {sets:[], released:[], unreleased:[]}; };
-function renderSheet(keepScroll){
-  const s = curSlot(); if(!s) return;
-  const prev = document.getElementById("sheetBody");
-  const top = keepScroll && prev ? prev.scrollTop : 0;
-  const on = picks.has(sheetState.id);
+function headHtml(){
+  const s = curSlot();
+  const on = PICKS && picks.has(sheetState.id);
   const o = overlapsPick(s);
   const a = artistOf();
   const data = hasData(a);
-  const nR = (a.released || []).length, nU = (a.unreleased || []).length + (a.unknown_ids || 0), nS = (a.sets || []).length;
+  const nR = (a.released || []).length, nU = (a.unreleased || []).length, nS = (a.sets || []).length;
   const tab = (m, label, n) => `<button role="tab" id="st-${m}" data-mode="${m}" aria-selected="${sheetState.mode === m}" aria-controls="sheetList" tabindex="${sheetState.mode === m ? 0 : -1}">${label}<span class="n">${n}</span></button>`;
   const names = esc(o.map(x => x.artist).join(", "));
   const opp = !TIMED && s.row === "battle" && s.vs ? acts.find(x => x.artist === s.vs) : null;
@@ -1101,9 +1609,26 @@ function renderSheet(keepScroll){
       <button class="x" id="closeSheet" aria-label="Close">×</button>
     </div>
     ${o.length ? `<div class="sh-clash"><span class="chip cl">${on ? "Clash" : "Overlap"}</span><span>${on ? "clashes with" : "overlaps"} ${names} in your run</span></div>` : ""}
-    <div class="sh-row"><button class="btn grow ${on ? "picked" : "primary"}" data-pick="${esc(sheetState.id)}" aria-pressed="${on}">${on ? "✓ in my run · remove" : "+ add to my run"}</button></div>
+    ${PICKS ? `<div class="sh-row"><button class="btn grow ${on ? "picked" : "primary"}" data-pick="${esc(sheetState.id)}" aria-pressed="${on}">${on ? "✓ in my run · remove" : "+ add to my run"}</button></div>` : ""}
     ${data ? `<div class="seg" role="tablist" aria-label="Tracks">${tab("rel", "Released", nR)}${tab("unrel", "Unreleased &amp; IDs", nU)}${tab("sets", "Sets", nS)}</div>` : ""}
-  </div>
+  </div>`;
+  return h;
+}
+// header only (pick state), so a playing set video isn't torn down
+function refreshHead(){
+  const old = document.querySelector("#sheet .sheet-head"); if(!old){ renderSheet(true); return; }
+  const ae = document.activeElement, refocus = ae && ae.closest && ae.closest("#sheet .sheet-head [data-pick]");
+  const t = document.createElement("div"); t.innerHTML = headHtml().trim();
+  old.replaceWith(t.firstElementChild);
+  if(refocus){ const b = document.querySelector("#sheet .sheet-head [data-pick]"); if(b) b.focus({preventScroll:true}); }
+}
+function renderSheet(keepScroll){
+  const s = curSlot(); if(!s) return;
+  const prev = document.getElementById("sheetBody");
+  const top = keepScroll && prev ? prev.scrollTop : 0;
+  const data = hasData(artistOf());
+  killYt();
+  let h = headHtml() + `
   <div class="sheet-body" id="sheetBody">
     ${data && sheetState.mode !== "sets" ? `<div class="filters">
       <input id="trackSearch" class="search" type="search" placeholder="search tracks" value="${esc(sheetState.q)}" aria-label="Search released and unreleased tracks" autocomplete="off" enterkeyhint="search">
@@ -1120,9 +1645,12 @@ function relRow(artist, it, m){
   const k = keyOf(it), on = isKr(artist, k);
   return `<li class="row${on ? " on" : ""}">
     <div class="r-main"><div class="r-t"><span class="ti">${esc(it.title)}${it.confidence === "guess" ? `<span class="q" title="release status not certain">?</span>` : ""}</span><span class="ar">${esc(it.artist)}</span></div>${krBtn(k, on)}</div>
-    <div class="r-sub">${inSets(it.sets.length, m)}
-      <button class="act pv" data-play="${esc(k)}">${playInner(k)}</button>
-      ${it.spotify ? `<a class="act" href="${esc(it.spotify)}" target="_blank" rel="noopener" aria-label="Open ${esc(k)} on Spotify">${IC.sp}Spotify</a>` : ""}
+    <div class="r-sub">${it.new ? `<span class="pill new" title="released ${esc(it.release_date || "recently")}, not in their tracklists yet">new${it.release_date ? " · " + esc(fmtRel(it.release_date)) : ""}</span>` : inSets(it.sets.length, m)}
+      ${it.proof ? `<a class="src" href="${esc(it.proof)}" target="_blank" rel="noopener" aria-label="${esc(k)} on ${esc(srcName(it.source))}">on ${esc(srcName(it.source))} ↗</a>` : ""}
+      <span class="brk" aria-hidden="true"></span>
+      <button class="act pv" data-play="${esc(k)}" aria-label="${esc(playLabel(k, playState(k)))}">${playInner(k)}</button>
+      ${it.sp ? `<button class="act spb" data-sp="${esc(k)}" aria-pressed="false" aria-label="Play ${esc(k)} on Spotify, here">${IC.sp}Spotify</button>` : it.spotify ? `<a class="act" href="${esc(it.spotify)}" target="_blank" rel="noopener" aria-label="Find ${esc(k)} on Spotify">${IC.sp}Spotify ↗</a>` : ""}
+      ${watchBtn(artist, k, "act ")}
     </div></li>`;
 }
 function unrelRow(artist, it, m){
@@ -1133,8 +1661,65 @@ function unrelRow(artist, it, m){
   return `<li class="row${on ? " on" : ""}">
     <div class="r-main"><div class="r-t"><span class="ti${untitled ? " untitled" : ""}">${untitled ? "untitled ID" : esc(it.title)}</span><span class="ar">${esc(ar)}</span></div>${krBtn(k, on)}</div>
     <div class="r-sub"><span class="pill kind${kind === "ID" ? " id" : ""}">${esc(kind)}${it.confidence === "guess" ? `<span class="qq" title="best guess">?</span>` : ""}</span>${it.sets.length > 1 ? inSets(it.sets.length, m) : ""}
+      ${watchBtn(artist, k, "act ")}
+      ${clipEmbed(it.clip) ? `<button class="act" data-clip="${esc(k)}" aria-expanded="${clipOpen.has(k)}">${IC.vid}clip</button>` : it.clip && it.clip.url ? `<a class="act" href="${esc(it.clip.url)}" target="_blank" rel="noopener">${IC.vid}clip ↗</a>` : ""}
       ${it.ref && it.ref.url ? `<span class="heard">heard at <a href="${esc(it.ref.url)}" target="_blank" rel="noopener">${esc(it.ref.label)} ↗</a></span>` : ""}
-    </div></li>`;
+      ${it.checked && it.checked.length ? `<span class="chk">checked: ${esc(it.checked.map(srcName).join(", "))}</span>` : ""}
+    </div>${clipOpen.has(k) ? clipHtml(k, it.clip) : ""}</li>`;
+}
+// "watch" from the Released / Unreleased lists: newest set with a video and a cue for this song
+function watchBtn(artist, k, cls){
+  const w = actIndex(artist).watch.get(k); if(!w) return "";
+  const st = ARTISTS[artist].sets[w.si];
+  return `<button class="${cls || ""}watch" data-watch="${w.si}:${w.ri}" aria-label="Watch ${esc(k)} in the ${esc(fmtDay(st.date))} set video, at ${fmtCue(w.cue)}">${IC.vid}watch</button>`;
+}
+function setRow(artist, st, si, ri, look){
+  const [num, text] = st.tracks[ri];
+  const w = /^w\//i.test(String(num).trim());
+  const cue = cueAt(st, ri), time = cue !== null ? fmtCue(cue) : "";
+  const no = `<span class="no">${w ? "w/" : esc(num)}${time ? `<small>${time}</small>` : ""}</span>`;
+  const watch = st.video && cue !== null ? `<button class="watch" data-watch="${si}:${ri}" aria-label="Watch ${esc(isId(text) ? "unidentified track" : text)} at ${time}">${IC.vid}watch</button>` : "";
+  const cls = `tr${w ? " w" : ""}`;
+  if(isId(text)) return `<li class="${cls}" data-ri="${ri}">${no}<div class="tx"><span class="ti unid">unidentified</span><div class="ts">${watch}</div></div><span></span></li>`;
+  const f = look.find(text);
+  const k = f ? f.key : text, on = isKr(artist, k);
+  const [ar0, ti0] = splitTrack(text);
+  const ar = f ? f.it.artist : ar0, ti = f ? f.it.title : ti0;
+  let chip = "", pv = "";
+  if(f && f.rel){
+    chip = f.it.proof ? `<a class="rchip rel" href="${esc(f.it.proof)}" target="_blank" rel="noopener" aria-label="released, on ${esc(srcName(f.it.source))}">released <span>${esc(srcName(f.it.source))} ↗</span></a>` : `<span class="rchip rel">released</span>`;
+    pv = `<button class="mini pv" data-play="${esc(k)}" aria-label="${esc(playLabel(k, playState(k)))}">${playInner(k, true)}</button>`;
+  } else if(f){
+    const kind = f.it.kind;
+    chip = `<span class="rchip un">unreleased${["edit", "mashup", "tool"].includes(kind) ? " " + esc(kind) : ""}</span>`;
+  }
+  return `<li class="${cls}${on ? " on" : ""}" data-ri="${ri}">${no}
+    <div class="tx"><span class="ti">${esc(ti)}</span>${ar ? `<span class="ar">${esc(ar)}</span>` : ""}<div class="ts">${chip}${watch}</div></div>
+    <div class="rc">${krBtn(k, on)}${pv}</div></li>`;
+}
+function setsHtml(artist, a){
+  const look = actIndex(artist);
+  const anyVid = (a.sets || []).some(x => x.video);
+  let h = `<p class="tip">newest first. tap a set for every song played${anyVid ? ", with the video where one's been posted" : ""}. an ${esc(EDITION.name)} set may differ.</p><ul class="sets">`;
+  for(const si of setOrder(a)){
+    const st = a.sets[si], open = sheetState.openSet === si, n = (st.tracks || []).length;
+    const vid = st.video ? `<span class="vid">${IC.vid}video${st.video.dur ? " " + esc(st.video.dur) : ""}</span>` : `<span>no video</span>`;
+    h += `<li class="set${open ? " open" : ""}" id="set-${si}">
+      <button class="set-h" data-set="${si}" aria-expanded="${open}" aria-controls="setb-${si}">
+        <span class="set-dt"${st.date_guess ? ` title="upload date, approximate"` : ""}>${esc(st.date_guess ? "~" + fmtRel(st.date.slice(0, 7)) : fmtDay(st.date))}</span><span class="set-ev">${esc(st.event)}</span>
+        <span class="set-meta"><span>${n ? plural(n, "track") : "no tracklist"}</span>${vid}</span><span class="chev" aria-hidden="true"></span></button>
+      ${st.url ? `<div class="set-f"><a href="${esc(st.url)}" target="_blank" rel="noopener">${/1001/.test(st.url) ? "tracklist on 1001Tracklists" : /youtu/.test(st.url) ? "on YouTube" : "source"} ↗</a></div>` : ""}`;
+    if(open){
+      h += `<div class="set-b" id="setb-${si}">`;
+      h += st.video ? `<div class="yt" id="ytBox"></div><p class="yt-cap">tap <b>watch</b> on a song to jump to it. cue times from 1001Tracklists.</p>`
+        : `<p class="novid">no video posted for this set.${st.url ? ` <a href="${esc(st.url)}" target="_blank" rel="noopener">1001Tracklists page ↗</a>` : ""}</p>`;
+      if(st.partial && n) h += `<p class="tip">partial tracklist: only the songs that could be IDed from public listings.</p>`;
+      h += n ? `<ol class="tl" aria-label="Tracklist, ${esc(fmtDay(st.date))}">${st.tracks.map((_, ri) => setRow(artist, st, si, ri, look)).join("")}</ol>` : `<p class="empty" style="padding:12px 14px">no tracklist for this set.</p>`;
+      h += `</div>`;
+    }
+    h += `</li>`;
+  }
+  return h + `</ul>`;
 }
 function mineBox(artist, match){
   const mine = (custom[artist] || []).filter(match);
@@ -1146,10 +1731,12 @@ function mineBox(artist, match){
     ${rows ? `<ul class="list">${rows}</ul>` : ""}
     <form class="addown" id="addOwn"><input id="ownTrack" placeholder="Artist - Track title" aria-label="Add a track" autocomplete="off" enterkeyhint="done"><button class="btn" type="submit">Add</button></form></div>`;
 }
+// "1 unidentified ID track(s) ..." -> "1 unidentified ID track ..."
+const tidyNote = t => String(t).replace(/\b(\d+)\b([^.()]*?)\(s\)/g, (m, n, mid) => n + mid + (Number(n) === 1 ? "" : "s"));
 function renderSheetList(){
   const s = curSlot(); if(!s) return;
   const a = artistOf();
-  const m = (a.sets || []).length;
+  const m = (a.sets || []).filter(x => !x.extra).length; // "in n of m sets" counts the sets the track lists were built from
   const q = sheetState.q.trim().toLowerCase();
   const match = k => (!q || k.toLowerCase().includes(q)) && (!krOnly || isKr(s.artist, k));
   const none = () => `<p class="empty">${q ? `nothing matches “${esc(sheetState.q)}”${krOnly ? " in your KR songs" : ""}.` : "no KR songs in this list yet. tap <b>KR</b> on a track."}</p>`;
@@ -1160,21 +1747,53 @@ function renderSheetList(){
     h += mineBox(s.artist, () => true);
   } else if(sheetState.mode === "rel"){
     const list = (a.released || []).filter(it => match(keyOf(it)));
-    h += list.length ? `<ul class="list">${list.map(it => relRow(s.artist, it, m)).join("")}</ul>` : none();
-    h += `<p class="cap"><span class="dz">previews via Deezer (30s). full track on Spotify.</span><span class="dz-alt">previews aren't loading right now. full track on Spotify.</span></p>`;
+    const canGroup = (a.released || []).some(it => it.album && it.album.name);
+    if(canGroup) h += `<div class="grpbar"><button class="tgl" id="grpRel" aria-pressed="${groupRel}">${groupRel ? "✓ " : ""}group by single / EP / album</button></div>`;
+    h += !list.length ? none() : groupRel && canGroup ? releaseGroups(s.artist, list, m) : `<ul class="list">${list.map(it => relRow(s.artist, it, m)).join("")}</ul>`;
+    h += `<p class="cap"><span class="c-ok">full tracks play from the official YouTube upload. 30s previews where there isn't one. <b>Spotify</b> plays here too: whole songs if you're signed in to Spotify in this browser, 30s if not.</span><span class="c-yt">full tracks can't play here, so these are 30s previews. full songs on Spotify.</span><span class="c-dz">full tracks play from the official YouTube upload. previews aren't loading right now, so the rest are on Spotify.</span><span class="c-no">playback isn't working here. full tracks are on Spotify.</span></p>`;
     h += mineBox(s.artist, match);
   } else if(sheetState.mode === "unrel"){
     const list = (a.unreleased || []).filter(it => match(keyOf(it)));
     h += list.length ? `<ul class="list">${list.map(it => unrelRow(s.artist, it, m)).join("")}</ul>` : none();
-    if(a.unknown_ids > 0 && !q && !krOnly) h += `<p class="more"><b>${a.unknown_ids}</b> more unidentified track${a.unknown_ids === 1 ? "" : "s"}</p>`;
-    h += `<p class="cap">clips, when someone has posted one, are linked on the 1001Tracklists page.</p>`;
+    if(a.own_note && !q && !krOnly) h += `<p class="cap own">${esc(tidyNote(a.own_note))}</p>`;
+    else if(a.unknown_ids > 0 && !q && !krOnly) h += `<p class="more"><b>${a.unknown_ids}</b> more unidentified track${a.unknown_ids === 1 ? "" : "s"}</p>`;
+    h += `<p class="cap">tap <b>clip</b> to watch or hear a posted clip right here. other clips are linked on the 1001Tracklists page.</p>`;
   } else {
-    const cnt = (a.sets || []).map((_, i) => [...(a.released || []), ...(a.unreleased || [])].filter(it => it.sets.includes(i)).length);
-    h += `<p class="tip">the recent sets these tracks come from. an ${esc(EDITION.name)} set may differ.</p>`;
-    h += `<ul class="sets">${(a.sets || []).map((x, i) => `<li><div class="ev">${esc(x.event)}</div><div class="dt">${esc(fmtDate(x.date))} · ${plural(cnt[i], "IDed track")}</div>${x.url ? `<a class="act" href="${esc(x.url)}" target="_blank" rel="noopener">${IC.ext}tracklist on 1001Tracklists</a>` : ""}</li>`).join("")}</ul>`;
+    h += setsHtml(s.artist, a);
   }
+  killYt();
   document.getElementById("sheetList").innerHTML = h;
-  syncPlay();
+  syncPlay(); syncSp();
+  if(hasData(a) && sheetState.mode === "sets" && sheetState.openSet !== null){
+    const si = sheetState.openSet, st = a.sets[si], c = sheetState.cue && sheetState.cue.si === si ? sheetState.cue : null;
+    sheetState.cue = null;
+    if(st && st.video) mountYt(si, c ? cueAt(st, c.ri) : null);
+    if(c){ markNow(c.ri); seekRow(c.ri); }
+  }
+}
+// released tracks grouped by the Spotify release they sit on, newest first
+const REL_TYPE = {single:"Single", ep:"EP", album:"Album", compilation:"Compilation"};
+function fmtRel(d){ const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(d || ""); return m ? (m[3] ? `${Number(m[3])} ` : "") + MON[Number(m[2]) - 1] + " " + m[1] : String(d || ""); }
+function releaseGroups(artist, list, m){
+  const groups = new Map();
+  for(const it of list){
+    // EPs and albums get their own heading; singles share one
+    const al = it.album && it.album.name && it.album.type !== "single" ? it.album : null;
+    const id = al ? (al.id || al.name) : it.album && it.album.name ? "single" : "~";
+    if(!groups.has(id)) groups.set(id, { al, single: id === "single", items:[], date:"" });
+    const g = groups.get(id); g.items.push(it);
+    if((it.release_date || "") > g.date) g.date = it.release_date || "";
+  }
+  const rank = g => g.al ? 0 : g.single ? 1 : 2;
+  const order = [...groups.values()].sort((x, y) => rank(x) - rank(y) || y.date.localeCompare(x.date) || y.items.length - x.items.length);
+  for(const g of order) if(!g.al) g.items.sort((x, y) => (y.release_date || "").localeCompare(x.release_date || ""));
+  return order.map(g => {
+    const head = g.al
+      ? `<div class="grp-h"><div><b>${esc(g.al.name)}</b><span>${esc(REL_TYPE[g.al.type] || "Release")}${g.date ? " · " + esc(fmtRel(g.date)) : ""} · ${plural(g.items.length, "track")} here</span></div>${g.al.id ? `<button class="act spb" data-spa="${esc(g.al.id)}" data-label="${esc(g.al.name)}" aria-pressed="false" aria-label="Play ${esc(g.al.name)} on Spotify, here">${IC.sp}play ${esc((REL_TYPE[g.al.type] || "release").toLowerCase())}</button>` : ""}</div>`
+      : g.single ? `<div class="grp-h"><div><b>Singles</b><span>newest first · ${plural(g.items.length, "track")}</span></div></div>`
+      : `<div class="grp-h"><div><b>Other tracks</b><span>release not matched yet</span></div></div>`;
+    return `<section class="relgrp">${head}<ul class="list">${g.items.map(it => relRow(artist, it, m)).join("")}</ul></section>`;
+  }).join("");
 }
 // update KR state in place so the list doesn't jump
 function syncKr(){
@@ -1183,7 +1802,7 @@ function syncKr(){
     const k = isKr(s.artist, b.dataset.kr);
     b.setAttribute("aria-pressed", k);
     b.textContent = k ? "KR ✓" : "KR";
-    const row = b.closest(".row"); if(row) row.classList.toggle("on", k);
+    const row = b.closest(".row, .tr"); if(row) row.classList.toggle("on", k);
   });
 }
 
@@ -1191,7 +1810,7 @@ function syncKr(){
 function cardText(){
   const chosen = chosenSlots(); const bad = clashes();
   let out = `CHEF'S ${EDITION.code} PLAYER CARD · ${EDITION.dateLong} · ${EDITION.venue}\n`;
-  out += `${chosen.length} sets · ${totalKr()} kick rolls${TIMED ? "" : " · set times tba"}\n`;
+  out += `${plural(chosen.length, PICKS ? "set" : "act")} · ${totalKr()} kick rolls${TIMED ? "" : " · set times tba"}\n`;
   for(const s of chosen){
     out += TIMED ? `\n${s.start}-${s.end}  ${s.artist} (${STAGES[s.stage].name})\n` : `\n${s.artist} (${rowLabel(s)})\n`;
     const c = bad.get(slotId(s)); if(c) out += `   ! clashes with ${c.map(x=>x.artist).join(", ")}\n`;
@@ -1201,18 +1820,18 @@ function cardText(){
 }
 function krItems(s){
   const ks = krFor(s.artist);
-  return `<ul class="krlist">${ks.length ? ks.map(t=>{ const it = RELEASED.get(t); return `<li><span>${esc(t)}</span>${it?`<span class="ics"><button class="mini pv" data-play="${esc(t)}" aria-label="Play preview of ${esc(t)}">${playInner(t, true)}</button>${it.spotify?`<a class="mini" href="${esc(it.spotify)}" target="_blank" rel="noopener" aria-label="Open ${esc(t)} on Spotify">${IC.sp}</a>`:""}</span>`:""}</li>`; }).join("") : `<li class="none">no KR songs yet. tap the name to pick some.</li>`}</ul>`;
+  return `<ul class="krlist">${ks.length ? ks.map(t=>{ const it = RELEASED.get(t); return `<li><span>${esc(t)}</span>${it?`<span class="ics"><button class="mini pv" data-play="${esc(t)}" aria-label="${esc(playLabel(t, playState(t)))}">${playInner(t, true)}</button>${it.sp?`<button class="mini" data-sp="${esc(t)}" aria-pressed="false" aria-label="Play ${esc(t)} on Spotify, here">${IC.sp}</button>`:it.spotify?`<a class="mini" href="${esc(it.spotify)}" target="_blank" rel="noopener" aria-label="Find ${esc(t)} on Spotify">${IC.sp}</a>`:""}</span>`:""}</li>`; }).join("") : `<li class="none">no KR songs yet. tap the name to pick some.</li>`}</ul>`;
 }
 function renderCard(){
   const chosen = chosenSlots();
   const bad = clashes();
   const now = nowMin();
   const nextIdx = !TIMED || now===null ? -1 : chosen.findIndex(s => s.s > now);
-  const third = TIMED ? `<div class="stat ${bad.size?"bad":""}"><b>${bad.size}</b><span>clashes</span></div>` : `<div class="stat"><b>TBA</b><span>set times</span></div>`;
+  const third = PICKS ? `<div class="stat ${bad.size?"bad":""}"><b>${bad.size}</b><span>clashes</span></div>` : `<div class="stat"><b>TBA</b><span>set times</span></div>`;
   let h = `<div class="pcard gframe"><div class="sheen" aria-hidden="true"></div><div class="pcard-head"><div><div class="eyebrow"><span class="star">★ P1</span> Player card <span class="sep">·</span> ${esc(EDITION.name)}</div><h2>${esc(EDITION.card)}</h2><div class="sub">${esc(EDITION.code)} · ${esc(EDITION.dateLong)} · ${esc(EDITION.venue)}</div></div>
-    <div class="stats"><div class="stat"><b>${chosen.length}</b><span>sets</span></div><div class="stat kr"><b>${totalKr()}</b><span>kick rolls</span></div>${third}</div></div><div class="thorn" aria-hidden="true"></div>`;
+    <div class="stats"><div class="stat"><b>${chosen.length}</b><span>${PICKS ? "sets" : "acts"}</span></div><div class="stat kr"><b>${totalKr()}</b><span>kick rolls</span></div>${third}</div></div><div class="thorn" aria-hidden="true"></div>`;
   if(!chosen.length){
-    h += `<p class="empty" style="padding:20px 22px">nothing cooking yet. on the <b>quest board</b>, hit <b>+</b> on the ${TIMED ? "sets" : "acts"} you want, then tap each artist and KR the songs you'll kick roll to.</p>`;
+    h += PICKS ? `<p class="empty" style="padding:20px 22px">nothing cooking yet. on the <b>quest board</b>, hit <b>+</b> on the sets you want, then tap each artist and KR the songs you'll kick roll to.</p>` : `<p class="empty" style="padding:20px 22px">the lineup isn't out yet.</p>`;
   } else if(!TIMED){
     // lineup mode: lineup order, no times, no clashes
     h += `<ol class="run">`;
@@ -1244,7 +1863,7 @@ function renderCard(){
   }
   h += `</div><div class="card-tools"><button class="btn primary" id="copyCard">Copy card</button><button class="btn" id="clearAll">reset everything</button></div><div id="copyFallback"></div>`;
   document.getElementById("cardWrap").innerHTML = h;
-  syncPlay();
+  syncPlay(); syncSp();
 }
 function toast(msg){ const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast._t); toast._t = setTimeout(()=>t.hidden=true, 1800); }
 
@@ -1260,19 +1879,41 @@ function setTab(card){
 }
 document.addEventListener("click", e => {
   const pick = e.target.closest("[data-pick]");
-  if(pick){ const id = pick.dataset.pick; picks.has(id) ? picks.delete(id) : picks.add(id); save(); renderHud(); if(sheetState.id) renderSheet(true); else renderMain(); toast(picks.has(id) ? "locked in" : "dropped from your run"); return; }
+  if(pick){ if(!PICKS) return; const id = pick.dataset.pick; picks.has(id) ? picks.delete(id) : picks.add(id); save(); renderHud(); if(sheetState.id) refreshHead(); else renderMain(); toast(picks.has(id) ? "locked in" : "dropped from your run"); return; }
   const open = e.target.closest("[data-open]");
   if(open){ openSheet(open.dataset.open, open); return; }
   const k = e.target.closest("[data-kr]");
   if(k){
     const s = curSlot(); const t = k.dataset.kr;
     toggleKr(s.artist, t);
-    if(isKr(s.artist,t) && !picks.has(sheetState.id)){ picks.add(sheetState.id); save(); renderHud(); renderSheet(true); toast("KR saved. set locked in"); return; }
-    if(krOnly) renderSheetList(); else syncKr();
+    if(PICKS && isKr(s.artist,t) && !picks.has(sheetState.id)){ picks.add(sheetState.id); save(); renderHud(); refreshHead(); syncKr(); toast("KR saved. set locked in"); return; }
+    if(krOnly && sheetState.mode !== "sets") renderSheetList(); else syncKr();
+    return; }
+  const wt = e.target.closest("[data-watch]");
+  if(wt){ const [si, ri] = wt.dataset.watch.split(":").map(Number); watchAt(si, ri); return; }
+  const sb = e.target.closest("[data-set]");
+  if(sb){
+    const si = Number(sb.dataset.set);
+    sheetState.openSet = sheetState.openSet === si ? null : si; sheetState.cue = null;
+    renderSheetList();
+    const b = document.querySelector(`[data-set="${si}"]`); if(b) b.focus({preventScroll:true});
+    if(sheetState.openSet === si){ const li = document.getElementById("set-" + si); if(li) li.scrollIntoView({block:"start", behavior: calm.matches ? "auto" : "smooth"}); }
     return; }
   const pl = e.target.closest("[data-play]");
   if(pl){ if(!pl.disabled) playTrack(pl.dataset.play); return; }
-  if(e.target.closest("#npStop")){ stopAudio(); return; }
+  if(e.target.closest("#npStop")){ closeNp(); return; }
+  const spb = e.target.closest("[data-sp]");
+  if(spb){ const it = RELEASED.get(spb.dataset.sp); if(it && it.sp) playSpotify("track", it.sp, spb.dataset.sp, spb.dataset.sp); return; }
+  const spa = e.target.closest("[data-spa]");
+  if(spa){ playSpotify("album", spa.dataset.spa, spa.dataset.label || "release", "album:" + spa.dataset.spa); return; }
+  const clp = e.target.closest("[data-clip]");
+  if(clp){ const k = clp.dataset.clip; clipOpen.has(k) ? clipOpen.delete(k) : clipOpen.add(k); renderSheet(true); return; }
+  if(e.target.closest("#grpRel")){ groupRel = !groupRel; store.set("group", groupRel); renderSheetList(); const b = document.getElementById("grpRel"); if(b) b.focus({preventScroll:true}); return; }
+  if(e.target.closest("#npToggle")){ if(fp.state === "playing" || fp.state === "loading") fullPause(); else fullResume(); return; }
+  if(e.target.closest("#npFold")){
+    fp.folded = !npEl.classList.contains("folded"); store.set("npfold", fp.folded);
+    setFold(fp.folded); return; }
+  if(e.target.closest("#npYt")){ fullPause(); return; }
   if(e.target.closest("#krOnly")){ krOnly = !krOnly; renderSheet(); return; }
   const del = e.target.closest("[data-del]");
   if(del){ const s = curSlot(); const t = del.dataset.del;
